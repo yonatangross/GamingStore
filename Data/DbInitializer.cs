@@ -28,7 +28,8 @@ namespace GamingStore.Data
             new Customer{FirstName="Peggy",LastName="Justice"},
             new Customer{FirstName="Peggy",LastName="Justice"},
             new Customer{FirstName="Laura",LastName="Norman"},
-            new Customer{FirstName="Nino",LastName="Olivetto"}
+            new Customer{FirstName="Nino",LastName="Olivetto"},
+            new Customer{FirstName="Ohad",LastName="Bolilon"}
             };
             foreach (var s in Customers)
             {
