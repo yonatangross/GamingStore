@@ -12,7 +12,6 @@ namespace GamingStore.Models
         public string Description { get; set; }
         public string Category { get; set; }
         [NotMapped]
-
         public Dictionary<string, string> PropertiesList { get; set; }
 
 

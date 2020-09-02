@@ -18,52 +18,52 @@ namespace GamingStore.Data
                 return;   // DB has been seeded
             }
 
-            var Customers = new Customer[]
+            var customers = new Customer[]
             {
-            new Customer{FirstName="Carson",LastName="Alexander"},
-            new Customer{FirstName="Meredith",LastName="Alonso"},
-            new Customer{FirstName="Arturo",LastName="Anand"},
-            new Customer{FirstName="Gytis",LastName="Barzdukas"},
-            new Customer{FirstName="Yan",LastName="Li"},
-            new Customer{FirstName="Peggy",LastName="Justice"},
-            new Customer{FirstName="Peggy",LastName="Justice"},
-            new Customer{FirstName="Laura",LastName="Norman"},
-            new Customer{FirstName="Nino",LastName="Olivetto"},
-            new Customer{FirstName="Ohad",LastName="Bolilon"}
+            new Customer{FirstName="Carson",LastName="Alexander",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
+            new Customer{FirstName="Meredith",LastName="Alonso",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
+            new Customer{FirstName="Arturo",LastName="Anand",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
+            new Customer{FirstName="Gytis",LastName="Barzdukas",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
+            new Customer{FirstName="Yan",LastName="Li",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
+            new Customer{FirstName="Peggy",LastName="Justice",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
+            new Customer{FirstName="Peggy",LastName="Justice",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
+            new Customer{FirstName="Laura",LastName="Norman",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
+            new Customer{FirstName="Nino",LastName="Olivetto",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
+            new Customer{FirstName="Ohad",LastName="Bolilon",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"}
             };
-            foreach (var s in Customers)
+            foreach (var s in customers)
             {
                 context.Customers.Add(s);
             }
             context.SaveChanges();
 
-            var Items = new Item[]
+            var items = new Item[]
             {
-            new Item{Id= 1050,Title="Chemistry"},
-            new Item{Id=4022,Title="Microeconomics3"},
-            new Item{Id=4041,Title="Macroeconomics"},
-            new Item{Id=1045,Title="Calculus"},
-            new Item{Id=3141,Title="Trigonometry"},
-            new Item{Id=2021,Title="Composition"},
-            new Item{Id=2042,Title="Literature"}
+            new Item{Title="Keyboard",Manufacturer= "Microsoft",Price = 299},
+            new Item{Title="Mouse",Manufacturer= "Microsoft",Price = 150},
+            new Item{Title="Gaming Chair",Manufacturer= "Razor",Price=799},
+            new Item{Title="Mouse Pad",Manufacturer= "Razor",Price=50},
+            new Item{Title="Graphic Card",Manufacturer= "Nvidia",Price = 1500},
+            new Item{Title="Processor",Manufacturer= "Intel",Price = 1249},
+            new Item{Title="Headphones",Manufacturer= "Bose",Price = 499}
             };
-            foreach (var c in Items)
+            foreach (var c in items)
             {
                 context.Items.Add(c);
             }
             context.SaveChanges();
 
-            var Stores = new Store[]
+            var stores = new Store[]
             {
-            new Store{Id=1,Name="a"},
-            new Store{Id=2,Name="b"},
-            new Store{Id=3,Name="c"},
-            new Store{Id=4,Name="d"},
-            new Store{Id=5,Name="e"},
-            new Store{Id=6,Name="f"},
-            new Store{Id=7,Name="g" }
+            new Store{Id=1,Name="KSP",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
+            new Store{Id=2,Name="Zap",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
+            new Store{Id=3,Name="Bug",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
+            new Store{Id=4,Name="Shimi Gaming Chairs",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
+            new Store{Id=5,Name="Ohad GamingWorld",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
+            new Store{Id=6,Name="Miranda Mouses",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
+            new Store{Id=7,Name="Yoni Keyboards" ,Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"}
             };
-            foreach (var e in Stores)
+            foreach (var e in stores)
             {
                 context.Stores.Add(e);
             }

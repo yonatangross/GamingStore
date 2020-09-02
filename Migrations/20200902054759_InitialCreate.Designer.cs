@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamingStore.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20200901112842_InitialCreate")]
+    [Migration("20200902054759_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,6 +29,7 @@ namespace GamingStore.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
@@ -60,9 +61,6 @@ namespace GamingStore.Migrations
                     b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CustomerId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -79,22 +77,15 @@ namespace GamingStore.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("CustomerId1");
-
                     b.ToTable("Items");
                 });
 
             modelBuilder.Entity("GamingStore.Models.Store", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ItemsList")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -111,12 +102,8 @@ namespace GamingStore.Migrations
             modelBuilder.Entity("GamingStore.Models.Item", b =>
                 {
                     b.HasOne("GamingStore.Models.Customer", null)
-                        .WithMany("OrderHistory")
-                        .HasForeignKey("CustomerId");
-
-                    b.HasOne("GamingStore.Models.Customer", null)
                         .WithMany("ShoppingCart")
-                        .HasForeignKey("CustomerId1");
+                        .HasForeignKey("CustomerId");
                 });
 #pragma warning restore 612, 618
         }

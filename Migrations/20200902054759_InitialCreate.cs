@@ -14,7 +14,7 @@ namespace GamingStore.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(maxLength: 50, nullable: true),
                     LastName = table.Column<string>(maxLength: 50, nullable: true),
-                    Email = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: false),
                     PhoneNumber = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -26,12 +26,10 @@ namespace GamingStore.Migrations
                 name: "Stores",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    ItemsList = table.Column<string>(nullable: true)
+                    Email = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -49,8 +47,7 @@ namespace GamingStore.Migrations
                     Price = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Category = table.Column<string>(nullable: true),
-                    CustomerId = table.Column<int>(nullable: true),
-                    CustomerId1 = table.Column<int>(nullable: true)
+                    CustomerId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -61,23 +58,12 @@ namespace GamingStore.Migrations
                         principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Items_Customers_CustomerId1",
-                        column: x => x.CustomerId1,
-                        principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Items_CustomerId",
                 table: "Items",
                 column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Items_CustomerId1",
-                table: "Items",
-                column: "CustomerId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

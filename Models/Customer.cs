@@ -12,10 +12,11 @@ namespace GamingStore.Models
         [StringLength(50), RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
         public string LastName { get; set; }
         public Address Address { get; set; }
+        [Required]
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
 
-        public ICollection<Item> OrderHistory { get; set; }
+        //public ICollection<Item> OrderHistory { get; set; }
         public ICollection<Item> ShoppingCart { get; set; }
 
     }
