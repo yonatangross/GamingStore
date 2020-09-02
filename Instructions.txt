@@ -1,0 +1,7 @@
+﻿First time after changes on db:
+1. remove migrations folder
+2. delete db
+3. write following commands on PMC:
+3.1 Add-Migration InitialCreate
+3.2 Update-Database
+4. run program.
