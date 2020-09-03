@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamingStore.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20200902054759_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200903163731_InitalCreate")]
+    partial class InitalCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -102,7 +102,7 @@ namespace GamingStore.Migrations
             modelBuilder.Entity("GamingStore.Models.Item", b =>
                 {
                     b.HasOne("GamingStore.Models.Customer", null)
-                        .WithMany("ShoppingCart")
+                        .WithMany("OrderHistory")
                         .HasForeignKey("CustomerId");
                 });
 #pragma warning restore 612, 618

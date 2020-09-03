@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using GamingStore.Contracts;
 
 namespace GamingStore.Models
@@ -16,7 +17,8 @@ namespace GamingStore.Models
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
 
-        //public ICollection<Item> OrderHistory { get; set; }
+        public ICollection<Item> OrderHistory { get; set; }
+        [NotMapped]
         public ICollection<Item> ShoppingCart { get; set; }
 
     }

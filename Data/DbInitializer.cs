@@ -13,15 +13,36 @@ namespace GamingStore.Data
             context.Database.EnsureCreated();
 
             // Look for any Customers.
-            if (context.Customers.Any())
+            if (context.Items.Any())
             {
                 return;   // DB has been seeded
             }
 
+            var items = new Item[]
+            {
+                new Item{Title="Keyboard",Manufacturer= "Microsoft",Price = 299},
+                new Item{Title="Mouse",Manufacturer= "Microsoft",Price = 150},
+                new Item{Title="Gaming Chair",Manufacturer= "Razor",Price=799},
+                new Item{Title="Mouse Pad",Manufacturer= "Razor",Price=50},
+                new Item{Title="Graphic Card",Manufacturer= "Nvidia",Price = 1500},
+                new Item{Title="Processor",Manufacturer= "Intel",Price = 1249},
+                new Item{Title="Headphones",Manufacturer= "Bose",Price = 499}
+            };
+            foreach (var c in items)
+            {
+                context.Items.Add(c);
+            }
+            context.SaveChanges();
+
+
+
             var customers = new Customer[]
             {
-            new Customer{FirstName="Carson",LastName="Alexander",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
-            new Customer{FirstName="Meredith",LastName="Alonso",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
+            new Customer{FirstName="Carson",LastName="Alexander",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474",
+                OrderHistory = items},
+            new Customer{FirstName="Meredith",LastName="Alonso",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474",
+                OrderHistory = new List<Item>{new Item(){Title="Headphones",Manufacturer= "Bose",Price = 499},new Item{Title="Graphic Card",Manufacturer= "Nvidia",Price = 1500},
+                    new Item{Title="Processor",Manufacturer= "Intel",Price = 1249},}},
             new Customer{FirstName="Arturo",LastName="Anand",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
             new Customer{FirstName="Gytis",LastName="Barzdukas",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
             new Customer{FirstName="Yan",LastName="Li",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
@@ -37,21 +58,7 @@ namespace GamingStore.Data
             }
             context.SaveChanges();
 
-            var items = new Item[]
-            {
-            new Item{Title="Keyboard",Manufacturer= "Microsoft",Price = 299},
-            new Item{Title="Mouse",Manufacturer= "Microsoft",Price = 150},
-            new Item{Title="Gaming Chair",Manufacturer= "Razor",Price=799},
-            new Item{Title="Mouse Pad",Manufacturer= "Razor",Price=50},
-            new Item{Title="Graphic Card",Manufacturer= "Nvidia",Price = 1500},
-            new Item{Title="Processor",Manufacturer= "Intel",Price = 1249},
-            new Item{Title="Headphones",Manufacturer= "Bose",Price = 499}
-            };
-            foreach (var c in items)
-            {
-                context.Items.Add(c);
-            }
-            context.SaveChanges();
+
 
             var stores = new Store[]
             {

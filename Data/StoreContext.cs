@@ -16,8 +16,7 @@ namespace GamingStore.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Customer>().ToTable("Customers");
-            modelBuilder.Entity<Customer>().HasMany(i => i.ShoppingCart).WithOne();
-            //modelBuilder.Entity<Customer>().HasMany(i => i.OrderHistory).WithOne();
+            modelBuilder.Entity<Customer>().HasMany(i => i.OrderHistory).WithOne();
 
             modelBuilder.Entity<Item>().ToTable("Items");
             modelBuilder.Entity<Store>().ToTable("Stores");

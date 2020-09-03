@@ -100,7 +100,7 @@ namespace GamingStore.Migrations
             modelBuilder.Entity("GamingStore.Models.Item", b =>
                 {
                     b.HasOne("GamingStore.Models.Customer", null)
-                        .WithMany("ShoppingCart")
+                        .WithMany("OrderHistory")
                         .HasForeignKey("CustomerId");
                 });
 #pragma warning restore 612, 618
