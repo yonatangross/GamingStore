@@ -41,16 +41,50 @@ namespace GamingStore.Data
             new Customer{FirstName="Carson",LastName="Alexander",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474",
                 OrderHistory = items},
             new Customer{FirstName="Meredith",LastName="Alonso",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474",
-                OrderHistory = new List<Item>{new Item(){Title="Headphones",Manufacturer= "Bose",Price = 499},new Item{Title="Graphic Card",Manufacturer= "Nvidia",Price = 1500},
-                    new Item{Title="Processor",Manufacturer= "Intel",Price = 1249},}},
-            new Customer{FirstName="Arturo",LastName="Anand",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
-            new Customer{FirstName="Gytis",LastName="Barzdukas",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
-            new Customer{FirstName="Yan",LastName="Li",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
-            new Customer{FirstName="Peggy",LastName="Justice",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
-            new Customer{FirstName="Peggy",LastName="Justice",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
-            new Customer{FirstName="Laura",LastName="Norman",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
-            new Customer{FirstName="Nino",LastName="Olivetto",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
-            new Customer{FirstName="Ohad",LastName="Bolilon",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"}
+                OrderHistory = new List<Item>{
+                    new Item{Title="Headphones",Manufacturer= "Bose",Price = 499},
+                    new Item{Title="Graphic Card",Manufacturer= "Nvidia",Price = 1500},
+                    new Item{Title="Processor",Manufacturer= "Intel",Price = 1249}}},
+            new Customer{FirstName="Arturo",LastName="Anand",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474",
+                OrderHistory = new List<Item>{
+                    new Item{Title="Headphones",Manufacturer= "Bose",Price = 499},
+                    new Item{Title="Graphic Card",Manufacturer= "Nvidia",Price = 1500},
+                    new Item{Title="Processor",Manufacturer= "Intel",Price = 1249}}},
+            new Customer{FirstName="Gytis",LastName="Barzdukas",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474",
+                OrderHistory = new List<Item>{
+                    new Item{Title="Headphones",Manufacturer= "Bose",Price = 499},
+                    new Item{Title="Graphic Card",Manufacturer= "Nvidia",Price = 1500},
+                    new Item{Title="Processor",Manufacturer= "Intel",Price = 1249}}},
+            new Customer{FirstName="Yan",LastName="Li",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474",
+                OrderHistory = new List<Item>{
+                    new Item{Title="Headphones",Manufacturer= "Bose",Price = 499},
+                    new Item{Title="Graphic Card",Manufacturer= "Nvidia",Price = 1500},
+                    new Item{Title="Processor",Manufacturer= "Intel",Price = 1249}}},
+            new Customer{FirstName="Peggy",LastName="Justice",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474",
+                OrderHistory = new List<Item>{
+                    new Item{Title="Headphones",Manufacturer= "Bose",Price = 499},
+                    new Item{Title="Graphic Card",Manufacturer= "Nvidia",Price = 1500},
+                    new Item{Title="Processor",Manufacturer= "Intel",Price = 1249}}},
+            new Customer{FirstName="Peggy",LastName="Justice",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474",
+                OrderHistory = new List<Item>{
+                    new Item{Title="Headphones",Manufacturer= "Bose",Price = 499},
+                    new Item{Title="Graphic Card",Manufacturer= "Nvidia",Price = 1500},
+                    new Item{Title="Processor",Manufacturer= "Intel",Price = 1249}}},
+            new Customer{FirstName="Laura",LastName="Norman",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474",
+                OrderHistory = new List<Item>{
+                    new Item{Title="Headphones",Manufacturer= "Bose",Price = 499},
+                    new Item{Title="Graphic Card",Manufacturer= "Nvidia",Price = 1500},
+                    new Item{Title="Processor",Manufacturer= "Intel",Price = 1249}}},
+            new Customer{FirstName="Nino",LastName="Olivetto",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474",
+                OrderHistory = new List<Item>{
+                    new Item{Title="Headphones",Manufacturer= "Bose",Price = 499},
+                    new Item{Title="Graphic Card",Manufacturer= "Nvidia",Price = 1500},
+                    new Item{Title="Processor",Manufacturer= "Intel",Price = 1249}}},
+            new Customer{FirstName="Ohad",LastName="Bolilon",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474",
+                OrderHistory = new List<Item>{
+                    new Item{Title="Headphones",Manufacturer= "Bose",Price = 499},
+                    new Item{Title="Graphic Card",Manufacturer= "Nvidia",Price = 1500},
+                    new Item{Title="Processor",Manufacturer= "Intel",Price = 1249}}}
             };
             foreach (var s in customers)
             {
