@@ -14,6 +14,5 @@ namespace GamingStore.Models
         [NotMapped]
         public Dictionary<string, string> PropertiesList { get; set; }
 
-
     }
 }
