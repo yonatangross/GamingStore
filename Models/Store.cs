@@ -13,9 +13,10 @@ namespace GamingStore.Models
         //TODO: add geolocation.
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-        [NotMapped]
         public  OpeningHours[] OpeningHours { get; set; }
-        [NotMapped]
-        public Dictionary<Item,bool> ItemsList { get; set; } // determines how many items there are in the store. example: {{fridge, 5},{mouse,6}}
+        public Dictionary<Item,uint> Stock { get; set; } // determines how many items there are in the store. example: {{fridge, 5},{mouse,6}}
+
+        public ICollection<Order> Orders { get; set; }
+
     }
 }

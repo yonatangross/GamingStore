@@ -16,9 +16,7 @@ namespace GamingStore.Models
         [Required]
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-
-        public ICollection<Item> OrderHistory { get; set; }
-        [NotMapped]
+        public ICollection<Order> OrderHistory { get; set; }
         public ICollection<Item> ShoppingCart { get; set; }
 
     }

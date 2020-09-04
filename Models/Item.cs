@@ -9,10 +9,7 @@ namespace GamingStore.Models
         public string Title { get; set; }
         public string Manufacturer { get; set; }
         public int Price { get; set; }
-        public string Description { get; set; }
         public string Category { get; set; }
-        [NotMapped]
         public Dictionary<string, string> PropertiesList { get; set; }
-
     }
 }

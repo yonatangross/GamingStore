@@ -1,4 +1,4 @@
-﻿namespace GamingStore.Models
+﻿namespace GamingStore.Contracts
 {
     public enum OrderState
     {
