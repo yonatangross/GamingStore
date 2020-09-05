@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using GamingStore.Contracts;
+using GamingStore.Contracts.Converters;
+using GamingStore.Data;
+using Newtonsoft.Json;
 
 namespace GamingStore.Models
 {
@@ -11,6 +14,7 @@ namespace GamingStore.Models
     {
         public int Id { get; set; }
         //todo: change saving in db to <id,uint> instead of <Item,uint>
+        [JsonProperty(ItemConverterType = typeof(DictionaryJsonConverter))]
         public Dictionary<Item, uint> Items { get; set; }
         public Customer Customer { get; set; }
         public Store Store { get; set; }
