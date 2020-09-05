@@ -4,7 +4,6 @@ namespace GamingStore.Contracts
 {[NotMapped]
     public class Address
     {
-
         public string Address1 { get; set; }
 
         public string Address2 { get; set; }
@@ -16,7 +15,5 @@ namespace GamingStore.Contracts
         public string PostalCode { get; set; }
 
         public string Country { get; set; }
-
-        public string PhoneNumber { get; set; }
     }
 }

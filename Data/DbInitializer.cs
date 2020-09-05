@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GamingStore.Contracts;
 using GamingStore.Models;
 
 namespace GamingStore.Data
@@ -61,7 +62,8 @@ namespace GamingStore.Data
             var orders = new Order[]
             {
                 new Order{Customer =new Customer{FirstName="samir",LastName="Alonso",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
-                    OrderDate = DateTime.Now.AddDays(-7),Items = new Dictionary<Item, uint>(){{  new Item{
+                    OrderDate = DateTime.Now.AddDays(-7),Items = new Dictionary<Item, uint>(){{
+                        new Item{
                             Title="Processor",
                             Manufacturer= "Intel",
                             Price = 1249,
@@ -69,23 +71,122 @@ namespace GamingStore.Data
                             {"diameter", "3"},
                             { "width", "15"},
                             { "height", "4"} }},1},{
-                        new Item{Title="Headphones",Manufacturer= "Bose",Price = 499,PropertiesList =new Dictionary<string, string>()  {
+                        new Item{
+                            Title="Headphones",
+                            Manufacturer= "Bose",
+                            Price = 499,
+                            PropertiesList =new Dictionary<string, string>()  {
                             {"diameter", "3"},
                             { "width", "15"},
                             { "height", "4"} }} ,2}}},
-                new Order{Customer =new Customer{FirstName="shimon",LastName="Alonso",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
-                    OrderDate = DateTime.Now.AddDays(-7),Items = new Dictionary<Item, uint>(){{  new Item{
+                new Order{
+                    Customer =new Customer
+                    {
+                        FirstName="shimon",
+                        LastName="Alonso",
+                        Email = "yonatan2gross@gmail.com",
+                        PhoneNumber = "0506656474"
+                    },
+                    OrderDate = DateTime.Now.AddDays(-7),
+                    Items = new Dictionary<Item, uint>(){
+                    {  
+                        new Item{
                         Title="Processor",
                         Manufacturer= "Intel",
                         Price = 1249,
                         PropertiesList =new Dictionary<string, string>()  {
                             {"diameter", "3"},
                             { "width", "15"},
-                            { "height", "4"} }},1},{
-                        new Item{Title="Headphones",Manufacturer= "Bose",Price = 499,PropertiesList =new Dictionary<string, string>()  {
+                            { "height", "4"} }},1},
+                    {
+                        new Item{
+                            Title="Headphones",
+                            Manufacturer= "Bose",
+                            Price = 499,
+                            PropertiesList =new Dictionary<string, string>()  {
                             {"diameter", "3"},
                             { "width", "15"},
-                            { "height", "4"} }} ,2}}}
+                            { "height", "4"} }} ,2}}
+                    ,
+                    Payment = new Payment()
+                    {
+                        ItemsCost = (1249+499),
+                        Paid = true,
+                        PaymentMethod = PaymentMethod.Paypal,
+                        ShippingCost = 9
+                    },
+                    State = OrderState.Fulfilled,
+                    Store = new Store(){
+                        Name = "Gaming Store - Tel Aviv",
+                        PhoneNumber = "0506656474",
+                        Email = "yonatan2gross@gmail.com",
+                        Address = new Address()
+                    {
+                        Address1 = "Dizingoff Center - Second Floor",
+                        City = "Tel Aviv",
+                        Country = "Israel",
+                        PostalCode = "1234567"
+                    },
+                        OpeningHours = new OpeningHours[7]
+                        {
+                            new OpeningHours(){
+                                DayOfWeek = DayOfWeek.Sunday,
+                                OpeningTime  = new TimeSpan(8, 30,00),
+                                ClosingTime= new TimeSpan(20, 00, 00),
+                            },
+                            new OpeningHours(){
+                                DayOfWeek = DayOfWeek.Monday,
+                                OpeningTime  = new TimeSpan(8, 30,00),
+                                ClosingTime= new TimeSpan(20, 00, 00),
+                            },
+                            new OpeningHours(){
+                                DayOfWeek = DayOfWeek.Tuesday,
+                                OpeningTime  = new TimeSpan(8, 30,00),
+                                ClosingTime= new TimeSpan(20, 00, 00),
+                            },
+                            new OpeningHours(){
+                                DayOfWeek = DayOfWeek.Wednesday,
+                                OpeningTime  = new TimeSpan(8, 30,00),
+                                ClosingTime= new TimeSpan(20, 00, 00),
+                            },
+                            new OpeningHours(){
+                                DayOfWeek = DayOfWeek.Thursday,
+                                OpeningTime  = new TimeSpan(8, 30,00),
+                                ClosingTime= new TimeSpan(20, 00, 00),
+                            },
+                            new OpeningHours(){
+                                DayOfWeek = DayOfWeek.Friday,
+                                OpeningTime  = new TimeSpan(8, 30,00),
+                                ClosingTime= new TimeSpan(14, 00, 00),
+                            },
+                            new OpeningHours(){
+                                DayOfWeek = DayOfWeek.Saturday,
+                                OpeningTime  = new TimeSpan(19, 30,00),
+                                ClosingTime= new TimeSpan(22, 00, 00),
+                            }
+                        },
+                        Stock = new Dictionary<Item, uint> {
+                        {
+                        new Item{
+                        Title="Processor",
+                        Manufacturer= "Intel",
+                        Price = 1249,
+                        PropertiesList =new Dictionary<string, string>()  {
+                            {"diameter", "3"},
+                            { "width", "15"},
+                            { "height", "4"} }},1}
+                        ,
+                        {
+                        new Item{
+                        Title="Headphones",
+                        Manufacturer= "Bose",Price = 499,
+                        PropertiesList =new Dictionary<string, string>()  {
+                            {"diameter", "3"},
+                            { "width", "15"},
+                            { "height", "4"} }} ,2}
+                        },
+                    }
+                }
             };
             foreach (var o in orders)
             {
@@ -96,7 +197,6 @@ namespace GamingStore.Data
             //todo: add payments with all parameters.
             var payments = new Payment[]
             {
-
             };
             foreach (var p in payments)
             {
