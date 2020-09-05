@@ -14,14 +14,6 @@ namespace GamingStore.Data
         {
         }
 
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Item> Items { get; set; }
-        public DbSet<Store> Stores { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<Payment> Payments { get; set; }
-
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var jsonSerializerSettings = new JsonSerializerSettings();
@@ -35,7 +27,7 @@ namespace GamingStore.Data
                     v => JsonConvert.SerializeObject(
                         v,
                         Formatting.Indented
-                        //,jsonSerializerSettings
+                        //, jsonSerializerSettings
                         ),
                     v => JsonConvert.DeserializeObject<Dictionary<string, string>>(v));
             modelBuilder.Entity<Order>()
@@ -44,7 +36,7 @@ namespace GamingStore.Data
                     v => JsonConvert.SerializeObject(
                         v,
                         Formatting.Indented
-                        //,jsonSerializerSettings
+                        //, jsonSerializerSettings
                         ),
                     v => JsonConvert.DeserializeObject<Dictionary<Item, uint>>(v));
             modelBuilder.Entity<Store>()
@@ -53,7 +45,7 @@ namespace GamingStore.Data
                     v => JsonConvert.SerializeObject(
                         v,
                         Formatting.Indented
-                        //,jsonSerializerSettings
+                        //, jsonSerializerSettings
                         ),
                     v => JsonConvert.DeserializeObject<Dictionary<Item, uint>>(v));
             modelBuilder.Entity<Item>().ToTable("Items");
@@ -65,5 +57,13 @@ namespace GamingStore.Data
             //        v => JsonConvert.SerializeObject(v),
             //        v => JsonConvert.DeserializeObject<Dictionary<Item, ushort>>(v));
         }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<Store> Stores { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+
+
+
     }
 }

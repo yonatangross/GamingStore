@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,9 +13,10 @@ namespace GamingStore.Models
 {
     public class Order
     {
+        [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         //todo: change saving in db to <id,uint> instead of <Item,uint>
-        [JsonProperty(ItemConverterType = typeof(DictionaryJsonConverter))]
+        //[JsonProperty(ItemConverterType = typeof(DictionaryJsonConverter))]
         public Dictionary<Item, uint> Items { get; set; }
         public Customer Customer { get; set; }
         public Store Store { get; set; }
@@ -22,7 +24,5 @@ namespace GamingStore.Models
         public OrderState State { get; set; }
         public Payment Payment { get; set; }
         //todo: add coupons maybe
-
-        
     }
 }
