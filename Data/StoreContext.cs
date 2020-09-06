@@ -19,12 +19,14 @@ namespace GamingStore.Data
         {
             #region Relationships
             #region OneToOne
+            // Order 1-1 Payment
             modelBuilder.Entity<Order>()
                 .HasOne(b => b.Payment)
                 .WithOne(i => i.Order)
                 .HasForeignKey<Payment>(p => p.OrderForeignKey);
             #endregion
             #region ManyToMany
+            // OrderItem: Order 1..x-1..x Item
             modelBuilder.Entity<OrderItem>()
                 .HasKey(orderItem => new { orderItem.OrderId, orderItem.ItemId});
             modelBuilder.Entity<OrderItem>()
@@ -36,6 +38,7 @@ namespace GamingStore.Data
                 .WithMany(item => item.OrderItems)
                 .HasForeignKey(orderItem => orderItem.ItemId);
 
+            // StoreItem: Store 1..x-1..x Item
             modelBuilder.Entity<StoreItem>()
                 .HasKey(storeItem => new { storeItem.StoreId, storeItem.ItemId });
             modelBuilder.Entity<StoreItem>()
@@ -48,12 +51,9 @@ namespace GamingStore.Data
                 .HasForeignKey(storeItem => storeItem.ItemId);
             #endregion
             #endregion
-
-            var jsonSerializerSettings = new JsonSerializerSettings();
-            jsonSerializerSettings.Converters.Add(new DictionaryJsonConverter());
-            //todo: fix serialization of dictionaries to <object's key,value>
-
             #region DictionariesHandling
+            //var jsonSerializerSettings = new JsonSerializerSettings();
+            //jsonSerializerSettings.Converters.Add(new DictionaryJsonConverter());
             modelBuilder.Entity<Item>()
                 .Property(i => i.PropertiesList)
                 .HasConversion(
@@ -63,35 +63,13 @@ namespace GamingStore.Data
                         //, jsonSerializerSettings
                     ),
                     v => JsonConvert.DeserializeObject<Dictionary<string, string>>(v));
-
-            //modelBuilder.Entity<Order>()
-            //    .Property(o => o.Items)
-            //    .HasConversion(
-            //        v => JsonConvert.SerializeObject(
-            //            v,
-            //            Formatting.Indented
-            //            //, jsonSerializerSettings
-            //            ),
-            //        v => JsonConvert.DeserializeObject<Dictionary<Item, uint>>(v));
-            //modelBuilder.Entity<Store>()
-            //    .Property(s => s.Stock)
-            //    .HasConversion(
-            //        v => JsonConvert.SerializeObject(
-            //            v,
-            //            Formatting.Indented
-            //            //, jsonSerializerSettings
-            //            ),
-            //        v => JsonConvert.DeserializeObject<Dictionary<Item, uint>>(v));
             #endregion
+
             modelBuilder.Entity<Customer>().ToTable("Customers");
             modelBuilder.Entity<Item>().ToTable("Items");
             modelBuilder.Entity<Store>().ToTable("Stores");
             modelBuilder.Entity<Order>().ToTable("Orders");
             modelBuilder.Entity<Payment>().ToTable("Payments");
-
-            //    modelBuilder.Entity<Store>().Property(b => b.ItemsList).HasConversion(
-            //        v => JsonConvert.SerializeObject(v),
-            //        v => JsonConvert.DeserializeObject<Dictionary<Item, ushort>>(v));
         }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Item> Items { get; set; }

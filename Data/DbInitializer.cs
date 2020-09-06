@@ -199,7 +199,7 @@ namespace GamingStore.Data
                 new Customer
                 {
                     FirstName = "Carson", LastName = "Alexander", Email = "yonatan2gross@gmail.com",
-                    PhoneNumber = "0506656474", OrderHistory = new List<Order>() { }
+                    PhoneNumber = "0506656474"
                 },
                 new Customer
                 {
