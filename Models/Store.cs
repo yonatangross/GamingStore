@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using GamingStore.Contracts;
+using GamingStore.Models.Relationships;
 
 namespace GamingStore.Models
 {
@@ -18,8 +19,8 @@ namespace GamingStore.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         public  OpeningHours[] OpeningHours { get; set; }
-        public Dictionary<Item,uint> Stock { get; set; } // determines how many items there are in the store. example: {{fridge, 5},{mouse,6}}
+        //public Dictionary<Item,uint> Stock { get; set; } // determines how many items there are in the store. example: {{fridge, 5},{mouse,6}}
         public ICollection<Order> Orders { get; set; }
-        public ICollection<StoreItem> StoreItems { get; set; }
+        public ICollection<StoreItem> StoreItems { get; set; } // many to many relationship
     }
 }

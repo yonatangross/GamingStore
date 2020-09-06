@@ -90,9 +90,6 @@ namespace GamingStore.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Items")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
@@ -141,6 +138,42 @@ namespace GamingStore.Migrations
                     b.ToTable("Payments");
                 });
 
+            modelBuilder.Entity("GamingStore.Models.Relationships.OrderItem", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<long>("ItemsCount")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("OrderId", "ItemId");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("OrderItem");
+                });
+
+            modelBuilder.Entity("GamingStore.Models.Relationships.StoreItem", b =>
+                {
+                    b.Property<int>("StoreId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<long>("ItemsCount")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("StoreId", "ItemId");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("StoreItem");
+                });
+
             modelBuilder.Entity("GamingStore.Models.Store", b =>
                 {
                     b.Property<int>("Id")
@@ -154,9 +187,6 @@ namespace GamingStore.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Stock")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -191,6 +221,36 @@ namespace GamingStore.Migrations
                     b.HasOne("GamingStore.Models.Order", "Order")
                         .WithOne("Payment")
                         .HasForeignKey("GamingStore.Models.Payment", "OrderForeignKey")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GamingStore.Models.Relationships.OrderItem", b =>
+                {
+                    b.HasOne("GamingStore.Models.Item", "Item")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GamingStore.Models.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GamingStore.Models.Relationships.StoreItem", b =>
+                {
+                    b.HasOne("GamingStore.Models.Item", "Item")
+                        .WithMany("StoreItems")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GamingStore.Models.Store", "Store")
+                        .WithMany("StoreItems")
+                        .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

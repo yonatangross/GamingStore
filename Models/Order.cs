@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using GamingStore.Contracts;
 using GamingStore.Contracts.Converters;
 using GamingStore.Data;
+using GamingStore.Models.Relationships;
 using Newtonsoft.Json;
 
 namespace GamingStore.Models
@@ -17,7 +18,7 @@ namespace GamingStore.Models
         public int Id { get; set; }
         //todo: change saving in db to <id,uint> instead of <Item,uint>
         //[JsonProperty(ItemConverterType = typeof(DictionaryJsonConverter))]
-        public Dictionary<Item, uint> Items { get; set; }
+        //public Dictionary<Item, uint> Items { get; set; }
         [Required]
         public int CustomerId{ get; set; }
         public Customer Customer { get; set; }
@@ -29,5 +30,6 @@ namespace GamingStore.Models
         [Required]
         public Payment Payment { get; set; }
         //todo: add coupons maybe
+        public ICollection<OrderItem> OrderItems { get; set; } // many to many relationship
     }
 }

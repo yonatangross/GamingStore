@@ -30,8 +30,7 @@ namespace GamingStore.Migrations
                     Id = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     PhoneNumber = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Stock = table.Column<string>(nullable: true)
+                    Email = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -68,7 +67,6 @@ namespace GamingStore.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Items = table.Column<string>(nullable: true),
                     CustomerId = table.Column<int>(nullable: false),
                     StoreId = table.Column<int>(nullable: false),
                     OrderDate = table.Column<DateTime>(nullable: false),
@@ -87,6 +85,56 @@ namespace GamingStore.Migrations
                         name: "FK_Orders_Stores_StoreId",
                         column: x => x.StoreId,
                         principalTable: "Stores",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StoreItem",
+                columns: table => new
+                {
+                    StoreId = table.Column<int>(nullable: false),
+                    ItemId = table.Column<int>(nullable: false),
+                    ItemsCount = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StoreItem", x => new { x.StoreId, x.ItemId });
+                    table.ForeignKey(
+                        name: "FK_StoreItem_Items_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "Items",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StoreItem_Stores_StoreId",
+                        column: x => x.StoreId,
+                        principalTable: "Stores",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderItem",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(nullable: false),
+                    ItemId = table.Column<int>(nullable: false),
+                    ItemsCount = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderItem", x => new { x.OrderId, x.ItemId });
+                    table.ForeignKey(
+                        name: "FK_OrderItem_Items_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "Items",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderItem_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -120,6 +168,11 @@ namespace GamingStore.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_OrderItem_ItemId",
+                table: "OrderItem",
+                column: "ItemId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_CustomerId",
                 table: "Orders",
                 column: "CustomerId");
@@ -134,24 +187,35 @@ namespace GamingStore.Migrations
                 table: "Payments",
                 column: "OrderForeignKey",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StoreItem_ItemId",
+                table: "StoreItem",
+                column: "ItemId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Items");
+                name: "OrderItem");
 
             migrationBuilder.DropTable(
                 name: "Payments");
 
             migrationBuilder.DropTable(
+                name: "StoreItem");
+
+            migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Customers");
+                name: "Items");
 
             migrationBuilder.DropTable(
                 name: "Stores");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
         }
     }
 }
