@@ -20,5 +20,6 @@ namespace GamingStore.Models
         public  OpeningHours[] OpeningHours { get; set; }
         public Dictionary<Item,uint> Stock { get; set; } // determines how many items there are in the store. example: {{fridge, 5},{mouse,6}}
         public ICollection<Order> Orders { get; set; }
+        public ICollection<StoreItem> StoreItems { get; set; }
     }
 }

@@ -16,5 +16,7 @@ namespace GamingStore.Models
         [DataType(DataType.Text)]
         public string Category { get; set; }
         public Dictionary<string, string> PropertiesList { get; set; }
+        public ICollection<StoreItem> StoreItems { get; set; }
+
     }
 }
