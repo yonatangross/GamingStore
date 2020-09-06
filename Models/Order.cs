@@ -18,10 +18,15 @@ namespace GamingStore.Models
         //todo: change saving in db to <id,uint> instead of <Item,uint>
         //[JsonProperty(ItemConverterType = typeof(DictionaryJsonConverter))]
         public Dictionary<Item, uint> Items { get; set; }
+        [Required]
+        public int CustomerId{ get; set; }
         public Customer Customer { get; set; }
+        [Required]
+        public int StoreId { get; set; }
         public Store Store { get; set; }
         public DateTime OrderDate { get; set; }
         public OrderState State { get; set; }
+        [Required]
         public Payment Payment { get; set; }
         //todo: add coupons maybe
     }

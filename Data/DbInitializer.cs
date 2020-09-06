@@ -62,11 +62,12 @@ namespace GamingStore.Data
             var orders = new Order[]
             {
                 new Order{Customer =new Customer{FirstName="samir",LastName="Alonso",Email = "yonatan2gross@gmail.com",PhoneNumber = "0506656474"},
-                    OrderDate = DateTime.Now.AddDays(-7),Items = new Dictionary<Item, uint>(){{
+                    OrderDate = DateTime.Now.AddDays(-7),
+                    Items = new Dictionary<Item, uint>(){{
                         new Item{
-                            Title="Processor",
+                            Title="Processor i7",
                             Manufacturer= "Intel",
-                            Price = 1249,
+                            Price = 3450,
                             PropertiesList =new Dictionary<string, string>()  {
                             {"diameter", "3"},
                             { "width", "15"},
@@ -78,7 +79,18 @@ namespace GamingStore.Data
                             PropertiesList =new Dictionary<string, string>()  {
                             {"diameter", "3"},
                             { "width", "15"},
-                            { "height", "4"} }} ,2}}},
+                            { "height", "4"} }} ,2}}
+                    ,
+                    Payment = new Payment()
+                    {
+                        ItemsCost = (1249+499),
+                        Paid = true,
+                        PaymentMethod = PaymentMethod.Paypal,
+                        ShippingCost = 9
+                    },
+
+                },
+
                 new Order{
                     Customer =new Customer
                     {
