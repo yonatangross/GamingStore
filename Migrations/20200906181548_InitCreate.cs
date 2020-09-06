@@ -29,8 +29,10 @@ namespace GamingStore.Migrations
                 {
                     Id = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: false),
+                    Address = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true)
+                    Email = table.Column<string>(nullable: true),
+                    OpeningHours = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

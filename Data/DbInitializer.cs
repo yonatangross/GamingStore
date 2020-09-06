@@ -21,6 +21,7 @@ namespace GamingStore.Data
             }
 
             #region ItemsSeed
+
             //TODO: add different items with properties
             var items = new Item[]
             {
@@ -101,32 +102,91 @@ namespace GamingStore.Data
             }
 
             context.SaveChanges();
+
             #endregion
 
             #region StoresSeed
+
             var stores = new Store[]
-     {
-                new Store {Id = 1, Name = "KSP", Email = "yonatan2gross@gmail.com", PhoneNumber = "0506656474"},
-                new Store {Id = 2, Name = "Zap", Email = "yonatan2gross@gmail.com", PhoneNumber = "0506656474"},
-                new Store {Id = 3, Name = "Bug", Email = "yonatan2gross@gmail.com", PhoneNumber = "0506656474"},
+            {
                 new Store
                 {
-                    Id = 4, Name = "Shimi Gaming Chairs", Email = "yonatan2gross@gmail.com", PhoneNumber = "0506656474"
+                    Id = 0,
+                    Name = "KSP", Email = "yonatan2gross@gmail.com", PhoneNumber = "0506656474",
+                    Address = new Address()
+                    {
+                        Address1 = "Dizingoff Center - Second Floor",
+                        City = "Beer Sheva",
+                        Country = "Israel",
+                        PostalCode = "1234567"
+                    },
+                    OpeningHours = new OpeningHours[7]
+                    {
+                        new OpeningHours()
+                        {
+                            DayOfWeek = DayOfWeek.Sunday,
+                            OpeningTime = new TimeSpan(8, 30, 00),
+                            ClosingTime = new TimeSpan(20, 00, 00),
+                        },
+                        new OpeningHours()
+                        {
+                            DayOfWeek = DayOfWeek.Monday,
+                            OpeningTime = new TimeSpan(8, 30, 00),
+                            ClosingTime = new TimeSpan(20, 00, 00),
+                        },
+                        new OpeningHours()
+                        {
+                            DayOfWeek = DayOfWeek.Tuesday,
+                            OpeningTime = new TimeSpan(8, 30, 00),
+                            ClosingTime = new TimeSpan(20, 00, 00),
+                        },
+                        new OpeningHours()
+                        {
+                            DayOfWeek = DayOfWeek.Wednesday,
+                            OpeningTime = new TimeSpan(8, 30, 00),
+                            ClosingTime = new TimeSpan(20, 00, 00),
+                        },
+                        new OpeningHours()
+                        {
+                            DayOfWeek = DayOfWeek.Thursday,
+                            OpeningTime = new TimeSpan(8, 30, 00),
+                            ClosingTime = new TimeSpan(20, 00, 00),
+                        },
+                        new OpeningHours()
+                        {
+                            DayOfWeek = DayOfWeek.Friday,
+                            OpeningTime = new TimeSpan(8, 30, 00),
+                            ClosingTime = new TimeSpan(14, 00, 00),
+                        },
+                        new OpeningHours()
+                        {
+                            DayOfWeek = DayOfWeek.Saturday,
+                            OpeningTime = new TimeSpan(19, 30, 00),
+                            ClosingTime = new TimeSpan(22, 00, 00),
+                        }
+                    },
+                },
+                new Store {Id = 1, Name = "Zap", Email = "yonatan2gross@gmail.com", PhoneNumber = "0506656474"},
+                new Store {Id = 2, Name = "Bug", Email = "yonatan2gross@gmail.com", PhoneNumber = "0506656474"},
+                new Store
+                {
+                    Id = 3, Name = "Shimi Gaming Chairs", Email = "yonatan2gross@gmail.com", PhoneNumber = "0506656474"
                 },
                 new Store
                 {
-                    Id = 5, Name = "Ohad GamingWorld", Email = "yonatan2gross@gmail.com", PhoneNumber = "0506656474"
+                    Id = 4, Name = "Ohad GamingWorld", Email = "yonatan2gross@gmail.com", PhoneNumber = "0506656474"
                 },
                 new Store
                 {
-                    Id = 6, Name = "Miranda Mouses", Email = "yonatan2gross@gmail.com", PhoneNumber = "0506656474"
+                    Id = 5, Name = "Miranda Mouses", Email = "yonatan2gross@gmail.com", PhoneNumber = "0506656474"
                 },
                 new Store
                 {
-                    Id = 7, Name = "Yoni Keyboards", Email = "yonatan2gross@gmail.com", PhoneNumber = "0506656474"
+                    Id = 6, Name = "Yoni Keyboards", Email = "yonatan2gross@gmail.com", PhoneNumber = "0506656474"
                 },
                 new Store()
                 {
+                    Id = 7,
                     Name = "Gaming Store - Tel Aviv",
                     PhoneNumber = "0506656474",
                     Email = "yonatan2gross@gmail.com",
@@ -183,65 +243,103 @@ namespace GamingStore.Data
                         }
                     },
                 }
-     };
+            };
             foreach (var s in stores)
             {
-                context.Stores.Add(s);
+                if (s.Id != 7)
+                    context.Stores.Add(s);
+                else
+                    context.Stores.Add(s);
             }
 
             context.SaveChanges();
+
             #endregion
 
             #region CustomersSeed
+
             //todo: add customers with all parameters excluding complex objects.
             var customers = new Customer[]
             {
                 new Customer
                 {
                     FirstName = "Carson", LastName = "Alexander", Email = "yonatan2gross@gmail.com",
-                    PhoneNumber = "0506656474"
+                    PhoneNumber = "0506656474", Address = new Address()
+                    {
+                        Address1 = "Ben Yehuda 179", City = "Tel Aviv", Country = "Israel", PostalCode = "1234567"
+                    }
                 },
                 new Customer
                 {
                     FirstName = "Meredith", LastName = "Alonso", Email = "yonatan2gross@gmail.com",
-                    PhoneNumber = "0506656474"
+                    PhoneNumber = "0506656474", Address = new Address()
+                    {
+                        Address1 = "Ben Yehuda 179", City = "Tel Aviv", Country = "Israel", PostalCode = "1234567"
+                    }
                 },
                 new Customer
                 {
                     FirstName = "Arturo", LastName = "Anand", Email = "yonatan2gross@gmail.com",
-                    PhoneNumber = "0506656474"
+                    PhoneNumber = "0506656474", Address = new Address()
+                    {
+                        Address1 = "Ben Yehuda 179", City = "Tel Aviv", Country = "Israel", PostalCode = "1234567"
+                    }
                 },
                 new Customer
                 {
                     FirstName = "Gytis", LastName = "Barzdukas", Email = "yonatan2gross@gmail.com",
-                    PhoneNumber = "0506656474"
-                },
-                new Customer
-                    {FirstName = "Yan", LastName = "Li", Email = "yonatan2gross@gmail.com", PhoneNumber = "0506656474"},
-                new Customer
-                {
-                    FirstName = "Peggy", LastName = "Justice", Email = "yonatan2gross@gmail.com",
-                    PhoneNumber = "0506656474"
+                    PhoneNumber = "0506656474", Address = new Address()
+                    {
+                        Address1 = "Ben Yehuda 179", City = "Tel Aviv", Country = "Israel", PostalCode = "1234567"
+                    }
                 },
                 new Customer
                 {
+                    FirstName = "Yan", LastName = "Li", Email = "yonatan2gross@gmail.com", PhoneNumber = "0506656474",
+                    Address = new Address()
+                    {
+                        Address1 = "Ben Yehuda 179", City = "Tel Aviv", Country = "Israel", PostalCode = "1234567"
+                    }
+                },
+                new Customer
+                {
                     FirstName = "Peggy", LastName = "Justice", Email = "yonatan2gross@gmail.com",
-                    PhoneNumber = "0506656474"
+                    PhoneNumber = "0506656474", Address = new Address()
+                    {
+                        Address1 = "Ben Yehuda 179", City = "Tel Aviv", Country = "Israel", PostalCode = "1234567"
+                    }
+                },
+                new Customer
+                {
+                    FirstName = "Peggy", LastName = "Justice", Email = "yonatan2gross@gmail.com",
+                    PhoneNumber = "0506656474", Address = new Address()
+                    {
+                        Address1 = "Ben Yehuda 179", City = "Tel Aviv", Country = "Israel", PostalCode = "1234567"
+                    }
                 },
                 new Customer
                 {
                     FirstName = "Laura", LastName = "Norman", Email = "yonatan2gross@gmail.com",
-                    PhoneNumber = "0506656474"
+                    PhoneNumber = "0506656474", Address = new Address()
+                    {
+                        Address1 = "Ben Yehuda 179", City = "Tel Aviv", Country = "Israel", PostalCode = "1234567"
+                    }
                 },
                 new Customer
                 {
                     FirstName = "Nino", LastName = "Olivetto", Email = "yonatan2gross@gmail.com",
-                    PhoneNumber = "0506656474"
+                    PhoneNumber = "0506656474", Address = new Address()
+                    {
+                        Address1 = "Ben Yehuda 179", City = "Tel Aviv", Country = "Israel", PostalCode = "1234567"
+                    }
                 },
                 new Customer
                 {
                     FirstName = "Ohad", LastName = "Bolilon", Email = "yonatan2gross@gmail.com",
-                    PhoneNumber = "0506656474"
+                    PhoneNumber = "0506656474", Address = new Address()
+                    {
+                        Address1 = "Ben Yehuda 179", City = "Tel Aviv", Country = "Israel", PostalCode = "1234567"
+                    }
                 }
             };
             foreach (var c in customers)
@@ -250,11 +348,13 @@ namespace GamingStore.Data
             }
 
             context.SaveChanges();
+
             #endregion
 
             #region OrdersSeed
+
             var orders = new Order[]
-        {
+            {
                 new Order
                 {
                     Customer = new Customer
@@ -307,7 +407,6 @@ namespace GamingStore.Data
                         ShippingCost = 9
                     },
                     State = OrderState.Fulfilled,
-
                 },
                 new Order
                 {
@@ -361,16 +460,18 @@ namespace GamingStore.Data
                     },
                     State = OrderState.Fulfilled,
                 }
-        };
+            };
             foreach (var o in orders)
             {
                 context.Orders.Add(o);
             }
 
             context.SaveChanges();
+
             #endregion
 
             #region PaymentsSeed
+
             //todo: add payments with all parameters.
             var payments = new Payment[]
             {
@@ -381,6 +482,7 @@ namespace GamingStore.Data
             }
 
             context.SaveChanges();
+
             #endregion
         }
     }

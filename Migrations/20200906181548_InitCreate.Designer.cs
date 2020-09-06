@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamingStore.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20200906164837_InitCreate")]
+    [Migration("20200906181548_InitCreate")]
     partial class InitCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -181,11 +181,17 @@ namespace GamingStore.Migrations
                     b.Property<int>("Id")
                         .HasColumnType("int");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OpeningHours")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
