@@ -209,12 +209,13 @@ namespace GamingStore.Data
             //todo: add payments with all parameters.
             var payments = new Payment[]
             {
-                new Payment{OrderId =1, ItemsCost = 543,ShippingCost = 20,Paid = true,PaymentMethod=PaymentMethod.Paypal},
-                new Payment{OrderId =2, ItemsCost = 250,ShippingCost = 20,Paid = true,PaymentMethod=PaymentMethod.Cash},
-                new Payment{OrderId =3, ItemsCost = 6043,ShippingCost = 0,Paid = false,PaymentMethod=PaymentMethod.CreditCard},
-                new Payment{OrderId =4, ItemsCost = 300,ShippingCost = 30,Paid = true,PaymentMethod=PaymentMethod.Cash},
-                new Payment{OrderId =5, ItemsCost = 987,ShippingCost = 30,Paid = false,PaymentMethod=PaymentMethod.CreditCard},
-                new Payment{OrderId =6, ItemsCost = 100,ShippingCost = 50,Paid = true,PaymentMethod=PaymentMethod.Cash}
+                // missing Order to add (complex object)
+                new Payment{OrderForeignKey =1, ItemsCost = 543,ShippingCost = 20,Paid = true,PaymentMethod=PaymentMethod.Paypal},
+                new Payment{OrderForeignKey =2, ItemsCost = 250,ShippingCost = 20,Paid = true,PaymentMethod=PaymentMethod.Cash},
+                new Payment{OrderForeignKey =3, ItemsCost = 6043,ShippingCost = 0,Paid = false,PaymentMethod=PaymentMethod.CreditCard},
+                new Payment{OrderForeignKey =4, ItemsCost = 300,ShippingCost = 30,Paid = true,PaymentMethod=PaymentMethod.Cash},
+                new Payment{OrderForeignKey =5, ItemsCost = 987,ShippingCost = 30,Paid = false,PaymentMethod=PaymentMethod.CreditCard},
+                new Payment{OrderForeignKey =6, ItemsCost = 100,ShippingCost = 50,Paid = true,PaymentMethod=PaymentMethod.Cash}
 
 
             };
