@@ -8,10 +8,15 @@ namespace GamingStore.Models
     {
         [Key,DatabaseGenerated((DatabaseGeneratedOption.Identity))]
         public int Id { get; set; }
+        [DataType(DataType.Text)]
         public string Title { get; set; }
+        [DataType(DataType.Text)]
         public string Manufacturer { get; set; }
         public int Price { get; set; }
+        [DataType(DataType.Text)]
         public string Category { get; set; }
         public Dictionary<string, string> PropertiesList { get; set; }
+        public ICollection<StoreItem> StoreItems { get; set; }
+
     }
 }

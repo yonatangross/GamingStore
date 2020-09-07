@@ -16,6 +16,11 @@ namespace GamingStore.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Order>()
+                .HasOne(b => b.Payment)
+                .WithOne(i => i.Order)
+                .HasForeignKey<Payment>(p => p.OrderForeignKey);
+
             var jsonSerializerSettings = new JsonSerializerSettings();
             jsonSerializerSettings.Converters.Add(new DictionaryJsonConverter());
             //todo: fix serialization of dictionaries to <object's key,value>
