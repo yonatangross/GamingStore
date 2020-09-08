@@ -63,7 +63,6 @@ namespace GamingStore.Data
 
             //var jsonSerializerSettings = new JsonSerializerSettings();
             //jsonSerializerSettings.Converters.Add(new DictionaryJsonConverter());
-
             modelBuilder.Entity<Item>()
                 .Property(i => i.PropertiesList)
                 .HasConversion(
@@ -71,6 +70,11 @@ namespace GamingStore.Data
                     v => JsonConvert.DeserializeObject<Dictionary<string, string>>(v));
             modelBuilder.Entity<Store>()
                 .Property(s => s.Address)
+                .HasConversion(
+                    v => JsonConvert.SerializeObject(v),
+                    v => JsonConvert.DeserializeObject<Address>(v));
+            modelBuilder.Entity<Customer>()
+                .Property(c => c.Address)
                 .HasConversion(
                     v => JsonConvert.SerializeObject(v),
                     v => JsonConvert.DeserializeObject<Address>(v));
