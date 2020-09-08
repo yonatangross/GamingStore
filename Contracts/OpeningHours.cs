@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GamingStore.Contracts
 {
-    [NotMapped]
     public class OpeningHours
     {
         public DayOfWeek DayOfWeek { get; set; }

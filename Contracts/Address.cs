@@ -1,7 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace GamingStore.Contracts
-{[NotMapped]
+﻿namespace GamingStore.Contracts
+{
     public class Address
     {
         public string Address1 { get; set; }

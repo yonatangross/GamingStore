@@ -36,9 +36,7 @@ namespace GamingStore.Contracts.Converters
 
         public override bool CanConvert(Type objectType)
         {
-            var type = (typeof(Order).IsAssignableFrom(objectType));
-            Console.WriteLine(objectType.Name);
-            return type;
+            return typeof(Item).IsAssignableFrom(objectType);
         }
     }
 }

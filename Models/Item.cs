@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using GamingStore.Models.Relationships;
 
 namespace GamingStore.Models
 {
@@ -16,7 +17,8 @@ namespace GamingStore.Models
         [DataType(DataType.Text)]
         public string Category { get; set; }
         public Dictionary<string, string> PropertiesList { get; set; }
-        public ICollection<StoreItem> StoreItems { get; set; }
+        public ICollection<StoreItem> StoreItems { get; set; } // many to many relationship
+        public ICollection<OrderItem> OrderItems { get; set; } // many to many relationship
 
     }
 }
