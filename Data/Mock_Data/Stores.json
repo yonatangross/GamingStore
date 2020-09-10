@@ -1,0 +1,2402 @@
+[
+  {
+    "Id": 0,
+    "Name": "ShufflebeatStore",
+    "Address": {
+      "Address1": "Herzl 32",
+      "City": "Beer Sheva",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "8963069584",
+    "Email": "ShufflebeatStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:56"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:52"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:12"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:00"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:36"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:19"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:02"
+      }
+    ]
+  },
+  {
+    "Id": 1,
+    "Name": "TwinderStore",
+    "Address": {
+      "Address1": "Ben Gurion 94",
+      "City": "Tel-Aviv",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "2206696793",
+    "Email": "TwinderStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:05"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:41"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:44"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:59"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:09"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:02"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:34"
+      }
+    ]
+  },
+  {
+    "Id": 2,
+    "Name": "GigazoomStore",
+    "Address": {
+      "Address1": "Bialik 11",
+      "City": "Jerusalem",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "1566066512",
+    "Email": "GigazoomStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:33"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:01"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:28"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:10"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:45"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:45"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:44"
+      }
+    ]
+  },
+  {
+    "Id": 3,
+    "Name": "DabZStore",
+    "Address": {
+      "Address1": "Bialik 5",
+      "City": "Haifa",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "7731292727",
+    "Email": "DabZStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:29"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:28"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:00"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:21"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:48"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:53"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:02"
+      }
+    ]
+  },
+  {
+    "Id": 4,
+    "Name": "MeembeeStore",
+    "Address": {
+      "Address1": "Hannah Szenes 34",
+      "City": "Tel-Aviv",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "2846287150",
+    "Email": "MeembeeStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:39"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:38"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:47"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:13"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:39"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:55"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:01"
+      }
+    ]
+  },
+  {
+    "Id": 5,
+    "Name": "GabtuneStore",
+    "Address": {
+      "Address1": "Arlozoroff 88",
+      "City": "Jerusalem",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "3347774134",
+    "Email": "GabtuneStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:13"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:01"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:11"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:37"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:12"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:32"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:27"
+      }
+    ]
+  },
+  {
+    "Id": 6,
+    "Name": "BabblestormStore",
+    "Address": {
+      "Address1": "Arlozoroff 61",
+      "City": "Tel-Aviv",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "7106642038",
+    "Email": "BabblestormStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:12"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:05"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:35"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:03"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:10"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:26"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:39"
+      }
+    ]
+  },
+  {
+    "Id": 7,
+    "Name": "LazzStore",
+    "Address": {
+      "Address1": "Levi Eshkol 82",
+      "City": "Jerusalem",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "4927707561",
+    "Email": "LazzStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:35"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:44"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:18"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:36"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:09"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:04"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:19"
+      }
+    ]
+  },
+  {
+    "Id": 8,
+    "Name": "DivanoodleStore",
+    "Address": {
+      "Address1": "Arlozoroff 29",
+      "City": "Beer Sheva",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "3661167428",
+    "Email": "DivanoodleStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:15"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:10"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:48"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:52"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:47"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:57"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:54"
+      }
+    ]
+  },
+  {
+    "Id": 9,
+    "Name": "OlooStore",
+    "Address": {
+      "Address1": "Weizmann 60",
+      "City": "Haifa",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "8158207008",
+    "Email": "OlooStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:55"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:46"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:38"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:38"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:01"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:09"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:23"
+      }
+    ]
+  },
+  {
+    "Id": 10,
+    "Name": "YombuStore",
+    "Address": {
+      "Address1": "Arlozoroff 29",
+      "City": "Haifa",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "9654232344",
+    "Email": "YombuStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:51"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:14"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:43"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:20"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:47"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:45"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:40"
+      }
+    ]
+  },
+  {
+    "Id": 11,
+    "Name": "PhotojamStore",
+    "Address": {
+      "Address1": "Ben Yehuda 82",
+      "City": "Beer Sheva",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "1897284429",
+    "Email": "PhotojamStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:49"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:31"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:39"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:57"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:03"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:46"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:10"
+      }
+    ]
+  },
+  {
+    "Id": 12,
+    "Name": "DynaboxStore",
+    "Address": {
+      "Address1": "Hannah Szenes 61",
+      "City": "Jerusalem",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "8079912838",
+    "Email": "DynaboxStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:55"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:40"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:44"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:17"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:35"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:58"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:51"
+      }
+    ]
+  },
+  {
+    "Id": 13,
+    "Name": "AilaneStore",
+    "Address": {
+      "Address1": "Hannah Szenes 18",
+      "City": "Jerusalem",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "3598928126",
+    "Email": "AilaneStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:33"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:50"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:15"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:42"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:54"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:06"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:48"
+      }
+    ]
+  },
+  {
+    "Id": 14,
+    "Name": "SkynoodleStore",
+    "Address": {
+      "Address1": "Herzl 35",
+      "City": "Jerusalem",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "9878877371",
+    "Email": "SkynoodleStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:54"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:38"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:43"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:09"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:35"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:36"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:51"
+      }
+    ]
+  },
+  {
+    "Id": 15,
+    "Name": "EintiStore",
+    "Address": {
+      "Address1": "Hannah Szenes 64",
+      "City": "Hadera",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "8603442960",
+    "Email": "EintiStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:04"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:48"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:14"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:19"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:23"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:28"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:21"
+      }
+    ]
+  },
+  {
+    "Id": 16,
+    "Name": "RhyceroStore",
+    "Address": {
+      "Address1": "Dizengoff 25",
+      "City": "Tel-Aviv",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "2639294716",
+    "Email": "RhyceroStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:52"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:24"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:04"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:07"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:13"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:14"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:13"
+      }
+    ]
+  },
+  {
+    "Id": 17,
+    "Name": "JazzyStore",
+    "Address": {
+      "Address1": "Balfour 80",
+      "City": "Jerusalem",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "6142992509",
+    "Email": "JazzyStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:49"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:47"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:24"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:20"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:23"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:29"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:21"
+      }
+    ]
+  },
+  {
+    "Id": 18,
+    "Name": "WikidoStore",
+    "Address": {
+      "Address1": "Ben Gurion 24",
+      "City": "Tel-Aviv",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "1916988465",
+    "Email": "WikidoStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:37"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:17"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:01"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:58"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:08"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:24"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:14"
+      }
+    ]
+  },
+  {
+    "Id": 19,
+    "Name": "GigazoomStore",
+    "Address": {
+      "Address1": "Arlozoroff 36",
+      "City": "Haifa",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "8356127610",
+    "Email": "GigazoomStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:10"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:34"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:50"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:39"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:51"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:01"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:42"
+      }
+    ]
+  },
+  {
+    "Id": 20,
+    "Name": "FeedfishStore",
+    "Address": {
+      "Address1": "Ben Yehuda 45",
+      "City": "Haifa",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "4293759736",
+    "Email": "FeedfishStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:35"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:55"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:13"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:38"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:12"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:49"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:52"
+      }
+    ]
+  },
+  {
+    "Id": 21,
+    "Name": "InnotypeStore",
+    "Address": {
+      "Address1": "Herzl 61",
+      "City": "Beer Sheva",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "4644801015",
+    "Email": "InnotypeStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:00"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:15"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:34"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:29"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:24"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:38"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:56"
+      }
+    ]
+  },
+  {
+    "Id": 22,
+    "Name": "MeeveoStore",
+    "Address": {
+      "Address1": "Dizengoff 13",
+      "City": "Rishon LeZion",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "9821406683",
+    "Email": "MeeveoStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:45"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:13"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:28"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:48"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:28"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:41"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:55"
+      }
+    ]
+  },
+  {
+    "Id": 23,
+    "Name": "DivavuStore",
+    "Address": {
+      "Address1": "Bialik 48",
+      "City": "Haifa",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "5892308088",
+    "Email": "DivavuStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:20"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:59"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:11"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:58"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:47"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:26"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:40"
+      }
+    ]
+  },
+  {
+    "Id": 24,
+    "Name": "KwimbeeStore",
+    "Address": {
+      "Address1": "Herzl 26",
+      "City": "Rishon LeZion",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "6073276535",
+    "Email": "KwimbeeStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:26"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:09"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:13"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:21"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:48"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:16"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:19"
+      }
+    ]
+  },
+  {
+    "Id": 25,
+    "Name": "EdgeifyStore",
+    "Address": {
+      "Address1": "Dizengoff 44",
+      "City": "Rishon LeZion",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "4679885622",
+    "Email": "EdgeifyStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:19"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:25"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:34"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:55"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:03"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:35"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:22"
+      }
+    ]
+  },
+  {
+    "Id": 26,
+    "Name": "JayoStore",
+    "Address": {
+      "Address1": "Ben Gurion 84",
+      "City": "Jerusalem",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "5334108778",
+    "Email": "JayoStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:52"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:50"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:51"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:02"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:45"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:32"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:53"
+      }
+    ]
+  },
+  {
+    "Id": 27,
+    "Name": "TekflyStore",
+    "Address": {
+      "Address1": "Jabotinsky 89",
+      "City": "Rishon LeZion",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "3625115990",
+    "Email": "TekflyStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:07"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:56"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:50"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:12"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:31"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:11"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:38"
+      }
+    ]
+  },
+  {
+    "Id": 28,
+    "Name": "QuaxoStore",
+    "Address": {
+      "Address1": "Weizmann 42",
+      "City": "Rishon LeZion",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "4063745945",
+    "Email": "QuaxoStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:16"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:01"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:51"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:53"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:53"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:51"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:15"
+      }
+    ]
+  },
+  {
+    "Id": 29,
+    "Name": "ThoughtsphereStore",
+    "Address": {
+      "Address1": "Ibn Gabirol 29",
+      "City": "Rishon LeZion",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "5628592337",
+    "Email": "ThoughtsphereStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:32"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:21"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:37"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:30"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:15"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:19"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:10"
+      }
+    ]
+  },
+  {
+    "Id": 30,
+    "Name": "FivebridgeStore",
+    "Address": {
+      "Address1": "Ben Gurion 69",
+      "City": "Haifa",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "9909226926",
+    "Email": "FivebridgeStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:13"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:28"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:39"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:39"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:27"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:07"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:59"
+      }
+    ]
+  },
+  {
+    "Id": 31,
+    "Name": "KwimbeeStore",
+    "Address": {
+      "Address1": "Balfour 29",
+      "City": "Hadera",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "4553097775",
+    "Email": "KwimbeeStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:01"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:48"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:58"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:36"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:23"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:54"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:40"
+      }
+    ]
+  },
+  {
+    "Id": 32,
+    "Name": "AilaneStore",
+    "Address": {
+      "Address1": "Arlozoroff 22",
+      "City": "Hadera",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "5355718368",
+    "Email": "AilaneStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:07"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:50"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:44"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:38"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:52"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:44"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:27"
+      }
+    ]
+  },
+  {
+    "Id": 33,
+    "Name": "JayoStore",
+    "Address": {
+      "Address1": "Levi Eshkol 72",
+      "City": "Hadera",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "5244760440",
+    "Email": "JayoStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:08"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:36"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:25"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:10"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:43"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:13"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:52"
+      }
+    ]
+  },
+  {
+    "Id": 34,
+    "Name": "TopdriveStore",
+    "Address": {
+      "Address1": "Dizengoff 35",
+      "City": "Haifa",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "6898667097",
+    "Email": "TopdriveStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:25"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:41"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:33"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:42"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:29"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:57"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:29"
+      }
+    ]
+  },
+  {
+    "Id": 35,
+    "Name": "FivespanStore",
+    "Address": {
+      "Address1": "Ben Yehuda 67",
+      "City": "Rishon LeZion",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "9983583983",
+    "Email": "FivespanStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:46"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:37"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:35"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:15"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:03"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:08"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:56"
+      }
+    ]
+  },
+  {
+    "Id": 36,
+    "Name": "WordpediaStore",
+    "Address": {
+      "Address1": "Dizengoff 83",
+      "City": "Rishon LeZion",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "7316100226",
+    "Email": "WordpediaStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:12"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:18"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:54"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:34"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:23"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:47"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:07"
+      }
+    ]
+  },
+  {
+    "Id": 37,
+    "Name": "YouspanStore",
+    "Address": {
+      "Address1": "Begin 91",
+      "City": "Haifa",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "6887856608",
+    "Email": "YouspanStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:28"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:35"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:22"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:24"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:50"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:27"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:27"
+      }
+    ]
+  },
+  {
+    "Id": 38,
+    "Name": "YoutagsStore",
+    "Address": {
+      "Address1": "Ibn Gabirol 86",
+      "City": "Hadera",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "3436702735",
+    "Email": "YoutagsStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:43"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:26"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:07"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:17"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:38"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:44"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:17"
+      }
+    ]
+  },
+  {
+    "Id": 39,
+    "Name": "JetwireStore",
+    "Address": {
+      "Address1": "Ben Yehuda 70",
+      "City": "Haifa",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "2395323507",
+    "Email": "JetwireStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:59"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:59"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:36"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:55"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:28"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:35"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:12"
+      }
+    ]
+  },
+  {
+    "Id": 40,
+    "Name": "JaxnationStore",
+    "Address": {
+      "Address1": "Balfour 92",
+      "City": "Tel-Aviv",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "1244586387",
+    "Email": "JaxnationStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:44"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:45"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:56"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:36"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:13"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:20"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:39"
+      }
+    ]
+  },
+  {
+    "Id": 41,
+    "Name": "DynavaStore",
+    "Address": {
+      "Address1": "Balfour 27",
+      "City": "Haifa",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "4942507937",
+    "Email": "DynavaStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:27"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:34"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:53"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:57"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:25"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:43"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:20"
+      }
+    ]
+  },
+  {
+    "Id": 42,
+    "Name": "ZavaStore",
+    "Address": {
+      "Address1": "Ben Yehuda 22",
+      "City": "Hadera",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "2958497697",
+    "Email": "ZavaStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:33"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:09"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:57"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:22"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:46"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:58"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:23"
+      }
+    ]
+  },
+  {
+    "Id": 43,
+    "Name": "EdgeblabStore",
+    "Address": {
+      "Address1": "Ben Yehuda 77",
+      "City": "Tel-Aviv",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "9976138928",
+    "Email": "EdgeblabStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:07"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:20"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:48"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:04"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:32"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:27"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:06"
+      }
+    ]
+  },
+  {
+    "Id": 44,
+    "Name": "RoodelStore",
+    "Address": {
+      "Address1": "Jabotinsky 43",
+      "City": "Beer Sheva",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "9869039255",
+    "Email": "RoodelStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:01"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:04"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:44"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:58"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:10"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:08"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:56"
+      }
+    ]
+  },
+  {
+    "Id": 45,
+    "Name": "DivanoodleStore",
+    "Address": {
+      "Address1": "Ben Gurion 22",
+      "City": "Rishon LeZion",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "6343407325",
+    "Email": "DivanoodleStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:48"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:45"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:38"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:59"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:49"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:34"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:38"
+      }
+    ]
+  },
+  {
+    "Id": 46,
+    "Name": "PhotobeanStore",
+    "Address": {
+      "Address1": "Levi Eshkol 87",
+      "City": "Tel-Aviv",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "6552748126",
+    "Email": "PhotobeanStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:17"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:29"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:51"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:46"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:17"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:22"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:31"
+      }
+    ]
+  },
+  {
+    "Id": 47,
+    "Name": "JalooStore",
+    "Address": {
+      "Address1": "Ibn Gabirol 12",
+      "City": "Rishon LeZion",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "2274782769",
+    "Email": "JalooStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:31"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:46"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:53"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:54"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:03"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:36"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:33"
+      }
+    ]
+  },
+  {
+    "Id": 48,
+    "Name": "CogidooStore",
+    "Address": {
+      "Address1": "Herzl 70",
+      "City": "Tel-Aviv",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "9444092346",
+    "Email": "CogidooStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:00"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:18"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:10"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:47"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:52"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:44"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:30"
+      }
+    ]
+  },
+  {
+    "Id": 49,
+    "Name": "AgimbaStore",
+    "Address": {
+      "Address1": "Bialik 20",
+      "City": "Beer Sheva",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "9155501812",
+    "Email": "AgimbaStore@gmail.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:34"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:27"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:46"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:32"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:14"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:20"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:52"
+      }
+    ]
+  }
+]

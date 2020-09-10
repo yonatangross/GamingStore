@@ -15,6 +15,7 @@ namespace GamingStore.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(maxLength: 50, nullable: false),
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
+                    Address = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: false),
                     PhoneNumber = table.Column<string>(nullable: true)
                 },

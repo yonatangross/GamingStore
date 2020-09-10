@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 using GamingStore.Contracts;
-using GamingStore.Contracts.Converters;
-using GamingStore.Data;
 using GamingStore.Models.Relationships;
-using Newtonsoft.Json;
 
 namespace GamingStore.Models
 {
