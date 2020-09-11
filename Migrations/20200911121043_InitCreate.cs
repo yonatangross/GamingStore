@@ -11,8 +11,7 @@ namespace GamingStore.Migrations
                 name: "Customers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(maxLength: 50, nullable: false),
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
                     Address = table.Column<string>(nullable: true),
@@ -44,8 +43,7 @@ namespace GamingStore.Migrations
                 name: "Items",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(nullable: false),
                     Title = table.Column<string>(nullable: true),
                     Manufacturer = table.Column<string>(nullable: true),
                     Price = table.Column<int>(nullable: false),
@@ -68,8 +66,7 @@ namespace GamingStore.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(nullable: false),
                     CustomerId = table.Column<int>(nullable: false),
                     StoreId = table.Column<int>(nullable: false),
                     OrderDate = table.Column<DateTime>(nullable: false),
