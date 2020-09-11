@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using GamingStore.Contracts;
 using GamingStore.Models;
@@ -33,73 +34,128 @@ namespace GamingStore.Data
             {
                 new Item
                 {
-                    Title = "Keyboard", Manufacturer = "Microsoft", Price = 299, Category = "hardware", PropertiesList =
+                    Title = "Cloud Stinger Wired Stereo Gaming Headset", Manufacturer = "HyperX", Price = 200,
+                    Category = "Gaming Headsets", PropertiesList =
                         new Dictionary<string, string>()
                         {
-                            {"diameter", "3"},
-                            {"width", "15"},
-                            {"height", "4"}
+                            {"Sound Mode", "Stereo"},
+                            {"Connection Type", "Wired"},
+                            {"Water Resistant", "No"}
                         }
                 },
                 new Item
                 {
-                    Title = "Mouse", Manufacturer = "Microsoft", Price = 150, Category = "hardware", PropertiesList =
+                    Title = "G432 Wired 7.1 Surround Sound Gaming Headset", Manufacturer = "Logitech", Price = 200,
+                    Category = "Gaming Headsets", PropertiesList =
                         new Dictionary<string, string>()
                         {
-                            {"diameter", "3"},
-                            {"width", "15"},
-                            {"height", "4"}
+                            {"Built-In Microphone", "Yes"},
+                            {"Connection Type", "Wired"},
+                            {"Headphone Fit", "Over-the-Ear"}
                         }
                 },
                 new Item
                 {
-                    Title = "Gaming Chair", Manufacturer = "Razor", Price = 799, Category = "other", PropertiesList =
+                    Title = "Milano Gaming Chair - Green", Manufacturer = "Arozzi ", Price = 799,
+                    Category = "Gaming Chairs", PropertiesList =
                         new Dictionary<string, string>()
                         {
-                            {"diameter", "3"},
-                            {"width", "15"},
-                            {"height", "4"}
+                            {"Office Chair Style", "Gaming chair"},
+                            {"Headrest Features", "Padded"},
+                            {"Swivel Angle", "360 degrees"},
+                            {"Color", "Green"}
                         }
                 },
                 new Item
                 {
-                    Title = "Mouse Pad", Manufacturer = "Razor", Price = 50, Category = "hardware", PropertiesList =
+                    Title = "Milano Gaming Chair - Blue", Manufacturer = "Arozzi ", Price = 799,
+                    Category = "Gaming Chairs", PropertiesList =
                         new Dictionary<string, string>()
                         {
-                            {"diameter", "3"},
-                            {"width", "15"},
-                            {"height", "4"}
+                            {"Office Chair Style", "Gaming chair"},
+                            {"Headrest Features", "Padded"},
+                            {"Swivel Angle", "360 degrees"},
+                            {"Color", "Blue"}
                         }
                 },
                 new Item
                 {
-                    Title = "Graphic Card", Manufacturer = "Nvidia", Price = 1500, Category = "GPUs hardware",
+                    Title = " Logitech G440 Hard Gaming", Manufacturer = "Logitech ", Price = 130,
+                    Category = "Mouse Pads", PropertiesList =
+                        new Dictionary<string, string>()
+                        {
+                            {"length", "280mm"},
+                            {"width", "340mm"},
+                            {"height", "3mm"}
+                        }
+                },
+                new Item
+                {
+                    Title = "NVIDIA GEFORCE RTX 3080", Manufacturer = "Nvidia", Price = 3500, Category = "GPUs",
                     PropertiesList =
                         new Dictionary<string, string>()
                         {
-                            {"diameter", "3"},
-                            {"width", "15"},
-                            {"height", "4"}
+                            {"Cooling System", "Fan"},
+                            {"Boost Clock Speed", "1.71 GHz"},
+                            {"GPU Memory Size", "10 GB"}
                         }
                 },
                 new Item
                 {
-                    Title = "Processor", Manufacturer = "Intel", Price = 1249, Category = "CPU", PropertiesList =
+                    Title = "NVIDIA GEFORCE RTX 3090", Manufacturer = "Nvidia", Price = 6500, Category = "GPUs",
+                    PropertiesList =
                         new Dictionary<string, string>()
                         {
-                            {"diameter", "3"},
-                            {"width", "15"},
-                            {"height", "4"}
+                            {"Cooling System", "Fan"},
+                            {"Boost Clock Speed", "1.70 GHz"},
+                            {"GPU Memory Size", "24 GB"}
                         }
                 },
                 new Item
                 {
-                    Title = "Headphones", Manufacturer = "Bose", Price = 499, Category = "hardware", PropertiesList =
+                    Title = "GEFORCE RTX 2080 SUPER BLACK GAMING", Manufacturer = "EVGA", Price = 4300,
+                    Category = "GPUs",
+                    PropertiesList =
                         new Dictionary<string, string>()
                         {
-                            {"diameter", "3"},
-                            {"width", "15"},
-                            {"height", "4"}
+                            {"Cooling System", "Active"},
+                            {"Boost Clock Speed", "1815 MHz"},
+                            {"GPU Memory Size", "8 GB"}
+                        }
+                },
+                new Item
+                {
+                    Title = "Intel Core i9-10900KA Comet Lake Box", Manufacturer = "Intel", Price = 2420,
+                    Category = "CPUs", PropertiesList =
+                        new Dictionary<string, string>()
+                        {
+                            {"Cores", "10"},
+                            {"Clock Speed", "3.60GHz - 5.30GHz"},
+                            {"GPU", "Intel® UHD Graphics 630"},
+                            {"Cache Memory", "20MB"}
+                        }
+                },
+                new Item
+                {
+                    Title = "Intel Core i9-10850KA Comet Lake Box", Manufacturer = "Intel", Price = 2020,
+                    Category = "CPUs", PropertiesList =
+                        new Dictionary<string, string>()
+                        {
+                            {"Cores", "10"},
+                            {"Clock Speed", "3.60GHz - 5.20GHz"},
+                            {"GPU", "Intel® UHD Graphics 630"},
+                            {"Cache Memory", "20MB"}
+                        }
+                },
+                new Item
+                {
+                    Title = "Gaming Headset white combat camouflage", Manufacturer = "Dragon", Price = 499,
+                    Category = "Gaming Headsets", PropertiesList =
+                        new Dictionary<string, string>()
+                        {
+                            {"Sound Mode", "Stereo"},
+                            {"Connection Type", "Wired"},
+                            {"Water Resistant", "No"}
                         }
                 }
             };
@@ -301,17 +357,13 @@ namespace GamingStore.Data
 
             #region CustomersSeed
 
-            // Look for any items.
-            if (!context.Customers.Any())
-            {
-                var dataCustomers =
-                    System.IO.File.ReadAllText(directoryPath + @"\Data\Mock_Data\Customers.json");
-                List<Customer> customersList =
-                    JsonConvert.DeserializeObject<List<Customer>>(
-                        dataCustomers);
-                context.Customers.AddRange(customersList);
-                context.SaveChanges();
-            }
+            var dataCustomers =
+                System.IO.File.ReadAllText(directoryPath + @"\Data\Mock_Data\Customers.json");
+            var customersList =
+                JsonConvert.DeserializeObject<List<Customer>>(
+                    dataCustomers);
+            context.Customers.AddRange(customersList);
+            context.SaveChanges();
             //var customers = new Customer[]
             //{
             //    new Customer
@@ -481,118 +533,61 @@ namespace GamingStore.Data
 
             #region OrdersSeed
 
+            List<Order> ordersList = GenerateOrder(customersList, items);
             var orders = new Order[]
             {
                 new Order
                 {
-                    Customer = new Customer
-                    {
-                        FirstName = "samir", LastName = "Alonso", Email = "yonatan2gross@gmail.com",
-                        PhoneNumber = "0506656474"
-                    },
-                    OrderDate = DateTime.Now.AddDays(-7),
-                    //OrderItems = new List<OrderItem>()
-                    //{
-                    //    new OrderItem()
-                    //    {
-                    //        Item =
-                    //            new Item
-                    //            {
-                    //                Title = "Processor i7",
-                    //                Manufacturer = "Intel",
-                    //                Price = 3450,
-                    //                PropertiesList = new Dictionary<string, string>()
-                    //                {
-                    //                    {"diameter", "3"},
-                    //                    {"width", "15"},
-                    //                    {"height", "4"}
-                    //                }
-                    //            },
-                    //        ItemsCount = 3
-                    //    },
-                    //    new OrderItem()
-                    //    {
-                    //        Item = new Item
-                    //        {
-                    //            Title = "Headphones",
-                    //            Manufacturer = "Bose",
-                    //            Price = 499,
-                    //            PropertiesList = new Dictionary<string, string>()
-                    //            {
-                    //                {"diameter", "3"},
-                    //                {"width", "15"},
-                    //                {"height", "4"}
-                    //            }
-                    //        },
-                    //        ItemsCount = 2
-                    //    }
-                    //},
-                    //Payment = new Payment()
-                    //{
-                    //    ItemsCost = (3450 * 3) + (499 * 2),
-                    //    Paid = true,
-                    //    PaymentMethod = PaymentMethod.Paypal,
-                    //    ShippingCost = 9
-                    //},
-                    State = OrderState.Fulfilled,
-                },
-                new Order
-                {
-                    Customer = new Customer
-                    {
-                        FirstName = "Yonatan", LastName = "Chips", Email = "yonatan2gross@gmail.com", Address =
-                            new Address()
-                            {
-                                Address1 = "Yirmiyahu 48", City = "Tel Aviv", Country = "Israel", PostalCode = "1234567"
-                            },
-                        PhoneNumber = "0506656474"
-                    },
+                    Customer = customersList[0],
                     OrderDate = DateTime.Now.AddDays(-7),
                     OrderItems = new List<OrderItem>()
                     {
                         new OrderItem()
                         {
-                            Item =
-                                new Item
-                                {
-                                    Title = "Processor i5",
-                                    Manufacturer = "Intel",
-                                    Price = 1450,
-                                    PropertiesList = new Dictionary<string, string>()
-                                    {
-                                        {"diameter", "3"},
-                                        {"width", "15"},
-                                        {"height", "4"}
-                                    }
-                                },
-                            ItemsCount = 2
+                            ItemId = 1,
+                            ItemsCount = 3
                         },
                         new OrderItem()
                         {
-                            Item = new Item
-                            {
-                                Title = "QCII",
-                                Manufacturer = "Bose",
-                                Price = 799,
-                                PropertiesList = new Dictionary<string, string>()
-                                {
-                                    {"diameter", "3"},
-                                    {"width", "15"},
-                                    {"height", "4"}
-                                }
-                            },
-                            ItemsCount = 1
+                            ItemId = 2,
+                            ItemsCount = 2
                         }
                     },
                     Payment = new Payment()
                     {
-                        ItemsCost = (1450 * 2) + (799 * 1),
+                        ItemsCost = items[1].Price * 3 + items[2].Price * 2,
                         Paid = true,
                         PaymentMethod = PaymentMethod.Paypal,
-                        ShippingCost = 39
+                        ShippingCost = 9
                     },
                     State = OrderState.Fulfilled,
-                }
+                },
+                new Order
+                {
+                    Customer = customersList[0],
+                    OrderDate = DateTime.Now.AddDays(-7),
+                    OrderItems = new List<OrderItem>()
+                    {
+                        new OrderItem()
+                        {
+                            ItemId = 1,
+                            ItemsCount = 3
+                        },
+                        new OrderItem()
+                        {
+                            ItemId = 2,
+                            ItemsCount = 2
+                        }
+                    },
+                    Payment = new Payment()
+                    {
+                        ItemsCost = items[1].Price * 3 + items[2].Price * 2,
+                        Paid = true,
+                        PaymentMethod = PaymentMethod.Paypal,
+                        ShippingCost = 9
+                    },
+                    State = OrderState.Fulfilled,
+                },
             };
             foreach (var o in orders)
             {
@@ -647,6 +642,44 @@ namespace GamingStore.Data
             context.SaveChanges();
 
             #endregion
+        }
+
+        private static List<Order> GenerateOrder(List<Customer> customersList, Item[] items)
+        {
+            var list = new List<Order>();
+            var rand = new Random();
+            DateTime start = new DateTime(2018, 1, 1);
+            int range = (DateTime.Today - start).Days;
+            foreach (var customer in customersList)
+            {
+                var numOfOrdersForCustomer = rand.Next(minValue: 0, maxValue: 5);
+                for (int orderNumber = 0; orderNumber < numOfOrdersForCustomer; orderNumber++)
+                {
+                    var numOfItems = rand.Next(1, 5);
+                    var order = new Order()
+                    {
+                        Customer = customer, OrderDate = start.AddDays(rand.Next(range)),
+                        OrderItems = GenerateOrderItems(items, numOfItems, out var payment), Payment = payment,
+                        State = OrderState.Fulfilled, Store = GenerateRelatedStore(customer)
+                    };
+                    customer.OrderHistory.Add(order);
+                }
+            }
+
+            return list;
+        }
+
+        private static Store GenerateRelatedStore(Customer customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static ICollection<OrderItem> GenerateOrderItems(Item[] items, in int numOfItems, out Payment payment)
+        {
+            List<OrderItem> orderItems = new List<OrderItem>();
+            payment = new Payment();
+
+            return orderItems;
         }
     }
 }
