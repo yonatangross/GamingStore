@@ -9,6 +9,7 @@ namespace GamingStore.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
         public int OrderForeignKey { get; set; }
         public Order Order { get; set; }
         public int ItemsCost { get; set; }

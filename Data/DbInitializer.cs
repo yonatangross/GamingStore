@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using GamingStore.Contracts;
 using GamingStore.Models;
 using GamingStore.Models.Relationships;
-using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 
 namespace GamingStore.Data
@@ -18,10 +14,9 @@ namespace GamingStore.Data
         {
             context.Database.EnsureCreated();
 
-            // Look for any items.
             if (context.Items.Any())
             {
-                return; // DB has been seeded
+                return;
             }
 
             var directoryPath =
@@ -30,8 +25,10 @@ namespace GamingStore.Data
 
             #region ItemsSeed
 
+            // Load items if they don't exist.
+
             //TODO: add different items with properties
-            var items = new Item[]
+            var items = new[]
             {
                 new Item
                 {
@@ -57,7 +54,7 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = "Milano Gaming Chair - Green", Manufacturer = "Arozzi ", Price = 799,
+                    Title = "Milano Gaming Chair - Green", Manufacturer = "Arozzi", Price = 799,
                     Category = "Gaming Chairs", PropertiesList =
                         new Dictionary<string, string>()
                         {
@@ -69,7 +66,7 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = "Milano Gaming Chair - Blue", Manufacturer = "Arozzi ", Price = 799,
+                    Title = "Milano Gaming Chair - Blue", Manufacturer = "Arozzi", Price = 799,
                     Category = "Gaming Chairs", PropertiesList =
                         new Dictionary<string, string>()
                         {
@@ -92,7 +89,7 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = "NVIDIA GEFORCE RTX 3080", Manufacturer = "Nvidia", Price = 3500, Category = "GPUs",
+                    Title = "NVIDIA GeForce RTX 3080", Manufacturer = "NVIDIA", Price = 3500, Category = "GPUs",
                     PropertiesList =
                         new Dictionary<string, string>()
                         {
@@ -103,7 +100,7 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = "NVIDIA GEFORCE RTX 3090", Manufacturer = "Nvidia", Price = 6500, Category = "GPUs",
+                    Title = "NVIDIA GeForce RTX 3090", Manufacturer = "NVIDIA", Price = 6500, Category = "GPUs",
                     PropertiesList =
                         new Dictionary<string, string>()
                         {
@@ -114,7 +111,7 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = "GEFORCE RTX 2080 SUPER BLACK GAMING", Manufacturer = "EVGA", Price = 4300,
+                    Title = "GeForce RTX 2080 SUPER BLACK GAMING", Manufacturer = "EVGA", Price = 4300,
                     Category = "GPUs",
                     PropertiesList =
                         new Dictionary<string, string>()
@@ -169,48 +166,36 @@ namespace GamingStore.Data
 
             #endregion
 
-            #region StoresSeed
+            #region CustomersSeed
 
-            var dataStores =
-                System.IO.File.ReadAllText(directoryPath + @"\Data\Mock_Data\Stores.json");
-            List<Store> storesList =
-                JsonConvert.DeserializeObject<List<Store>>(
-                    dataStores);
-            context.Stores.AddRange(storesList);
+            var dataCustomers = System.IO.File.ReadAllText(directoryPath + @"\Data\Mock_Data\Customers.json");
+            var customers = JsonConvert.DeserializeObject<List<Customer>>(dataCustomers);
+            context.Customers.AddRange(customers);
             context.SaveChanges();
 
             #endregion
 
-            #region CustomersSeed
+            #region StoresSeed
 
-            var dataCustomers =
-                System.IO.File.ReadAllText(directoryPath + @"\Data\Mock_Data\Customers.json");
-            var customersList =
-                JsonConvert.DeserializeObject<List<Customer>>(
-                    dataCustomers);
-            context.Customers.AddRange(customersList);
+            var dataStores =
+                System.IO.File.ReadAllText(directoryPath + @"\Data\Mock_Data\Stores.json");
+            var stores = JsonConvert.DeserializeObject<List<Store>>(
+                dataStores);
+            if (context.Items.Any() && context.Customers.Any())
+                GenerateStoreItems(stores, items, customers);
+
+            context.Stores.AddRange(stores);
             context.SaveChanges();
 
             #endregion
 
             #region OrdersAndPaymetsSeed
 
-            var ordersList = GenerateOrders(customersList, items.ToList(), storesList, out var payments);
+            var orders = GenerateOrders(customers, items.ToList(), stores, out var payments);
 
-            var enumerable = ordersList.ToList();
-            for (int i = 0; i < enumerable.Count(); i++)
-            {
-                try
-                {
-                    context.Orders.Add(enumerable[i]);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
-                }
-            }
-
+            var orderList = orders.ToList();
+            foreach (var order in orderList)
+                context.Orders.Add(order);
             foreach (var p in payments)
                 context.Payments.Add(p);
             context.SaveChanges();
@@ -218,7 +203,30 @@ namespace GamingStore.Data
             #endregion
         }
 
-        private static IEnumerable<Order> GenerateOrders(IEnumerable<Customer> customersList, List<Item> items,
+        private static void GenerateStoreItems(IEnumerable<Store> stores, Item[] items,
+            IReadOnlyCollection<Customer> customersList)
+        {
+            var rand = new Random();
+            foreach (var store in stores)
+            {
+                foreach (var item in items)
+                {
+                    var itemCreated = rand.Next(2) == 1; // 1 - True  - False
+                    if (!itemCreated) continue;
+                    const float itemsNumberMultiplier = 0.3f;
+                    store.StoreItems.Add(new StoreItem()
+                    {
+                        ItemId = item.Id, StoreId = store.Id,
+                        ItemsCount =
+                            (uint) rand.Next(1,
+                                (int) (customersList.Count * itemsNumberMultiplier)) // customers number times 0.3
+                    });
+                }
+            }
+        }
+
+        private static IEnumerable<Order> GenerateOrders(IEnumerable<Customer> customersList,
+            IReadOnlyCollection<Item> items,
             IReadOnlyCollection<Store> storesList, out List<Payment> payments)
         {
             payments = new List<Payment>();
@@ -235,14 +243,13 @@ namespace GamingStore.Data
                     const int maxItems = 5;
                     var numItemsOrdered = rand.Next(minItems, maxItems);
                     var store = GenerateRelatedStore(customer, storesList);
-
                     var order = new Order()
                     {
                         CustomerId = customer.Id, OrderDate = shopOpeningDate.AddDays(rand.Next(range)),
                         State = OrderState.Fulfilled,
                         StoreId = store.Id,
                     };
-                    order.OrderItems = GenerateOrderItems(order.Id, items, numItemsOrdered, store, out var payment);
+                    order.OrderItems = GenerateOrderItems(order.Id, items, numItemsOrdered, out var payment);
                     order.Payment = payment;
                     payments.Add(payment);
                     list.Add(order);
@@ -261,7 +268,6 @@ namespace GamingStore.Data
 
         private static ICollection<OrderItem> GenerateOrderItems(int orderId, IEnumerable<Item> items,
             int numItemsOrdered,
-            Store store,
             out Payment payment)
         {
             var itemsList = new List<Item>(items); // copy list in order to alter it.
@@ -272,7 +278,6 @@ namespace GamingStore.Data
                 var curIndex = rand.Next(itemsList.Count);
                 var curItem = itemsList[curIndex];
                 itemsList.Remove(curItem);
-                //todo: check store stock, make sure we have enough items.
                 var orderItem = new OrderItem()
                 {
                     OrderId = orderId,
@@ -285,7 +290,8 @@ namespace GamingStore.Data
 
             payment = new Payment()
             {
-                ItemsCost = CalculateOrderSum(orderItems), PaymentMethod = PaymentMethod.CreditCard, ShippingCost = 0,
+                ItemsCost = CalculateOrderSum(orderItems), PaymentMethod = (PaymentMethod) rand.Next(0, 3),
+                ShippingCost = 0,
                 Paid = true
             };
 

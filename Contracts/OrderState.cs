@@ -2,6 +2,10 @@
 {
     public enum OrderState
     {
-        New, InProgress, Shipped, Fulfilled, Cancelled
+        New,
+        InProgress,
+        Shipped,
+        Fulfilled,
+        Cancelled
     }
 }

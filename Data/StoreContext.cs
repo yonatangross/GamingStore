@@ -5,6 +5,7 @@ using GamingStore.Contracts.Converters;
 using GamingStore.Models;
 using GamingStore.Models.Relationships;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Newtonsoft.Json;
 
 namespace GamingStore.Data
@@ -61,8 +62,6 @@ namespace GamingStore.Data
 
             #region ObjectConverationHandling
 
-            //var jsonSerializerSettings = new JsonSerializerSettings();
-            //jsonSerializerSettings.Converters.Add(new DictionaryJsonConverter());
             modelBuilder.Entity<Item>()
                 .Property(i => i.PropertiesList)
                 .HasConversion(
