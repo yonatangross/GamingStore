@@ -245,7 +245,8 @@ namespace GamingStore.Data
                     var store = GenerateRelatedStore(customer, storesList);
                     var order = new Order()
                     {
-                        CustomerId = customer.Id, OrderDate = shopOpeningDate.AddDays(rand.Next(range)),
+                        CustomerId = customer.Id, 
+                        OrderDate = shopOpeningDate.AddDays(rand.Next(range)),
                         State = OrderState.Fulfilled,
                         StoreId = store.Id,
                     };

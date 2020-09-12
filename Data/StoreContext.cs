@@ -4,13 +4,15 @@ using GamingStore.Contracts;
 using GamingStore.Contracts.Converters;
 using GamingStore.Models;
 using GamingStore.Models.Relationships;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Newtonsoft.Json;
 
 namespace GamingStore.Data
 {
-    public class StoreContext : DbContext
+    public class StoreContext : IdentityDbContext<Customer,IdentityRole,string>
     {
         public StoreContext(DbContextOptions<StoreContext> options) : base(options)
         {
@@ -18,6 +20,8 @@ namespace GamingStore.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             #region Relationships
 
             #region OneToOne

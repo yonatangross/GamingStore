@@ -22,7 +22,7 @@ namespace GamingStore.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        [Required] public int CustomerId { get; set; }
+        [Required] public string CustomerId { get; set; }
         public Customer Customer { get; set; }
         [Required] public int StoreId { get; set; }
         public Store Store { get; set; }
