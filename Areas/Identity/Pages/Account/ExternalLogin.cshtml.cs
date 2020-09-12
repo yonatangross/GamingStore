@@ -49,6 +49,12 @@ namespace GamingStore.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+            [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
             [Required]
             [EmailAddress]
             public string Email { get; set; }
@@ -122,7 +128,7 @@ namespace GamingStore.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new Customer { UserName = Input.Email, Email = Input.Email };
+                var user = new Customer { UserName = Input.Email, Email = Input.Email ,FirstName = Input.FirstName,LastName = Input.LastName};
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
