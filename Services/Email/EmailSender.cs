@@ -21,31 +21,14 @@ namespace GamingStore.Services.Email
         {
             var mimeMessage = new MimeMessage();
             mimeMessage.From.Add(new MailboxAddress(Options.AppName, Options.GmailUser));
-            mimeMessage.To.Add(new MailboxAddress(address:email));
+            mimeMessage.To.Add(new MailboxAddress(address: email));
             mimeMessage.Subject = subject; //Subject
             mimeMessage.Body = new TextPart("html") // message rendered as html
             {
                 Text = message
             };
-            await SendMessage(mimeMessage);
-        }
-
-        public async Task SendEmailAsync(string email, string subject, string message, string firstName)
-        {
-            var mimeMessage = new MimeMessage();
-            mimeMessage.From.Add(new MailboxAddress(Options.AppName, Options.GmailUser));
-            mimeMessage.To.Add(address: new MailboxAddress(firstName, email));
-            mimeMessage.Subject = subject; //Subject
-            mimeMessage.Body = new TextPart("html") // message rendered as html
-            {
-                Text = message
-            };
-
-            await SendMessage(mimeMessage);
-        }
-
-        private async Task SendMessage(MimeMessage mimeMessage)
-        {
+            
+            //logs the smtp protocol transmission 
             using var client = new SmtpClient(new ProtocolLogger("smtp.log"))
             {
                 ServerCertificateValidationCallback = (sender, certificate, certChainType, errors) => true
@@ -57,6 +40,7 @@ namespace GamingStore.Services.Email
             await client.SendAsync(mimeMessage).ConfigureAwait(false);
             await client.DisconnectAsync(true).ConfigureAwait(false);
         }
+
 
         private static void OnMessageSent(object sender, MessageSentEventArgs e)
         {
