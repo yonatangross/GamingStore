@@ -33,6 +33,10 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
+            [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
@@ -42,8 +46,6 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
-            Username = userName;
 
             Input = new InputModel
             {

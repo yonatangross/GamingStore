@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using GamingStore.Data;
 using GamingStore.Models;
+using GamingStore.Services;
+using GamingStore.Services.Email;
+using GamingStore.Services.Email.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -51,6 +54,9 @@ namespace GamingStore
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageOptions>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
