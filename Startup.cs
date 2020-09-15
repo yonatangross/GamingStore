@@ -34,10 +34,13 @@ namespace GamingStore
             services.AddDbContext<StoreContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("StoreContext")));
 
+            // User Management
             services.AddDefaultIdentity<Customer>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<StoreContext>()
                 .AddDefaultUI();
+
+            // Authentication
             services.AddAuthentication().AddFacebook(facebookOptions =>
             {
                 facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
@@ -51,6 +54,7 @@ namespace GamingStore
                 options.ClientId = googleAuthNSection["ClientId"];
                 options.ClientSecret = googleAuthNSection["ClientSecret"];
             });
+            
 
             services.AddControllersWithViews();
             services.AddRazorPages();

@@ -36,8 +36,8 @@ namespace GamingStore.Services.Email
 
             await client.ConnectAsync(Options.SmtpServer, Options.SmtpPortNumber, false).ConfigureAwait(false);
             await client.AuthenticateAsync(Options.GmailUser, Options.GmailKey).ConfigureAwait(false);
-            client.MessageSent += OnMessageSent;
             await client.SendAsync(mimeMessage).ConfigureAwait(false);
+            client.MessageSent += OnMessageSent;
             await client.DisconnectAsync(true).ConfigureAwait(false);
         }
 

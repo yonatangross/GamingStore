@@ -25,6 +25,7 @@ namespace GamingStore.Models
 
         [Required, DataType(DataType.Text)] public string Name { get; set; }
 
+        //todo: add field validation.
         public Address Address { get; set; }
 
         //TODO: add geolocation.
