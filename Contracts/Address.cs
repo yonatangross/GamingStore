@@ -1,4 +1,7 @@
-﻿namespace GamingStore.Contracts
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace GamingStore.Contracts
 {
     public class Address
     {
@@ -13,5 +16,18 @@
         public string PostalCode { get; set; }
 
         public string Country { get; set; }
+
+        public override string ToString()
+        {
+            List<string> values
+                = typeof(Address).GetProperties()
+                    .Select(prop => prop.GetValue(this, null))
+                    .Where(val => val != null)
+                    .Select(val => val.ToString())
+                    .Where(str => str.Length > 0)
+                    .ToList();
+
+            return string.Join(",", values);
+        }
     }
 }
