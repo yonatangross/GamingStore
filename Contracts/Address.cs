@@ -18,13 +18,14 @@ namespace GamingStore.Contracts
         public string Country { get; set; }
 
         public override string ToString()
-        {
-            List<string> values
+        { 
+            // shows values only if they aren't null.
+            var values
                 = typeof(Address).GetProperties()
                     .Select(prop => prop.GetValue(this, null))
                     .Where(val => val != null)
                     .Select(val => val.ToString())
-                    .Where(str => str.Length > 0)
+                    .Where(str => !string.IsNullOrEmpty(str))
                     .ToList();
 
             return string.Join(",", values);

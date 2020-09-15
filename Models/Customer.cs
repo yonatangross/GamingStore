@@ -10,19 +10,11 @@ namespace GamingStore.Models
 {
     public class Customer :IdentityUser
     {
-        // public static int CustomerCounter = 0;
-
         public Customer()
         {
             OrderHistory = new List<Order>();
             ShoppingCart = new List<Item>();
-            /*Id = CustomerCounter;
-            Interlocked.Increment(ref CustomerCounter);*/
         }
-
-        /*[Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }*/
-
         [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
         public string FirstName { get; set; }
 
