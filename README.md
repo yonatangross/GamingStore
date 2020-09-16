@@ -34,6 +34,6 @@ The application motivation is to create an web application that serves both the 
 - [Facebook API](https://developers.facebook.com/)
 
 ## Credits
- Course Instructor [Shay Horovitz]()
+ Course Instructor [Shay Horovitz](https://www.linkedin.com/in/shay-horovitz-25bb31/)
 ## License
-MIT © [Yonatan Gross](), [Ohad Cohen](), [Aviv Miranda](), [Matan Hassin]()
+MIT © [Yonatan Gross](https://github.com/yonatangross), [Ohad Cohen](https://github.com/OhadCohen97), [Aviv Miranda](https://github.com/Aviv943), [Matan Hassin](https://github.com/AnubisMatan)
