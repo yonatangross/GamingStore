@@ -1,4 +1,4 @@
-﻿First time after changes on db:
+﻿Instructions to run project as administrator.
 1. run <dotnet user-secrets init> in PMC
 2. Make sure you have our secrets.json on your computer in %APPDATA%
 3. Remove migrations folder
