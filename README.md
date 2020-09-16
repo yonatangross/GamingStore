@@ -17,7 +17,8 @@ The application motivation is to create an web application that serves both the 
 3. Generated mock data using [Mockaro](https://www.mockaroo.com/)
 4. Implemented graphs using [d3js](https://d3js.org)
 5. Implemented Google Maps and Facebook API 
-6. Using AJAX to display asynchronously
+6. Implemented Email Service using [MailKit](https://github.com/jstedfast/MailKit)
+7. Using AJAX to display asynchronously
  
 ## Installation
 0. Make sure you have secrets.json on your computer in %APPDATA%
@@ -32,10 +33,7 @@ The application motivation is to create an web application that serves both the 
 - [Google Maps API](https://developers.google.com/maps/documentation)
 - [Facebook API](https://developers.facebook.com/)
 
-## How to use?
-If people like your project they’ll want to learn how they can use it. To do so include step by step guide to use your project.
-
 ## Credits
  Course Instructor [Shay Horovitz]()
 ## License
-MIT © [Yonatan Gross, Ohad Cohen, Aviv Miranda, Matan Hassin]()
+MIT © [Yonatan Gross](), [Ohad Cohen](), [Aviv Miranda](), [Matan Hassin]()
