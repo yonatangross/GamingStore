@@ -32,9 +32,6 @@ The application motivation is to create an web application that serves both the 
 - [Google Maps API](https://developers.google.com/maps/documentation)
 - [Facebook API](https://developers.facebook.com/)
 
-## How to use?
-If people like your project they’ll want to learn how they can use it. To do so include step by step guide to use your project.
-
 ## Credits
  Course Instructor [Shay Horovitz]()
 ## License
