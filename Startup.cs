@@ -7,10 +7,12 @@ using GamingStore.Models;
 using GamingStore.Services;
 using GamingStore.Services.Email;
 using GamingStore.Services.Email.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,11 +36,12 @@ namespace GamingStore
             services.AddDbContext<StoreContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("StoreContext")));
 
-            // User Management
+            // Authorization
             services.AddDefaultIdentity<Customer>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<StoreContext>()
                 .AddDefaultUI();
+
 
             // Authentication
             services.AddAuthentication().AddFacebook(facebookOptions =>
@@ -54,10 +57,13 @@ namespace GamingStore
                 options.ClientId = googleAuthNSection["ClientId"];
                 options.ClientSecret = googleAuthNSection["ClientSecret"];
             });
-            
 
-            services.AddControllersWithViews();
-            services.AddRazorPages();
+            /*// Configure Authentication Policies.
+            services.AddMvc(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+            }).AddXmlSerializerFormatters();*/
 
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageOptions>(Configuration);

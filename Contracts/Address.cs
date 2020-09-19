@@ -1,24 +1,27 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace GamingStore.Contracts
 {
-    public class Address
+    public class Address 
     {
-        public string Address1 { get; set; }
+        [Required] public string Address1 { get; set; }
 
         public string Address2 { get; set; }
 
-        public string City { get; set; }
+        [Required] public string City { get; set; }
 
         public string State { get; set; }
 
-        public string PostalCode { get; set; }
 
-        public string Country { get; set; }
+        [Required] public string PostalCode { get; set; }
+
+
+        [Required] public string Country { get; set; }
 
         public override string ToString()
-        { 
+        {
             // shows values only if they aren't null.
             var values
                 = typeof(Address).GetProperties()
@@ -30,5 +33,6 @@ namespace GamingStore.Contracts
 
             return string.Join(",", values);
         }
+
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GamingStore.Controllers
 {
@@ -54,7 +55,8 @@ namespace GamingStore.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address,PhoneNumber,Email,OpeningHours")] Store store)
+        public async Task<IActionResult> Create([Bind("Id,Name,Address,PhoneNumber,Email,OpeningHours")]
+            Store store)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +64,7 @@ namespace GamingStore.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(store);
         }
 
@@ -78,6 +81,7 @@ namespace GamingStore.Controllers
             {
                 return NotFound();
             }
+
             return View(store);
         }
 
@@ -86,7 +90,8 @@ namespace GamingStore.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,PhoneNumber,Email,OpeningHours")] Store store)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,PhoneNumber,Email,OpeningHours")]
+            Store store)
         {
             if (id != store.Id)
             {
@@ -111,8 +116,10 @@ namespace GamingStore.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
+
             return View(store);
         }
 

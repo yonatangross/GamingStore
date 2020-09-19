@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Policy;
@@ -8,7 +9,7 @@ using GamingStore.Models.Relationships;
 
 namespace GamingStore.Models
 {
-    public class Store
+    public class Store 
     {
         public static int StoreCounter = 0;
 
@@ -23,14 +24,17 @@ namespace GamingStore.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        [Required, DataType(DataType.Text)] public string Name { get; set; }
+        [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
+        public string Name { get; set; }
 
-        //todo: add field validation.
-        public Address Address { get; set; }
+        [Required] public Address Address { get; set; }
 
         //TODO: add geolocation.
-        [DataType(DataType.PhoneNumber)] public string PhoneNumber { get; set; }
-        [DataType(DataType.EmailAddress)] public string Email { get; set; }
+        [Required, DataType(DataType.PhoneNumber), StringLength(50), Phone]
+        public string PhoneNumber { get; set; }
+
+        [DataType(DataType.EmailAddress), EmailAddress]
+        public string Email { get; set; }
 
         public OpeningHours[] OpeningHours { get; set; }
 
