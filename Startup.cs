@@ -37,11 +37,19 @@ namespace GamingStore
                 options.UseSqlServer(Configuration.GetConnectionString("StoreContext")));
 
             // Authorization
-            services.AddDefaultIdentity<Customer>()
+            services.AddIdentity<Customer, IdentityRole>(options =>
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequiredLength = 6;
+                    options.User.AllowedUserNameCharacters = null;
+                })
                 .AddRoles<IdentityRole>()
+                .AddDefaultUI()
                 .AddEntityFrameworkStores<StoreContext>()
-                .AddDefaultUI();
-
+                .AddDefaultTokenProviders();
 
             // Authentication
             services.AddAuthentication().AddFacebook(facebookOptions =>
@@ -57,8 +65,6 @@ namespace GamingStore
                 options.ClientId = googleAuthNSection["ClientId"];
                 options.ClientSecret = googleAuthNSection["ClientSecret"];
             });
-
-
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageOptions>(Configuration);
         }
