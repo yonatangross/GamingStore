@@ -58,12 +58,6 @@ namespace GamingStore
                 options.ClientSecret = googleAuthNSection["ClientSecret"];
             });
 
-            /*// Configure Authentication Policies.
-            services.AddMvc(options =>
-            {
-                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-                options.Filters.Add(new AuthorizeFilter(policy));
-            }).AddXmlSerializerFormatters();*/
 
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageOptions>(Configuration);

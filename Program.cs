@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using GamingStore.Data;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,12 +25,20 @@ namespace GamingStore
             try
             {
                 var context = services.GetRequiredService<StoreContext>();
-                DbInitializer.Initialize(context);
+                context.Database.Migrate();
+
+                // requires using Microsoft.Extensions.Configuration;
+                var config = host.Services.GetRequiredService<IConfiguration>();
+                // Set password with the Secret Manager tool.
+                // dotnet user-secrets set SeedUserPW <pw>
+                var adminPassword = config["SeedAdminPW"];
+
+                SeedData.Initialize(services,adminPassword).Wait();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e);
-                throw;
+                var logger = services.GetRequiredService<ILogger<Program>>();
+                logger.LogError(ex, "An error occurred seeding the DB.");
             }
 
             host.Run();

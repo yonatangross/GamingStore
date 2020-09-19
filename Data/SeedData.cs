@@ -1,19 +1,83 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using GamingStore.Contracts;
 using GamingStore.Models;
 using GamingStore.Models.Relationships;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 
 namespace GamingStore.Data
 {
-    public class DbInitializer
+    public class SeedData
     {
-        public static void Initialize(StoreContext context)
+        public static async Task Initialize(IServiceProvider serviceProvider,string adminPassword)
         {
-            context.Database.EnsureCreated();
+            await using var context = new StoreContext(
+                serviceProvider.GetRequiredService<DbContextOptions<StoreContext>>());
+            var userManager = serviceProvider.GetService<UserManager<Customer>>();
+            var roleManager = serviceProvider.GetService<RoleManager<IdentityRole>>();
 
+            await CreateRolesAndUsers(context,userManager, roleManager,adminPassword);
+
+            SeedDatabase(context);
+        }
+
+        private static async Task CreateRolesAndUsers(StoreContext context,UserManager<Customer> userManager,
+            RoleManager<IdentityRole> roleManager,string adminPassword)
+        {
+            const string admin = "Admin";
+            const string storeManager = "StoreManager";
+            const string customer = "Customer";
+
+
+            var roleExists = await roleManager.RoleExistsAsync(admin);
+            if (!roleExists)
+            {
+                // first we create Admin roll    
+                var role = new IdentityRole {Name = admin};
+                await roleManager.CreateAsync(role);
+
+                //Here we create a Admin super user who will maintain the website                   
+
+                var user = new Customer()
+                {
+                    UserName = "yonatan2gross@gmail.com",
+                    Email = "yonatan2gross@gmail.com",
+                    FirstName = "Yonatan",
+                    LastName = "Gross"
+                };
+
+                var result = await userManager.CreateAsync(user, adminPassword);
+
+                //Add default User to Role Admin    
+                if (result.Succeeded)
+                    await userManager.AddToRoleAsync(user, "Admin");
+            }
+
+            // creating Creating Manager role     
+            roleExists = await roleManager.RoleExistsAsync(storeManager);
+            if (!roleExists)
+            {
+                var role = new IdentityRole {Name = storeManager};
+                await roleManager.CreateAsync(role);
+            }
+
+            // creating Creating Employee role     
+            roleExists = await roleManager.RoleExistsAsync(customer);
+            if (!roleExists)
+            {
+                var role = new IdentityRole {Name = customer};
+                await roleManager.CreateAsync(role);
+            }
+            await context.SaveChangesAsync();
+        }
+
+        public static void SeedDatabase(StoreContext context)
+        {
             if (context.Items.Any())
             {
                 return;
@@ -168,7 +232,7 @@ namespace GamingStore.Data
 
             #region CustomersSeed
 
-            var dataCustomers = System.IO.File.ReadAllText(directoryPath + @"\Data\Mock_Data\Customers.json");
+            var dataCustomers = System.IO.File.ReadAllText(directoryPath + @"\Data\Mock_Data\CustomersMin.json");
             var customers = JsonConvert.DeserializeObject<List<Customer>>(dataCustomers);
             context.Customers.AddRange(customers);
             context.SaveChanges();
@@ -245,7 +309,7 @@ namespace GamingStore.Data
                     var store = GenerateRelatedStore(customer, storesList);
                     var order = new Order()
                     {
-                        CustomerId = customer.Id, 
+                        CustomerId = customer.Id,
                         OrderDate = shopOpeningDate.AddDays(rand.Next(range)),
                         State = OrderState.Fulfilled,
                         StoreId = store.Id,
