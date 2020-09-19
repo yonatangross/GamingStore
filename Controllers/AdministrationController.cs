@@ -181,7 +181,7 @@ namespace GamingStore.Controllers
                 var userRoleViewModel = new UserRoleViewModel
                 {
                     UserId = user.Id,
-                    UserName = user.UserName,
+                    UserName = user.Email,
                     Email = user.Email,
                     IsSelected = await _userManager.IsInRoleAsync(user,role.Name)
                 };

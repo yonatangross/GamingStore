@@ -10,16 +10,21 @@
             <h2>Add or remove users from this role</h2>
         </div>
         <div class="card-body">
-            @for (int i = 0; i < Model.Count; i++)
+            @foreach (var userRoleViewModel in Model)
             {
+
                 <div class="form-check m-1">
-                    <input type="hidden" asp-for="@Model[i].UserId" />
-                    <input type="hidden" asp-for="@Model[i].UserName" />
-                    <input asp-for="@Model[i].IsSelected" class="form-check-input" />
-                    <label class="form-check-label" asp-for="@Model[i].IsSelected">
-                        @Model[i].Email
+                    <input type="hidden" asp-for="@userRoleViewModel.UserId" />
+                    <input type="hidden" asp-for="@userRoleViewModel.UserName" />
+                    <input asp-for="@userRoleViewModel.IsSelected" class="form-check-input" />
+                    <label class="form-check-label" asp-for="@userRoleViewModel.IsSelected">
+                        @userRoleViewModel.Email
                     </label>
                 </div>
+                /*if (!userRoleViewModel.IsSelected) //todo: fix model sent via HttpPost
+                {
+                    Model.Remove(userRoleViewModel);
+                }*/
             }
         </div>
         <div class="card-footer">
