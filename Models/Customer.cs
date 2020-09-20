@@ -15,10 +15,10 @@ namespace GamingStore.Models
             OrderHistory = new List<Order>();
             ShoppingCart = new List<Item>();
         }
-        [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
+        [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"[a-zA-Z]{2,}$")]
         public string FirstName { get; set; }
 
-        [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
+        [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"[a-zA-Z]{2,}$")]
         public string LastName { get; set; }
 
         public Address Address { get; set; }
