@@ -10,7 +10,6 @@ namespace GamingStore.ViewModels
     {
         public EditUserViewModel()
         {
-            Claims = new List<string>();
             Roles = new List<string>();
         }
 
@@ -22,8 +21,6 @@ namespace GamingStore.ViewModels
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-
-        public List<string> Claims { get; set; }
 
         public IList<string> Roles { get; set; }
     }

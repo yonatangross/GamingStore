@@ -45,7 +45,6 @@ namespace GamingStore.Controllers
                 Id = user.Id,
                 Email = user.Email,
                 UserName = user.UserName,
-                Claims = userClaims.Select(c => c.Value).ToList(),
                 Roles = userRoles
             };
 
@@ -211,10 +210,12 @@ namespace GamingStore.Controllers
 
                 if (model[i].IsSelected && !(await _userManager.IsInRoleAsync(user, role.Name)))
                 {
+                    user.UserName = user.Email;
                     result = await _userManager.AddToRoleAsync(user, role.Name);
                 }
                 else if (!model[i].IsSelected && await _userManager.IsInRoleAsync(user, role.Name))
                 {
+                    user.UserName = user.Email;
                     result = await _userManager.RemoveFromRoleAsync(user, role.Name);
                 }
                 else

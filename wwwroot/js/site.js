@@ -14,3 +14,4 @@ function confirmDelete(uniqueId, isDeleteClicked) {
         $("#" + confirmDeleteSpan).hide();
     }
 }
+
