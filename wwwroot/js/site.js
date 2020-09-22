@@ -5,6 +5,11 @@
 function confirmDelete(uniqueId, isDeleteClicked) {
     var deleteSpan = "deleteSpan_" + uniqueId;
     var confirmDeleteSpan = "confirmDeleteSpan_" + uniqueId;
+    
+    $("[id^=confirmDeleteSpan_]").each(function() {
+        $("[id^=deleteSpan_]").show();
+        $("[id^=confirmDeleteSpan_]").hide();
+    });
 
     if (isDeleteClicked) {
         $("#" + deleteSpan).hide();
@@ -13,5 +18,16 @@ function confirmDelete(uniqueId, isDeleteClicked) {
         $("#" + deleteSpan).show();
         $("#" + confirmDeleteSpan).hide();
     }
+}
+
+function deleteUserFunc(url,userId) {
+    $.ajax({
+            type: "Post",
+            url: url,
+            success: function(res) {
+                $().html(res);
+            }
+        }
+    );
 }
 
