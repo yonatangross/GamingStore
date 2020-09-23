@@ -5,29 +5,40 @@
 function confirmDelete(uniqueId, isDeleteClicked) {
     var deleteSpan = "deleteSpan_" + uniqueId;
     var confirmDeleteSpan = "confirmDeleteSpan_" + uniqueId;
-    
+    var animationTime = 100;
+
     $("[id^=confirmDeleteSpan_]").each(function() {
         $("[id^=deleteSpan_]").show();
         $("[id^=confirmDeleteSpan_]").hide();
     });
 
     if (isDeleteClicked) {
-        $("#" + deleteSpan).hide();
-        $("#" + confirmDeleteSpan).show();
+        $("#" + deleteSpan).hide(animationTime);
+        $("#" + confirmDeleteSpan).show(animationTime);
     } else {
-        $("#" + deleteSpan).show();
-        $("#" + confirmDeleteSpan).hide();
+        $("#" + deleteSpan).show(animationTime);
+        $("#" + confirmDeleteSpan).hide(animationTime);
     }
 }
 
-function deleteUserFunc(url,userId) {
+function confirmDeleteAjax(userId,userNum,userEmail) {
     $.ajax({
-            type: "Post",
-            url: url,
-            success: function(res) {
-                $().html(res);
+            type: "POST",
+            url: "Administration/DeleteUser",
+            data: {
+                id: userId
+            },
+            success: function() {
+                $.notify(userEmail+ " deleted", { color: "#fff", background: "#D44950" ,position: "top center" });
+
+                $(".user"+userNum).hide('slow', function () { $(".user"+userNum).remove(); });
+            },
+            failure: function(response) {
+                alert(response.text);
+            },
+            error: function(response) {
+                alert(response.text);
             }
         }
     );
 }
-
