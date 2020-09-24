@@ -15,6 +15,7 @@ namespace GamingStore.Models
             OrderHistory = new List<Order>();
             ShoppingCart = new List<Item>();
         }
+        
         [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"[a-zA-Z]{2,}$")]
         public string FirstName { get; set; }
 
@@ -24,6 +25,7 @@ namespace GamingStore.Models
         public Address Address { get; set; }
 
         public ICollection<Order> OrderHistory { get; set; }
+        
         public ICollection<Item> ShoppingCart { get; set; }
     }
 }

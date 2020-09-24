@@ -6,24 +6,26 @@ namespace GamingStore.Contracts
 {
     public class Address 
     {
-        [Required] public string Address1 { get; set; }
+        [Required]
+        public string Address1 { get; set; }
 
         public string Address2 { get; set; }
 
-        [Required] public string City { get; set; }
+        [Required] 
+        public string City { get; set; }
 
         public string State { get; set; }
 
+        [Required] 
+        public string PostalCode { get; set; }
 
-        [Required] public string PostalCode { get; set; }
-
-
-        [Required] public string Country { get; set; }
+        [Required]
+        public string Country { get; set; }
 
         public override string ToString()
         {
             // shows values only if they aren't null.
-            var values
+            List<string?> values
                 = typeof(Address).GetProperties()
                     .Select(prop => prop.GetValue(this, null))
                     .Where(val => val != null)

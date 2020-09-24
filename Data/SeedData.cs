@@ -16,8 +16,7 @@ namespace GamingStore.Data
     {
         public static async Task Initialize(IServiceProvider serviceProvider,string adminPassword)
         {
-            await using var context = new StoreContext(
-                serviceProvider.GetRequiredService<DbContextOptions<StoreContext>>());
+            await using var context = new StoreContext(serviceProvider.GetRequiredService<DbContextOptions<StoreContext>>());
             var userManager = serviceProvider.GetService<UserManager<Customer>>();
             var roleManager = serviceProvider.GetService<RoleManager<IdentityRole>>();
 
@@ -26,15 +25,14 @@ namespace GamingStore.Data
             SeedDatabase(context);
         }
 
-        private static async Task CreateRolesAndUsers(StoreContext context,UserManager<Customer> userManager,
-            RoleManager<IdentityRole> roleManager,string adminPassword)
+        private static async Task CreateRolesAndUsers(StoreContext context,UserManager<Customer> userManager, RoleManager<IdentityRole> roleManager,string adminPassword)
         {
             const string admin = "Admin";
             const string storeManager = "StoreManager";
             const string customer = "Customer";
 
+            bool roleExists = await roleManager.RoleExistsAsync(admin);
 
-            var roleExists = await roleManager.RoleExistsAsync(admin);
             if (!roleExists)
             {
                 // first we create Admin roll    
@@ -42,7 +40,6 @@ namespace GamingStore.Data
                 await roleManager.CreateAsync(role);
 
                 //Here we create a Admin super user who will maintain the website                   
-
                 var user = new Customer()
                 {
                     UserName = "yonatan2gross@gmail.com",
@@ -51,11 +48,13 @@ namespace GamingStore.Data
                     LastName = "Gross"
                 };
 
-                var result = await userManager.CreateAsync(user, adminPassword);
+                IdentityResult result = await userManager.CreateAsync(user, adminPassword);
 
                 //Add default User to Role Admin    
                 if (result.Succeeded)
+                {
                     await userManager.AddToRoleAsync(user, "Admin");
+                }
             }
 
             // creating Creating Manager role     
@@ -83,12 +82,11 @@ namespace GamingStore.Data
                 return;
             }
 
-            var directoryPath =
+            string directoryPath =
                 AppContext.BaseDirectory.Substring(0,
                     AppContext.BaseDirectory.IndexOf("bin", StringComparison.Ordinal));
 
             #region ItemsSeed
-
             // Load items if they don't exist.
 
             //TODO: add different items with properties
@@ -221,68 +219,74 @@ namespace GamingStore.Data
                         }
                 }
             };
-            foreach (var i in items)
+            foreach (Item item in items)
             {
-                context.Items.Add(i);
+                context.Items.Add(item);
             }
 
             context.SaveChanges();
-
             #endregion
 
             #region CustomersSeed
-
-            var dataCustomers = System.IO.File.ReadAllText(directoryPath + @"\Data\Mock_Data\CustomersMin.json");
+            string dataCustomers = System.IO.File.ReadAllText($@"{directoryPath}\Data\Mock_Data\CustomersMin.json");
             var customers = JsonConvert.DeserializeObject<List<Customer>>(dataCustomers);
             context.Customers.AddRange(customers);
             context.SaveChanges();
-
             #endregion
 
             #region StoresSeed
+            string dataStores = System.IO.File.ReadAllText(directoryPath + @"\Data\Mock_Data\Stores.json");
+            var stores = JsonConvert.DeserializeObject<List<Store>>(dataStores);
 
-            var dataStores =
-                System.IO.File.ReadAllText(directoryPath + @"\Data\Mock_Data\Stores.json");
-            var stores = JsonConvert.DeserializeObject<List<Store>>(
-                dataStores);
             if (context.Items.Any() && context.Customers.Any())
+            {
                 GenerateStoreItems(stores, items, customers);
+            }
 
             context.Stores.AddRange(stores);
             context.SaveChanges();
-
             #endregion
 
             #region OrdersAndPaymetsSeed
+            IEnumerable<Order> orders = GenerateOrders(customers, items.ToList(), stores, out var payments);
 
-            var orders = GenerateOrders(customers, items.ToList(), stores, out var payments);
-
-            var orderList = orders.ToList();
-            foreach (var order in orderList)
+            List<Order> orderList = orders.ToList();
+            foreach (Order order in orderList)
+            {
                 context.Orders.Add(order);
-            foreach (var p in payments)
-                context.Payments.Add(p);
-            context.SaveChanges();
+            }
 
+            foreach (Payment payment in payments)
+            {
+                context.Payments.Add(payment);
+            }
+
+            context.SaveChanges();
             #endregion
         }
 
-        private static void GenerateStoreItems(IEnumerable<Store> stores, Item[] items,
-            IReadOnlyCollection<Customer> customersList)
+        private static void GenerateStoreItems(IEnumerable<Store> stores, Item[] items, IReadOnlyCollection<Customer> customersList)
         {
-            var rand = new Random();
-            foreach (var store in stores)
+            var random = new Random();
+            
+            foreach (Store store in stores)
             {
-                foreach (var item in items)
+                foreach (Item item in items)
                 {
-                    var itemCreated = rand.Next(2) == 1; // 1 - True  - False
-                    if (!itemCreated) continue;
+                    bool itemCreated = random.Next(2) == 1; // 1 - True  - False
+                    
+                    if (!itemCreated)
+                    {
+                        continue;
+                    }
+
                     const float itemsNumberMultiplier = 0.3f;
-                    store.StoreItems.Add(new StoreItem()
+                    
+                    store.StoreItems.Add(new StoreItem
                     {
                         ItemId = item.Id, StoreId = store.Id,
                         ItemsCount =
-                            (uint) rand.Next(1,
+                            (uint) random.Next(1,
                                 (int) (customersList.Count * itemsNumberMultiplier)) // customers number times 0.3
                     });
                 }
@@ -297,23 +301,27 @@ namespace GamingStore.Data
             var list = new List<Order>();
             var rand = new Random();
             var shopOpeningDate = new DateTime(2018, 1, 1);
-            var range = (DateTime.Today - shopOpeningDate).Days;
-            foreach (var customer in customersList)
+            int range = (DateTime.Today - shopOpeningDate).Days;
+
+            foreach (Customer customer in customersList)
             {
-                var numOfOrdersForCustomer = rand.Next(minValue: 0, maxValue: 5);
+                int numOfOrdersForCustomer = rand.Next(minValue: 0, maxValue: 5);
+                
                 for (var orderNumber = 0; orderNumber < numOfOrdersForCustomer; orderNumber++)
                 {
                     const int minItems = 1;
                     const int maxItems = 5;
-                    var numItemsOrdered = rand.Next(minItems, maxItems);
-                    var store = GenerateRelatedStore(customer, storesList);
-                    var order = new Order()
+                    int numItemsOrdered = rand.Next(minItems, maxItems);
+                    Store store = GenerateRelatedStore(customer, storesList);
+                    
+                    var order = new Order
                     {
                         CustomerId = customer.Id,
                         OrderDate = shopOpeningDate.AddDays(rand.Next(range)),
                         State = OrderState.Fulfilled,
                         StoreId = store.Id,
                     };
+
                     order.OrderItems = GenerateOrderItems(order.Id, items, numItemsOrdered, out var payment);
                     order.Payment = payment;
                     payments.Add(payment);
@@ -326,8 +334,9 @@ namespace GamingStore.Data
 
         private static Store GenerateRelatedStore(Customer customer, IEnumerable<Store> storesList)
         {
-            var storesInCustomerCity = storesList.Where(store => store.Address.City == customer.Address.City).ToList();
+            List<Store> storesInCustomerCity = storesList.Where(store => store.Address.City == customer.Address.City).ToList();
             var rand = new Random();
+            
             return storesInCustomerCity[rand.Next(storesInCustomerCity.Count)];
         }
 
@@ -338,11 +347,13 @@ namespace GamingStore.Data
             var itemsList = new List<Item>(items); // copy list in order to alter it.
             var rand = new Random();
             var orderItems = new List<OrderItem>();
+            
             for (var orderItemIndex = 0; orderItemIndex < numItemsOrdered; orderItemIndex++)
             {
-                var curIndex = rand.Next(itemsList.Count);
-                var curItem = itemsList[curIndex];
+                int curIndex = rand.Next(itemsList.Count);
+                Item curItem = itemsList[curIndex];
                 itemsList.Remove(curItem);
+                
                 var orderItem = new OrderItem()
                 {
                     OrderId = orderId,
@@ -350,6 +361,7 @@ namespace GamingStore.Data
                     Item = curItem,
                     ItemsCount = (uint) rand.Next(1, 3)
                 };
+
                 orderItems.Add(orderItem);
             }
 
@@ -359,7 +371,6 @@ namespace GamingStore.Data
                 ShippingCost = 0,
                 Paid = true
             };
-
 
             return orderItems;
         }

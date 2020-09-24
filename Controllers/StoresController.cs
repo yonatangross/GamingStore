@@ -34,7 +34,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            var store = await _context.Stores
+            Store store = await _context.Stores
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (store == null)
             {
@@ -57,17 +57,16 @@ namespace GamingStore.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address,PhoneNumber,Email,OpeningHours")]
-            Store store)
+        public async Task<IActionResult> Create([Bind("Id,Name,Address,PhoneNumber,Email,OpeningHours")] Store store)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(store);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return View(store);
             }
 
-            return View(store);
+            _context.Add(store);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Stores/Edit/5
@@ -79,7 +78,8 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            var store = await _context.Stores.FindAsync(id);
+            Store store = await _context.Stores.FindAsync(id);
+            
             if (store == null)
             {
                 return NotFound();
@@ -94,37 +94,34 @@ namespace GamingStore.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,PhoneNumber,Email,OpeningHours")]
-            Store store)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,PhoneNumber,Email,OpeningHours")] Store store)
         {
             if (id != store.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(store);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!StoreExists(store.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-
-                return RedirectToAction(nameof(Index));
+                return View(store);
             }
 
-            return View(store);
+            try
+            {
+                _context.Update(store);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!StoreExists(store.Id))
+                {
+                    return NotFound();
+                }
+
+                throw;
+            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Stores/Delete/5
@@ -136,8 +133,8 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            var store = await _context.Stores
-                .FirstOrDefaultAsync(m => m.Id == id);
+            Store store = await _context.Stores.FirstOrDefaultAsync(m => m.Id == id);
+            
             if (store == null)
             {
                 return NotFound();
@@ -152,9 +149,10 @@ namespace GamingStore.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var store = await _context.Stores.FindAsync(id);
+            Store store = await _context.Stores.FindAsync(id);
             _context.Stores.Remove(store);
             await _context.SaveChangesAsync();
+            
             return RedirectToAction(nameof(Index));
         }
 

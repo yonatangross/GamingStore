@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using GamingStore.Models;
 using GamingStore.ViewModels;
@@ -17,7 +18,6 @@ namespace GamingStore.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<Customer> _userManager;
 
-
         public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<Customer> userManager)
         {
             _roleManager = roleManager;
@@ -27,18 +27,18 @@ namespace GamingStore.Controllers
         [HttpGet]
         public async Task<IActionResult> EditUser(string id)
         {
-            var user = await _userManager.FindByIdAsync(id);
+            Customer user = await _userManager.FindByIdAsync(id);
 
             if (user == null)
             {
-                ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
-                return View("NotFound");
+                return Error(id, "user");
             }
+            
+            // GetClaimsAsync returns the list of user Claims
+            IList<Claim> userClaims = await _userManager.GetClaimsAsync(user); //bug Why do we need a userClaims if we don't use it?
 
-            // GetClaimsAsync retunrs the list of user Claims
-            var userClaims = await _userManager.GetClaimsAsync(user);
             // GetRolesAsync returns the list of user Roles
-            var userRoles = await _userManager.GetRolesAsync(user);
+            IList<string> userRoles = await _userManager.GetRolesAsync(user);
 
             var model = new EditUserViewModel
             {
@@ -50,35 +50,33 @@ namespace GamingStore.Controllers
 
             return View(model);
         }
+
         [HttpPost]
         public async Task<IActionResult> EditUser(EditUserViewModel model)
         {
-            var user = await _userManager.FindByIdAsync(model.Id);
+            Customer user = await _userManager.FindByIdAsync(model.Id);
 
             if (user == null)
             {
-                ViewBag.ErrorMessage = $"User with Id = {model.Id} cannot be found";
-                return View("NotFound");
+                return Error(model.Id, "user");
+
             }
-            else
+
+            user.Email = model.Email;
+            user.UserName = model.UserName;
+            IdentityResult result = await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
             {
-                user.Email = model.Email;
-                user.UserName = model.UserName;
-
-                var result = await _userManager.UpdateAsync(user);
-
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("ListUsers");
-                }
-
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
-
-                return View(model);
+                return RedirectToAction("ListUsers");
             }
+
+            foreach (IdentityError error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            return View(model);
         }
         [HttpGet]
         public IActionResult ListRoles()
@@ -93,18 +91,20 @@ namespace GamingStore.Controllers
             return View(users);
         }
 
-
-        // Role ID is passed from the URL to the action
+        /// <summary>
+        /// Role ID is passed from the URL to the action
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> EditRole(string id)
         {
             // Find the role by Role ID
-            var role = await _roleManager.FindByIdAsync(id);
+            IdentityRole role = await _roleManager.FindByIdAsync(id);
 
             if (role == null)
             {
-                ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
-                return View("NotFound");
+                return Error(id, "role");
             }
 
             var model = new EditRoleViewModel
@@ -114,7 +114,7 @@ namespace GamingStore.Controllers
             };
 
             // Retrieve all the Users
-            foreach (var user in _userManager.Users)
+            foreach (Customer user in _userManager.Users)
             {
                 // If the user is in this role, add the username to
                 // Users property of EditRoleViewModel. This model
@@ -132,32 +132,29 @@ namespace GamingStore.Controllers
         [HttpPost]
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {
-            var role = await _roleManager.FindByIdAsync(model.Id);
+            IdentityRole role = await _roleManager.FindByIdAsync(model.Id);
 
             if (role == null)
             {
-                ViewBag.ErrorMessage = $"Role with Id = {model.Id} cannot be found";
-                return View("NotFound");
+                return Error(model.Id, "role");
             }
-            else
+
+            role.Name = model.RoleName;
+
+            // Update the Role using UpdateAsync
+            IdentityResult result = await _roleManager.UpdateAsync(role);
+
+            if (result.Succeeded)
             {
-                role.Name = model.RoleName;
-
-                // Update the Role using UpdateAsync
-                var result = await _roleManager.UpdateAsync(role);
-
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("ListRoles");
-                }
-
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
-
-                return View(model);
+                return RedirectToAction("ListRoles");
             }
+
+            foreach (IdentityError error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            return View(model);
         }
 
         [HttpGet]
@@ -165,17 +162,16 @@ namespace GamingStore.Controllers
         {
             ViewBag.roleId = roleId;
 
-            var role = await _roleManager.FindByIdAsync(roleId);
+            IdentityRole role = await _roleManager.FindByIdAsync(roleId);
 
             if (role == null)
             {
-                ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
-                return View("NotFound");
+                return Error(roleId, "role");
             }
 
             var model = new List<UserRoleViewModel>();
 
-            foreach (var user in _userManager.Users)
+            foreach (Customer user in _userManager.Users)
             {
                 var userRoleViewModel = new UserRoleViewModel
                 {
@@ -193,20 +189,18 @@ namespace GamingStore.Controllers
         [HttpPost]
         public async Task<IActionResult> EditUsersInRole(List<UserRoleViewModel> model, string roleId)
         {
-
-            var role = await _roleManager.FindByIdAsync(roleId);
+            IdentityRole role = await _roleManager.FindByIdAsync(roleId);
 
             if (role == null)
             {
-                ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
-                return View("NotFound");
+                return Error(roleId, "role");
             }
 
             for (var i = 0; i < model.Count; i++)
             {
-                var user = await _userManager.FindByIdAsync(model[i].UserId);
+                Customer user = await _userManager.FindByIdAsync(model[i].UserId);
 
-                IdentityResult result = null;
+                IdentityResult result;
 
                 if (model[i].IsSelected && !(await _userManager.IsInRoleAsync(user, role.Name)))
                 {
@@ -223,9 +217,16 @@ namespace GamingStore.Controllers
                     continue;
                 }
 
-                if (!result.Succeeded) continue;
-                if (i < (model.Count - 1))
+                if (!result.Succeeded)
+                {
                     continue;
+                }
+
+                if (i < (model.Count - 1))
+                {
+                    continue;
+                }
+
                 return RedirectToAction("EditRole", new { Id = roleId });
             }
 
@@ -235,27 +236,32 @@ namespace GamingStore.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteUser(string id)
         {
-            var user = await _userManager.FindByIdAsync(id);
+            Customer user = await _userManager.FindByIdAsync(id);
 
             if (user == null)
             {
-                ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
-                return View("NotFound");
+                return Error(id, "user");
             }
 
-            var result = await _userManager.DeleteAsync(user);
+            IdentityResult result = await _userManager.DeleteAsync(user);
 
             if (result.Succeeded)
             {
                 return RedirectToAction("ListUsers");
             }
 
-            foreach (var error in result.Errors)
+            foreach (IdentityError error in result.Errors)
             {
-                ModelState.AddModelError("", error.Description);
+                ModelState.AddModelError(string.Empty, error.Description);
             }
 
             return View("ListUsers");
+        }
+
+        private IActionResult Error(string id, string type)
+        {
+            ViewBag.ErrorMessage = $"{type} with Id = {id} cannot be found";
+            return View("NotFound");
         }
     }
 }

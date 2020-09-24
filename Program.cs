@@ -19,9 +19,10 @@ namespace GamingStore
         public static void Main(string[] args)
         {
             //CreateHostBuilder(args).Build().Run();
-            var host = CreateHostBuilder(args).Build();
-            using var scope = host.Services.CreateScope();
-            var services = scope.ServiceProvider;
+            IHost host = CreateHostBuilder(args).Build();
+            using IServiceScope scope = host.Services.CreateScope();
+            IServiceProvider services = scope.ServiceProvider;
+            
             try
             {
                 var context = services.GetRequiredService<StoreContext>();
@@ -29,9 +30,10 @@ namespace GamingStore
 
                 // requires using Microsoft.Extensions.Configuration;
                 var config = host.Services.GetRequiredService<IConfiguration>();
+                
                 // Set password with the Secret Manager tool.
                 // dotnet user-secrets set SeedUserPW <pw>
-                var adminPassword = config["SeedAdminPW"];
+                string adminPassword = config["SeedAdminPW"];
 
                 SeedData.Initialize(services,adminPassword).Wait();
             }

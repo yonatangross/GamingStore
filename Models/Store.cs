@@ -11,7 +11,7 @@ namespace GamingStore.Models
 {
     public class Store 
     {
-        public static int StoreCounter = 0;
+        public static int StoreCounter;
 
         public Store()
         {
@@ -40,6 +40,7 @@ namespace GamingStore.Models
 
         //public Dictionary<Item,uint> Stock { get; set; } // determines how many items there are in the store. example: {{fridge, 5},{mouse,6}}
         public ICollection<Order> Orders { get; set; }
+        
         public ICollection<StoreItem> StoreItems { get; set; } // many to many relationship
     }
 }
