@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using GamingStore.Models;
 using GamingStore.ViewModels;
@@ -33,9 +32,6 @@ namespace GamingStore.Controllers
             {
                 return Error(id, "user");
             }
-            
-            // GetClaimsAsync returns the list of user Claims
-            IList<Claim> userClaims = await _userManager.GetClaimsAsync(user); //bug Why do we need a userClaims if we don't use it?
 
             // GetRolesAsync returns the list of user Roles
             IList<string> userRoles = await _userManager.GetRolesAsync(user);
@@ -59,7 +55,6 @@ namespace GamingStore.Controllers
             if (user == null)
             {
                 return Error(model.Id, "user");
-
             }
 
             user.Email = model.Email;
@@ -78,17 +73,24 @@ namespace GamingStore.Controllers
 
             return View(model);
         }
+
         [HttpGet]
         public IActionResult ListRoles()
         {
             var roles = _roleManager.Roles;
             return View(roles);
         }
-        [HttpGet]
-        public IActionResult ListUsers()
+
+        public async Task<IActionResult> ListUsers(string searchString)
         {
-            var users = _userManager.Users;
-            return View(users);
+            var users = from user in _userManager.Users select user;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                users = users.Where(user => user.Email.Contains(searchString));
+            }
+
+            return View(await users.ToListAsync());
         }
 
         /// <summary>
@@ -178,7 +180,7 @@ namespace GamingStore.Controllers
                     UserId = user.Id,
                     UserName = user.Email,
                     Email = user.Email,
-                    IsSelected = await _userManager.IsInRoleAsync(user,role.Name)
+                    IsSelected = await _userManager.IsInRoleAsync(user, role.Name)
                 };
 
                 model.Add(userRoleViewModel);
@@ -186,6 +188,7 @@ namespace GamingStore.Controllers
 
             return View(model);
         }
+
         [HttpPost]
         public async Task<IActionResult> EditUsersInRole(List<UserRoleViewModel> model, string roleId)
         {
@@ -227,10 +230,10 @@ namespace GamingStore.Controllers
                     continue;
                 }
 
-                return RedirectToAction("EditRole", new { Id = roleId });
+                return RedirectToAction("EditRole", new {Id = roleId});
             }
 
-            return RedirectToAction("EditRole", new { Id = roleId });
+            return RedirectToAction("EditRole", new {Id = roleId});
         }
 
         [HttpPost]
