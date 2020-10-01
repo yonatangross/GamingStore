@@ -3,6 +3,8 @@
 
 // Write your JavaScript code.
 function toggleConfirmDeleteUserButton(uniqueId, isDeleteClicked) {
+    console.log("Entered function toggleConfirmDeleteUserButton with uniqueId:" + uniqueId + "and isDeleteClicked: " + isDeleteClicked+"\n");
+
     var deleteSpan = "deleteSpan_" + uniqueId;
     var confirmDeleteSpan = "confirmDeleteSpan_" + uniqueId;
     var animationTime = 100;
@@ -22,6 +24,7 @@ function toggleConfirmDeleteUserButton(uniqueId, isDeleteClicked) {
 }
 
 function confirmDeleteUserAjax(userId, userNum, userEmail) {
+    console.log("Entered function confirmDeleteUserAjax with:"+userId+" "+userNum+" "+userEmail+"\n");
     $.ajax({
             type: "POST",
             url: "Administration/DeleteUser",
@@ -42,32 +45,62 @@ function confirmDeleteUserAjax(userId, userNum, userEmail) {
         }
     );
 }
-/*
 
-$("#searchSubmit").click(function() {
-    searchUsers($("#searchUserString").val());
+
+$("#searchSubmit").click(function () {
+    var searchString = $("#searchUserString").val();
+    searchUsers(searchString);
 });
 
-function searchUsers(searchString) {
+function searchUsers(searchUserString) {
+    var usersHtml = "";
     $.ajax({
             type: "POST",
-            url: "Administration/ListUsers",
+            url: "Administration/ListUsersBySearch",
             data: {
-                searchString: searchString
+                searchUserString:searchUserString
             },
-            success: function(data, textStatus, jqXHR) {
-                console.log("data:\n" + data + "\ntextStatus:\n" + textStatus + "\njqXHR:\n" + jqXHR.toString());
-            },
+        success: function (data, textStatus, jqXhr) {
+            var userCheck = data[0];
+            console.log("Length " + Object.keys(data).length);
+            console.log("data[0] keys: " + Object.keys(data[0]));
+            console.log("Id: " + userCheck.id);
+            console.log("Email: " + userCheck.email);
+                var users = data;
+                console.log(users.toString());
+                for (var userIndex = 0; userIndex < Object.keys(data).length; userIndex++) {
+                    usersHtml += '<div class="card mb-3 user'+ userIndex+'">\n';
+                    usersHtml +=     '<div class="card-header">\n';
+                    usersHtml +=        'User Id: '+data[userIndex].id;
+                    usersHtml +=     '</div>\n';
+                    usersHtml +=     '<div class="card-body">\n';
+                    usersHtml +=        '<h5 class="card-title">\n' + data[userIndex].email+'</h5>\n';
+                    usersHtml +=     '</div>\n';
+                    usersHtml +=     '<div class="card-footer">\n';
+                    usersHtml +=        '<a href="/Administration/EditUser/'+data[userIndex].id+'" class="btn btn-primary">\nEdit</a>\n';
+                    usersHtml +=        '<span id="confirmDeleteSpan_'+data[userIndex].id+'" style="display: none">\n';
+                    usersHtml +=        '<span>\nAre you sure you want to delete?</span>\n';
+                    usersHtml +=          '<input type="button" onclick="confirmDeleteUserAjax(' + "'" + data[userIndex].id + "'" + ',' + "'" + (userIndex + 1) + "'" + ',' + "'" + data[userIndex].email+ "'" +')" class="btn btn-danger" value="Yes">\n';
+                    usersHtml +=          '<a href="javascript:void(0)" class="btn btn-primary" onclick="toggleConfirmDeleteUserButton('+"'"+data[userIndex].id+"'"+', false)">\n No </a>\n';
+                    usersHtml +=        '</span>\n';
+                    usersHtml +=        '<span id="deleteSpan_'+data[userIndex].id+'">\n';
+                    usersHtml +=          '<a href="javascript:void(0)" class="btn btn-danger" onclick="toggleConfirmDeleteUserButton(' + "'" + data[userIndex].id + "'" +', true)">\n Delete </a>\n';
+                    usersHtml +=        '</span>\n';
+                    usersHtml +=     '</div>\n';
+                    usersHtml += '</div>\n';
+                }
+            console.log(usersHtml);
+            $("#users").html(usersHtml);
+        },
             complete: function(response) {
-                console.log(response);
-
+                console.log("completed: " + response);
             },
             failure: function(response) {
-                console.log(response);
+                console.log("failure: "+response);
             },
             error: function(response) {
-                console.log(response);
+                console.log("error: "+response);
             }
         }
     );
-}*/
+ }

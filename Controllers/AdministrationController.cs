@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
+using GamingStore.Contracts;
+using GamingStore.Data;
 using GamingStore.Models;
 using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -81,15 +84,24 @@ namespace GamingStore.Controllers
             return View(roles);
         }
 
-        public async Task<IActionResult> ListUsers(string searchString)
+        public JsonResult ListUsersBySearch(string searchUserString)
         {
             var users = from user in _userManager.Users select user;
 
-            if (!string.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchUserString))
             {
-                users = users.Where(user => user.Email.Contains(searchString));
+                users = users.Where(user => user.Email.Contains(searchUserString));
             }
 
+            var jsonResult= new JsonResult(users.ToList());
+            return jsonResult;
+        }
+
+        public async Task<IActionResult> ListUsers()
+        {
+            var users = _userManager.Users;
+
+            Console.WriteLine("users was loaded from ListUsers");
             return View(await users.ToListAsync());
         }
 

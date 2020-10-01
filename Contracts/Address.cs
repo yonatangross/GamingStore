@@ -25,6 +25,7 @@ namespace GamingStore.Contracts
         public override string ToString()
         {
             // shows values only if they aren't null.
+            //todo: fix warning, aviv miranda.
             List<string?> values
                 = typeof(Address).GetProperties()
                     .Select(prop => prop.GetValue(this, null))
