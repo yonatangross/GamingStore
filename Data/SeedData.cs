@@ -47,8 +47,29 @@ namespace GamingStore.Data
                     FirstName = "Yonatan",
                     LastName = "Gross"
                 };
+                //todo: add users from json like in customers.json
+                /*var user2 = new Customer()
+                {
+                    UserName = "matan18061806@gmail.com",
+                    Email = "matan18061806@gmail.com",
+                    FirstName = "Matan",
+                    LastName = "Hassin"
+                }; var user3 = new Customer()
+                {
+                    UserName = "aviv943@gmail.com",
+                    Email = "aviv943@gmail.com",
+                    FirstName = "Aviv",
+                    LastName = "Miranda"
+                }; var user4 = new Customer()
+                {
+                    UserName = "ohad338@gmail.com",
+                    Email = "ohad338@gmail.com",
+                    FirstName = "Ohad",
+                    LastName = "Cohen"
+                };*/
 
                 IdentityResult result = await userManager.CreateAsync(user, adminPassword);
+
 
                 //Add default User to Role Admin    
                 if (result.Succeeded)
