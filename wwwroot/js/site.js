@@ -7,7 +7,7 @@ function toggleConfirmDeleteUserButton(uniqueId, isDeleteClicked) {
 
     var deleteSpan = "deleteSpan_" + uniqueId;
     var confirmDeleteSpan = "confirmDeleteSpan_" + uniqueId;
-    var animationTime = 100;
+    var animationTime = 300;
 
     $("[id^=confirmDeleteSpan_]").each(function() {
         $("[id^=deleteSpan_]").show();

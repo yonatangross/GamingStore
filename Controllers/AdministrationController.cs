@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
-using GamingStore.Contracts;
-using GamingStore.Data;
 using GamingStore.Models;
 using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -251,7 +248,7 @@ namespace GamingStore.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteUser(string id)
         {
-            // Todo: change from deleteuser to disable user.
+            // Todo: change from deleteUser to disable user.
             Customer user = await _userManager.FindByIdAsync(id);
 
             if (user == null)

@@ -116,7 +116,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Cloud Stinger Wired Stereo Gaming Headset", Manufacturer = "HyperX", Price = 200,
-                    Category = "Gaming Headsets", PropertiesList =
+                    Category = Category.GamingHeadsets, PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Sound Mode", "Stereo"},
@@ -127,7 +127,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "G432 Wired 7.1 Surround Sound Gaming Headset", Manufacturer = "Logitech", Price = 200,
-                    Category = "Gaming Headsets", PropertiesList =
+                    Category = Category.GamingHeadsets, PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Built-In Microphone", "Yes"},
@@ -138,7 +138,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Milano Gaming Chair - Green", Manufacturer = "Arozzi", Price = 799,
-                    Category = "Gaming Chairs", PropertiesList =
+                    Category = Category.GamingChairs, PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Office Chair Style", "Gaming chair"},
@@ -150,7 +150,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Milano Gaming Chair - Blue", Manufacturer = "Arozzi", Price = 799,
-                    Category = "Gaming Chairs", PropertiesList =
+                    Category = Category.GamingChairs, PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Office Chair Style", "Gaming chair"},
@@ -162,7 +162,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = " Logitech G440 Hard Gaming", Manufacturer = "Logitech ", Price = 130,
-                    Category = "Mouse Pads", PropertiesList =
+                    Category = Category.MousePads, PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"length", "280mm"},
@@ -172,7 +172,8 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = "NVIDIA GeForce RTX 3080", Manufacturer = "NVIDIA", Price = 3500, Category = "GPUs",
+                    Title = "NVIDIA GeForce RTX 3080", Manufacturer = "NVIDIA", Price = 3500,
+                    Category = Category.GPUs,
                     PropertiesList =
                         new Dictionary<string, string>()
                         {
@@ -183,7 +184,7 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = "NVIDIA GeForce RTX 3090", Manufacturer = "NVIDIA", Price = 6500, Category = "GPUs",
+                    Title = "NVIDIA GeForce RTX 3090", Manufacturer = "NVIDIA", Price = 6500, Category =Category.GPUs,
                     PropertiesList =
                         new Dictionary<string, string>()
                         {
@@ -195,7 +196,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "GeForce RTX 2080 SUPER BLACK GAMING", Manufacturer = "EVGA", Price = 4300,
-                    Category = "GPUs",
+                    Category = Category.GPUs,
                     PropertiesList =
                         new Dictionary<string, string>()
                         {
@@ -207,7 +208,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Intel Core i9-10900KA Comet Lake Box", Manufacturer = "Intel", Price = 2420,
-                    Category = "CPUs", PropertiesList =
+                    Category = Category.CPUs, PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Cores", "10"},
@@ -219,7 +220,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Intel Core i9-10850KA Comet Lake Box", Manufacturer = "Intel", Price = 2020,
-                    Category = "CPUs", PropertiesList =
+                    Category = Category.CPUs, PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Cores", "10"},
@@ -231,7 +232,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Gaming Headset white combat camouflage", Manufacturer = "Dragon", Price = 499,
-                    Category = "Gaming Headsets", PropertiesList =
+                    Category = Category.GamingHeadsets, PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Sound Mode", "Stereo"},
@@ -268,7 +269,7 @@ namespace GamingStore.Data
             context.SaveChanges();
             #endregion
 
-            #region OrdersAndPaymetsSeed
+            #region OrdersAndPaymentsSeed
             IEnumerable<Order> orders = GenerateOrders(customers, items.ToList(), stores, out var payments);
 
             List<Order> orderList = orders.ToList();
