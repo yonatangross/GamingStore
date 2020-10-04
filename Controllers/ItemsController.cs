@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,6 @@ namespace GamingStore.Controllers
     public class ItemsController : Controller
     {
         private readonly StoreContext _context;
-
         public ItemsController(StoreContext context)
         {
             _context = context;

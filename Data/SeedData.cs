@@ -39,43 +39,8 @@ namespace GamingStore.Data
                 var role = new IdentityRole {Name = admin};
                 await roleManager.CreateAsync(role);
 
-                //Here we create a Admin super user who will maintain the website                   
-                var user = new Customer()
-                {
-                    UserName = "yonatan2gross@gmail.com",
-                    Email = "yonatan2gross@gmail.com",
-                    FirstName = "Yonatan",
-                    LastName = "Gross"
-                };
-                //todo: add users from json like in customers.json
-                /*var user2 = new Customer()
-                {
-                    UserName = "matan18061806@gmail.com",
-                    Email = "matan18061806@gmail.com",
-                    FirstName = "Matan",
-                    LastName = "Hassin"
-                }; var user3 = new Customer()
-                {
-                    UserName = "aviv943@gmail.com",
-                    Email = "aviv943@gmail.com",
-                    FirstName = "Aviv",
-                    LastName = "Miranda"
-                }; var user4 = new Customer()
-                {
-                    UserName = "ohad338@gmail.com",
-                    Email = "ohad338@gmail.com",
-                    FirstName = "Ohad",
-                    LastName = "Cohen"
-                };*/
-
-                IdentityResult result = await userManager.CreateAsync(user, adminPassword);
-
-
-                //Add default User to Role Admin    
-                if (result.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(user, "Admin");
-                }
+                //Here we create a Admin super users who will maintain the website                   
+                await AddAdmins(userManager, adminPassword);
             }
 
             // creating Creating Manager role     
@@ -94,6 +59,52 @@ namespace GamingStore.Data
                 await roleManager.CreateAsync(role);
             }
             await context.SaveChangesAsync();
+        }
+
+        private static async Task AddAdmins(UserManager<Customer> userManager, string adminPassword)
+        {
+            var admins = new List<Customer>
+            {
+                new Customer
+                {
+                    UserName = "yonatan2gross@gmail.com",
+                    Email = "yonatan2gross@gmail.com",
+                    FirstName = "Yonatan",
+                    LastName = "Gross"
+                },
+                new Customer
+                {
+                    UserName = "matan18061806@gmail.com",
+                    Email = "matan18061806@gmail.com",
+                    FirstName = "Matan",
+                    LastName = "Hassin"
+                },
+                new Customer
+                {
+                    UserName = "aviv943@gmail.com",
+                    Email = "aviv943@gmail.com",
+                    FirstName = "Aviv",
+                    LastName = "Miranda"
+                },
+                new Customer
+                {
+                    UserName = "ohad338@gmail.com",
+                    Email = "ohad338@gmail.com",
+                    FirstName = "Ohad",
+                    LastName = "Cohen"
+                }
+            };
+
+            foreach (Customer newAdmin in admins)
+            {
+                IdentityResult result = await userManager.CreateAsync(newAdmin, adminPassword);
+
+                //Add default User to Role Admin    
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(newAdmin, "Admin");
+                }
+            }
         }
 
         public static void SeedDatabase(StoreContext context)
@@ -283,6 +294,27 @@ namespace GamingStore.Data
                 context.Payments.Add(payment);
             }
 
+            context.SaveChanges();
+            #endregion
+
+            #region CartsSeed
+
+            var carts = new[]
+            {
+                new Cart(context.Customers.First().Id)
+                {
+                    ShoppingCart = new Dictionary<int, uint>
+                    {
+                        {0, 2},
+                        {1, 3}
+                    }
+                }
+            };
+
+            foreach (Cart cart in carts)
+            {
+                context.Cart.Add(cart);
+            }
             context.SaveChanges();
             #endregion
         }

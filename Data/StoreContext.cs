@@ -87,6 +87,11 @@ namespace GamingStore.Data
                 .HasConversion(
                     v => JsonConvert.SerializeObject(v),
                     v => JsonConvert.DeserializeObject<OpeningHours[]>(v));
+            modelBuilder.Entity<Cart>()
+                .Property(s => s.ShoppingCart)
+                .HasConversion(
+                    v => JsonConvert.SerializeObject(v),
+                    v => JsonConvert.DeserializeObject<Dictionary<int,uint>>(v));
 
             #endregion
 
@@ -95,6 +100,7 @@ namespace GamingStore.Data
             modelBuilder.Entity<Store>().ToTable("Stores");
             modelBuilder.Entity<Order>().ToTable("Orders");
             modelBuilder.Entity<Payment>().ToTable("Payments");
+            modelBuilder.Entity<Cart>().ToTable("Cart");
         }
 
         public DbSet<Customer> Customers { get; set; }
@@ -102,5 +108,6 @@ namespace GamingStore.Data
         public DbSet<Store> Stores { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<Cart> Cart { get; set; }
     }
 }

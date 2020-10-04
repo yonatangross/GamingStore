@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Identity;
 
 namespace GamingStore.Models
 {
-    public class Customer :IdentityUser
+    public sealed class Customer :IdentityUser
     {
         public Customer()
         {
             OrderHistory = new List<Order>();
-            ShoppingCart = new List<Item>();
+            ShoppingCart = new Cart(Id);
         }
         
         [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"[a-zA-Z]{2,}$")]
@@ -26,6 +26,6 @@ namespace GamingStore.Models
 
         public ICollection<Order> OrderHistory { get; set; }
         
-        public ICollection<Item> ShoppingCart { get; set; }
+        public Cart ShoppingCart { get; set; }
     }
 }
