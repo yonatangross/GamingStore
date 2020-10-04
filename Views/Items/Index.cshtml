@@ -50,9 +50,19 @@
                 @Html.DisplayFor(modelItem => item.PropertiesList)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> 
+                }
+
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a asp-action="AddToCart" asp-route-id="@item.Id">AddToCart</a>
+                
+                @*@using (Html.BeginForm("AddToCart", "Items", FormMethod.Post, new { Id = "sampleform"}))
+                {
+                    <input id="Create" name="AddToCart" type="button" value="Create" />
+                }*@
             </td>
         </tr>
 }

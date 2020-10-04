@@ -70,7 +70,7 @@ namespace GamingStore.Data
                     UserName = "yonatan2gross@gmail.com",
                     Email = "yonatan2gross@gmail.com",
                     FirstName = "Yonatan",
-                    LastName = "Gross"
+                    LastName = "Gross",
                 },
                 new Customer
                 {
@@ -127,7 +127,8 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Cloud Stinger Wired Stereo Gaming Headset", Manufacturer = "HyperX", Price = 200,
-                    Category = Category.GamingHeadsets, PropertiesList =
+                    Category = Category.GamingHeadsets,
+                    PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Sound Mode", "Stereo"},
@@ -257,6 +258,7 @@ namespace GamingStore.Data
                 context.Items.Add(item);
             }
 
+            context.Items.AsNoTracking();
             context.SaveChanges();
             #endregion
 
@@ -264,6 +266,7 @@ namespace GamingStore.Data
             string dataCustomers = System.IO.File.ReadAllText($@"{directoryPath}\Data\Mock_Data\CustomersMin.json");
             var customers = JsonConvert.DeserializeObject<List<Customer>>(dataCustomers);
             context.Customers.AddRange(customers);
+            context.Customers.AsNoTracking();
             context.SaveChanges();
             #endregion
 
@@ -281,41 +284,52 @@ namespace GamingStore.Data
             #endregion
 
             #region OrdersAndPaymentsSeed
-            IEnumerable<Order> orders = GenerateOrders(customers, items.ToList(), stores, out var payments);
 
-            List<Order> orderList = orders.ToList();
-            foreach (Order order in orderList)
+            try
             {
-                context.Orders.Add(order);
-            }
+                IEnumerable<Order> orders = GenerateOrders(customers, items.ToList(), stores, out var payments);
 
-            foreach (Payment payment in payments)
+                List<Order> orderList = orders.ToList();
+                foreach (Order order in orderList)
+                {
+                    context.Orders.Add(order);
+                }
+
+                foreach (Payment payment in payments)
+                {
+                    context.Payments.Add(payment);
+                }
+
+                context.Orders.AsNoTracking();
+                context.SaveChanges();
+            }
+            catch (Exception e)
             {
-                context.Payments.Add(payment);
+                
             }
-
-            context.SaveChanges();
             #endregion
 
             #region CartsSeed
 
-            var carts = new[]
-            {
-                new Cart(context.Customers.First().Id)
-                {
-                    ShoppingCart = new Dictionary<int, uint>
-                    {
-                        {0, 2},
-                        {1, 3}
-                    }
-                }
-            };
+            //try
+            //{
+            //    Customer firstCustomer = context.Customers.First();
+            //    var cart = new Cart(firstCustomer.Id)
+            //    {
+            //        ShoppingCart = new Dictionary<int, uint>()
+            //        {
+            //            {1, 2}
+            //        }
+            //    };
 
-            foreach (Cart cart in carts)
-            {
-                context.Cart.Add(cart);
-            }
-            context.SaveChanges();
+            //    context.Carts.AsNoTracking();
+            //    context.Carts.Update(cart);
+            //    context.SaveChanges();
+            //}
+            //catch (Exception e)
+            //{
+                
+            //}
             #endregion
         }
 
