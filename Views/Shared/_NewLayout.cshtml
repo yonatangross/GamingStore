@@ -5,8 +5,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - GamingStore</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="GamingStore shop project">
@@ -18,6 +18,8 @@
     <link rel="stylesheet" type="text/css" href="~/lib/slick-1.8.0/slick.css">
     <link rel="stylesheet" type="text/css" href="~/css/main_styles.css">
     <link rel="stylesheet" type="text/css" href="~/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="~/css/cart_styles.css">
+    <link rel="stylesheet" type="text/css" href="~/css/cart_responsive.css">
 </head>
 
 <body>
@@ -92,11 +94,11 @@
                                     <div class="cart_container d-flex flex-row align-items-center justify-content-end">
                                         <div class="cart_icon">
                                             <img src="~/images/cart.png" alt="">
-                                            <div class="cart_count"><span>10</span></div>
+                                            <div class="cart_count"><span></span></div>
                                         </div>
                                         <div class="cart_content">
-                                            <div class="cart_text"><a class="nav-link text-dark" asp-area="" asp-controller="Carts" asp-action="Index">Cart</a></div>
-                                            <div class="cart_price">$85</div>
+                                            <div class="cart_text"><a class="nav-link text-dark" asp-controller="Carts" asp-action="Index">Cart</a></div>
+                                            <div class="cart_price"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -126,9 +128,9 @@
 
                                         @for (int categoryIndex = 0; categoryIndex < Enum.GetNames(typeof(Category)).Length; categoryIndex++)
                                         {
-                                            var category = (Category) categoryIndex;
+                                            var category = (Category)categoryIndex;
                                             /*todo: add links to items specified by the category*/
-                                            <li><a href="#">@Html.DisplayFor(e=>category)<i class="fas fa-chevron-right ml-auto"></i></a></li>
+                                            <li><a href="#">@Html.DisplayFor(e => category)<i class="fas fa-chevron-right ml-auto"></i></a></li>
                                         }
                                     </ul>
                                 </div>
@@ -274,11 +276,11 @@
 
         </header>
 
-        
-            @RenderBody()
+
+        @RenderBody()
 
 
-    <!-- Footer -->
+        <!-- Footer -->
 
         <footer class="footer">
             <div class="container">
@@ -313,9 +315,9 @@
                             <ul class="footer_list">
                                 @for (int categoryIndex = 0; categoryIndex < Enum.GetNames(typeof(Category)).Length; categoryIndex++)
                                 {
-                                    var category = (Category) categoryIndex;
+                                    var category = (Category)categoryIndex;
                                     /*todo: add links to items specified by the category*/
-                                    <li><a href="#">@Html.DisplayFor(e=>category)<i class="fas fa-chevron-right ml-auto"></i></a></li>
+                                    <li><a href="#">@Html.DisplayFor(e => category)<i class="fas fa-chevron-right ml-auto"></i></a></li>
                                 }
                             </ul>
                         </div>
@@ -380,6 +382,7 @@
     <script src="~/lib/slick-1.8.0/slick.js"></script>
     <script src="~/lib/easing/easing.js"></script>
     <script src="~/js/custom.js"></script>
+    <script src="~/js/cart_custom.js"></script>
 </body>
 
 </html>

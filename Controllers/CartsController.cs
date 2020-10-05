@@ -27,29 +27,39 @@ namespace GamingStore.Controllers
 
         private Task<Customer> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
-        [HttpGet]
         public async Task<IActionResult> Index()
         {
-            Customer customer = await GetCurrentUserAsync();
-            Cart cart = await _context.Carts.FirstOrDefaultAsync(c => c.CustomerId == customer.Id);
-
-            if (cart == null)
-            {
-                return NotFound();
-            }
-
             try
             {
-                foreach ((int key, uint value) in cart.ShoppingCart)
+                Customer customer = await GetCurrentUserAsync();
+                var itemsInCart = _context.Carts.Where(c => c.CustomerId == customer.Id);
+
+                foreach (Cart cartItem in itemsInCart)
                 {
-                    Item item = _context.Items.First(i => i.Id == key);
-                    cart.ItemsInCart.Add(item, value);
+                    Item item = _context.Items.First(i => i.Id == cartItem.ItemId);
+                    cartItem.Item = item;
                 }
+
+                return View(await _context.Carts.Where(c => c.CustomerId == customer.Id).ToListAsync());
+
             }
             catch (Exception e)
             {
                 
             }
+            
+            //try
+            //{
+            //    foreach ((int key, uint value) in cart.ShoppingCart)
+            //    {
+            //        Item item = _context.Items.First(i => i.Id == key);
+            //        cart.ItemsInCart.Add(item, value);
+            //    }
+            //}
+            //catch (Exception e)
+            //{
+                
+            //}
 
             //var list = new List<ItemsInCart>();
 
@@ -75,23 +85,23 @@ namespace GamingStore.Controllers
             //    }
             //}
 
-            return View(cart);
-        }
-
-        // POST: Carts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
-            var cart = await _context.Carts.FindAsync(id);
-            _context.Carts.Remove(cart);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return View();
         }
 
         private bool CartExists(string id)
         {
             return _context.Carts.Any(e => e.CustomerId == id);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete()
+        {
+            Customer customer = await GetCurrentUserAsync();
+            IQueryable<Cart> cart = _context.Carts.Where(c => c.CustomerId == customer.Id);
+            _context.Carts.RemoveRange(cart);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

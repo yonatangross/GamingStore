@@ -42,7 +42,7 @@ namespace GamingStore.Controllers
             }
 
             Item item = await _context.Items.FirstOrDefaultAsync(m => m.Id == id);
-            
+
             if (item == null)
             {
                 return NotFound();
@@ -62,6 +62,7 @@ namespace GamingStore.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Manufacturer,Price,Category,PropertiesList")] Item item)
         {
@@ -169,23 +170,25 @@ namespace GamingStore.Controllers
             try
             {
                 Customer customer = await GetCurrentUserAsync();
-                customer.ShoppingCart.ShoppingCart.Add(id, 1);
-
-                _context.Customers.Update(customer);
-
                 Cart cart = await _context.Carts.FirstOrDefaultAsync(c => c.CustomerId == customer.Id);
 
-                if (cart.ShoppingCart == null)
+                if (cart == null || cart.ItemId != id)
                 {
-                    cart.ShoppingCart = new Dictionary<int, uint>() {{id, 1}};
-                }
-                else
-                {
-                    cart.ShoppingCart.Add(id, 1);
+                    cart = new Cart()
+                    {
+                        ItemId = id,
+                        Quantity = 1,
+                        CustomerId = customer.Id
+                    };
+
+                    _context.Carts.Add(cart);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
 
-                _context.Carts.Update(cart);
-
+                cart.Quantity++;
+                _context.Update(cart);
+                await _context.SaveChangesAsync();
             }
             catch (Exception e)
             {
@@ -193,6 +196,33 @@ namespace GamingStore.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+
+            //try
+            //{
+            //    Customer customer = await GetCurrentUserAsync();
+            //    customer.ShoppingCart.ShoppingCart.Add(id, 1);
+
+            //    _context.Customers.Update(customer);
+
+            //    Cart cart = await _context.Carts.FirstOrDefaultAsync(c => c.CustomerId == customer.Id);
+
+            //    if (cart.ShoppingCart == null)
+            //    {
+            //        cart.ShoppingCart = new Dictionary<int, uint>() {{id, 1}};
+            //    }
+            //    else
+            //    {
+            //        cart.ShoppingCart.Add(id, 1);
+            //    }
+
+            //    _context.Carts.Update(cart);
+
+            //}
+            //catch (Exception e)
+            //{
+
+            //}
+
         }
     }
 }

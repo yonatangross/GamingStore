@@ -1,25 +1,34 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GamingStore.Models
 {
     public class Cart
     {
-        public Cart(string customerId)
+        public static int ItemCounter;
+
+        public Cart()
         {
-            CustomerId = customerId;
+            Id = ItemCounter;
+            Interlocked.Increment(ref ItemCounter);
         }
 
-        [Key]
+        [Key, DatabaseGenerated((DatabaseGeneratedOption.None))]
+        public int Id { get; set; }
+        
         public string CustomerId { get; set; }
 
-        public Dictionary<int, uint> ShoppingCart { get; set; } = new Dictionary<int, uint>();
+        public int ItemId { get; set; }
 
+        public int Quantity { get; set; }
+        
         [NotMapped]
-        public Dictionary<Item, uint> ItemsInCart { get; set; }
+        public Item Item { get; set; }
     }
 }

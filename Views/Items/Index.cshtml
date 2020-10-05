@@ -8,7 +8,10 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="Create">Create New</a>
+    }
 </p>
 <table class="table">
     <thead>
@@ -32,39 +35,40 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Manufacturer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PropertiesList)
-            </td>
-            <td>
-                @if (User.IsInRole("Admin"))
-                {
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> 
-                }
+        @foreach (Item item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Manufacturer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PropertiesList)
+                </td>
+                <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
 
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                <a asp-action="AddToCart" asp-route-id="@item.Id">AddToCart</a>
-                
-                @*@using (Html.BeginForm("AddToCart", "Items", FormMethod.Post, new { Id = "sampleform"}))
-                {
-                    <input id="Create" name="AddToCart" type="button" value="Create" />
-                }*@
-            </td>
-        </tr>
-}
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a asp-action="AddToCart" asp-route-id="@item.Id">AddToCart</a>
+
+                    @*@using (Html.BeginForm("AddToCart", "Items", FormMethod.Post, new { Id = "sampleform"}))
+                        {
+                            <input id="Create" name="AddToCart" type="button" value="Create" />
+                        }*@
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

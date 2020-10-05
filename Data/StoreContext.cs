@@ -88,12 +88,6 @@ namespace GamingStore.Data
                 .HasConversion(
                     v => JsonConvert.SerializeObject(v),
                     v => JsonConvert.DeserializeObject<OpeningHours[]>(v));
-            modelBuilder.Entity<Cart>()
-                .Property(s => s.ShoppingCart)
-                .HasConversion(
-                    v => JsonConvert.SerializeObject(v),
-                    v => JsonConvert.DeserializeObject<Dictionary<int, uint>>(v));
-
             #endregion
 
             modelBuilder.Entity<Customer>().ToTable("Customers");

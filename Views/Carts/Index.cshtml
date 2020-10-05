@@ -1,4 +1,4 @@
-﻿@model GamingStore.Models.Cart
+﻿@model IEnumerable<GamingStore.Models.Cart>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,26 +13,26 @@
                     <div class="cart_title">Shopping Cart</div>
                     <div class="cart_items">
                         <ul class="cart_list">
-                            @foreach (KeyValuePair<Item, uint> item in Model.ItemsInCart)
+                            @foreach (Cart cart in Model)
                             {
                                 <li class="cart_item clearfix">
                                     <div class="cart_item_image"><img src="images/shopping_cart.jpg" alt=""></div>
                                     <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
                                         <div class="cart_item_name cart_info_col">
                                             <div class="cart_item_title"> Name</div>
-                                            <div class="cart_item_text">MacBook Air 13</div>
+                                            <div class="cart_item_text">@cart.Item.Title.Substring(0, Math.Min(cart.Item.Title.Length, 27))</div>
                                         </div>
-                                        <div class="cart_item_color cart_info_col">
-                                            <div class="cart_item_title">Color</div>
-                                            <div class="cart_item_text"><span style="background-color: #999999;"></span>@item.Key.Category</div>
+                                        <div class="cart_item_manufacturer cart_info_col">
+                                            <div class="cart_item_title">Manufacturer</div>
+                                            <div class="cart_item_text"><span style="background-color: #999999;"></span>@cart.Item.Manufacturer</div>
                                         </div>
                                         <div class="cart_item_quantity cart_info_col">
                                             <div class="cart_item_title">Quantity</div>
-                                            <div class="cart_item_text">@item.Value</div>
+                                            <div class="cart_item_text">@cart.Quantity</div>
                                         </div>
                                         <div class="cart_item_total cart_info_col">
                                             <div class="cart_item_title">Total</div>
-                                            <div class="cart_item_text">$@item.Key.Price)</div>
+                                            <div class="cart_item_text">$@cart.Item.Price</div>
                                         </div>
                                     </div>
                                 </li>
@@ -45,13 +45,19 @@
                     <div class="order_total">
                         <div class="order_total_content text-md-right">
                             <div class="order_total_title">Order Total:</div>
-                            <div class="order_total_amount">$111)</div>
+                            @{
+                                double total = Model.Aggregate<Cart, double>(0, (current, itemsInCart) => current + itemsInCart.Item.Price*itemsInCart.Quantity);
+                                <div class="order_total_amount">$@total</div>
+                            }
                         </div>
                     </div>
 
                     <div class="cart_buttons">
-                        <button type="button" class="button cart_button_clear">Add to Cart</button>
-                        <button type="button" class="button cart_button_checkout">Add to Cart</button>
+                        @using (Html.BeginForm("Delete", "Carts", FormMethod.Post, null))
+                        {
+                            <input type="submit" class="button cart_button_clear" value="Clear Cart" />
+                        } 
+                        @*<button type="button" class="button cart_button_checkout">Add to Cart</button>*@
                     </div>
                 </div>
             </div>
@@ -65,14 +71,14 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ShoppingCart)
+            @*@Html.DisplayNameFor(model => model.ShoppingCart)*@
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ShoppingCart)
+            @*@Html.DisplayFor(model => model.ShoppingCart)*@
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.CustomerId">Edit</a> |
+    @*<a asp-action="Edit" asp-route-id="@Model.CustomerId">Edit</a> |*@
     <a asp-action="Index">Back to List</a>
 </div>

@@ -9,7 +9,7 @@ namespace GamingStore.Models
 {
     public class Item
     {
-        public static int ItemCounter = 0;
+        public static int ItemCounter;
 
         public Item()
         {
