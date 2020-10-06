@@ -56,18 +56,16 @@ function searchUsers(searchUserString) {
     var usersHtml = "";
     $.ajax({
             type: "POST",
-            url: "Administration/ListUsersBySearch",
+        url: "Administration/ListUsersBySearch",
             data: {
-                searchUserString:searchUserString
+                searchUserString: searchUserString
             },
         success: function (data, textStatus, jqXhr) {
-            var userCheck = data[0];
-            console.log("Length " + Object.keys(data).length);
-            console.log("data[0] keys: " + Object.keys(data[0]));
-            console.log("Id: " + userCheck.id);
-            console.log("Email: " + userCheck.email);
-                var users = data;
-                console.log(users.toString());
+            /*var dvUsers = $("#users");
+            dvUsers.empty();
+            $.each(data, function(i, user) {
+                    var $tr
+                });*/
                 for (var userIndex = 0; userIndex < Object.keys(data).length; userIndex++) {
                     usersHtml += '<div class="card mb-3 user'+ userIndex+'">\n';
                     usersHtml +=     '<div class="card-header">\n';
@@ -89,8 +87,9 @@ function searchUsers(searchUserString) {
                     usersHtml +=     '</div>\n';
                     usersHtml += '</div>\n';
                 }
-            console.log(usersHtml);
             $("#users").html(usersHtml);
+            console.log("success: ");
+
         },
             complete: function(response) {
                 console.log("completed: " + response);

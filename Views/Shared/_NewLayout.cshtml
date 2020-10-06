@@ -276,8 +276,11 @@
 
         </header>
 
-
-        @RenderBody()
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
 
 
         <!-- Footer -->
@@ -286,7 +289,7 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="col-lg-3 footer_col">
+                    <div class="col-lg-4 footer_col">
                         <div class="footer_column footer_contact">
                             <div class="logo_container">
                                 <div class="logo"><a href="#">GamingStore</a></div>
@@ -309,7 +312,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 offset-lg-2">
+                    <div class="col-lg-2 offset-lg-3">
                         <div class="footer_column">
                             <div class="footer_title">Find it Fast</div>
                             <ul class="footer_list">
@@ -323,7 +326,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-2">
+                    <div class=" col-lg-2 offset-lg-1">
                         <div class="footer_column">
                             <div class="footer_title">Customer Care</div>
                             <ul class="footer_list">
@@ -382,7 +385,10 @@
     <script src="~/lib/slick-1.8.0/slick.js"></script>
     <script src="~/lib/easing/easing.js"></script>
     <script src="~/js/custom.js"></script>
-    <script src="~/js/cart_custom.js"></script>
+<script src="~/js/cart_custom.js"></script>
+<script src="~/lib/notifyjs/notify.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@RenderSection("Scripts", required: false)
 </body>
 
 </html>
