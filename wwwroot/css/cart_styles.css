@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 /******************************
@@ -1212,11 +1212,9 @@ select option
 4. Cart
 *********************************/
 
-.cart_section
-{
+.cart_section {
 	width: 100%;
-	padding-top: 93px;
-	padding-bottom: 111px;
+	padding-top: 30px;
 }
 .cart_title
 {
@@ -1225,7 +1223,7 @@ select option
 }
 .cart_items
 {
-	margin-top: 67px;
+	margin-top: 20px;
 }
 .cart_list
 {
