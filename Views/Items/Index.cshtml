@@ -1,74 +1,112 @@
-﻿@model IEnumerable<GamingStore.Models.Item>
+﻿@using GamingStore.Contracts
+@model IEnumerable<GamingStore.Models.Item>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_NewLayout.cshtml";
 }
+<div class="shop">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
 
-<h1>Index</h1>
+                <!-- Shop Sidebar -->
+                <div class="shop_sidebar">
+                    <div class="sidebar_section">
+                        <div class="sidebar_title">Categories</div>
+                        <ul class="sidebar_categories">
+                            @foreach (var category in Enum.GetNames(typeof(Category)))
+                            {
+                                <li><a asp-action="Index" asp-controller="Items" asp-route-category="@category">@Html.DisplayFor(e => category)</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-<p>
-    @if (User.IsInRole("Admin"))
-    {
-        <a asp-action="Create">Create New</a>
-    }
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Manufacturer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PropertiesList)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Item item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Manufacturer)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PropertiesList)
-                </td>
-                <td>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    }
+            <div class="col-lg-9">
+                <!-- Shop Content -->
+                <div class="shop_content">
+                    <div class="shop_bar clearfix">
+                        <div class="shop_product_count"><span>@Model.Count()</span> products found</div>
+                        <div class="shop_sorting">
+                            <span>Sort by:</span>
+                            <ul>
+                                <li>
+                                    <span class="sorting_text">highest rated<i class="fas fa-chevron-down"></i></span>
+                                    <ul>
+                                        <li class="shop_sorting_button" data-isotope-option="{ &quot;sortBy&quot;: &quot;original-order&quot; }">highest rated</li>
+                                        <li class="shop_sorting_button" data-isotope-option="{ &quot;sortBy&quot;: &quot;name&quot; }">name</li>
+                                        <li class="shop_sorting_button" data-isotope-option="{ &quot;sortBy&quot;: &quot;price&quot; }">price</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product_grid" style="position: relative; height: 1012px;">
+                        <div class="product_grid_border"></div>
 
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    <a asp-action="AddToCart" asp-route-id="@item.Id">AddToCart</a>
+                        @{
+                            var leftPosition = 177;
+                            var topPosition = 253;
+                            var counterLeft = 0;
+                            var counterTop = 0;
+                            var roundTop = 0;
+                            int finalLeft = 0;
+                            int finalTop = 0;
+                            string left = string.Empty;
+                            string top = string.Empty;
+                            foreach (var item in Model)
+                            {
+                                if (counterLeft == 5)
+                                {
+                                    counterLeft = 0;
+                                }
+                                if (roundTop == 5)
+                                {
+                                    counterTop++;
+                                }
+                                finalLeft = leftPosition * counterLeft;
+                                finalTop = topPosition * counterTop;
+                                left = $"{finalLeft}px";
+                                top = $"{finalTop}px";
+                                <!-- Product Item -->
+                                <div class="product_item is_new" style="position: absolute; left: @left; top: @top;">
+                                    <div class="product_border"></div>
+                                    <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/new_5.jpg" alt=""></div>
+                                    <div class="product_content">
+                                        <div class="product_price">$@item.Price</div>
+                                        <div class="product_name"><a href="#" tabindex="0" style="overflow-wrap: break-word">@item.Title</a></div>
+                                    </div>
+                                    <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                    <ul class="product_marks">
+                                        <li class="product_mark product_discount">-25%</li>
+                                        <li class="product_mark product_new">new</li>
+                                    </ul>
+                                </div>
+                                counterLeft++;
+                                roundTop++;
+                            }
+                        }
+                    </div>
 
-                    @*@using (Html.BeginForm("AddToCart", "Items", FormMethod.Post, new { Id = "sampleform"}))
-                        {
-                            <input id="Create" name="AddToCart" type="button" value="Create" />
-                        }*@
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                    <!-- Shop Page Navigation -->
+
+                    <div class="shop_page_nav d-flex flex-row">
+                        <div class="page_prev d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-left"></i></div>
+                        <ul class="page_nav d-flex flex-row">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">...</a></li>
+                            <li><a href="#">21</a></li>
+                        </ul>
+                        <div class="page_next d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-right"></i></div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

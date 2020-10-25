@@ -5,6 +5,7 @@
     <UserSecretsId>3e15871e-3aa1-4c99-826a-3822d8f228b7</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Clutch.Web.Mvc" Version="1.0.5304.38566" />
     <PackageReference Include="MailKit" Version="1.10.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="3.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.8" />
