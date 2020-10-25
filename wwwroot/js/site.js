@@ -3,11 +3,11 @@
 
 // Write your JavaScript code.
 function toggleConfirmDeleteUserButton(uniqueId, isDeleteClicked) {
-    console.log("Entered function toggleConfirmDeleteUserButton with uniqueId:" + uniqueId + "and isDeleteClicked: " + isDeleteClicked+"\n");
+    console.log(`Entered function toggleConfirmDeleteUserButton with uniqueId:${uniqueId}and isDeleteClicked: ${isDeleteClicked}\n`);
 
-    var deleteSpan = "deleteSpan_" + uniqueId;
-    var confirmDeleteSpan = "confirmDeleteSpan_" + uniqueId;
-    var animationTime = 300;
+    const deleteSpan = `deleteSpan_${uniqueId}`;
+    const confirmDeleteSpan = `confirmDeleteSpan_${uniqueId}`;
+    const animationTime = 300;
 
     $("[id^=confirmDeleteSpan_]").each(function() {
         $("[id^=deleteSpan_]").show();
@@ -15,16 +15,16 @@ function toggleConfirmDeleteUserButton(uniqueId, isDeleteClicked) {
     });
 
     if (isDeleteClicked) {
-        $("#" + deleteSpan).hide(animationTime);
-        $("#" + confirmDeleteSpan).show(animationTime);
+        $(`#${deleteSpan}`).hide(animationTime);
+        $(`#${confirmDeleteSpan}`).show(animationTime);
     } else {
-        $("#" + deleteSpan).show(animationTime);
-        $("#" + confirmDeleteSpan).hide(animationTime);
+        $(`#${deleteSpan}`).show(animationTime);
+        $(`#${confirmDeleteSpan}`).hide(animationTime);
     }
 }
 
 function confirmDeleteUserAjax(userId, userNum, userEmail) {
-    console.log("Entered function confirmDeleteUserAjax with:"+userId+" "+userNum+" "+userEmail+"\n");
+    console.log(`Entered function confirmDeleteUserAjax with:${userId} ${userNum} ${userEmail}\n`);
     $.ajax({
             type: "POST",
             url: "Administration/DeleteUser",
@@ -34,7 +34,7 @@ function confirmDeleteUserAjax(userId, userNum, userEmail) {
             success: function() {
                 $.notify(userEmail + " deleted", { color: "#fff", background: "#D44950", position: "top center" });
 
-                $(".user" + userNum).hide('slow', function() { $(".user" + userNum).remove(); });
+                $(`.user${userNum}`).hide("slow", function() { $(`.user${userNum}`).remove(); });
             },
             failure: function(response) {
                 alert(response.text);
@@ -48,58 +48,64 @@ function confirmDeleteUserAjax(userId, userNum, userEmail) {
 
 
 $("#searchSubmit").click(function () {
-    var searchString = $("#searchUserString").val();
+    const searchString = $("#searchUserString").val();
     searchUsers(searchString);
 });
 
+
+const Card = (id, email, userIndex) => `
+ <div class="card mb-3 user${userIndex}">
+                <div class="card-header">
+                    User Id : ${id}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">${email}</h5>
+                </div>
+                <div class="card-footer">
+                    <a href="/Administration/EditUser/${id}" class="btn btn-primary">
+                        Edit
+                    </a>
+                    <span id="confirmDeleteSpan_${id}" style="display: none">
+                        <span>Are you sure you want to delete?</span>
+                        <input type="button" onclick="confirmDeleteUserAjax('${id}','${userIndex}','${email}')" class="btn btn-danger" value="Yes">
+                        <a href="javascript:void(0)" class="btn btn-primary"
+                           onclick="toggleConfirmDeleteUserButton('${id}', false)">
+                            No
+                        </a>
+                    </span>
+                    <span id="deleteSpan_${id}">
+                        <a href="javascript:void(0)" class="btn btn-danger"
+                           onclick="toggleConfirmDeleteUserButton('${id}', true)">
+                            Delete
+                        </a>
+                    </span>
+                </div>
+            </div>
+`;
+
 function searchUsers(searchUserString) {
-    var usersHtml = "";
     $.ajax({
             type: "POST",
-            url: "Administration/ListUsersBySearch",
+        url: "Administration/ListUsersBySearch",
             data: {
-                searchUserString:searchUserString
+                searchUserString: searchUserString
             },
         success: function (data, textStatus, jqXhr) {
-            var userCheck = data[0];
-            console.log("Length " + Object.keys(data).length);
-            console.log("data[0] keys: " + Object.keys(data[0]));
-            console.log("Id: " + userCheck.id);
-            console.log("Email: " + userCheck.email);
-                var users = data;
-                console.log(users.toString());
-                for (var userIndex = 0; userIndex < Object.keys(data).length; userIndex++) {
-                    usersHtml += '<div class="card mb-3 user'+ userIndex+'">\n';
-                    usersHtml +=     '<div class="card-header">\n';
-                    usersHtml +=        'User Id: '+data[userIndex].id;
-                    usersHtml +=     '</div>\n';
-                    usersHtml +=     '<div class="card-body">\n';
-                    usersHtml +=        '<h5 class="card-title">\n' + data[userIndex].email+'</h5>\n';
-                    usersHtml +=     '</div>\n';
-                    usersHtml +=     '<div class="card-footer">\n';
-                    usersHtml +=        '<a href="/Administration/EditUser/'+data[userIndex].id+'" class="btn btn-primary">\nEdit</a>\n';
-                    usersHtml +=        '<span id="confirmDeleteSpan_'+data[userIndex].id+'" style="display: none">\n';
-                    usersHtml +=        '<span>\nAre you sure you want to delete?</span>\n';
-                    usersHtml +=          '<input type="button" onclick="confirmDeleteUserAjax(' + "'" + data[userIndex].id + "'" + ',' + "'" + (userIndex + 1) + "'" + ',' + "'" + data[userIndex].email+ "'" +')" class="btn btn-danger" value="Yes">\n';
-                    usersHtml +=          '<a href="javascript:void(0)" class="btn btn-primary" onclick="toggleConfirmDeleteUserButton('+"'"+data[userIndex].id+"'"+', false)">\n No </a>\n';
-                    usersHtml +=        '</span>\n';
-                    usersHtml +=        '<span id="deleteSpan_'+data[userIndex].id+'">\n';
-                    usersHtml +=          '<a href="javascript:void(0)" class="btn btn-danger" onclick="toggleConfirmDeleteUserButton(' + "'" + data[userIndex].id + "'" +', true)">\n Delete </a>\n';
-                    usersHtml +=        '</span>\n';
-                    usersHtml +=     '</div>\n';
-                    usersHtml += '</div>\n';
-                }
-            console.log(usersHtml);
-            $("#users").html(usersHtml);
+    
+            $("#users").empty();
+            for (let userIndex = 0; userIndex < Object.keys(data).length; userIndex++) {
+                $("#users").append(Card(data[userIndex].id, data[userIndex].email, userIndex+1));
+            }
+            console.log("success: ");
         },
             complete: function(response) {
-                console.log("completed: " + response);
+                console.log(`completed: ${response}`);
             },
             failure: function(response) {
-                console.log("failure: "+response);
+                console.log(`failure: ${response}`);
             },
             error: function(response) {
-                console.log("error: "+response);
+                console.log(`error: ${response}`);
             }
         }
     );

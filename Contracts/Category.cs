@@ -10,5 +10,4 @@ namespace GamingStore.Contracts
         [Display(Name = "GPUs")] GPUs,
         [Display(Name = "CPUs")] CPUs
     }
-    
 }

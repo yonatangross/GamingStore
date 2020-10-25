@@ -180,6 +180,7 @@ namespace GamingStore.Controllers
             return _context.Items.Any(e => e.Id == id);
         }
 
+        [Authorize]
         public async Task<IActionResult> AddToCart(int id)
         {
             try
@@ -211,33 +212,6 @@ namespace GamingStore.Controllers
             }
 
             return RedirectToAction(nameof(Index));
-
-            //try
-            //{
-            //    Customer customer = await GetCurrentUserAsync();
-            //    customer.ShoppingCart.ShoppingCart.Add(id, 1);
-
-            //    _context.Customers.Update(customer);
-
-            //    Cart cart = await _context.Carts.FirstOrDefaultAsync(c => c.CustomerId == customer.Id);
-
-            //    if (cart.ShoppingCart == null)
-            //    {
-            //        cart.ShoppingCart = new Dictionary<int, uint>() {{id, 1}};
-            //    }
-            //    else
-            //    {
-            //        cart.ShoppingCart.Add(id, 1);
-            //    }
-
-            //    _context.Carts.Update(cart);
-
-            //}
-            //catch (Exception e)
-            //{
-
-            //}
-
         }
     }
 }
