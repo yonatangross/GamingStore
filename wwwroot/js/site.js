@@ -60,7 +60,6 @@ const Card = (id, email, userIndex) => `
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">${email}</h5>
-                    
                 </div>
                 <div class="card-footer">
                     <a href="/Administration/EditUser/${id}" class="btn btn-primary">
@@ -69,7 +68,6 @@ const Card = (id, email, userIndex) => `
                     <span id="confirmDeleteSpan_${id}" style="display: none">
                         <span>Are you sure you want to delete?</span>
                         <input type="button" onclick="confirmDeleteUserAjax('${id}','${userIndex}','${email}')" class="btn btn-danger" value="Yes">
-
                         <a href="javascript:void(0)" class="btn btn-primary"
                            onclick="toggleConfirmDeleteUserButton('${id}', false)">
                             No
@@ -99,7 +97,6 @@ function searchUsers(searchUserString) {
                 $("#users").append(Card(data[userIndex].id, data[userIndex].email, userIndex+1));
             }
             console.log("success: ");
-
         },
             complete: function(response) {
                 console.log(`completed: ${response}`);
