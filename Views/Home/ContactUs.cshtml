@@ -1,0 +1,74 @@
+﻿@model GamingStore.Models.Mail
+
+@{
+    ViewData["Title"] = "Contact Us";
+}
+<body>
+    <div class="contact_info">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <div class="contact_info_container d-flex flex-lg-row flex-column justify-content-between align-items-between">
+
+                        <!-- Contact Item -->
+                        <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                            <div class="contact_info_image"><img src="~/images/contact_1.png" alt=""></div>
+                            <div class="contact_info_content">
+                                <div class="contact_info_title">Phone</div>
+                                <div class="contact_info_text">+972 54 005 3570</div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Item -->
+                        <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                            <div class="contact_info_image"><img src="~/images/contact_2.png" alt=""></div>
+                            <div class="contact_info_content">
+                                <div class="contact_info_title">Email</div>
+                                <div class="contact_info_text">gamingstore@gmail.com</div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Item -->
+                        <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                            <div class="contact_info_image"><img src="~/images/contact_3.png" alt=""></div>
+                            <div class="contact_info_content">
+                                <div class="contact_info_title">Address</div>
+                                <div class="contact_info_text">33 Eli Vizel, College of management, Rishon Leziyyon, IL, Israel</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <div class="contact_form_container">
+                        <div class="contact_form_title">Get in Touch</div>
+
+                        @using (Html.BeginForm("ContactUs", "Home", FormMethod.Post, new { @id = "contact-form", role = "form" }))
+                        {
+                            @Html.ValidationSummary()
+                            <div class="contact_form_inputs d-flex flex-md-row flex-column justify-content-between align-items-between">
+                                @Html.TextBoxFor(m => m.Name, new { @placeholder = "Your name", @type = "text", @class = "contact_form_name input_field", @id = "contact_form_name", @required = "required" })
+                                @Html.TextBoxFor(m => m.Email, new { @placeholder = "Your email", @type = "email", @class = "contact_form_email input_field", @id = "contact_form_name", @required = "required" })
+                                @Html.TextBoxFor(m => m.Telephone, new { @placeholder = "Your phone number", @type = "text", @class = "contact_form_phone input_field", @id = "contact_form_phone" })
+                            </div>
+                            <div class="contact_form_text">
+                                @Html.TextAreaFor(m => m.Message, new { @placeholder = "Message", @class = "text_field contact_form_message", @id = "contact_form_message", @required = "required", @rows = "4" })
+                            </div>
+                            <div class="contact_form_button">
+                                <input type="submit" value="Send Message" name="submit" class="button contact_submit_button">
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel"></div>
+    </div>
+</body>
