@@ -26,6 +26,12 @@ namespace GamingStore.Controllers
             return View(await _context.Stores.ToListAsync());
         }
 
+        // GET: Stores
+        public async Task<IActionResult> NewIndex()
+        {
+            return View(await _context.Stores.ToListAsync());
+        }
+
         // GET: Stores/Details/5
         public async Task<IActionResult> Details(int? id)
         {
