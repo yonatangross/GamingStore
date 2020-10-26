@@ -181,7 +181,7 @@ namespace GamingStore.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> AddToCart(int id)
+        public async Task<IActionResult> AddToCart(int id, int quantity = 1)
         {
             try
             {
@@ -193,7 +193,7 @@ namespace GamingStore.Controllers
                     cart = new Cart()
                     {
                         ItemId = id,
-                        Quantity = 1,
+                        Quantity = quantity,
                         CustomerId = customer.Id
                     };
 
