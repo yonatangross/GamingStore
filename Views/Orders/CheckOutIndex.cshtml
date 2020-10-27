@@ -12,32 +12,61 @@
                 <div class="row">
                     <div class="col-50">
                         <h3>Billing Address</h3>
-                        <div class="form-group fa fa-user">
-                            <label asp-for="Customer.FirstName" ></label>
-                            <input asp-for="Customer.FirstName" class="form-control" />
-                            <span asp-validation-for="Customer.FirstName" class="text-danger"></span>
-                        </div>
-                        <label for="fname"><i class="fa fa-user"></i> Full Name</label>
-                        <input type="text" id="fname" name="firstname" placeholder="John M. Doe" class="dummyclass">
-                        <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                        <input type="text" id="email" name="email" placeholder="john@example.com">
-                        <label for="adr"><i class="fa"></i> Address</label>
-                        <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
-                        <label for="city"><i class="fa"></i> City</label>
-                        <input type="text" id="city" name="city" placeholder="New York">
+
+                        <label asp-for="Customer.FirstName"><i class="fa fa-user"></i>First Name</label>
+                        <input asp-for="Customer.FirstName" type="text" id="fname" name="firstname" placeholder="John">
+                        <span asp-validation-for="Customer.FirstName" class="text-danger"></span>
+
+                        <label asp-for="Customer.LastName"><i class="fa fa-user"></i>Last Name</label>
+                        <input asp-for="Customer.LastName" type="text" id="lname" name="lastname" placeholder="Cohen">
+                        <span asp-validation-for="Customer.LastName" class="text-danger"></span>
+
+
+                        <label asp-for="Customer.Email"><i class="fa fa-envelope"></i> Email</label>
+                        <input asp-for="Customer.Email" type="text" id="email" name="email" placeholder="john@example.com">
+                        <span asp-validation-for="Customer.Email" class="text-danger"></span>
+
+                        <label asp-for="Customer.Address"><i class="fa"></i> Address</label>
+                        <input asp-for="Customer.Address" type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+                        <span asp-validation-for="Customer.Address" class="text-danger"></span>
+
+                        <label asp-for="Customer.City"><i class="fa"></i> City</label>
+                        <input asp-for="Customer.City" type="text" id="city" name="city" placeholder="Tel Aviv">
+                        <span asp-validation-for="Customer.City" class="text-danger"></span>
+
                         <div class="row">
                             <div class="col-50">
                                 <label for="state">State</label>
-                                <input type="text" id="state" name="state" placeholder="NY">
+                                <input type="text" id="state" name="state" placeholder="Israel">
                             </div>
+
                             <div class="col-50">
                                 <label for="zip">Zip</label>
                                 <input type="text" id="zip" name="zip" placeholder="10001">
                             </div>
                         </div>
                     </div>
+                    
+
+                </div>
+                <h3>Payment</h3>
+                <label for="cname">Name on Card</label>
+                <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+                <label for="ccnum">Credit card number</label>
+                <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+                <label for="expmonth">Exp Month</label>
+                <input type="text" id="expmonth" name="expmonth" placeholder="September">
+
+                <div class="row">
                     <div class="col-50">
-                        <h3>Payment</h3>
+                        <label for="expyear">Exp Year</label>
+                        <input type="text" id="expyear" name="expyear" placeholder="2018">
+                    </div>
+                    <div class="col-50">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" name="cvv" placeholder="352">
+                    </div>
+                    <div class="col-50">
                         <label for="fname">Shipping options</label>
                         <div class="icon-container">
                             <div>
@@ -47,7 +76,7 @@
                                             <span>Choose a delivery option:</span>
                                         </legend>
                                         <div data-isscheduleddelivery="0">
-                                            <input type="radio"  checked="checked" title="AmazonGlobal Standard Shipping" name="order0" value="std-intl-us-eur2-ag" data-issss="0" data-guaranteetype="NOT_GUARANTEED" data-isscheduleddelivery="0" data-shippingofferingid="AEIL6C6ZPG9RW" data-trial-index="" data-istrial="0" data-testid="" data-nosupportforgiftoption="" data-shipsplitpriority="shipWhenComplete" data-isshipwhencompletevalid="1" data-isshipwhenevervalid="0" data-rcxsspdecoupling="1">
+                                            <input type="radio" checked="checked" title="AmazonGlobal Standard Shipping" name="order0" value="std-intl-us-eur2-ag" data-issss="0" data-guaranteetype="NOT_GUARANTEED" data-isscheduleddelivery="0" data-shippingofferingid="AEIL6C6ZPG9RW" data-trial-index="" data-istrial="0" data-testid="" data-nosupportforgiftoption="" data-shipsplitpriority="shipWhenComplete" data-isshipwhencompletevalid="1" data-isshipwhenevervalid="0" data-rcxsspdecoupling="1">
                                             <span data-testid="">
                                                 <span>
                                                     <strong>Pickup</strong>
@@ -57,8 +86,8 @@
                                             </span>
                                         </div>
                                         <div data-isscheduleddelivery="0">
-                                            <input type="radio"  title="AmazonGlobal Expedited Shipping" name="order0" value="expd-intl-us-row-ag" data-issss="0" data-guaranteetype="NOT_GUARANTEED" data-isscheduleddelivery="0" data-shippingofferingid="AWFJFG1YUZ5IG" data-trial-index="" data-istrial="0" data-testid="" data-nosupportforgiftoption="" data-shipsplitpriority="shipWhenComplete" data-isshipwhencompletevalid="1" data-isshipwhenevervalid="0" data-rcxsspdecoupling="1">
-                                            <span  data-testid="">
+                                            <input type="radio" title="AmazonGlobal Expedited Shipping" name="order0" value="expd-intl-us-row-ag" data-issss="0" data-guaranteetype="NOT_GUARANTEED" data-isscheduleddelivery="0" data-shippingofferingid="AWFJFG1YUZ5IG" data-trial-index="" data-istrial="0" data-testid="" data-nosupportforgiftoption="" data-shipsplitpriority="shipWhenComplete" data-isshipwhencompletevalid="1" data-isshipwhenevervalid="0" data-rcxsspdecoupling="1">
+                                            <span data-testid="">
                                                 <span>
                                                     <strong>
                                                         Averages 7-10 business days
@@ -69,8 +98,8 @@
                                             </span>
                                         </div>
                                         <div data-isscheduleddelivery="0">
-                                            <input type="radio"  title="AmazonGlobal Priority Shipping" name="order0" value="pri-intl-us-isrl-ag" data-issss="0" data-guaranteetype="NOT_GUARANTEED" data-isscheduleddelivery="0" data-shippingofferingid="AOQ44VIU1GFA1" data-trial-index="" data-istrial="0" data-testid="" data-nosupportforgiftoption="" data-shipsplitpriority="shipWhenComplete" data-isshipwhencompletevalid="1" data-isshipwhenevervalid="0" data-rcxsspdecoupling="1">
-                                            <span  data-testid="">
+                                            <input type="radio" title="AmazonGlobal Priority Shipping" name="order0" value="pri-intl-us-isrl-ag" data-issss="0" data-guaranteetype="NOT_GUARANTEED" data-isscheduleddelivery="0" data-shippingofferingid="AOQ44VIU1GFA1" data-trial-index="" data-istrial="0" data-testid="" data-nosupportforgiftoption="" data-shipsplitpriority="shipWhenComplete" data-isshipwhencompletevalid="1" data-isshipwhenevervalid="0" data-rcxsspdecoupling="1">
+                                            <span data-testid="">
                                                 <span>
                                                     <strong>
                                                         Averages 2-5 business days
@@ -113,23 +142,7 @@
                                     <input type="hidden" name="shippriority.0.shipWhenComplete" value="shipWhenComplete">
                                 </div>
                             </div>
-                        </div>
-                        <label for="cname">Name on Card</label>
-                        <input type="text" id="cname" name="cardname" placeholder="John More Doe">
-                        <label for="ccnum">Credit card number</label>
-                        <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-                        <label for="expmonth">Exp Month</label>
-                        <input type="text" id="expmonth" name="expmonth" placeholder="September">
 
-                        <div class="row">
-                            <div class="col-50">
-                                <label for="expyear">Exp Year</label>
-                                <input type="text" id="expyear" name="expyear" placeholder="2018">
-                            </div>
-                            <div class="col-50">
-                                <label for="cvv">CVV</label>
-                                <input type="text" id="cvv" name="cvv" placeholder="352">
-                            </div>
                         </div>
                     </div>
 
@@ -147,29 +160,43 @@
             <h4>
                 Cart
                 <span class="price" style="color: black">
-                    <i class="fa fa-shopping-cart"></i>
-                    <b>4</b>
+                    @foreach (Cart cart in Model.Cart)
+                    {
+                        <p>
+                            <div class="cart_item_title"> Name </div>
+                            <div class="cart_item_text">@cart.Item.Title.Substring(0, Math.Min(cart.Item.Title.Length, 27))</div>
+                        </p>
+
+                        <p>
+                            <div class="cart_item_title"> Manufacturer </div>
+                            <div class="cart_item_text"><span style="background-color: #999999;"></span>@cart.Item.Manufacturer</div>
+                        </p>
+                        <p>
+                            <div class="cart_item_title">Quantity</div>
+                            <div class="cart_item_text">@cart.Quantity</div>
+                        </p>
+
+                        <p>
+                            <div class="cart_item_title">Price</div>
+                            <div class="cart_item_text">$@cart.Item.Price</div>
+                        </p>
+
+
+                    }
+                    <br /> <br>
+                   
+                    <!-- Order Total -->
+                    <div>
+                        <p>
+                            @{
+                                double total = Model.Cart.Aggregate<Cart, double>(0, (current, itemsInCart) => current + itemsInCart.Item.Price * itemsInCart.Quantity);
+                                <div>Order Total: $@total</div>
+                            }
+                        </p>
+                    </div>
+
                 </span>
             </h4>
-            <p>
-                <a href="#">Product 1</a> <span class="price">$15</span>
-            </p>
-            <p>
-                <a href="#">Product 2</a> <span class="price">$5</span>
-            </p>
-            <p>
-                <a href="#">Product 3</a> <span class="price">$8</span>
-            </p>
-            <p>
-                <a href="#">Product 4</a> <span class="price">$2</span>
-            </p>
-            <hr>
-            <p>
-                Total
-                <span class="price" style="color: black">
-                    <b>$30</b>
-                </span>
-            </p>
         </div>
     </div>
 </div>

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Threading;
 using GamingStore.Contracts;
 using Microsoft.AspNetCore.Identity;
+using Org.BouncyCastle.Crypto.Tls;
 
 namespace GamingStore.Models
 {
@@ -22,6 +23,8 @@ namespace GamingStore.Models
         public string LastName { get; set; }
 
         public Address Address { get; set; }
+
+        public string City { get; set; }
 
         public ICollection<Order> OrderHistory { get; set; }
     }
