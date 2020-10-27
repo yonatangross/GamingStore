@@ -5,7 +5,13 @@
     Layout = "~/Views/Shared/_NewLayout.cshtml";
 }
 
-<div class="cart_section">
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/cart_styles.css">
+    <link rel="stylesheet" type="text/css" href="~/css/cart_responsive.css">
+</head>
+
+<body>
+    <div class="cart_section">
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
                 <div class="cart_container">
@@ -36,7 +42,7 @@
                                     </div>
                                 </li>
                             }
-                            
+
                         </ul>
                     </div>
 
@@ -45,7 +51,7 @@
                         <div class="order_total_content text-md-right">
                             <div class="order_total_title">Order Total:</div>
                             @{
-                                double total = Model.Aggregate<Cart, double>(0, (current, itemsInCart) => current + itemsInCart.Item.Price*itemsInCart.Quantity);
+                                double total = Model.Aggregate<Cart, double>(0, (current, itemsInCart) => current + itemsInCart.Item.Price * itemsInCart.Quantity);
                                 <div class="order_total_amount">$@total</div>
                             }
                         </div>
@@ -55,13 +61,11 @@
                         @using (Html.BeginForm("Delete", "Carts", FormMethod.Post, null))
                         {
                             <input type="submit" class="button cart_button_clear" value="Clear Cart" />
-                        } 
-                        <br/>
-                      <button type="button" class="button cart_button_checkout" onclick="location.href = '@Url.Action("CheckOutIndex", "Orders")'">Proceed to Check Out</button>
-                       <br/>
-                        @*<button type="button" class="button cart_button_checkout">Add to Cart</button>*@
+                            <button type="button" class="button cart_button_checkout" onclick="location.href = '@Url.Action("CheckOutIndex", "Orders")'">Proceed to Check Out</button>
+                        }
                     </div>
                 </div>
+            </div>
         </div>
     </div>
-</div>
+</body>
