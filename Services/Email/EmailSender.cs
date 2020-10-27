@@ -17,11 +17,11 @@ namespace GamingStore.Services.Email
 
         public AuthMessageOptions Options { get; } //set only via Secret Manager
 
-        public async Task SendEmailAsync(string email, string subject, string message)
+        public async Task SendEmailAsync(string toEmail, string subject, string message)
         {
             var mimeMessage = new MimeMessage();
             mimeMessage.From.Add(new MailboxAddress(Options.AppName, Options.GmailUser));
-            mimeMessage.To.Add(new MailboxAddress(address: email));
+            mimeMessage.To.Add(new MailboxAddress(address: toEmail));
             mimeMessage.Subject = subject; //Subject
             mimeMessage.Body = new TextPart("html") // message rendered as html
             {
