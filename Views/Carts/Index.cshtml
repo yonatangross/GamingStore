@@ -14,7 +14,7 @@
     <div class="cart_section">
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
-                <div class="cart_container">
+                <div>
                     <div class="cart_title">Shopping Cart</div>
                     <div class="cart_items">
                         <ul class="cart_list">
@@ -27,11 +27,11 @@
                                             <div class="cart_item_title"> Name</div>
                                             <div class="cart_item_text">@cart.Item.Title.Substring(0, Math.Min(cart.Item.Title.Length, 27))</div>
                                         </div>
-                                        <div class="cart_item_manufacturer cart_info_col">
+                                        <div class="cart_info_col">
                                             <div class="cart_item_title">Manufacturer</div>
                                             <div class="cart_item_text"><span style="background-color: #999999;"></span>@cart.Item.Manufacturer</div>
                                         </div>
-                                        <div class="cart_item_quantity cart_info_col">
+                                        <div class="cart_info_col">
                                             <div class="cart_item_title">Quantity</div>
                                             <div class="cart_item_text">@cart.Quantity</div>
                                         </div>
@@ -48,7 +48,7 @@
 
                     <!-- Order Total -->
                     <div class="order_total">
-                        <div class="order_total_content text-md-right">
+                        <div class="text-md-right">
                             <div class="order_total_title">Order Total:</div>
                             @{
                                 double total = Model.Aggregate<Cart, double>(0, (current, itemsInCart) => current + itemsInCart.Item.Price * itemsInCart.Quantity);
