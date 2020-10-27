@@ -28,9 +28,24 @@ namespace GamingStore.Controllers
         private Task<Customer> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Items
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string category)
         {
-            return View(await _context.Items.ToListAsync());
+            if (string.IsNullOrEmpty(category))
+            {
+                return View(await _context.Items.ToListAsync());
+            }
+
+            List<Item> items = new List<Item>();
+
+            foreach (var item in _context.Items)
+            {
+                if (item.Category.ToString() == category)
+                {
+                    items.Add(item);
+                }
+            }
+         
+            return View(items);
         }
 
         // GET: Items/Details/5
@@ -166,7 +181,7 @@ namespace GamingStore.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> AddToCart(int id)
+        public async Task<IActionResult> AddToCart(int id, int quantity = 1)
         {
             try
             {
@@ -178,7 +193,7 @@ namespace GamingStore.Controllers
                     cart = new Cart()
                     {
                         ItemId = id,
-                        Quantity = 1,
+                        Quantity = quantity,
                         CustomerId = customer.Id
                     };
 
