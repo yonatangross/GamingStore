@@ -30,6 +30,7 @@ namespace GamingStore.Models
         public OrderState State { get; set; }
 
         public Address ShippingAddress { get; set; }
+
         public ShippingMethod ShippingMethod { get; set; }
 
         [Required] public Payment Payment { get; set; }
