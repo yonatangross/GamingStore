@@ -31,3 +31,4 @@ namespace GamingStore.ViewModels
         [Required] public Payment Payment { get; set; }
     }
 }
+

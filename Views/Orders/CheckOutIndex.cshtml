@@ -5,14 +5,15 @@
     Layout = "~/Views/Shared/_NewLayout.cshtml";
 }
 <link rel="stylesheet" type="text/css" href="~/css/check_out.css">
-<div class="row">
-    <div class="col-75">
-        <div class="container">
-            <form asp-action="CheckOutIndex">
+<form asp-action="CheckOutIndex">
+    <div class="row">
+        <div class="col-8">
+            <div class="container">
+
                 <div class="row">
                     <div class="col-50">
-                        <h3>Billing Address</h3>
-
+                        <h3>Shipping Address</h3>
+                        <br>
                         <label asp-for="Customer.FirstName"><i class="fa fa-user"></i>First Name</label>
                         <input asp-for="Customer.FirstName" type="text" id="fname" name="firstname" placeholder="John">
                         <span asp-validation-for="Customer.FirstName" class="text-danger"></span>
@@ -46,157 +47,116 @@
                             </div>
                         </div>
                     </div>
-                    
 
-                </div>
-                <h3>Payment</h3>
-                <label for="cname">Name on Card</label>
-                <input type="text" id="cname" name="cardname" placeholder="John More Doe">
-                <label for="ccnum">Credit card number</label>
-                <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-                <label for="expmonth">Exp Month</label>
-                <input type="text" id="expmonth" name="expmonth" placeholder="September">
 
-                <div class="row">
-                    <div class="col-50">
-                        <label for="expyear">Exp Year</label>
-                        <input type="text" id="expyear" name="expyear" placeholder="2018">
-                    </div>
-                    <div class="col-50">
-                        <label for="cvv">CVV</label>
-                        <input type="text" id="cvv" name="cvv" placeholder="352">
-                    </div>
-                    <div class="col-50">
-                        <label for="fname">Shipping options</label>
-                        <div class="icon-container">
-                            <div>
-                                <div >
-                                    <fieldset>
-                                        <legend>
-                                            <span>Choose a delivery option:</span>
-                                        </legend>
-                                        <div data-isscheduleddelivery="0">
-                                            <input type="radio" checked="checked" title="AmazonGlobal Standard Shipping" name="order0" value="std-intl-us-eur2-ag" data-issss="0" data-guaranteetype="NOT_GUARANTEED" data-isscheduleddelivery="0" data-shippingofferingid="AEIL6C6ZPG9RW" data-trial-index="" data-istrial="0" data-testid="" data-nosupportforgiftoption="" data-shipsplitpriority="shipWhenComplete" data-isshipwhencompletevalid="1" data-isshipwhenevervalid="0" data-rcxsspdecoupling="1">
-                                            <span data-testid="">
-                                                <span>
-                                                    <strong>Pickup</strong>
-                                                </span>
-                                                <br>
-                                                <span>$0.00 -&nbsp;FREE&nbsp;</span>
-                                            </span>
-                                        </div>
-                                        <div data-isscheduleddelivery="0">
-                                            <input type="radio" title="AmazonGlobal Expedited Shipping" name="order0" value="expd-intl-us-row-ag" data-issss="0" data-guaranteetype="NOT_GUARANTEED" data-isscheduleddelivery="0" data-shippingofferingid="AWFJFG1YUZ5IG" data-trial-index="" data-istrial="0" data-testid="" data-nosupportforgiftoption="" data-shipsplitpriority="shipWhenComplete" data-isshipwhencompletevalid="1" data-isshipwhenevervalid="0" data-rcxsspdecoupling="1">
-                                            <span data-testid="">
-                                                <span>
-                                                    <strong>
-                                                        Averages 7-10 business days
-                                                    </strong>
-                                                </span>
-                                                <br>
-                                                <span>$10.00&nbsp;-&nbsp;Standard Shipping&nbsp;</span>
-                                            </span>
-                                        </div>
-                                        <div data-isscheduleddelivery="0">
-                                            <input type="radio" title="AmazonGlobal Priority Shipping" name="order0" value="pri-intl-us-isrl-ag" data-issss="0" data-guaranteetype="NOT_GUARANTEED" data-isscheduleddelivery="0" data-shippingofferingid="AOQ44VIU1GFA1" data-trial-index="" data-istrial="0" data-testid="" data-nosupportforgiftoption="" data-shipsplitpriority="shipWhenComplete" data-isshipwhencompletevalid="1" data-isshipwhenevervalid="0" data-rcxsspdecoupling="1">
-                                            <span data-testid="">
-                                                <span>
-                                                    <strong>
-                                                        Averages 2-5 business days
-                                                    </strong>
-                                                </span>
-                                                <br>
-                                                <span>$45.00&nbsp;-&nbsp;Express Shipping&nbsp;</span>
-                                            </span>
-                                        </div>
-                                    </fieldset>
-                                    <input type="hidden" name="shippingofferingid0.0" value="AEIL6C6ZPG9RW">
-                                    <input type="hidden" name="guaranteetype0.0" value="NOT_GUARANTEED">
-                                    <input type="hidden" name="issss0.0" value="0">
-                                    <input type="hidden" name="shipsplitpriority0.0" value="shipWhenComplete">
-                                    <input type="hidden" name="isShipWhenCompleteValid0.0" value="1">
-                                    <input type="hidden" name="isShipWheneverValid0.0" value="0">
-                                    <input type="hidden" name="shippingofferingid0.1" value="AWFJFG1YUZ5IG">
-                                    <input type="hidden" name="guaranteetype0.1" value="NOT_GUARANTEED">
-                                    <input type="hidden" name="issss0.1" value="0">
-                                    <input type="hidden" name="shipsplitpriority0.1" value="shipWhenComplete">
-                                    <input type="hidden" name="isShipWhenCompleteValid0.1" value="1">
-                                    <input type="hidden" name="isShipWheneverValid0.1" value="0">
-                                    <input type="hidden" name="shippingofferingid0.2" value="AOQ44VIU1GFA1">
-                                    <input type="hidden" name="guaranteetype0.2" value="NOT_GUARANTEED">
-                                    <input type="hidden" name="issss0.2" value="0">
-                                    <input type="hidden" name="shipsplitpriority0.2" value="shipWhenComplete">
-                                    <input type="hidden" name="isShipWhenCompleteValid0.2" value="1">
-                                    <input type="hidden" name="isShipWheneverValid0.2" value="0">
-                                    <input type="hidden" name="previousshippingofferingid0" value="AEIL6C6ZPG9RW">
-                                    <input type="hidden" name="previousguaranteetype0" value="NOT_GUARANTEED">
-                                    <input type="hidden" name="previousissss0" value="0">
-                                    <input type="hidden" name="previousshippriority0" value="shipWhenComplete">
-                                    <input type="hidden" name="lineitemids0" value="A0478312VQQSW19PI2SP: A03782092E0X9OAOBWZ3V: A04782243P1AIXMLHSSPP: A03779931A2M40F1X8ATG: A03780652YVII2S6SKP6N: A0478264HM03LE4KIOSZ: A0478272364RT47ZWJOFM: A03778571XENO8Y8JPHNN: A037810522E1YJT9S5L9O: A037789714JFF27ZWYCOU: A0478128K21M748MN69V: A0478408IO5Q797YXCWI: A04781682BFN8NRCZ7QNL:" class="lineitemidinput">
-                                    <input type="hidden" name="currentshippingspeed" value="std-intl-us-eur2-ag">
-                                    <input type="hidden" name="previousShippingSpeed0" value="std-intl-us-eur2-ag">
-                                </div>
 
-                                <div style="display: none">
-                                    <input type="hidden" name="currentshipsplitpreference" value="shipWhenComplete">
-                                    <input type="hidden" name="shippriority.0.shipWhenComplete" value="shipWhenComplete">
-                                </div>
+                    <div class="col-50">
+                        <h3>Payment</h3>
+                        <br>
+                        <label for="cname">Name on Card</label>
+                        <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+                        <label for="ccnum">Credit card number</label>
+                        <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+                        <label for="expmonth">Exp Month</label>
+                        <input type="text" id="expmonth" name="expmonth" placeholder="September">
+
+                        <div class="row">
+                            <div class="col-50">
+                                <label for="expyear">Exp Year</label>
+                                <input type="text" id="expyear" name="expyear" placeholder="2018">
                             </div>
-
+                            <div class="col-50">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" name="cvv" placeholder="352">
+                            </div>
                         </div>
                     </div>
 
-                </div>
-                <label>
-                    <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
-                </label>
-                <input type="submit" value="Place Order" class="btn" onclick="">
-            </form>
-        </div>
-    </div>
 
-    <div class="col-25">
-        <div class="container">
-            <h4>
-                Cart
-                <span class="price" style="color: black">
-                    @foreach (Cart cart in Model.Cart)
-                    {
-                        <p>
-                            <div class="cart_item_title"> Name </div>
-                            <div class="cart_item_text">@cart.Item.Title.Substring(0, Math.Min(cart.Item.Title.Length, 27))</div>
-                        </p>
-
-                        <p>
-                            <div class="cart_item_title"> Manufacturer </div>
-                            <div class="cart_item_text"><span style="background-color: #999999;"></span>@cart.Item.Manufacturer</div>
-                        </p>
-                        <p>
-                            <div class="cart_item_title">Quantity</div>
-                            <div class="cart_item_text">@cart.Quantity</div>
-                        </p>
-
-                        <p>
-                            <div class="cart_item_title">Price</div>
-                            <div class="cart_item_text">$@cart.Item.Price</div>
-                        </p>
-
-
-                    }
-                    <br /> <br>
-                   
-                    <!-- Order Total -->
-                    <div>
-                        <p>
-                            @{
-                                double total = Model.Cart.Aggregate<Cart, double>(0, (current, itemsInCart) => current + itemsInCart.Item.Price * itemsInCart.Quantity);
-                                <div>Order Total: $@total</div>
-                            }
-                        </p>
+                    <div class="col-50">
+                        <br>
+                        <h3>Shipping options</h3>
+                        <fieldset>
+                            <label>Choose a delivery option:</label>
+                            <div data-isscheduleddelivery="0">
+                                <input type="radio" asp-for="Payment.ShippingCost" value="0">
+                                <span>
+                                    <strong>Pickup</strong>
+                                </span>
+                                <br>
+                                <span>$0.00 -&nbsp;FREE&nbsp;</span>
+                            </div>
+                            <div data-isscheduleddelivery="0">
+                                <input type="radio" checked="checked" asp-for="Payment.ShippingCost" value="10">
+                                <span>
+                                    <strong>
+                                        Averages 7-10 business days
+                                    </strong>
+                                </span>
+                                <br>
+                                <span>$10.00&nbsp;-&nbsp;Standard Shipping&nbsp;</span>
+                            </div>
+                            <div data-isscheduleddelivery="0">
+                                <input type="radio" asp-for="Payment.ShippingCost" value="45">
+                                <span>
+                                    <strong>
+                                        Averages 2-5 business days
+                                    </strong>
+                                </span>
+                                <br>
+                                <span>$45.00&nbsp;-&nbsp;Express Shipping&nbsp;</span>
+                            </div>
+                        </fieldset>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="container">
+                <h3>
+                    Cart
+                    <span class="price" style="color: black">
+                        <i class="fa fa-shopping-cart"></i>
+                        @{
+                            double count = Model.Cart.Aggregate(0, (current, itemsInCart) => current + itemsInCart.Quantity);
+                            <b>@count</b>
+                        }
+                    </span>
+                    <br>
+                </h3>
+                <span class="col-50" style="color: black">
+                    <p>
+                        @foreach (Cart cart in Model.Cart)
+                        {
+                            <span>@cart.Quantity x @cart.Item.Title.Substring(0, Math.Min(cart.Item.Title.Length, 27))</span>
+                            <span class="price">$@cart.Item.Price</span>
+                            <br>
+                        }
+                    </p>
+                    <p>
+                        <span>Shipping:</span> <span class="price">$0</span>
+                    </p>
+
+                    <!-- Order Total -->
+                    <p>
+                        <h4>
+                            <hr class="solid">
+                            @{
+                                double itemsCost = Model.Cart.Aggregate<Cart, double>(0, (current, itemsInCart) => current + itemsInCart.Item.Price * itemsInCart.Quantity);
+                                <input type="hidden" value="@itemsCost" asp-for="Payment.ItemsCost" />
+                                <span>Order Total:</span>
+                                <span class="price">$@itemsCost</span>
+                            }
+                        </h4>
+                    </p>
 
                 </span>
-            </h4>
+                <input type="submit" value="Place Order" class="btn">
+            </div>
         </div>
+
+
+
     </div>
-</div>
+</form>
