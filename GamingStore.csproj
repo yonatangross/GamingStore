@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>3e15871e-3aa1-4c99-826a-3822d8f228b7</UserSecretsId>
-  
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MailKit" Version="2.9.0" />
