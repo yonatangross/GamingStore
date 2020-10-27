@@ -82,3 +82,8 @@ span.price {
         margin-bottom: 20px;
     }
 }
+
+.dummyclass {
+    border-color: aqua;
+    margin: 10px;
+}
