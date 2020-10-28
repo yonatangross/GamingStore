@@ -177,7 +177,7 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = " Logitech G440 Hard Gaming", Manufacturer = "Logitech ", Price = 130,
+                    Title = "Logitech G440 Hard Gaming", Manufacturer = "Logitech ", Price = 130,
                     Category = Category.MousePads, PropertiesList =
                         new Dictionary<string, string>()
                         {
