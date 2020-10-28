@@ -5,13 +5,10 @@ using System.Linq;
 
 namespace GamingStore.Contracts
 {
-    //todo: move to be a model
     public class Address 
     {
         [Required]
         public string? Address1 { get; set; }
-
-        public string? Address2 { get; set; }
 
         [Required] 
         public string? City { get; set; }
@@ -21,8 +18,6 @@ namespace GamingStore.Contracts
         [Required] 
         public string? PostalCode { get; set; }
 
-        //todo: remove country 
-        [Required]
         public string? Country { get; set; }
 
         public override string ToString()

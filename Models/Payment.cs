@@ -14,6 +14,7 @@ namespace GamingStore.Models
         public Order Order { get; set; }
         public int ItemsCost { get; set; }
         public int ShippingCost { get; set; }
+        public double Total { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
         public bool Paid { get; set; }
     }

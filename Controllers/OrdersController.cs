@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GamingStore.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Models;
 using GamingStore.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Query;
 
@@ -61,6 +63,17 @@ namespace GamingStore.Controllers
 
             }
 
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Create(Order order)
+        {
+            order.Payment.PaymentMethod = PaymentMethod.CreditCard;
+            order.Payment.Paid = true;
+            order.Payment.Total = order.Payment.ItemsCost + order.Payment.ShippingCost;
+            order.Customer
             return View();
         }
 
