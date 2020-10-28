@@ -1339,6 +1339,7 @@ select option
 	border-color: #0e8ce4;
 	color: #0e8ce4;
 }
+
 .cart_button_checkout
 {
 	display: inline-block;
@@ -1352,6 +1353,10 @@ select option
     outline: none;
     cursor: pointer;
     vertical-align: top;
+}
+
+.cart_button_checkout:disabled {
+	background: #828282
 }
 
 /*********************************

@@ -61,7 +61,14 @@
                         @using (Html.BeginForm("Delete", "Carts", FormMethod.Post, null))
                         {
                             <input type="submit" class="button cart_button_clear" value="Clear Cart" />
-                            <button type="button" class="button cart_button_checkout" onclick="location.href = '@Url.Action("CheckOutIndex", "Orders")'">Proceed to Check Out</button>
+                            <button type="button" class="button cart_button_checkout" onclick="location.href = '@Url.Action("CheckOutIndex", "Orders")'"
+                                    @{
+                                        if(!Model.Any())
+                                        {
+                                            @:disabled
+                                        }
+                                    }
+                                    >Proceed to Check Out</button>
                         }
                     </div>
                 </div>
