@@ -135,7 +135,7 @@ namespace GamingStore.Data
                             {"Connection Type", "Wired"},
                             {"Water Resistant", "No"}
                         },
-                    ImageUrl = "images/review_2.jpg"
+                    ImageUrl = "images/items/items/CloudStingerWiredStereoGamingHeadset.jpg"
                 },
                 new Item
                 {
@@ -147,7 +147,7 @@ namespace GamingStore.Data
                             {"Connection Type", "Wired"},
                             {"Headphone Fit", "Over-the-Ear"}
                         },
-                    ImageUrl = "images/review_2.jpg"
+                    ImageUrl = "images/items/items/G432Wired7dot1SurroundSoundGamingHeadset.jpg"
                 },
                 new Item
                 {
@@ -160,7 +160,7 @@ namespace GamingStore.Data
                             {"Swivel Angle", "360 degrees"},
                             {"Color", "Green"}
                         },
-                    ImageUrl = "images/review_2.jpg"
+                    ImageUrl = "images/items/MilanoGamingChair-Green.jpg"
                 },
                 new Item
                 {
@@ -173,7 +173,7 @@ namespace GamingStore.Data
                             {"Swivel Angle", "360 degrees"},
                             {"Color", "Blue"}
                         },
-                    ImageUrl = "images/review_2.jpg"
+                    ImageUrl = "images/items/MilanoGamingChair-Blue.jpg"
                 },
                 new Item
                 {
@@ -185,7 +185,7 @@ namespace GamingStore.Data
                             {"width", "340mm"},
                             {"height", "3mm"}
                         },
-                    ImageUrl = "images/review_2.jpg"
+                    ImageUrl = "images/items/LogitechG440HardGaming.jpg"
                 },
                 new Item
                 {
@@ -198,7 +198,7 @@ namespace GamingStore.Data
                             {"Boost Clock Speed", "1.71 GHz"},
                             {"GPU Memory Size", "10 GB"}
                         },
-                    ImageUrl = "images/review_2.jpg"
+                    ImageUrl = "images/items/NVIDIAGeForceRTX3080.jpg"
                 },
                 new Item
                 {
@@ -210,7 +210,7 @@ namespace GamingStore.Data
                             {"Boost Clock Speed", "1.70 GHz"},
                             {"GPU Memory Size", "24 GB"}
                         },
-                    ImageUrl = "images/review_2.jpg"
+                    ImageUrl = "images/items/NVIDIAGeForceRTX3090.jpg"
                 },
                 new Item
                 {
@@ -223,7 +223,7 @@ namespace GamingStore.Data
                             {"Boost Clock Speed", "1815 MHz"},
                             {"GPU Memory Size", "8 GB"}
                         },
-                    ImageUrl = "images/review_2.jpg"
+                    ImageUrl = "images/items/GeForceRTX2080SUPERBLACKGAMING.jpg"
                 },
                 new Item
                 {
@@ -236,7 +236,7 @@ namespace GamingStore.Data
                             {"GPU", "Intel® UHD Graphics 630"},
                             {"Cache Memory", "20MB"}
                         },
-                    ImageUrl = "images/review_2.jpg"
+                    ImageUrl = "images/items/IntelCorei9-10850KACometLakeBox.jpg"
                 },
                 new Item
                 {
@@ -249,7 +249,7 @@ namespace GamingStore.Data
                             {"GPU", "Intel® UHD Graphics 630"},
                             {"Cache Memory", "20MB"}
                         },
-                    ImageUrl = "images/review_2.jpg"
+                    ImageUrl = "images/items/IntelCorei9-10900KACometLakeBox.jpg"
                 },
                 new Item
                 {
@@ -261,7 +261,7 @@ namespace GamingStore.Data
                             {"Connection Type", "Wired"},
                             {"Water Resistant", "No"}
                         },
-                    ImageUrl = "images/review_2.jpg"
+                    ImageUrl = "images/items/gamingheadsetwhitecombatcamouflage.jpg"
                 }
             };
             foreach (Item item in items)

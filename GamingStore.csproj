@@ -27,7 +27,21 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\images\items\" />
+    <Folder Include="Data\images\" />
+    <Folder Include="wwwroot\images\items\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\images\items\CloudStingerWiredStereoGamingHeadset.jpg" />
+    <None Include="wwwroot\images\items\G432Wired7dot1SurroundSoundGamingHeadset.jpg" />
+    <None Include="wwwroot\images\items\gamingheadsetwhitecombatcamouflage.jpg" />
+    <None Include="wwwroot\images\items\GeForceRTX2080SUPERBLACKGAMING.jpg" />
+    <None Include="wwwroot\images\items\IntelCorei9-10850KACometLakeBox.jpg" />
+    <None Include="wwwroot\images\items\IntelCorei9-10900KACometLakeBox.jpg" />
+    <None Include="wwwroot\images\items\LogitechG440HardGaming.jpg" />
+    <None Include="wwwroot\images\items\MilanoGamingChair-Blue.jpg" />
+    <None Include="wwwroot\images\items\MilanoGamingChair-Green.jpg" />
+    <None Include="wwwroot\images\items\NVIDIAGeForceRTX3080.jpg" />
+    <None Include="wwwroot\images\items\NVIDIAGeForceRTX3090.jpg" />
   </ItemGroup>
   <ProjectExtensions><VisualStudio><UserProperties wwwroot_4lib_4bootstrap_4dist_4js_4bootstrap_1bundle_1js_1map__JsonSchema="" /></VisualStudio></ProjectExtensions>
 </Project>
