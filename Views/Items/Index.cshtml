@@ -73,7 +73,7 @@
                                 <!-- Product Item -->
                                 <div class="product_item is_new" style="position: absolute; left: @left; top: @top;">
                                     <div class="product_border"></div>
-                                    <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/new_5.jpg" alt=""></div>
+                                    <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="@item.ImageUrl" alt=""></div>
                                     <div class="product_content">
                                         <div class="product_price">$@item.Price</div>
                                         <div class="product_name"><a asp-action="Details" asp-route-id="@item.Id" tabindex="0" style="overflow-wrap: break-word">@item.Title</a></div>

@@ -134,7 +134,8 @@ namespace GamingStore.Data
                             {"Sound Mode", "Stereo"},
                             {"Connection Type", "Wired"},
                             {"Water Resistant", "No"}
-                        }
+                        },
+                    ImageUrl = "images/review_2.jpg"
                 },
                 new Item
                 {
@@ -145,7 +146,8 @@ namespace GamingStore.Data
                             {"Built-In Microphone", "Yes"},
                             {"Connection Type", "Wired"},
                             {"Headphone Fit", "Over-the-Ear"}
-                        }
+                        },
+                    ImageUrl = "images/review_2.jpg"
                 },
                 new Item
                 {
@@ -157,7 +159,8 @@ namespace GamingStore.Data
                             {"Headrest Features", "Padded"},
                             {"Swivel Angle", "360 degrees"},
                             {"Color", "Green"}
-                        }
+                        },
+                    ImageUrl = "images/review_2.jpg"
                 },
                 new Item
                 {
@@ -169,7 +172,8 @@ namespace GamingStore.Data
                             {"Headrest Features", "Padded"},
                             {"Swivel Angle", "360 degrees"},
                             {"Color", "Blue"}
-                        }
+                        },
+                    ImageUrl = "images/review_2.jpg"
                 },
                 new Item
                 {
@@ -180,7 +184,8 @@ namespace GamingStore.Data
                             {"length", "280mm"},
                             {"width", "340mm"},
                             {"height", "3mm"}
-                        }
+                        },
+                    ImageUrl = "images/review_2.jpg"
                 },
                 new Item
                 {
@@ -192,7 +197,8 @@ namespace GamingStore.Data
                             {"Cooling System", "Fan"},
                             {"Boost Clock Speed", "1.71 GHz"},
                             {"GPU Memory Size", "10 GB"}
-                        }
+                        },
+                    ImageUrl = "images/review_2.jpg"
                 },
                 new Item
                 {
@@ -203,7 +209,8 @@ namespace GamingStore.Data
                             {"Cooling System", "Fan"},
                             {"Boost Clock Speed", "1.70 GHz"},
                             {"GPU Memory Size", "24 GB"}
-                        }
+                        },
+                    ImageUrl = "images/review_2.jpg"
                 },
                 new Item
                 {
@@ -215,7 +222,8 @@ namespace GamingStore.Data
                             {"Cooling System", "Active"},
                             {"Boost Clock Speed", "1815 MHz"},
                             {"GPU Memory Size", "8 GB"}
-                        }
+                        },
+                    ImageUrl = "images/review_2.jpg"
                 },
                 new Item
                 {
@@ -227,7 +235,8 @@ namespace GamingStore.Data
                             {"Clock Speed", "3.60GHz - 5.30GHz"},
                             {"GPU", "Intel® UHD Graphics 630"},
                             {"Cache Memory", "20MB"}
-                        }
+                        },
+                    ImageUrl = "images/review_2.jpg"
                 },
                 new Item
                 {
@@ -239,7 +248,8 @@ namespace GamingStore.Data
                             {"Clock Speed", "3.60GHz - 5.20GHz"},
                             {"GPU", "Intel® UHD Graphics 630"},
                             {"Cache Memory", "20MB"}
-                        }
+                        },
+                    ImageUrl = "images/review_2.jpg"
                 },
                 new Item
                 {
@@ -250,7 +260,8 @@ namespace GamingStore.Data
                             {"Sound Mode", "Stereo"},
                             {"Connection Type", "Wired"},
                             {"Water Resistant", "No"}
-                        }
+                        },
+                    ImageUrl = "images/review_2.jpg"
                 }
             };
             foreach (Item item in items)

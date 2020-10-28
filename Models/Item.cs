@@ -34,6 +34,8 @@ namespace GamingStore.Models
         public Category Category { get; set; }
         
         public Dictionary<string, string> PropertiesList { get; set; }
+
+        public string ImageUrl { get; set; }
         
         public ICollection<StoreItem> StoreItems { get; set; } // many to many relationship
         
