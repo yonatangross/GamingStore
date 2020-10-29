@@ -55,16 +55,16 @@ function disableCartButtonCheckOut() {
     }
 
 
-$("cart_button_checkout").toggleClass("disabled", true);
+    $("cart_button_checkout").toggleClass("disabled", true);
 
 
-$("#searchSubmit").click(function () {
-    const searchString = $("#searchUserString").val();
-    searchUsers(searchString);
-});
+    $("#searchSubmit").click(function () {
+        const searchString = $("#searchUserString").val();
+        searchUsers(searchString);
+    });
 
 
-const Card = (id, email, userIndex) => `
+    const Card = (id, email, userIndex) => `
  <div class="card mb-3 user${userIndex}">
                 <div class="card-header">
                     User Id : ${id}
@@ -94,30 +94,31 @@ const Card = (id, email, userIndex) => `
             </div>
 `;
 
-function searchUsers(searchUserString) {
-    $.ajax({
+    function searchUsers(searchUserString) {
+        $.ajax({
             type: "POST",
-        url: "Administration/ListUsersBySearch",
+            url: "Administration/ListUsersBySearch",
             data: {
                 searchUserString: searchUserString
             },
-        success: function (data, textStatus, jqXhr) {
-    
-            $("#users").empty();
-            for (let userIndex = 0; userIndex < Object.keys(data).length; userIndex++) {
-                $("#users").append(Card(data[userIndex].id, data[userIndex].email, userIndex+1));
-            }
-            console.log("success: ");
-        },
-            complete: function(response) {
+            success: function (data, textStatus, jqXhr) {
+
+                $("#users").empty();
+                for (let userIndex = 0; userIndex < Object.keys(data).length; userIndex++) {
+                    $("#users").append(Card(data[userIndex].id, data[userIndex].email, userIndex + 1));
+                }
+                console.log("success: ");
+            },
+            complete: function (response) {
                 console.log(`completed: ${response}`);
             },
-            failure: function(response) {
+            failure: function (response) {
                 console.log(`failure: ${response}`);
             },
-            error: function(response) {
+            error: function (response) {
                 console.log(`error: ${response}`);
             }
         }
-    );
- }
+        );
+    }
+}
