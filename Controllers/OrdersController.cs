@@ -80,7 +80,7 @@ namespace GamingStore.Controllers
             order.Payment.Paid = true;
             order.Payment.Total = order.Payment.ItemsCost + order.Payment.ShippingCost;
             //order.Customer
-            return View();
+            return RedirectToAction("ThankYouIndex");
         }
 
         private bool OrderExists(int id)
