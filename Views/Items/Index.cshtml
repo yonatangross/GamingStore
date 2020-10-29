@@ -13,7 +13,7 @@
     <div class="shop">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-2">
 
                     <!-- Shop Sidebar -->
                     <div class="shop_sidebar">
@@ -29,7 +29,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-9">
+                <div class="col-lg-10">
                     <!-- Shop Content -->
                     <div class="shop_content">
                         <div class="shop_bar clearfix">
@@ -48,31 +48,34 @@
                                 </ul>
                             </div>
                         </div>
+                        <div><h2>Aviv The Bulilon</h2></div>
                         <div class="product_grid" style="position: relative; height: 1012px;">
                             <div class="product_grid_border"></div>
 
                             @{
-                                var leftPosition = 177;
-                                var topPosition = 253;
+                                var leftPosition = 220;
+                                var topPosition = 300;
                                 var counterLeft = 0;
                                 var counterTop = 0;
                                 var roundTop = 0;
-                                int finalLeft = 0;
-                                int finalTop = 0;
                                 string left = string.Empty;
                                 string top = string.Empty;
                                 foreach (var item in Model)
                                 {
-                                    if (counterLeft == 5)
+
+                                    if (counterLeft == 4)
                                     {
                                         counterLeft = 0;
                                     }
-                                    if (roundTop == 5)
+                                    if (roundTop == 4)
                                     {
+                                        roundTop=0;
                                         counterTop++;
                                     }
-                                    finalLeft = leftPosition * counterLeft;
-                                    finalTop = topPosition * counterTop;
+                                    if (counterTop == 4)
+                                        break;
+                                    var finalLeft = leftPosition * counterLeft;
+                                    var finalTop = topPosition * counterTop;
                                     left = $"{finalLeft}px";
                                     top = $"{finalTop}px";
                                     <!-- Product Item -->
@@ -83,11 +86,6 @@
                                             <div class="product_price">$@item.Price</div>
                                             <div class="product_name"><a asp-action="Details" asp-route-id="@item.Id" tabindex="0" style="overflow-wrap: break-word">@item.Title</a></div>
                                         </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
                                     </div>
                                     counterLeft++;
                                     roundTop++;
