@@ -40,7 +40,7 @@ namespace GamingStore.Controllers
             try
             {
                 Customer customer = await GetCurrentUserAsync();
-                IQueryable<Cart> itemsInCart = _context.Carts.Where(c => c.CustomerId == customer.Id);
+                List<Cart> itemsInCart = await _context.Carts.Where(c => c.CustomerId == customer.Id).ToListAsync();
 
                 foreach (Cart cartItem in itemsInCart)
                 {
@@ -48,11 +48,15 @@ namespace GamingStore.Controllers
                     cartItem.Item = item;
                 }
 
-                List<Cart> carts = await _context.Carts.Where(c => c.CustomerId == customer.Id).ToListAsync();
-
                 var viewModel = new CreateOrderViewModel
                 {
-                    Cart = carts
+                    Cart = itemsInCart,
+                    Customer = customer,
+                    ShippingAddress = customer.Address,
+                    Payment = new Payment
+                    {
+                        ShippingCost = 10
+                    }
                 };
 
                 return View(viewModel);
@@ -70,6 +74,8 @@ namespace GamingStore.Controllers
         [Authorize]
         public async Task<IActionResult> Create(Order order)
         {
+            order.State = OrderState.New;
+            order.OrderDate = DateTime.Now;
             order.Payment.PaymentMethod = PaymentMethod.CreditCard;
             order.Payment.Paid = true;
             order.Payment.Total = order.Payment.ItemsCost + order.Payment.ShippingCost;

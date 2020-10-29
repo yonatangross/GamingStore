@@ -26,6 +26,8 @@ namespace GamingStore.ViewModels
         public Address ShippingAddress { get; set; }
         public ShippingMethod ShippingMethod { get; set; }
 
+        public CreditCard CreditCard { get; set; }
+
         public List<Cart> Cart { get; set; }
 
         [Required] public Payment Payment { get; set; }

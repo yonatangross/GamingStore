@@ -29,6 +29,9 @@ namespace GamingStore.Models
         public DateTime OrderDate { get; set; }
         public OrderState State { get; set; }
 
+        [NotMapped]
+        public CreditCard CreditCard { get; set; }
+
         public Address ShippingAddress { get; set; }
 
         public ShippingMethod ShippingMethod { get; set; }

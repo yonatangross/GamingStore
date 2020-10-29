@@ -18,56 +18,47 @@
                     <div class="col-50">
                         <h3>Shipping Address</h3>
                         <br>
-                        <label><i class="fa fa-user"></i>First Name</label>
-                        @Html.TextBoxFor(m => m.Customer.FirstName, new { @placeholder = "John", @type = "text", @required = "required", @id = "fname", @name = "firstname" })
-
-                        <label><i class="fa fa-user"></i>Last Name</label>
-                        @Html.TextBoxFor(m => m.Customer.LastName, new { @placeholder = "Cohen", @type = "text", @required = "required", @id = "lname", @name = "lastname" })
-
-                        <label><i class="fa fa-envelope"></i> Email</label>
-                        @Html.TextBoxFor(m => m.Customer.Email, new { @placeholder = "John@example.com", @type = "text", @required = "required", @id = "email", @name = "email" })
+                        <label><i class="fa fa-user"></i>Full Name</label>
+                        @Html.TextBoxFor(m => m.ShippingAddress.FullName, new { @placeholder = "John", @type = "text", @required = "required", @id = "fname", @name = "firstname" })
 
                         <label><i class="fa"></i> Address</label>
-                        @Html.TextBoxFor(m => m.Customer.Address, new { @placeholder = "542 W. 15th Street", @type = "text", @required = "required", @id = "adr", @name = "address" })
+                        @Html.TextBoxFor(m => m.ShippingAddress.Address1, new { @placeholder = "542 W. 15th Street", @type = "text", @required = "required", @id = "adr", @name = "address"})
 
                         <label><i class="fa"></i> City</label>
-                        @Html.TextBoxFor(m => m.Customer.City, new { @placeholder = "Tel Aviv", @type = "text", @required = "required", @id = "city", @name = "city" })
+                        @Html.TextBoxFor(m => m.ShippingAddress.City, new { @placeholder = "Tel Aviv", @type = "text", @required = "required", @id = "city", @name = "city" })
 
                         <div class="row">
                             <div class="col-50">
                                 <label>Country</label>
-                                @Html.TextBoxFor(m => m.Customer.Country, new { @type = "text", @id = "state", @name = "state", @disabled = "disabled", @value = "Israel" })
+                                @Html.TextBoxFor(m => m.ShippingAddress.Country, new { @type = "text", @id = "state", @name = "state", @disabled = "disabled" })
                             </div>
 
                             <div class="col-50">
-                                <label>Zip</label>
-                                @Html.TextBoxFor(m => m.Customer.Zip, new { @placeholder = "1000001", @type = "text", @required = "required", @id = "zip", @name = "zip" })
+                                <label>Postal Code</label>
+                                @Html.TextBoxFor(m => m.ShippingAddress.PostalCode, new { @placeholder = "1000001", @type = "text", @required = "required", @id = "zip", @name = "zip" })
                             </div>
                         </div>
                     </div>
-
-
-
                     <div class="col-50">
                         <h3>Payment</h3>
                         <br>
                         <label for="cname">Name on Card</label>
-                        @Html.TextBox("CardName", new { @placeholder = "John More Doe", @type = "text", @required = "required", @id = "cname", @name = "cardname" })
+                        @Html.TextBoxFor(m => m.CreditCard.OwnerName, new { @type = "text", @required = "required", @id = "cname", @name = "cardname" })
 
                         <label for="ccnum">Credit card number</label>
-                        @Html.TextBox("CardNumber", new { @placeholder = "1111-2222-3333-4444", @type = "text", @required = "required", @id = "ccnum", @name = "cardnumber" })
+                        @Html.TextBoxFor(m => m.CreditCard.Number, new { @placeholder = "1111-2222-3333-4444", @type = "text", @required = "required", @id = "ccnum", @name = "cardnumber" })
 
                         <label for="expmonth">Exp Month</label>
-                        @Html.TextBox("CardExpMonth", new { @placeholder = "September", @type = "text", @required = "required", @id = "expmonth", @name = "expmonth" })
+                        @Html.TextBoxFor(m => m.CreditCard.ExpirationMonth, new { @placeholder = "mm", @type = "text", @required = "required", @id = "expmonth", @name = "expmonth" })
 
                         <div class="row">
                             <div class="col-50">
                                 <label for="expyear">Exp Year</label>
-                                @Html.TextBox("CardExpYear", new { @placeholder = "2018", @type = "text", @required = "required", @id = "expyear", @name = "expyear" })
+                                @Html.TextBoxFor(m => m.CreditCard.ExpirationYear, new { @placeholder = "yyyy", @type = "text", @required = "required", @id = "expyear", @name = "expyear" })
                             </div>
                             <div class="col-50">
                                 <label for="cvv">CVV</label>
-                                @Html.TextBox("CardCVV", new { @placeholder = "352", @type = "text", @required = "required", @id = "cvv", @name = "cvv" })
+                                @Html.TextBoxFor(m => m.CreditCard.CVV, new { @type = "text", @required = "required", @id = "cvv", @name = "cvv" })
                             </div>
                         </div>
                     </div>
