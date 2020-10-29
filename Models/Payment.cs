@@ -12,7 +12,7 @@ namespace GamingStore.Models
 
         public int OrderForeignKey { get; set; }
         public Order Order { get; set; }
-        public int ItemsCost { get; set; }
+        public double ItemsCost { get; set; }
         public int ShippingCost { get; set; }
         public double Total { get; set; }
         public PaymentMethod PaymentMethod { get; set; }

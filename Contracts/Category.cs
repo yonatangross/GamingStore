@@ -8,6 +8,10 @@ namespace GamingStore.Contracts
         [Display(Name = "Gaming Chairs")] GamingChairs,
         [Display(Name = "Mouse Pads")] MousePads,
         [Display(Name = "GPUs")] GPUs,
-        [Display(Name = "CPUs")] CPUs
+        [Display(Name = "CPUs")] CPUs,
+        [Display(Name = "Monitors")] Monitors,
+        [Display(Name = "Keyboards")] Keyboards,
+        [Display(Name = "Mouses")] Mouses,
+
     }
 }
