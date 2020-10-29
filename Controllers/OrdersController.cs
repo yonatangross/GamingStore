@@ -73,7 +73,7 @@ namespace GamingStore.Controllers
             order.Payment.PaymentMethod = PaymentMethod.CreditCard;
             order.Payment.Paid = true;
             order.Payment.Total = order.Payment.ItemsCost + order.Payment.ShippingCost;
-            order.Customer
+            //order.Customer
             return View();
         }
 

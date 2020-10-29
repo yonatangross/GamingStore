@@ -7,18 +7,18 @@ namespace GamingStore.Contracts
 {
     public class Address 
     {
+        public string? FullName { get; set; }
+
         [Required]
         public string? Address1 { get; set; }
 
         [Required] 
         public string? City { get; set; }
 
-        public string? State { get; set; }
-
         [Required] 
         public string? PostalCode { get; set; }
 
-        public string? Country { get; set; }
+        public string? Country { get; set; } = "Israel";
 
         public override string ToString()
         {
