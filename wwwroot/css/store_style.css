@@ -1,50 +1,60 @@
-﻿
-.store_section {
-	width: 100%;
-	padding-top: 30px;
-}
-.store_title
-{
-	font-size: 30px;
-	font-weight: 500;
-}
-.store_items
-{
-	margin-top: 20px;
-}
-.store_list
-{
+﻿.store_container {
+    background: #FFFFFF;
+    padding-top: 80px;
+    padding-bottom: 139px;
 }
 
-.store_li {
-	margin: 20px;
-    width: 100%;
-    padding: 15px;
-    padding-right: 46px;
-    border: solid 1px #e8e8e8;
-    box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+.store_grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    column-gap: 50px;
+    row-gap: 25px;
 }
 
-.store {
-	
-	display: flex;
-	flex-direction: row;
+.store_list {
+
 }
 
-.store_prop > span{
-    flex-grow: 2;
-}
-.store_proptable {
+.store_card {
+    background-color: white;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    margin: 5px;
+    box-shadow: -20px -20px 0px 0px #0e8ce4;
+    border-radius: 10px;
+    border: #282828 solid;
 }
 .store_title {
-	font-size: 18px;
-	color: rgba(0,0,0,0.5);
+    margin: 0px;
+    padding: 0px 0px 15px 0px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 30px;
+    color: #282828;
 }
-.store_text {
-	font-size: 18px;
-    padding-left: 50px;
+.store_detail {
+    margin: 15px 0px 5px 0px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 100;
+    letter-spacing: -0.25px;
+    line-height: 1.25;
+    font-size: 16px;
+    word-break: break-all;
+    color: #282828;
 }
-.store_text span
-{
-	
+
+.store_card hr {
+    display: block;
+    border: none;
+    height: 3px;
+    background-color: #0e8ce4;
+    margin: 0px;
+}
+
+.store_map {
+    height: 400px;
+    width: 100%;
+    border: #0e8ce4 solid thin;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
 }
