@@ -4,14 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using GamingStore.Contracts;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Models;
 using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.Query;
 
 namespace GamingStore.Controllers
 {
@@ -72,44 +70,54 @@ namespace GamingStore.Controllers
         [Authorize]
         public async Task<IActionResult> Create(Order order)
         {
+            //handle order
             order.State = OrderState.New;
             order.OrderDate = DateTime.Now;
             order.Payment.PaymentMethod = PaymentMethod.CreditCard;
             order.Payment.Paid = true;
             order.Payment.Total = order.Payment.ItemsCost + order.Payment.ShippingCost;
-            
 
+            //handle customer
             Customer customer = await GetCurrentUserAsync();
             order.Customer = customer;
             order.CustomerId = customer.Id;
+            
+            //add order to db
             _context.Add(order);
             await _context.SaveChangesAsync();
-            //order.Customer
-            return RedirectToAction("ThankYouIndex");
+
+            return RedirectToAction("ThankYouIndex", new {id = order.Id});
         }
 
 
-        public async Task<IActionResult> ThankYouIndex()
+        public async Task<IActionResult> ThankYouIndex(string id)
         {
             Customer customer = await GetCurrentUserAsync();
-            List<Cart> qCarts = await _context.Carts.Where(c => c.CustomerId == customer.Id).ToListAsync();
-            var storeContext = _context.Orders.Include(o => o.Customer).Include(o => o.Store);
+            List<Cart> carts = await _context.Carts.Where(c => c.CustomerId == customer.Id).ToListAsync();
+            Order order = null;
+
             try
             {
-                var viewModel = new OrderPlacedViewModel
-                {
-                    Cart = qCarts,
-                    Customer = customer,
-                    ShippingAddress = customer.Address,
-                };
-                return View(viewModel);
+                 order = _context.Orders.Include(o => o.Customer).First(o => o.Id == id);
             }
-            catch (Exception exception)
+            catch
             {
-                Console.WriteLine(exception.StackTrace+"\n"+exception.Message);;
+                //ignored
             }
 
-            return View();
+            if (order == null)
+            {
+                return View();
+            }
+
+            var viewModel = new OrderPlacedViewModel
+            {
+                Cart = carts,
+                Customer = customer,
+                ShippingAddress = order.ShippingAddress
+            };
+
+            return View(viewModel);
         }
     }
 }
