@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace GamingStore.Data
 {
-    public class StoreContext : IdentityDbContext<Customer,IdentityRole,string>
+    public class StoreContext : IdentityDbContext<Customer, IdentityRole, string>
     {
         public StoreContext(DbContextOptions<StoreContext> options) : base(options)
         {
@@ -27,9 +27,7 @@ namespace GamingStore.Data
             #region OneToOne
 
             // Order 1-1 Payment
-            modelBuilder.Entity<Order>()
-                .HasOne(b => b.Payment)
-                .WithOne(i => i.Order)
+            modelBuilder.Entity<Order>().HasOne(b => b.Payment).WithOne(i => i.Order)
                 .HasForeignKey<Payment>(p => p.OrderForeignKey);
 
             #endregion
@@ -39,27 +37,17 @@ namespace GamingStore.Data
             #region ManyToMany
 
             // OrderItem: Order 1..x-1..x Item
-            modelBuilder.Entity<OrderItem>()
-                .HasKey(orderItem => new {orderItem.OrderId, orderItem.ItemId});
-            modelBuilder.Entity<OrderItem>()
-                .HasOne(orderItem => orderItem.Order)
-                .WithMany(order => order.OrderItems)
+            modelBuilder.Entity<OrderItem>().HasKey(orderItem => new {orderItem.OrderId, orderItem.ItemId});
+            modelBuilder.Entity<OrderItem>().HasOne(orderItem => orderItem.Order).WithMany(order => order.OrderItems)
                 .HasForeignKey(orderItem => orderItem.OrderId);
-            modelBuilder.Entity<OrderItem>()
-                .HasOne(orderItem => orderItem.Item)
-                .WithMany(item => item.OrderItems)
+            modelBuilder.Entity<OrderItem>().HasOne(orderItem => orderItem.Item).WithMany(item => item.OrderItems)
                 .HasForeignKey(orderItem => orderItem.ItemId);
 
             // StoreItem: Store 1..x-1..x Item
-            modelBuilder.Entity<StoreItem>()
-                .HasKey(storeItem => new {storeItem.StoreId, storeItem.ItemId});
-            modelBuilder.Entity<StoreItem>()
-                .HasOne(storeItem => storeItem.Store)
-                .WithMany(store => store.StoreItems)
+            modelBuilder.Entity<StoreItem>().HasKey(storeItem => new {storeItem.StoreId, storeItem.ItemId});
+            modelBuilder.Entity<StoreItem>().HasOne(storeItem => storeItem.Store).WithMany(store => store.StoreItems)
                 .HasForeignKey(storeItem => storeItem.StoreId);
-            modelBuilder.Entity<StoreItem>()
-                .HasOne(storeItem => storeItem.Item)
-                .WithMany(item => item.StoreItems)
+            modelBuilder.Entity<StoreItem>().HasOne(storeItem => storeItem.Item).WithMany(item => item.StoreItems)
                 .HasForeignKey(storeItem => storeItem.ItemId);
 
             #endregion
@@ -68,31 +56,19 @@ namespace GamingStore.Data
 
             #region ObjectConverationHandling
 
-            modelBuilder.Entity<Item>()
-                .Property(i => i.PropertiesList)
-                .HasConversion(
-                    v => JsonConvert.SerializeObject(v),
-                    v => JsonConvert.DeserializeObject<Dictionary<string, string>>(v));
-            modelBuilder.Entity<Store>()
-                .Property(s => s.Address)
-                .HasConversion(
-                    v => JsonConvert.SerializeObject(v),
-                    v => JsonConvert.DeserializeObject<Address>(v));
-            modelBuilder.Entity<Customer>()
-                .Property(c => c.Address)
-                .HasConversion(
-                    v => JsonConvert.SerializeObject(v),
-                    v => JsonConvert.DeserializeObject<Address>(v));
-            modelBuilder.Entity<Store>()
-                .Property(s => s.OpeningHours)
-                .HasConversion(
-                    v => JsonConvert.SerializeObject(v),
-                    v => JsonConvert.DeserializeObject<OpeningHours[]>(v));
-            modelBuilder.Entity<Order>()
-                .Property(c => c.ShippingAddress)
-                .HasConversion(
-                    v => JsonConvert.SerializeObject(v),
-                    v => JsonConvert.DeserializeObject<Address>(v));
+            modelBuilder.Entity<Item>().Property(i => i.PropertiesList).HasConversion(
+                v => JsonConvert.SerializeObject(v), v => JsonConvert.DeserializeObject<Dictionary<string, string>>(v));
+            modelBuilder.Entity<Store>().Property(s => s.Address).HasConversion(v => JsonConvert.SerializeObject(v),
+                v => JsonConvert.DeserializeObject<Address>(v));
+            modelBuilder.Entity<Customer>().Property(c => c.Address).HasConversion(v => JsonConvert.SerializeObject(v),
+                v => JsonConvert.DeserializeObject<Address>(v));
+            modelBuilder.Entity<Store>().Property(s => s.GeoLocation).HasConversion(g => JsonConvert.SerializeObject(g),
+                s => JsonConvert.DeserializeObject<GeoLocation>(s));
+            modelBuilder.Entity<Store>().Property(s => s.OpeningHours).HasConversion(
+                v => JsonConvert.SerializeObject(v), v => JsonConvert.DeserializeObject<OpeningHours[]>(v));
+            modelBuilder.Entity<Order>().Property(c => c.ShippingAddress)
+                .HasConversion(v => JsonConvert.SerializeObject(v), v => JsonConvert.DeserializeObject<Address>(v));
+
             #endregion
 
             modelBuilder.Entity<Customer>().ToTable("Customers");

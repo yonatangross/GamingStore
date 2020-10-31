@@ -28,8 +28,7 @@ namespace GamingStore.Models
         public string Name { get; set; }
 
         [Required] public Address Address { get; set; }
-
-        //TODO: add geolocation.
+        [Required] public GeoLocation GeoLocation { get; set; }
         [Required, DataType(DataType.PhoneNumber), StringLength(50), Phone]
         public string PhoneNumber { get; set; }
 

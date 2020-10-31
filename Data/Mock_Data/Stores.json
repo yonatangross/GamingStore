@@ -6,6 +6,10 @@
       "City": "Tel-Aviv",
       "Country": "Israel"
     },
+    "GeoLocation": {
+      "Latitude": 32.049324,
+      "Longitude": 34.758630
+    },
     "PhoneNumber": "7826940900",
     "Email": "SkajoStore@gmail.com",
     "OpeningHours": [
@@ -54,6 +58,10 @@
       "City": "Tel-Aviv",
       "Country": "Israel"
     },
+    "GeoLocation": {
+      "Latitude": 32.086813,
+      "Longitude": 34.776303
+    },
     "PhoneNumber": "7826940900",
     "Email": "SkajoStore@gmail.com",
     "OpeningHours": [
@@ -100,6 +108,10 @@
       "Address1": "Ben Gurion 58",
       "City": "Rishon LeZion",
       "Country": "Israel"
+    },
+    "GeoLocation": {
+      "Latitude": 32.049324,
+      "Longitude": 34.758630
     },
     "PhoneNumber": "8477773641",
     "Email": "GabspotStore@gmail.com",
@@ -148,6 +160,10 @@
       "City": "Jerusalem",
       "Country": "Israel"
     },
+    "GeoLocation": {
+      "Latitude": 32.049324,
+      "Longitude": 34.758630
+    },
     "PhoneNumber": "8951925867",
     "Email": "FliptuneStore@gmail.com",
     "OpeningHours": [
@@ -194,6 +210,10 @@
       "Address1": "Ben Gurion 90",
       "City": "Hadera",
       "Country": "Israel"
+    },
+    "GeoLocation": {
+      "Latitude": 32.049324,
+      "Longitude": 34.758630
     },
     "PhoneNumber": "1009698366",
     "Email": "GebaStore@gmail.com",
@@ -242,6 +262,10 @@
       "City": "Rishon LeZion",
       "Country": "Israel"
     },
+    "GeoLocation": {
+      "Latitude": 32.049324,
+      "Longitude": 34.758630
+    },
     "PhoneNumber": "1424560866",
     "Email": "BubbletubeStore@gmail.com",
     "OpeningHours": [
@@ -288,6 +312,10 @@
       "Address1": "Ben Yehuda 10",
       "City": "Tel-Aviv",
       "Country": "Israel"
+    },
+    "GeoLocation": {
+      "Latitude": 32.049324,
+      "Longitude": 34.758630
     },
     "PhoneNumber": "2694817709",
     "Email": "WikizzStore@gmail.com",
@@ -336,6 +364,10 @@
       "City": "Jerusalem",
       "Country": "Israel"
     },
+    "GeoLocation": {
+      "Latitude": 32.049324,
+      "Longitude": 34.758630
+    },
     "PhoneNumber": "7996320671",
     "Email": "QuireStore@gmail.com",
     "OpeningHours": [
@@ -382,6 +414,10 @@
       "Address1": "Levi Eshkol 22",
       "City": "Tel-Aviv",
       "Country": "Israel"
+    },
+    "GeoLocation": {
+      "Latitude": 32.049324,
+      "Longitude": 34.758630
     },
     "PhoneNumber": "4768511978",
     "Email": "BabblesetStore@gmail.com",
@@ -430,6 +466,10 @@
       "City": "Haifa",
       "Country": "Israel"
     },
+    "GeoLocation": {
+      "Latitude": 32.049324,
+      "Longitude": 34.758630
+    },
     "PhoneNumber": "9187094756",
     "Email": "TopicloungeStore@gmail.com",
     "OpeningHours": [
@@ -476,6 +516,10 @@
       "Address1": "Balfour 25",
       "City": "Rishon LeZion",
       "Country": "Israel"
+    },
+    "GeoLocation": {
+      "Latitude": 32.049324,
+      "Longitude": 34.758630
     },
     "PhoneNumber": "3814792223",
     "Email": "InnoZStore@gmail.com",
@@ -524,6 +568,10 @@
       "City": "Beer Sheva",
       "Country": "Israel"
     },
+    "GeoLocation": {
+      "Latitude": 32.049324,
+      "Longitude": 34.758630
+    },
     "PhoneNumber": "2522491310",
     "Email": "LinklinksStore@gmail.com",
     "OpeningHours": [
@@ -570,6 +618,10 @@
       "Address1": "Ben Gurion 2",
       "City": "Hadera",
       "Country": "Israel"
+    },
+    "GeoLocation": {
+      "Latitude": 32.049324,
+      "Longitude": 34.758630
     },
     "PhoneNumber": "6607604171",
     "Email": "InnotypeStore@gmail.com",
@@ -618,6 +670,10 @@
       "City": "Tel-Aviv",
       "Country": "Israel"
     },
+    "GeoLocation": {
+      "Latitude": 32.049324,
+      "Longitude": 34.758630
+    },
     "PhoneNumber": "4529556949",
     "Email": "EdgeclubStore@gmail.com",
     "OpeningHours": [
@@ -664,6 +720,10 @@
       "Address1": "Arlozoroff 15",
       "City": "Jerusalem",
       "Country": "Israel"
+    },
+    "GeoLocation": {
+      "Latitude": 32.049324,
+      "Longitude": 34.758630
     },
     "PhoneNumber": "3975253005",
     "Email": "ChatterpointStore@gmail.com",
@@ -712,6 +772,10 @@
       "City": "Hadera",
       "Country": "Israel"
     },
+    "GeoLocation": {
+      "Latitude": 32.049324,
+      "Longitude": 34.758630
+    },
     "PhoneNumber": "7056958673",
     "Email": "DemimbuStore@gmail.com",
     "OpeningHours": [
@@ -758,6 +822,10 @@
       "Address1": "Herzl 72",
       "City": "Jerusalem",
       "Country": "Israel"
+    },
+    "GeoLocation": {
+      "Latitude": 32.049324,
+      "Longitude": 34.758630
     },
     "PhoneNumber": "5128168390",
     "Email": "YozioStore@gmail.com",
@@ -806,6 +874,10 @@
       "City": "Rishon LeZion",
       "Country": "Israel"
     },
+    "GeoLocation": {
+      "Latitude": 32.049324,
+      "Longitude": 34.758630
+    },
     "PhoneNumber": "3022971033",
     "Email": "DevbugStore@gmail.com",
     "OpeningHours": [
@@ -852,6 +924,10 @@
       "Address1": "Ibn Gabirol 16",
       "City": "Hadera",
       "Country": "Israel"
+    },
+    "GeoLocation": {
+      "Latitude": 32.049324,
+      "Longitude": 34.758630
     },
     "PhoneNumber": "3494261099",
     "Email": "FivebridgeStore@gmail.com",
@@ -900,6 +976,10 @@
       "City": "Beer Sheva",
       "Country": "Israel"
     },
+    "GeoLocation": {
+      "Latitude": 32.049324,
+      "Longitude": 34.758630
+    },
     "PhoneNumber": "5731036019",
     "Email": "SkyvuStore@gmail.com",
     "OpeningHours": [
@@ -946,6 +1026,10 @@
       "Address1": "Herzl 34",
       "City": "Beer Sheva",
       "Country": "Israel"
+    },
+    "GeoLocation": {
+      "Latitude": 32.049324,
+      "Longitude": 34.758630
     },
     "PhoneNumber": "8811950235",
     "Email": "OyonduStore@gmail.com",
