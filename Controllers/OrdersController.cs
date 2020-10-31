@@ -90,8 +90,26 @@ namespace GamingStore.Controllers
 
         public async Task<IActionResult> ThankYouIndex()
         {
+            Customer customer = await GetCurrentUserAsync();
+            List<Cart> qCarts = await _context.Carts.Where(c => c.CustomerId == customer.Id).ToListAsync();
             var storeContext = _context.Orders.Include(o => o.Customer).Include(o => o.Store);
-            return View(await storeContext.ToListAsync());
+            try
+            {
+                var viewModel = new OrderPlacedViewModel
+                {
+                    Cart = qCarts,
+                    Customer = customer,
+                    ShippingAddress = customer.Address,
+                };
+                return View(viewModel);
+
+            }
+            catch(Exception exception)
+            {
+
+            }
+
+            return View();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿
+﻿@model GamingStore.ViewModels.OrderPlacedViewModel
 @{
     ViewData["Title"] = "Thank You";
 }
@@ -49,13 +49,46 @@
 
                                                             <div>
                                                                 <span>
-                                                                    <strong>2 items will be delivered to:</strong>
+                                                                    <strong>
+                                                                        @{
+                                                                            double count = Model.Cart.Aggregate(0, (current, itemsInCart) => current + itemsInCart.Quantity);
+                                                                            <b>@count items will be delivered to: </b>
+
+                                                                        }
+                                                                    </strong>
                                                                     <br>
                                                                 </span>
-                                                                <span>Aviv Miranda</span><br>
-                                                                <span>Bit Aharava 10</span><br>
-                                                                <span>Rishon Leziyyon, 7528659</span><br>
-                                                                <span>Israel</span>
+                                                                <span>@{
+
+                                                                    string name = Model.ShippingAddress.FullName.ToString();
+                                                                      }
+                                                                    
+                                                                       @name
+                                                                </span><br>
+
+                                                                <span>
+                                                                    @{
+
+                                                                        string Adress = Model.ShippingAddress.Address1.ToString();
+                                                                    }
+                                                                    
+                                                                    @Adress
+                                                                    
+                                                                </span><br>
+                                                                
+                                                                @{
+
+                                                                    string city = Model.ShippingAddress.City.ToString();
+                                                                    string zip = Model.ShippingAddress.PostalCode.ToString();
+                                                                }
+                                                                    
+                                                               
+                                                                <span>@city , @zip </span><br>
+                                                                @{
+                                                                    string country = Model.ShippingAddress.Country.ToString();
+                                                                }
+
+                                                                <span>@country</span>
                                                             </div>
                                                         </div>
                                                     </div>
