@@ -1,4 +1,5 @@
 ﻿@using GamingStore.Contracts
+@using System.Text.RegularExpressions
 @model IEnumerable<GamingStore.Models.Store>
 
 @{
@@ -42,16 +43,21 @@
                                 <li class="list-group-item">
                                     <div class="store_title">
                                         <h2>
-                                            @Html.DisplayFor(modelItem => store.Name)
+                                            @{
+                                                var storeName = store.Name.Replace("Store", "");
+                                            }
+                                            @Html.DisplayFor(modelItem => storeName)
                                         </h2>
                                     </div>
                                     <hr/>
                                     <div class="store_detail store_address">
-                                        @{ var address = store.Address.ToString(); }
+                                        @{
+                                            var address = store.Address.ToString();
+                                        }
                                         @Html.DisplayFor(modelItem => address)
                                     </div>
                                     <div class="store_detail store_phonenumber">
-                                        @Html.DisplayFor(modelItem => store.PhoneNumber)
+                                        <a href="tel:@store.PhoneNumber">@Regex.Replace(store.PhoneNumber, @"(\d{3})(\d{3})(\d{4})", "+$1-$2-$3")</a>
                                     </div>
                                 </li>
                             }

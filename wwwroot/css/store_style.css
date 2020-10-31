@@ -4,31 +4,15 @@
     padding-bottom: 139px;
 }
 
-.store_grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr ;
-    column-gap: 50px;
-    row-gap: 25px;
-}
-
 .store_list {
-
+    max-height: 600px;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-.store_card {
-    background-color: white;
-    padding-right: 20px;
-    padding-left: 20px;
-    padding-top: 10px;
-    padding-bottom: 5px;
-    margin: 5px;
-    box-shadow: -20px -20px 0px 0px #0e8ce4;
-    border-radius: 10px;
-    border: #282828 solid;
-}
+
 .store_title {
-    margin: 0px;
-    padding: 0px 0px 15px 0px;
     font-family: "Noto Sans KR", sans-serif;
     font-size: 30px;
     color: #282828;
@@ -53,7 +37,7 @@
 }
 
 .store_map {
-    height: 400px;
+    height: 600px;
     width: 100%;
     border: #0e8ce4 solid thin;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
