@@ -60,11 +60,9 @@ namespace GamingStore.Controllers
                 };
 
                 return View(viewModel);
-
             }
             catch (Exception e)
             {
-
             }
 
             return View();
@@ -79,14 +77,17 @@ namespace GamingStore.Controllers
             order.Payment.PaymentMethod = PaymentMethod.CreditCard;
             order.Payment.Paid = true;
             order.Payment.Total = order.Payment.ItemsCost + order.Payment.ShippingCost;
+            
+
+            Customer customer = await GetCurrentUserAsync();
+            order.Customer = customer;
+            order.CustomerId = customer.Id;
+            _context.Add(order);
+            await _context.SaveChangesAsync();
             //order.Customer
             return RedirectToAction("ThankYouIndex");
         }
 
-        private bool OrderExists(int id)
-        {
-            return _context.Orders.Any(e => e.Id == id);
-        }
 
         public async Task<IActionResult> ThankYouIndex()
         {
@@ -102,11 +103,10 @@ namespace GamingStore.Controllers
                     ShippingAddress = customer.Address,
                 };
                 return View(viewModel);
-
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
-
+                Console.WriteLine(exception.StackTrace+"\n"+exception.Message);;
             }
 
             return View();

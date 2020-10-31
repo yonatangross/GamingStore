@@ -10,17 +10,15 @@ namespace GamingStore.Models
 {
     public class Order
     {
-        public static int OrderCounter = 0;
 
         public Order()
         {
             OrderItems = new List<OrderItem>();
-            Id = OrderCounter;
-            Interlocked.Increment(ref OrderCounter);
+            Id = Guid.NewGuid().ToString();
         }
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Required] public string CustomerId { get; set; }
         public Customer Customer { get; set; }

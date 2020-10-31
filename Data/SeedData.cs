@@ -598,7 +598,7 @@ namespace GamingStore.Data
             return storesInCustomerCity[rand.Next(storesInCustomerCity.Count)];
         }
 
-        private static ICollection<OrderItem> GenerateOrderItems(int orderId, IEnumerable<Item> items,
+        private static ICollection<OrderItem> GenerateOrderItems(string orderId, IEnumerable<Item> items,
             int numItemsOrdered,
             out Payment payment)
         {
