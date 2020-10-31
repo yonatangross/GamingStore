@@ -1,104 +1,74 @@
 ﻿@using GamingStore.Contracts
+@using System.Text.RegularExpressions
 @model IEnumerable<GamingStore.Models.Store>
 
 @{
-    ViewData["Title"] = "Stores";
+    ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_NewLayout.cshtml";
 }
-
-
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/store_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVO7D0J75IZJhAcreAuPINi6xoDFnGUXg&callback=initMap"
+            type="text/javascript"></script>
+    <script>
+        // Initialize and add the map
+        function initMap() {
+            // The location of Uluru
+            const uluru = { lat: -25.344, lng: 131.036 };
+            // The map, centered at Uluru
+            const map = new google.maps.Map(document.getElementsByClassName("store_map")[0],
+                {
+                    zoom: 4,
+                    center: uluru,
+                });
+
+            // The marker, positioned at Uluru
+            const marker = new google.maps.Marker({
+                position: uluru,
+                map: map,
+            });
+        }
+    </script>
 </head>
+<div class="store_container">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="shop_content">
+                    <ul class="list-group store_list">
+                        @{
+                            foreach (var store in Model)
+                            {
+                                <li class="list-group-item">
+                                    <div class="store_title">
+                                        <h2>
+                                            @{
+                                                var storeName = store.Name.Replace("Store", "");
+                                            }
+                                            @Html.DisplayFor(modelItem => storeName)
+                                        </h2>
+                                    </div>
+                                    <hr/>
+                                    <div class="store_detail store_address">
+                                        @{
+                                            var address = store.Address.ToString();
+                                        }
+                                        @Html.DisplayFor(modelItem => address)
+                                    </div>
+                                    <div class="store_detail store_phonenumber">
+                                        <a href="tel:@store.PhoneNumber">@Regex.Replace(store.PhoneNumber, @"(\d{3})(\d{3})(\d{4})", "+$1-$2-$3")</a>
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
 
-<body>
-    <h1>Index</h1>
-    @if (User.IsInRole("Admin"))
-    {
-        <p>
-            <a asp-action="Create">Create New</a>
-        </p>
-    }
-
-    <div class="form-inline">
-        <p>
-            <input class="form-control mr-sm-2" type="text" placeholder="Search Store" aria-label="Search" name="searchStoreString" id="searchStoreString">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchSubmit">Search</button>
-        </p>
+            </div>
+            <div class="col-lg-7">
+                <div class="store_map"></div>
+            </div>
+        </div>
     </div>
-
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Address)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PhoneNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OpeningHours)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @* todo: add get for address *@
-                        @item.Address.ToString()
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PhoneNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    @foreach (var openingHourDay in item.OpeningHours)
-                                    {
-                                        <th>
-                                            @openingHourDay.DayOfWeek
-                                        </th>
-                                    }
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    @foreach (var openingHourDay in item.OpeningHours)
-                                    {
-                                        <td>
-                                            @openingHourDay.OpeningTime - @openingHourDay.ClosingTime
-                                        </td>
-                                    }
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a><text>|</text>
-                            <a asp-action="Details" asp-route-id="@item.Id">Details</a><text>|</text>
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </td>
-                    }
-                </tr>
-            }
-        </tbody>
-    </table>
-</body>
+</div>
