@@ -1,5 +1,4 @@
 ﻿.store_container {
-    background: #FFFFFF;
     padding-top: 80px;
     padding-bottom: 139px;
 }
@@ -17,21 +16,21 @@
     font-size: 30px;
     color: #282828;
 }
+
 .store_detail {
-    margin: 15px 0px 5px 0px;
     font-family: "Noto Sans KR", sans-serif;
     font-weight: 100;
     letter-spacing: -0.25px;
-    line-height: 1.25;
+    line-height: 1.5;
     font-size: 16px;
     word-break: break-all;
     color: #282828;
+    margin-bottom: 3px;
 }
 
-.store_card hr {
+.list-group-item hr {
     display: block;
     border: none;
-    height: 3px;
     background-color: #0e8ce4;
     margin: 0px;
 }

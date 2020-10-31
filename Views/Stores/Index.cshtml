@@ -9,29 +9,15 @@
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/store_style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
+    <script  src="js/stores.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVO7D0J75IZJhAcreAuPINi6xoDFnGUXg&callback=initMap"
             type="text/javascript"></script>
-    <script>
-        // Initialize and add the map
-        function initMap() {
-            // The location of Uluru
-            const uluru = { lat: -25.344, lng: 131.036 };
-            // The map, centered at Uluru
-            const map = new google.maps.Map(document.getElementsByClassName("store_map")[0],
-                {
-                    zoom: 4,
-                    center: uluru,
-                });
-
-            // The marker, positioned at Uluru
-            const marker = new google.maps.Marker({
-                position: uluru,
-                map: map,
-            });
-        }
-    </script>
 </head>
 <div class="store_container">
+    @{
+        var stores = new JsonResult(Model);
+    }
+    <script>setStores("@stores");</script>
     <div class="container">
         <div class="row">
             <div class="col-lg-5">
@@ -49,7 +35,6 @@
                                             @Html.DisplayFor(modelItem => storeName)
                                         </h2>
                                     </div>
-                                    <hr/>
                                     <div class="store_detail store_address">
                                         @{
                                             var address = store.Address.ToString();
@@ -57,7 +42,12 @@
                                         @Html.DisplayFor(modelItem => address)
                                     </div>
                                     <div class="store_detail store_phonenumber">
+                                        Phone:
                                         <a href="tel:@store.PhoneNumber">@Regex.Replace(store.PhoneNumber, @"(\d{3})(\d{3})(\d{4})", "+$1-$2-$3")</a>
+                                    </div>
+                                    <div class="store_detail store_email">
+                                        Email:
+                                        <a href="mailto:@store.Email">@store.Email </a>
                                     </div>
                                 </li>
                             }
@@ -67,7 +57,7 @@
 
             </div>
             <div class="col-lg-7">
-                <div class="store_map"></div>
+                <div class="store_map" id="map"></div>
             </div>
         </div>
     </div>
