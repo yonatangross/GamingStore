@@ -582,6 +582,7 @@ namespace GamingStore.Data
 
                     order.OrderItems = GenerateOrderItems(order.Id, items, numItemsOrdered, out var payment);
                     order.Payment = payment;
+                    order.PaymentId = payment.Id;
                     payments.Add(payment);
                     list.Add(order);
                 }
@@ -598,9 +599,7 @@ namespace GamingStore.Data
             return storesInCustomerCity[rand.Next(storesInCustomerCity.Count)];
         }
 
-        private static ICollection<OrderItem> GenerateOrderItems(string orderId, IEnumerable<Item> items,
-            int numItemsOrdered,
-            out Payment payment)
+        private static ICollection<OrderItem> GenerateOrderItems(string orderId, IEnumerable<Item> items, int numItemsOrdered, out Payment payment)
         {
             var itemsList = new List<Item>(items); // copy list in order to alter it.
             var rand = new Random();

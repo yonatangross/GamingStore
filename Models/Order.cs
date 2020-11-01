@@ -34,6 +34,8 @@ namespace GamingStore.Models
 
         public ShippingMethod ShippingMethod { get; set; }
 
+        [Required] public string PaymentId { get; set; }
+
         [Required] public Payment Payment { get; set; }
 
         //todo: add coupons maybe

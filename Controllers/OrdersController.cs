@@ -38,13 +38,7 @@ namespace GamingStore.Controllers
             try
             {
                 Customer customer = await GetCurrentUserAsync();
-                List<Cart> itemsInCart = await _context.Carts.Where(c => c.CustomerId == customer.Id).ToListAsync();
-
-                foreach (Cart cartItem in itemsInCart)
-                {
-                    Item item = _context.Items.First(i => i.Id == cartItem.ItemId);
-                    cartItem.Item = item;
-                }
+                List<Cart> itemsInCart = await GetItemsInCart(customer);
 
                 var viewModel = new CreateOrderViewModel
                 {
@@ -66,22 +60,38 @@ namespace GamingStore.Controllers
             return View();
         }
 
+        private async Task<List<Cart>> GetItemsInCart(Customer customer)
+        {
+            List<Cart> itemsInCart = await _context.Carts.Where(c => c.CustomerId == customer.Id).ToListAsync();
+
+            foreach (Cart cartItem in itemsInCart)
+            {
+                Item item = _context.Items.First(i => i.Id == cartItem.ItemId);
+                cartItem.Item = item;
+            }
+
+            return itemsInCart;
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Create(Order order)
         {
-            //handle order
-            order.State = OrderState.New;
-            order.OrderDate = DateTime.Now;
-            order.Payment.PaymentMethod = PaymentMethod.CreditCard;
-            order.Payment.Paid = true;
-            order.Payment.Total = order.Payment.ItemsCost + order.Payment.ShippingCost;
-
             //handle customer
             Customer customer = await GetCurrentUserAsync();
             order.Customer = customer;
             order.CustomerId = customer.Id;
             
+            //handle order
+            order.State = OrderState.New;
+            order.OrderDate = DateTime.Now;
+            order.Payment.PaymentMethod = PaymentMethod.CreditCard;
+            order.Payment.Paid = true;
+            order.PaymentId = order.Payment.Id;
+            List<Cart> itemsInCart = await GetItemsInCart(customer);
+            order.Payment.ItemsCost = itemsInCart.Aggregate<Cart, double>(0, (current, cart) => current + cart.Item.Price * cart.Quantity);
+            order.Payment.Total = order.Payment.ItemsCost + order.Payment.ShippingCost;
+
             //add order to db
             _context.Add(order);
             await _context.SaveChangesAsync();
@@ -99,7 +109,7 @@ namespace GamingStore.Controllers
             _context.Carts.RemoveRange(carts);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("ThankYouIndex", new {id = order.Id, items });
+            return RedirectToAction("ThankYouIndex", new {id = order.Id, items});
         }
 
 

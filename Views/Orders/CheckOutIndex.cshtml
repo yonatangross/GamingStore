@@ -136,7 +136,6 @@
                             <hr class="solid">
                             @{
                                 double itemsCost = Model.Cart.Aggregate<Cart, double>(0, (current, itemsInCart) => current + itemsInCart.Item.Price * itemsInCart.Quantity);
-                                @Html.HiddenFor(m => m.Payment.ItemsCost, new { @value = itemsCost });
                                 double total = itemsCost/* + shippingCost*/;
                                 <span>Order Total:</span>
                                 <span class="price">$@total</span>

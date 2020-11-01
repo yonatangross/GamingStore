@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using GamingStore.Contracts;
 
@@ -6,9 +7,14 @@ namespace GamingStore.Models
 {
     public class Payment
     {
+        public Payment()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string OrderForeignKey { get; set; }
         public Order Order { get; set; }
