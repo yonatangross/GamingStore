@@ -49,19 +49,19 @@
                             <label for="ccnum">Credit card number</label>
                             @Html.TextBoxFor(m => m.CreditCard.Number, new { @placeholder = "1111-2222-3333-4444", @type = "text", @required = "required", @id = "ccnum", @name = "cardnumber" })
 
-                            <label for="expmonth">Exp Month</label>
-                            @Html.TextBoxFor(m => m.CreditCard.ExpirationMonth, new { @placeholder = "mm", @type = "text", @required = "required", @id = "expmonth", @name = "expmonth" })
-
                             <div class="row">
+                                <div class="col-50">
+                                    <label for="expmonth">Exp Month</label>
+                                    @Html.TextBoxFor(m => m.CreditCard.ExpirationMonth, new { @placeholder = "mm", @type = "text", @required = "required", @id = "expmonth", @name = "expmonth" })
+                                </div>
                                 <div class="col-50">
                                     <label for="expyear">Exp Year</label>
                                     @Html.TextBoxFor(m => m.CreditCard.ExpirationYear, new { @placeholder = "yyyy", @type = "text", @required = "required", @id = "expyear", @name = "expyear" })
                                 </div>
-                                <div class="col-50">
-                                    <label for="cvv">CVV</label>
-                                    @Html.TextBoxFor(m => m.CreditCard.CVV, new { @type = "text", @required = "required", @id = "cvv", @name = "cvv" })
-                                </div>
                             </div>
+                            
+                            <label for="cvv">CVV</label>
+                            @Html.TextBoxFor(m => m.CreditCard.CVV, new {@type = "text", @required = "required", @id = "cvv", @name = "cvv"})
                         </div>
 
 
