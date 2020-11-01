@@ -86,11 +86,24 @@ namespace GamingStore.Controllers
             _context.Add(order);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("ThankYouIndex", new {id = order.Id});
+            //clear cart
+            IQueryable<Cart> carts = _context.Carts.Where(c => c.CustomerId == customer.Id);
+
+            var items = 0;
+
+            foreach (Cart itemInCart in carts)
+            {
+                items += itemInCart.Quantity;
+            }
+
+            _context.Carts.RemoveRange(carts);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("ThankYouIndex", new {id = order.Id, items });
         }
 
 
-        public async Task<IActionResult> ThankYouIndex(string id)
+        public async Task<IActionResult> ThankYouIndex(string id, int items)
         {
             Customer customer = await GetCurrentUserAsync();
             List<Cart> carts = await _context.Carts.Where(c => c.CustomerId == customer.Id).ToListAsync();
@@ -112,7 +125,7 @@ namespace GamingStore.Controllers
 
             var viewModel = new OrderPlacedViewModel
             {
-                Cart = carts,
+                ItemsCount = items,
                 Customer = customer,
                 ShippingAddress = order.ShippingAddress
             };

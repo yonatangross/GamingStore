@@ -54,7 +54,7 @@
                                                                 <span>
                                                                     <strong>
                                                                         @{
-                                                                            double count = Model.Cart.Aggregate(0, (current, itemsInCart) => current + itemsInCart.Quantity);
+                                                                            double count = Model.ItemsCount;
                                                                             <b>@count items will be delivered to: </b>
                                                                         }
                                                                     </strong>

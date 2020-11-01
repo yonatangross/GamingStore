@@ -11,7 +11,7 @@ namespace GamingStore.ViewModels
     {
         public Customer Customer { get; set; }
 
-        public List<Cart> Cart { get; set; }
+        public int ItemsCount { get; set; }
 
         public Address ShippingAddress { get; set; }
 
