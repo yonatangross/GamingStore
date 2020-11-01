@@ -4,6 +4,7 @@
     {
         Pickup,
         Standard,
-        Express
+        Express,
+        Other
     }
 }
