@@ -22,7 +22,7 @@
                         @Html.TextBoxFor(m => m.ShippingAddress.FullName, new { @placeholder = "John", @type = "text", @required = "required", @id = "fname", @name = "firstname" })
 
                         <label><i class="fa"></i> Address</label>
-                        @Html.TextBoxFor(m => m.ShippingAddress.Address1, new { @placeholder = "542 W. 15th Street", @type = "text", @required = "required", @id = "adr", @name = "address"})
+                        @Html.TextBoxFor(m => m.ShippingAddress.Address1, new { @placeholder = "542 W. 15th Street", @type = "text", @required = "required", @id = "adr", @name = "address" })
 
                         <label><i class="fa"></i> City</label>
                         @Html.TextBoxFor(m => m.ShippingAddress.City, new { @placeholder = "Tel Aviv", @type = "text", @required = "required", @id = "city", @name = "city" })
@@ -127,7 +127,7 @@
                         }
                     </p>
                     <p>
-                        <span>Shipping:</span> <span class="price">$0</span>
+                        <span>Shipping:</span><span class="price" id="shipping_amount">10</span><span class="price">$</span>
                     </p>
 
                     <!-- Order Total -->
@@ -136,9 +136,9 @@
                             <hr class="solid">
                             @{
                                 double itemsCost = Model.Cart.Aggregate<Cart, double>(0, (current, itemsInCart) => current + itemsInCart.Item.Price * itemsInCart.Quantity);
-                                double total = itemsCost/* + shippingCost*/;
-                                <span>Order Total:</span>
-                                <span class="price">$@total</span>
+                                double total = itemsCost + @Model.Payment.ShippingCost;
+                                <input type="hidden" id="items_cost" value="@itemsCost" />
+                                <span>Order Total:</span><span class="price" id="total_amount">@total</span><span class="price">$</span>
                             }
                         </h4>
                     </p>
@@ -147,8 +147,26 @@
                 <input type="submit" value="Place Order" class="btn">
             </div>
         </div>
-
-
-
     </div>
+}
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $("input:radio").on("change", function () {
+                var ic = parseFloat($('#items_cost').val());
+
+                if ($(this).val() == "0") {
+                    $('#shipping_amount').text("0");
+                    $('#total_amount').text(ic);
+                } else if ($(this).val() == "10") {
+                    $('#shipping_amount').text("10");
+                    $('#total_amount').text(ic + 10);
+                } else if ($(this).val() == "45") {
+                    $('#shipping_amount').text("45");
+                    $('#total_amount').text(ic + 45);
+                }
+            });
+        });
+    </script>
 }
