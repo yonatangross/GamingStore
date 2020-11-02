@@ -81,7 +81,7 @@ namespace GamingStore.Controllers
             Customer customer = await GetCurrentUserAsync();
             order.Customer = customer;
             order.CustomerId = customer.Id;
-            
+
             //handle order
             order.State = OrderState.New;
             order.OrderDate = DateTime.Now;
@@ -116,7 +116,7 @@ namespace GamingStore.Controllers
             _context.Carts.RemoveRange(carts);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("ThankYouIndex", new {id = order.Id, items});
+            return RedirectToAction("ThankYouIndex", new { id = order.Id, items });
         }
 
         public async Task<IActionResult> ThankYouIndex(string id, int items)
@@ -127,7 +127,7 @@ namespace GamingStore.Controllers
 
             try
             {
-                 order = _context.Orders.Include(o => o.Customer).First(o => o.Id == id);
+                order = _context.Orders.Include(o => o.Customer).First(o => o.Id == id);
             }
             catch
             {
@@ -147,6 +147,27 @@ namespace GamingStore.Controllers
             };
 
             return View(viewModel);
+        }
+
+
+        // GET: Orders/Details/5
+        public async Task<IActionResult> Details(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            
+            Order order = await _context.Orders.FirstOrDefaultAsync(order => order.Id == id);
+            order.Customer = await _userManager.GetUserAsync(User);
+            order.Payment = await _context.Payments.FirstOrDefaultAsync(payment => payment.Id == order.PaymentId);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
         }
     }
 }

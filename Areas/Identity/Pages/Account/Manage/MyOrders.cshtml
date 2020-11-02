@@ -124,7 +124,7 @@
         @foreach (Order modelOrder in Model.Orders)
         {
             <tr>
-                <td class="tg-tzj0">@modelOrder.Id</td>
+                <td class="tg-tzj0"><a href="#" onclick="location.href = '@Url.Action("Details", "Orders", new { id= modelOrder.Id })'" >@modelOrder.Id</a></td>
                 <td class="tg-tzj0">@modelOrder.OrderDate</td>
                 <td class="tg-tzj0">@modelOrder.ShippingMethod</td>
                 <td class="tg-tzj0">@modelOrder.State</td>
