@@ -6,6 +6,6 @@
         public Order Order { get; set; }
         public int ItemId { get; set; }
         public Item Item { get; set; }
-        public uint ItemsCount { get; set; }
+        public int ItemsCount { get; set; }
     }
 }

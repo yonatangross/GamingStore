@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Models;
+using GamingStore.Models.Relationships;
 using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -99,6 +100,19 @@ namespace GamingStore.Controllers
                 _ => ShippingMethod.Other
             };
 
+            //handle order items
+            foreach (var cartItem in itemsInCart)
+            {
+                order.OrderItems.Add(new OrderItem()
+                {
+                    ItemId = cartItem.ItemId,
+                    Item = cartItem.Item,
+                    ItemsCount = cartItem.Quantity,
+                    Order = order,
+                    OrderId = order.Id
+                });
+            }
+
             //add order to db
             _context.Add(order);
             await _context.SaveChangesAsync();
@@ -158,14 +172,17 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
             
-            Order order = await _context.Orders.FirstOrDefaultAsync(order => order.Id == id);
-            order.Customer = await _userManager.GetUserAsync(User);
-            order.Payment = await _context.Payments.FirstOrDefaultAsync(payment => payment.Id == order.PaymentId);
+            //Order order = await _context.Orders.FirstOrDefaultAsync(order => order.Id == id);
+            //List<Item> items = _context.Items.Where(x => x.OrderItems.Any(y => y.OrderId == id)).ToList();
+            Order order = await _context.Orders.Include(x => x.OrderItems).ThenInclude(y => y.Item).FirstOrDefaultAsync(o => o.Id == id);
 
             if (order == null)
             {
                 return NotFound();
             }
+
+            order.Customer = await _userManager.GetUserAsync(User);
+            order.Payment = await _context.Payments.FirstOrDefaultAsync(payment => payment.Id == order.PaymentId);
 
             return View(order);
         }

@@ -616,7 +616,7 @@ namespace GamingStore.Data
                     OrderId = orderId,
                     ItemId = curItem.Id,
                     Item = curItem,
-                    ItemsCount = (uint) rand.Next(1, 3)
+                    ItemsCount = rand.Next(1, 3)
                 };
 
                 orderItems.Add(orderItem);

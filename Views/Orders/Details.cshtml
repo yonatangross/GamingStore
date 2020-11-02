@@ -4,70 +4,92 @@
     ViewData["Title"] = "Order Details";
     Layout = "~/Views/Shared/_NewLayout.cshtml";
 }
+<div style="padding:3%">
+    <h1>Order Details</h1>
 
-<h1>Details</h1>
-
-<div>
-    <p>Ordered on @Model.OrderDate<span class="text-secondary" style="padding:2%;">|</span>Order# @Model.Id</p>
-    <div class="card">
-        <div class="card-body row">
-            <div class="col-sm-4">
-                <h5><strong>Shipping Address</strong></h5>
-                <ul>
-                    <li>@Model.ShippingAddress.FullName</li>
-                    <li>@Model.ShippingAddress.Address1</li>
-                    <li>@Model.ShippingAddress.City, @Model.ShippingAddress.PostalCode</li>
-                    <li>@Model.ShippingAddress.Country</li>
-                </ul>
-            </div>
-
-            <div class="col-sm-4">
-                <h5><strong>Payment Method</strong></h5>
-                <span>@Model.Payment.PaymentMethod</span>
-            </div>
-
-            <div class="col-sm-4">
-                <h5><strong>Order Summary</strong></h5>
-                <div class="row">
-                    <div class="col-sm-6">Item(s) Subtotal:</div>
-                    <div class="col-sm-6">@Model.Payment.ItemsCost</div>
+    <div>
+        <p>Ordered on @Model.OrderDate<span class="text-secondary" style="padding:2%;">|</span>Order# @Model.Id</p>
+        <div class="card">
+            <div class="card-body row">
+                <div class="col-sm-4">
+                    <h5><strong>Shipping Address</strong></h5>
+                    <ul>
+                        <li>@Model.ShippingAddress.FullName</li>
+                        <li>@Model.ShippingAddress.Address1</li>
+                        <li>@Model.ShippingAddress.City, @Model.ShippingAddress.PostalCode</li>
+                        <li>@Model.ShippingAddress.Country</li>
+                    </ul>
                 </div>
-                <div class="row">
-                    <div class="col-sm-6">Shipping:</div>
-                    <div class="col-sm-6">@Model.Payment.ShippingCost</div>
+
+                <div class="col-sm-4">
+                    <h5><strong>Payment Method</strong></h5>
+                    <span>@Model.Payment.PaymentMethod</span>
                 </div>
-                <div class="row">
-                    <div class="col-sm-6">Grand Total:</div>
-                    <div class="col-sm-6">@Model.Payment.Total</div>
+
+                <div class="col-sm-4">
+                    <h5><strong>Order Summary</strong></h5>
+                    <div class="row">
+                        <div class="col-sm-6">Item(s) Subtotal:</div>
+                        <div class="col-sm-6">@Html.DisplayFor(m => m.Payment.ItemsCost)</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">Shipping:</div>
+                        <div class="col-sm-6">@Html.DisplayFor(m => m.Payment.ShippingCost)</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">Grand Total:</div>
+                        <div class="col-sm-6">@Html.DisplayFor(m => m.Payment.Total)</div>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div style="padding:1%"></div>
+        <div class="card">
+            <div class="card-body row">
+                <div class="col-8">
+                    <div class="container">
+                        <div><h4><strong>@Model.State</strong></h4></div>
+                    </div>
+                    @foreach (var orderItem in @Model.OrderItems)
+                    {
+                        <div class="row" style="padding: 2%">
+                            <div class="col-3">
+                                <div class="image_selected"><img src="/@orderItem.Item.ImageUrl/1.jpg" alt="" width="60%"></div>
+                            </div>
+                            <div class="col-9">
+                                <div class="row">@orderItem.ItemsCount x @orderItem.Item.Title</div>
+                                @{
+                                    var price = orderItem.Item.Price;
+                                    var count = orderItem.ItemsCount;
+                                    var totalItemCost = Math.Round(price * count, 2);
+                                }
+                                <div class="row">$@totalItemCost</div>
+
+                            </div>
+                        </div>
+                        if (Model.OrderItems.Last().ItemId != orderItem.ItemId)
+                        {
+                            <hr />
+                        }
+                    }
+                </div>
+                <div class="col-sm-3">
+
+                    <div class="row" style="padding: 2%">
+                        <form action="https://t.17track.net/en#nums=@null">
+                            <input type="submit" class="btn btn-primary btn-block" value="Track Package">
+                        </form>
+                    </div>
+                    <div class="row" style="padding: 2%">
+                        @using (Html.BeginForm("ContactUs", "Home", FormMethod.Get))
+                        {
+                            <input type="submit" class="btn btn-secondary btn-block" value="Contact Support">
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Customer)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Customer.Id)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Store)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Store.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.OrderDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.OrderDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.State)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.State)
-        </dd>
-    </dl>
 </div>
 @*<div>
         <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
