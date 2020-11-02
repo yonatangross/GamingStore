@@ -8,147 +8,167 @@
     <link rel="stylesheet" type="text/css" href="~/css/cart_styles.css">
     <link rel="stylesheet" type="text/css" href="~/css/cart_responsive.css">
 </head>
-<link rel="stylesheet" type="text/css" href="~/css/check_out.css">
-@using (Html.BeginForm("Create", "Orders", FormMethod.Post, null))
-{
-    <div class="row">
-        <div class="col-8">
-            <div class="container">
-                <div class="row">
-                    <div class="col-50">
-                        <h3>Shipping Address</h3>
-                        <br>
-                        <label><i class="fa fa-user"></i>Full Name</label>
-                        @Html.TextBoxFor(m => m.ShippingAddress.FullName, new { @placeholder = "John", @type = "text", @required = "required", @id = "fname", @name = "firstname" })
+<body>
+    <link rel="stylesheet" type="text/css" href="~/css/check_out.css">
+    @using (Html.BeginForm("Create", "Orders", FormMethod.Post, null))
+    {
+        <div class="row">
+            <div class="col-8">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-50">
+                            <h3>Shipping Address</h3>
+                            <br>
+                            <label><i class="fa fa-user"></i>Full Name</label>
+                            @Html.TextBoxFor(m => m.ShippingAddress.FullName, new { @placeholder = "John", @type = "text", @required = "required", @id = "fname", @name = "firstname" })
 
-                        <label><i class="fa"></i> Address</label>
-                        @Html.TextBoxFor(m => m.ShippingAddress.Address1, new { @placeholder = "542 W. 15th Street", @type = "text", @required = "required", @id = "adr", @name = "address"})
+                            <label><i class="fa"></i> Address</label>
+                            @Html.TextBoxFor(m => m.ShippingAddress.Address1, new { @placeholder = "542 W. 15th Street", @type = "text", @required = "required", @id = "adr", @name = "address" })
 
-                        <label><i class="fa"></i> City</label>
-                        @Html.TextBoxFor(m => m.ShippingAddress.City, new { @placeholder = "Tel Aviv", @type = "text", @required = "required", @id = "city", @name = "city" })
+                            <label><i class="fa"></i> City</label>
+                            @Html.TextBoxFor(m => m.ShippingAddress.City, new { @placeholder = "Tel Aviv", @type = "text", @required = "required", @id = "city", @name = "city" })
 
-                        <div class="row">
-                            <div class="col-50">
-                                <label>Country</label>
-                                @Html.TextBoxFor(m => m.ShippingAddress.Country, new { @type = "text", @id = "state", @name = "state", @disabled = "disabled" })
-                            </div>
+                            <div class="row">
+                                <div class="col-50">
+                                    <label>Country</label>
+                                    @Html.TextBoxFor(m => m.ShippingAddress.Country, new { @type = "text", @id = "state", @name = "state", @disabled = "disabled" })
+                                </div>
 
-                            <div class="col-50">
-                                <label>Postal Code</label>
-                                @Html.TextBoxFor(m => m.ShippingAddress.PostalCode, new { @placeholder = "1000001", @type = "text", @required = "required", @id = "zip", @name = "zip" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-50">
-                        <h3>Payment</h3>
-                        <br>
-                        <label for="cname">Name on Card</label>
-                        @Html.TextBoxFor(m => m.CreditCard.OwnerName, new { @type = "text", @required = "required", @id = "cname", @name = "cardname" })
-
-                        <label for="ccnum">Credit card number</label>
-                        @Html.TextBoxFor(m => m.CreditCard.Number, new { @placeholder = "1111-2222-3333-4444", @type = "text", @required = "required", @id = "ccnum", @name = "cardnumber" })
-
-                        <label for="expmonth">Exp Month</label>
-                        @Html.TextBoxFor(m => m.CreditCard.ExpirationMonth, new { @placeholder = "mm", @type = "text", @required = "required", @id = "expmonth", @name = "expmonth" })
-
-                        <div class="row">
-                            <div class="col-50">
-                                <label for="expyear">Exp Year</label>
-                                @Html.TextBoxFor(m => m.CreditCard.ExpirationYear, new { @placeholder = "yyyy", @type = "text", @required = "required", @id = "expyear", @name = "expyear" })
-                            </div>
-                            <div class="col-50">
-                                <label for="cvv">CVV</label>
-                                @Html.TextBoxFor(m => m.CreditCard.CVV, new { @type = "text", @required = "required", @id = "cvv", @name = "cvv" })
+                                <div class="col-50">
+                                    <label>Postal Code</label>
+                                    @Html.TextBoxFor(m => m.ShippingAddress.PostalCode, new { @placeholder = "1000001", @type = "text", @required = "required", @id = "zip", @name = "zip" })
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="col-50">
+                            <h3>Payment</h3>
+                            <br>
+                            <label for="cname">Name on Card</label>
+                            @Html.TextBoxFor(m => m.CreditCard.OwnerName, new { @type = "text", @required = "required", @id = "cname", @name = "cardname" })
+
+                            <label for="ccnum">Credit card number</label>
+                            @Html.TextBoxFor(m => m.CreditCard.Number, new { @placeholder = "1111-2222-3333-4444", @type = "text", @required = "required", @id = "ccnum", @name = "cardnumber" })
+
+                            <div class="row">
+                                <div class="col-50">
+                                    <label for="expmonth">Exp Month</label>
+                                    @Html.TextBoxFor(m => m.CreditCard.ExpirationMonth, new { @placeholder = "mm", @type = "text", @required = "required", @id = "expmonth", @name = "expmonth" })
+                                </div>
+                                <div class="col-50">
+                                    <label for="expyear">Exp Year</label>
+                                    @Html.TextBoxFor(m => m.CreditCard.ExpirationYear, new { @placeholder = "yyyy", @type = "text", @required = "required", @id = "expyear", @name = "expyear" })
+                                </div>
+                            </div>
+                            
+                            <label for="cvv">CVV</label>
+                            @Html.TextBoxFor(m => m.CreditCard.CVV, new {@type = "text", @required = "required", @id = "cvv", @name = "cvv"})
+                        </div>
 
 
-                    <div class="col-50">
-                        <br>
-                        <h3>Shipping options</h3>
-                        <fieldset>
-                            <label>Choose a delivery option:</label>
-                            <div data-isscheduleddelivery="0">
-                                @Html.RadioButtonFor(m => m.Payment.ShippingCost, "0", new { @checked = "checked" })
-                                <span>
-                                    <strong>Pickup</strong>
-                                </span>
-                                <br>
-                                <span>$0.00 -&nbsp;FREE&nbsp;</span>
-                            </div>
-                            <div data-isscheduleddelivery="0">
-                                @Html.RadioButtonFor(m => m.Payment.ShippingCost, "10", new { @checked = "checked" })
-                                <span>
-                                    <strong>
-                                        Averages 7-10 business days
-                                    </strong>
-                                </span>
-                                <br>
-                                <span>$10.00&nbsp;-&nbsp;Standard Shipping&nbsp;</span>
-                            </div>
-                            <div data-isscheduleddelivery="0">
-                                @Html.RadioButtonFor(m => m.Payment.ShippingCost, "45", new { @checked = "checked" })
-                                <span>
-                                    <strong>
-                                        Averages 2-5 business days
-                                    </strong>
-                                </span>
-                                <br>
-                                <span>$45.00&nbsp;-&nbsp;Express Shipping&nbsp;</span>
-                            </div>
-                        </fieldset>
+                        <div class="col-50">
+                            <br>
+                            <h3>Shipping options</h3>
+                            <fieldset>
+                                <label>Choose a delivery option:</label>
+                                <div data-isscheduleddelivery="0">
+                                    @Html.RadioButtonFor(m => m.Payment.ShippingCost, "0", new { @checked = "checked" })
+                                    <span>
+                                        <strong>Pickup</strong>
+                                    </span>
+                                    <br>
+                                    <span>$0.00 -&nbsp;FREE&nbsp;</span>
+                                </div>
+                                <div data-isscheduleddelivery="0">
+                                    @Html.RadioButtonFor(m => m.Payment.ShippingCost, "10", new { @checked = "checked" })
+                                    <span>
+                                        <strong>
+                                            Averages 7-10 business days
+                                        </strong>
+                                    </span>
+                                    <br>
+                                    <span>$10.00&nbsp;-&nbsp;Standard Shipping&nbsp;</span>
+                                </div>
+                                <div data-isscheduleddelivery="0">
+                                    @Html.RadioButtonFor(m => m.Payment.ShippingCost, "45", new { @checked = "checked" })
+                                    <span>
+                                        <strong>
+                                            Averages 2-5 business days
+                                        </strong>
+                                    </span>
+                                    <br>
+                                    <span>$45.00&nbsp;-&nbsp;Express Shipping&nbsp;</span>
+                                </div>
+                            </fieldset>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-4">
-            <div class="container">
-                <h3>
-                    Cart
-                    <span class="price" style="color: black">
-                        <i class="fa fa-shopping-cart"></i>
-                        @{
-                            double count = Model.Cart.Aggregate(0, (current, itemsInCart) => current + itemsInCart.Quantity);
-                            <b>@count</b>
-
-                        }
-                    </span>
-                    <br>
-                </h3>
-                <span class="col-50" style="color: black">
-                    <p>
-                        @foreach (Cart cart in Model.Cart)
-                        {
-                            <span>@cart.Quantity x @cart.Item.Title.Substring(0, Math.Min(cart.Item.Title.Length, 27))</span>
-                            <span class="price">$@cart.Item.Price</span>
-                            <br>
-                        }
-                    </p>
-                    <p>
-                        <span>Shipping:</span> <span class="price">$0</span>
-                    </p>
-
-                    <!-- Order Total -->
-                    <p>
-                        <h4>
-                            <hr class="solid">
+            <div class="col-4">
+                <div class="container">
+                    <h3>
+                        Cart
+                        <span class="price" style="color: black">
+                            <i class="fa fa-shopping-cart"></i>
                             @{
-                                double itemsCost = Model.Cart.Aggregate<Cart, double>(0, (current, itemsInCart) => current + itemsInCart.Item.Price * itemsInCart.Quantity);
-                                double total = itemsCost/* + shippingCost*/;
-                                <span>Order Total:</span>
-                                <span class="price">$@total</span>
-                            }
-                        </h4>
-                    </p>
+                                double count = Model.Cart.Aggregate(0, (current, itemsInCart) => current + itemsInCart.Quantity);
+                                <b>@count</b>
 
-                </span>
-                <input type="submit" value="Place Order" class="btn">
+                            }
+                        </span>
+                        <br>
+                    </h3>
+                    <span class="col-50" style="color: black">
+                        <p>
+                            @foreach (Cart cart in Model.Cart)
+                            {
+                                <span>@cart.Quantity x @cart.Item.Title.Substring(0, Math.Min(cart.Item.Title.Length, 27))</span>
+                                <span class="price">$@cart.Item.Price</span>
+                                <br>
+                            }
+                        </p>
+                        <p>
+                            <span>Shipping:</span><span class="price" id="shipping_amount">10</span><span class="price">$</span>
+                        </p>
+
+                        <!-- Order Total -->
+                        <p>
+                            <h4>
+                                <hr class="solid">
+                                @{
+                                    double itemsCost = Model.Cart.Aggregate<Cart, double>(0, (current, itemsInCart) => current + itemsInCart.Item.Price * itemsInCart.Quantity);
+                                    double total = itemsCost + @Model.Payment.ShippingCost;
+                                    <input type="hidden" id="items_cost" value="@itemsCost" />
+                                    <span>Order Total:</span><span class="price" id="total_amount">@total</span><span class="price">$</span>
+                                }
+                            </h4>
+                        </p>
+
+                    </span>
+                    <input type="submit" value="Place Order" class="btn">
+                </div>
             </div>
         </div>
+    }
 
+    @section scripts{
+        <script type="text/javascript">
+            $(function () {
+                $("input:radio").on("change", function () {
+                    var ic = parseFloat($('#items_cost').val());
 
-
-    </div>
-}
+                    if ($(this).val() == "0") {
+                        $('#shipping_amount').text("0");
+                        $('#total_amount').text(ic);
+                    } else if ($(this).val() == "10") {
+                        $('#shipping_amount').text("10");
+                        $('#total_amount').text(ic + 10);
+                    } else if ($(this).val() == "45") {
+                        $('#shipping_amount').text("45");
+                        $('#total_amount').text(ic + 45);
+                    }
+                });
+            });
+        </script>
+    }
+</body>

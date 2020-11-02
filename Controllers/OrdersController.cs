@@ -91,6 +91,13 @@ namespace GamingStore.Controllers
             List<Cart> itemsInCart = await GetItemsInCart(customer);
             order.Payment.ItemsCost = itemsInCart.Aggregate<Cart, double>(0, (current, cart) => current + cart.Item.Price * cart.Quantity);
             order.Payment.Total = order.Payment.ItemsCost + order.Payment.ShippingCost;
+            order.ShippingMethod = order.Payment.ShippingCost switch
+            {
+                0 => ShippingMethod.Pickup,
+                10 => ShippingMethod.Standard,
+                45 => ShippingMethod.Express,
+                _ => ShippingMethod.Other
+            };
 
             //add order to db
             _context.Add(order);
@@ -111,7 +118,6 @@ namespace GamingStore.Controllers
 
             return RedirectToAction("ThankYouIndex", new {id = order.Id, items});
         }
-
 
         public async Task<IActionResult> ThankYouIndex(string id, int items)
         {

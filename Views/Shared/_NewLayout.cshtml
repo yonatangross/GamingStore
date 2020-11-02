@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="~/lib/OwlCarousel2-2.2.1/owl.theme.default.css">
     <link rel="stylesheet" type="text/css" href="~/lib/OwlCarousel2-2.2.1/animate.css">
     <link rel="stylesheet" type="text/css" href="~/lib/slick-1.8.0/slick.css">
-    <link rel="stylesheet" type="text/css" href="~/css/site.css"/>
+    <link rel="stylesheet" type="text/css" href="~/css/site.css" />
 </head>
 
 <body>
@@ -178,24 +178,24 @@
 
         </header>
 
-    <div class="container" style="margin-top: 1%">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+        <div class="container" style="margin-top: 1%">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
 
 
         <!-- Footer -->
-        
-    <div style="
+
+        <div style="
         background: #fafafa;
         width: 100%;
         padding-top: 60px;
         padding-bottom: 60px;
         box-shadow: 0px 5px 20px rgba(0,0,0,0.1);">
 
-    </div>
-    <footer class="footer">
+        </div>
+        <footer class="footer">
             <div class="container">
                 <div class="row">
 
@@ -295,10 +295,11 @@
     <script src="~/lib/slick-1.8.0/slick.js"></script>
     <script src="~/lib/easing/easing.js"></script>
     <script src="~/js/custom.js"></script>
-<script src="~/js/cart_custom.js"></script>
-<script src="~/lib/notifyjs/notify.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-@RenderSection("Scripts", required: false)
+    <script src="~/js/product_custom.js"></script>
+    <script src="~/js/cart_custom.js"></script>
+    <script src="~/lib/notifyjs/notify.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 
 </html>

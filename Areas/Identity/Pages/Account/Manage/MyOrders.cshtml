@@ -112,8 +112,9 @@
 <table class="tg">
     <thead>
         <tr>
-            <th class="tg-0vh3">Order Info</th>
+            <th class="tg-0vh3">Order ID</th>
             <th class="tg-0vh3">Date</th>
+            <th class="tg-0vh3">Shipping</th>
             <th class="tg-0vh3">Status</th>
             <th class="tg-0vh3">Total Paid</th>
         </tr>
@@ -125,6 +126,7 @@
             <tr>
                 <td class="tg-tzj0">@modelOrder.Id</td>
                 <td class="tg-tzj0">@modelOrder.OrderDate</td>
+                <td class="tg-tzj0">@modelOrder.ShippingMethod</td>
                 <td class="tg-tzj0">@modelOrder.State</td>
                 <td class="tg-tzj0">$@modelOrder.Payment.Total</td>
             </tr>
