@@ -4,7 +4,7 @@
 }
 
 .store_list {
-    max-height: 600px;
+    max-height: 800px;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
@@ -13,7 +13,7 @@
 
 .store_title {
     font-family: "Noto Sans KR", sans-serif;
-    font-size: 30px;
+    font-size: 20px;
     color: #282828;
 }
 
@@ -30,7 +30,7 @@
 
 
 .store_map {
-    height: 600px;
+    height: 800px;
     width: 100%;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
 }

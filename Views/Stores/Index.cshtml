@@ -9,49 +9,48 @@
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/store_style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
-    <script  src="js/stores.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVO7D0J75IZJhAcreAuPINi6xoDFnGUXg&callback=initMap"
-            type="text/javascript"></script>
+    <script src="js/stores.js"></script>
+  
 </head>
 <div class="store_container">
-    @{
-        var stores = new JsonResult(Model);
-    }
-    <script>setStores("@stores");</script>
     <div class="container">
         <div class="row">
             <div class="col-lg-5">
-                    <ul class="list-group store_list">
-                        @{
-                            foreach (var store in Model)
-                            {
-                                <li class="list-group-item">
-                                    <div class="store_title">
-                                        <h2>
-                                            @{
-                                                var storeName = store.Name.Replace("Store", "");
-                                            }
-                                            @Html.DisplayFor(modelItem => storeName)
-                                        </h2>
-                                    </div>
-                                    <div class="store_detail store_address">
+                <ul class="list-group store_list">
+                    @{
+                        foreach (var store in Model)
+                        {
+                            var isWarehouse = store.Name == "Warehouse" ? true : false;
+                            <li class="list-group-item">
+                                <div class="store_title">
+                                    <h4>
                                         @{
-                                            var address = store.Address.ToString();
+                                            var storeName = store.Name.Replace("Store", "");
                                         }
-                                        @Html.DisplayFor(modelItem => address)
-                                    </div>
-                                    <div class="store_detail store_phonenumber">
-                                        Phone:
-                                        <a href="tel:@store.PhoneNumber">@Regex.Replace(store.PhoneNumber, @"(\d{3})(\d{3})(\d{4})", "+$1-$2-$3")</a>
-                                    </div>
-                                    <div class="store_detail store_email">
-                                        Email:
-                                        <a href="mailto:@store.Email">@store.Email </a>
-                                    </div>
-                                </li>
-                            }
+                                        @Html.DisplayFor(modelItem => storeName)
+                                    </h4>
+                                </div>
+                                <div class="store_detail store_address">
+                                    @{
+                                        var address = store.Address.ToString();
+                                        <script>
+                                            storesObject.push(["@address", "@storeName", "@isWarehouse".toLowerCase()]);
+                                        </script>
+                                    }
+                                    @Html.DisplayFor(modelItem => address)
+                                </div>
+                                <div class="store_detail store_phonenumber">
+                                    Phone:
+                                    <a href="tel:@store.PhoneNumber">@Regex.Replace(store.PhoneNumber, @"(\d{3})(\d{3})(\d{4})", "+$1-$2-$3")</a>
+                                </div>
+                                <div class="store_detail store_email">
+                                    Email:
+                                    <a href="mailto:@store.Email">@store.Email </a>
+                                </div>
+                            </li>
                         }
-                    </ul>
+                    }
+                </ul>
 
             </div>
             <div class="col-lg-7">
@@ -60,3 +59,5 @@
         </div>
     </div>
 </div>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVO7D0J75IZJhAcreAuPINi6xoDFnGUXg&callback=initMap&libraries=&v=weekly"
+        type="text/javascript"></script>

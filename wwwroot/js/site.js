@@ -64,7 +64,7 @@ function disableCartButtonCheckOut() {
     });
 
 
-    const Card = (id, email, userIndex) => `
+    const card = (id, email, userIndex) => `
  <div class="card mb-3 user${userIndex}">
                 <div class="card-header">
                     User Id : ${id}
@@ -105,7 +105,7 @@ function disableCartButtonCheckOut() {
 
                 $("#users").empty();
                 for (let userIndex = 0; userIndex < Object.keys(data).length; userIndex++) {
-                    $("#users").append(Card(data[userIndex].id, data[userIndex].email, userIndex + 1));
+                    $("#users").append(card(data[userIndex].id, data[userIndex].email, userIndex + 1));
                 }
                 console.log("success: ");
             },

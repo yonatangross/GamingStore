@@ -9,7 +9,7 @@ using GamingStore.Models.Relationships;
 
 namespace GamingStore.Models
 {
-    public class Store 
+    public class Store
     {
         public static int StoreCounter;
 
@@ -28,7 +28,7 @@ namespace GamingStore.Models
         public string Name { get; set; }
 
         [Required] public Address Address { get; set; }
-        [Required] public GeoLocation GeoLocation { get; set; }
+
         [Required, DataType(DataType.PhoneNumber), StringLength(50), Phone]
         public string PhoneNumber { get; set; }
 
@@ -39,7 +39,7 @@ namespace GamingStore.Models
 
         //public Dictionary<Item,uint> Stock { get; set; } // determines how many items there are in the store. example: {{fridge, 5},{mouse,6}}
         public ICollection<Order> Orders { get; set; }
-        
+
         public ICollection<StoreItem> StoreItems { get; set; } // many to many relationship
     }
 }

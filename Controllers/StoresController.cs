@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Models;
+using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 
 namespace GamingStore.Controllers
@@ -35,8 +36,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            Store store = await _context.Stores
-                .FirstOrDefaultAsync(m => m.Id == id);
+            Store store = await _context.Stores.FirstOrDefaultAsync(m => m.Id == id);
             if (store == null)
             {
                 return NotFound();
@@ -58,7 +58,8 @@ namespace GamingStore.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address,PhoneNumber,Email,OpeningHours")] Store store)
+        public async Task<IActionResult> Create([Bind("Id,Name,Address,PhoneNumber,Email,OpeningHours")]
+            Store store)
         {
             if (!ModelState.IsValid)
             {
@@ -80,7 +81,7 @@ namespace GamingStore.Controllers
             }
 
             Store store = await _context.Stores.FindAsync(id);
-            
+
             if (store == null)
             {
                 return NotFound();
@@ -95,7 +96,8 @@ namespace GamingStore.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,PhoneNumber,Email,OpeningHours")] Store store)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,PhoneNumber,Email,OpeningHours")]
+            Store store)
         {
             if (id != store.Id)
             {
@@ -135,7 +137,7 @@ namespace GamingStore.Controllers
             }
 
             Store store = await _context.Stores.FirstOrDefaultAsync(m => m.Id == id);
-            
+
             if (store == null)
             {
                 return NotFound();
@@ -153,7 +155,7 @@ namespace GamingStore.Controllers
             Store store = await _context.Stores.FindAsync(id);
             _context.Stores.Remove(store);
             await _context.SaveChangesAsync();
-            
+
             return RedirectToAction(nameof(Index));
         }
 
