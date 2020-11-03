@@ -30,6 +30,9 @@
                             </li>
                         </ul>
                         <ul class="top_bar_contact_item">
+                            <a class="top_bar_contact_item nav-link text-dark" asp-controller="Administration" asp-action="ListOrders">Orders</a>
+                        </ul>
+                        <ul class="top_bar_contact_item">
                             <a class="top_bar_contact_item nav-link text-dark" asp-controller="Administration" asp-action="ListItems">Products</a>
                         </ul>
                         <div class="ml-auto">
@@ -41,7 +44,7 @@
         </div>
     </header>
     <div class="container d-flex justify-content-center" style="margin-top: 1%;">
-        <main role="main" class="col-md-10">
+        <main role="main" class="col-md-11">
             @RenderBody()
         </main>
     </div>
