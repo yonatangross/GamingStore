@@ -47,6 +47,12 @@ namespace GamingStore.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> EditUser(EditUserViewModel model)
         {

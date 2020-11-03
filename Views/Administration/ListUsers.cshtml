@@ -4,32 +4,33 @@
 
 @{
     ViewBag.Title = "All Users";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h1>All Users</h1>
 
-<div class="form-inline"> 
-    <p>   
+<div class="form-inline">
+    <p>
         <input class="form-control mr-sm-2" type="text" placeholder="Search User" aria-label="Search" name="searchUserString" id="searchUserString">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchSubmit">Search</button>
     </p>
 </div>
-   
-<div  id="users">
+
+<div id="users">
     @if (Model.Any())
     {
         var userNum = 0;
         foreach (var user in Model)
         {
             userNum++;
-            var userNameString = "user"+userNum; @*adding user number to div*@
+            var userNameString = "user" + userNum;@*adding user number to div*@
             <div class="card mb-3 @userNameString">
                 <div class="card-header">
                     User Id : @user.Id
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">@user.Email</h5>
-                    
+
                 </div>
                 <div class="card-footer">
                     <a asp-controller="Administration" asp-action="Edituser"

@@ -31,29 +31,15 @@
                             <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="~/images/mail.png" alt=""></div><a href="mailto:gamingstoreproject@gmail.com">gamingstoreproject@gmail.com</a></div>
                             @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                             {
-                                <div class="top_bar_contact_item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Manage
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" asp-controller="Administration"
-                                           asp-action="ListUsers">
-                                            Users
-                                        </a>
-                                        <a class="dropdown-item" asp-controller="Administration"
-                                           asp-action="ListRoles">
-                                            Roles
-                                        </a>
-                                    </div>
+                                <div class="top_bar_contact_item ">
+                                    <a asp-controller="Administration" asp-action="Index">Admin CP</a>
                                 </div>
                             }
                             <div class="ml-auto">
                                 <partial name="_NewLoginPartial" />
                             </div>
-                           
                         </div>
-                    
+
                     </div>
                 </div>
             </div>
@@ -156,7 +142,7 @@
                                         <li><a asp-area="" asp-controller="Stores" asp-action="Index">Stores<i class="fas fa-chevron-down"></i></a></li>
                                         <li><a asp-area="" asp-controller="Items" asp-action="Index">Products<i class="fas fa-chevron-down"></i></a></li>
                                         <li><a asp-area="" asp-controller="Home" asp-action="ContactUs">Contact<i class="fas fa-chevron-down"></i></a></li>
-                                     
+
                                     </ul>
                                 </div>
 
