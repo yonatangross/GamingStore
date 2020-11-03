@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using GamingStore.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -76,7 +77,13 @@ namespace GamingStore.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
-            return View(new CreateItemViewModel());
+            Category[] allCategories = _context.Items.Select(item => item.Category).Distinct().ToArray();
+            string categoriesString = $"[\"{string.Join("\",\"", allCategories)}\"]";
+
+            return View(new CreateItemViewModel
+            {
+                Categories = allCategories
+            });
         }
 
         // POST: Items/Create
@@ -94,7 +101,7 @@ namespace GamingStore.Controllers
             if (model.File1 != null)
             {
                 Directory.CreateDirectory(uploadFolder);
-                var uniqueFileName = "1.jpg";
+                const string uniqueFileName = "1.jpg";
                 var filePath = Path.Combine(uploadFolder, uniqueFileName);
                 await model.File1.CopyToAsync(new FileStream(filePath, FileMode.Create));
 
@@ -103,14 +110,14 @@ namespace GamingStore.Controllers
 
             if (model.File2 != null)
             {
-                var uniqueFileName = "2.jpg";
+                const string uniqueFileName = "2.jpg";
                 var filePath = Path.Combine(uploadFolder, uniqueFileName);
                 await model.File2.CopyToAsync(new FileStream(filePath, FileMode.Create));
             }
 
             if (model.File3 != null)
             {
-                var uniqueFileName = "3.jpg";
+                const string uniqueFileName = "3.jpg";
                 var filePath = Path.Combine(uploadFolder, uniqueFileName);
                 await model.File3.CopyToAsync(new FileStream(filePath, FileMode.Create));
             }
@@ -185,8 +192,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            var item = await _context.Items
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var item = await _context.Items.FirstOrDefaultAsync(m => m.Id == id);
             if (item == null)
             {
                 return NotFound();

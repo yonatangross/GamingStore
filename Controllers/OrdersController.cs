@@ -189,5 +189,43 @@ namespace GamingStore.Controllers
 
             return View(order);
         }
+
+        // GET: Items/Edit/5
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Order order = await _context.Orders.FindAsync(id);
+            
+            if (order == null)
+            {
+                return NotFound();
+            }
+            
+            return View(order);
+        }
+
+        // GET: Items/Delete/5
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Order order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+        }
     }
 }
