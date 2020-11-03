@@ -1,0 +1,64 @@
+﻿@model IEnumerable<GamingStore.Models.Order>
+
+@{
+    ViewData["Title"] = "Admin Items";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Orders</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Store)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Payment.Total)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var order in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => order.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.Customer.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.Store)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.Payment.Total)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-controller="Orders" asp-route-id="@order.Id">Edit</a>
+                <a asp-action="Delete" asp-controller="Orders" asp-route-id="@order.Id">Delete</a>
+                <a asp-action="Details" asp-controller="Orders" asp-route-id="@order.Id">Details</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

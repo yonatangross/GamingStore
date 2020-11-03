@@ -192,8 +192,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            var item = await _context.Items
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var item = await _context.Items.FirstOrDefaultAsync(m => m.Id == id);
             if (item == null)
             {
                 return NotFound();

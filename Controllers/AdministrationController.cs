@@ -147,10 +147,17 @@ namespace GamingStore.Controllers
 
             return View(model);
         }
+
         [HttpGet]
         public async Task<IActionResult> ListItems()
         {
             return View(await _context.Items.ToListAsync());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ListOrders()
+        {
+            return View(await _context.Orders.Include(order => order.Customer).Include(order => order.Payment).ToListAsync());
         }
 
         // This action responds to HttpPost and receives EditRoleViewModel
