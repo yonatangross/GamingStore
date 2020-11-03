@@ -1,4 +1,4 @@
-﻿ixed@page
+﻿@page
 @using GamingStore.Models
 @model MyOrdersModel
 @{
@@ -128,7 +128,7 @@
                 <td class="tg-tzj0">@modelOrder.OrderDate</td>
                 <td class="tg-tzj0">@modelOrder.ShippingMethod</td>
                 <td class="tg-tzj0">@modelOrder.State</td>
-                <td class="tg-tzj0">@Html.DisplayFor(m => modelOrder.Payment.Total)</td>
+                <td class="tg-tzj0">$@modelOrder.Payment.Total</td>
             </tr>
         }
     </tbody>
