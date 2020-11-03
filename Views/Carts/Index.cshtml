@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GamingStore.Models.Cart>
+﻿@model GamingStore.ViewModels.CartViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -19,28 +19,28 @@
                     <div class="cart_items">
                         <ul class="cart_list">
                             @{
-                                if (Model.Any())
+                                if (Model?.Carts != null && Model.Carts.Any())
                                 {
-                                    foreach (Cart itemsInCart in Model)
+                                    foreach (Cart itemCart in Model.Carts)
                                     {
                                         <li class="cart_item clearfix">
-                                            <div class="cart_item_image"><img src="/@itemsInCart.Item.ImageUrl/1.jpg" alt=""></div>
+                                            <div class="cart_item_image"><img src="/@itemCart.Item.ImageUrl/1.jpg" alt=""></div>
                                             <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
                                                 <div class="cart_item_name cart_info_col">
                                                     <div class="cart_item_title"> Name</div>
-                                                    <div class="cart_item_text" style="width: 200px">@itemsInCart.Item.Title.Substring(0, Math.Min(itemsInCart.Item.Title.Length, 27))</div>
+                                                    <div class="cart_item_text" style="width: 200px">@itemCart.Item.Title.Substring(0, Math.Min(itemCart.Item.Title.Length, 27))</div>
                                                 </div>
                                                 <div class="cart_info_col">
                                                     <div class="cart_item_title">Manufacturer</div>
-                                                    <div class="cart_item_text"><span style="background-color: #999999;"></span>@itemsInCart.Item.Manufacturer</div>
+                                                    <div class="cart_item_text"><span style="background-color: #999999;"></span>@itemCart.Item.Manufacturer</div>
                                                 </div>
                                                 <div class="cart_info_col">
                                                     <div class="cart_item_title">Quantity</div>
-                                                    <div class="cart_item_text">@itemsInCart.Quantity</div>
+                                                    <div class="cart_item_text">@itemCart.Quantity</div>
                                                 </div>
                                                 <div class="cart_item_total cart_info_col">
                                                     <div class="cart_item_title">Total</div>
-                                                    <div class="cart_item_text">$@itemsInCart.Item.Price</div>
+                                                    <div class="cart_item_text">@Html.DisplayFor(m => itemCart.Item.Price)</div>
                                                 </div>
                                             </div>
                                         </li>
@@ -60,8 +60,7 @@
                         <div class="text-md-right">
                             <div class="order_total_title">Order Total:</div>
                             @{
-                                double total = Model.Aggregate<Cart, double>(0, (current, itemsInCart) => current + itemsInCart.Item.Price * itemsInCart.Quantity);
-                                <div class="order_total_amount">$@total</div>
+                                <div class="order_total_amount">@Html.DisplayFor(m => m.Payment.ItemsCost)</div>
                             }
                         </div>
                     </div>
@@ -71,7 +70,7 @@
                         {
                             <input type="submit" class="button cart_button_clear" value="Clear Cart" />
                             <button type="button" class="button cart_button_checkout" onclick="location.href = '@Url.Action("CheckOutIndex", "Orders")'"
-                                    @{ if (!Model.Any()) { @: disabled
+                                    @{ if (!Model.Carts.Any()) { @: disabled
                                     } }>
                                 Proceed to Checkout
                             </button>

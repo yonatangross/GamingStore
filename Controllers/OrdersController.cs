@@ -25,7 +25,7 @@ namespace GamingStore.Controllers
             _userManager = userManager;
         }
 
-        private Task<Customer> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+        private Task<Customer> GetCurrentUserAsync() => _userManager.GetUserAsync(User);
 
         // GET: Orders
         public async Task<IActionResult> Index()
@@ -40,6 +40,9 @@ namespace GamingStore.Controllers
             {
                 Customer customer = await GetCurrentUserAsync();
                 List<Cart> itemsInCart = await GetItemsInCart(customer);
+                const int defaultPaymentCost = 10;
+                double itemsCost = itemsInCart.Aggregate<Cart, double>(0, (current, cart) => current + cart.Item.Price * cart.Quantity);
+                double totalCost = itemsCost + defaultPaymentCost;
 
                 var viewModel = new CreateOrderViewModel
                 {
@@ -48,8 +51,10 @@ namespace GamingStore.Controllers
                     ShippingAddress = customer.Address,
                     Payment = new Payment
                     {
-                        ShippingCost = 10
-                    }
+                        ShippingCost = defaultPaymentCost,
+                        ItemsCost = itemsCost,
+                        Total = totalCost
+                    },
                 };
 
                 return View(viewModel);
@@ -172,8 +177,6 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
             
-            //Order order = await _context.Orders.FirstOrDefaultAsync(order => order.Id == id);
-            //List<Item> items = _context.Items.Where(x => x.OrderItems.Any(y => y.OrderId == id)).ToList();
             Order order = await _context.Orders.Include(x => x.OrderItems).ThenInclude(y => y.Item).FirstOrDefaultAsync(o => o.Id == id);
 
             if (order == null)
@@ -181,7 +184,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            order.Customer = await _userManager.GetUserAsync(User);
+            order.Customer = await GetCurrentUserAsync();
             order.Payment = await _context.Payments.FirstOrDefaultAsync(payment => payment.Id == order.PaymentId);
 
             return View(order);

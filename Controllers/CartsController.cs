@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Models;
+using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -26,7 +27,7 @@ namespace GamingStore.Controllers
             _userManager = userManager;
         }
 
-        private Task<Customer> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+        private Task<Customer> GetCurrentUserAsync() => _userManager.GetUserAsync(User);
 
         [Authorize]
         public async Task<IActionResult> Index()
@@ -42,15 +43,30 @@ namespace GamingStore.Controllers
                     cartItem.Item = item;
                 }
 
-                return View(await _context.Carts.Where(c => c.CustomerId == customer.Id).ToListAsync());
+                var itemsPrice = 0.00;
+
+                foreach (Cart cart in itemsInCart)
+                {
+                    itemsPrice += cart.Item.Price * cart.Quantity;
+                }
+
+                var viewModel = new CartViewModel
+                {
+                    Carts = await itemsInCart.ToListAsync(),
+                    Payment = new Payment
+                    {
+                        ItemsCost = itemsPrice
+                    }
+                };
+
+                return View(viewModel);
 
             }
-            catch (Exception e)
+            catch(Exception e)
             {
-                
+                //no items in cart
+                return View();
             }
-
-            return View();
         }
 
         [HttpPost]
