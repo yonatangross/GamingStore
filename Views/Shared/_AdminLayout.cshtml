@@ -24,16 +24,13 @@
                                     Manage
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" asp-controller="Administration"
-                                       asp-action="ListUsers">
-                                        Users
-                                    </a>
-                                    <a class="dropdown-item" asp-controller="Administration"
-                                       asp-action="ListRoles">
-                                        Roles
-                                    </a>
+                                    <a class="dropdown-item" asp-controller="Administration" asp-action="ListUsers">Users</a>
+                                    <a class="dropdown-item" asp-controller="Administration" asp-action="ListRoles">Roles</a>
                                 </div>
                             </li>
+                        </ul>
+                        <ul class="top_bar_contact_item">
+                            <a class="top_bar_contact_item nav-link text-dark" asp-controller="Administration" asp-action="ListItems">Products</a>
                         </ul>
                         <div class="ml-auto">
                             <partial name="_NewLoginPartial" />

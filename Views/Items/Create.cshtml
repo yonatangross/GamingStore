@@ -1,8 +1,8 @@
-﻿@model GamingStore.Models.Item
+﻿@model GamingStore.ViewModels.CreateItemViewModel
 
 @{
     ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h1>Create</h1>
@@ -10,41 +10,70 @@
 <h4>Item</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+    <div class="col-md-7">
+        @Html.BeginForm("Create", "Items")
+        {
+        
+        }
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
+                <label asp-for="Item.Title" class="control-label"></label>
+                <input asp-for="Item.Title" class="form-control"/>
+                <span asp-validation-for="Item.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <label asp-for="Item.Description" class="control-label"></label>
+                <input asp-for="Item.Description" class="form-control"/>
+                <span asp-validation-for="Item.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Manufacturer" class="control-label"></label>
-                <input asp-for="Manufacturer" class="form-control" />
-                <span asp-validation-for="Manufacturer" class="text-danger"></span>
+                <label asp-for="Item.Manufacturer" class="control-label"></label>
+                <input asp-for="Item.Manufacturer" class="form-control"/>
+                <span asp-validation-for="Item.Manufacturer" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
+                <label asp-for="Item.Price" class="control-label"></label>
+                <input asp-for="Item.Price" class="form-control"/>
+                <span asp-validation-for="Item.Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
-                <span asp-validation-for="Category" class="text-danger"></span>
+                <label asp-for="Item.Category" class="control-label"></label>
+                <input asp-for="Item.Category" class="form-control"/>
+                <span asp-validation-for="Item.Category" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PropertiesList" class="control-label"></label>
-                <input asp-for="PropertiesList" class="form-control" />
-                <span asp-validation-for="PropertiesList" class="text-danger"></span>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Image</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="file1" id="file1" aria-describedby="inputGroupFileAddon01" required>
+                        <label class="custom-file-label" for="file1">Choose Primary Image</label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon02">Image</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="file2" id="file2" aria-describedby="inputGroupFileAddon01">
+                        <label class="custom-file-label" for="file2">Choose Secondary Image</label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon03">Image</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="file3" id="file3" aria-describedby="inputGroupFileAddon01">
+                        <label class="custom-file-label" for="file3">Choose Primary Image</label>
+                    </div>
+                </div>
+
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create Item" class="btn btn-primary"/>
             </div>
         </form>
     </div>

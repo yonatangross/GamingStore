@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GamingStore.Data;
 using GamingStore.Models;
 using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -16,11 +17,13 @@ namespace GamingStore.Controllers
     {
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<Customer> _userManager;
+        private readonly StoreContext _context;
 
-        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<Customer> userManager)
+        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<Customer> userManager, StoreContext context)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            _context = context;
         }
 
         [HttpGet]
@@ -143,6 +146,11 @@ namespace GamingStore.Controllers
             }
 
             return View(model);
+        }
+        [HttpGet]
+        public async Task<IActionResult> ListItems()
+        {
+            return View(await _context.Items.ToListAsync());
         }
 
         // This action responds to HttpPost and receives EditRoleViewModel
