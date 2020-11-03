@@ -70,7 +70,7 @@
                         {
                             <input type="submit" class="button cart_button_clear" value="Clear Cart" />
                             <button type="button" class="button cart_button_checkout" onclick="location.href = '@Url.Action("CheckOutIndex", "Orders")'"
-                                    @{ if (!Model.Carts.Any()) { @: disabled
+                                    @{ if (Model?.Carts == null || !Model.Carts.Any()) { @: disabled
                                     } }>
                                 Proceed to Checkout
                             </button>
