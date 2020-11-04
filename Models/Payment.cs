@@ -18,7 +18,7 @@ namespace GamingStore.Models
 
         public string OrderForeignKey { get; set; }
         
-        public Order Order { get; set; }
+        //public Order Order { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         public double ItemsCost { get; set; }

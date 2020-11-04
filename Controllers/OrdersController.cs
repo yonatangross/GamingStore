@@ -200,8 +200,8 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            Order order = await _context.Orders.FindAsync(id);
-            
+            Order order = await _context.Orders.Include(o => o.Payment).FirstOrDefaultAsync(o => o.Id == id);
+
             if (order == null)
             {
                 return NotFound();
@@ -215,7 +215,6 @@ namespace GamingStore.Controllers
             
             return View(viewModel);
         }
-
         
         [HttpPost]
         [Authorize(Roles = "Admin")]
@@ -225,12 +224,20 @@ namespace GamingStore.Controllers
             {
                 try
                 {
-                    _context.Update(order);
+                    Order orderOnDb = await _context.Orders.Include(o => o.Payment).FirstOrDefaultAsync(o => o.Id == order.Id);
+                    orderOnDb.Payment.Paid = order.Payment.Paid;
+                    orderOnDb.Payment.PaymentMethod = order.Payment.PaymentMethod;
+                    orderOnDb.Payment.ShippingCost = order.Payment.ShippingCost;
+                    orderOnDb.Payment.ItemsCost = order.Payment.ItemsCost;
+                    orderOnDb.Payment.Total = order.Payment.Total;
+                    orderOnDb.State = order.State;
+
+                    _context.Update(orderOnDb);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OrderExists(order.Id))
+                    if (!await OrderExists(order.Id))
                     {
                         return NotFound();
                     }
@@ -238,17 +245,24 @@ namespace GamingStore.Controllers
                     throw;
                 }
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("ListOrders", "Administration");
             }
-            return View(order);
+
+            var viewModel = new EditOrdersViewModel
+            {
+                Customers = await _context.Customers.Where(customer => !string.IsNullOrWhiteSpace(customer.UserName)).Distinct().ToListAsync(),
+                Order = order
+            };
+
+            return View(viewModel);
         }
 
-        private bool OrderExists(string id)
+        private async Task<bool> OrderExists(string id)
         {
-            return _context.Orders.Any(e => e.Id == id);
+            return await _context.Orders.AnyAsync(e => e.Id == id);
         }
 
-        // GET: Items/Delete/5
+        // GET: Orders/Delete/5
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(string id)
         {
@@ -265,6 +279,18 @@ namespace GamingStore.Controllers
             }
 
             return View(order);
+        }
+
+        // POST: Orders/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            Order order = await _context.Orders.FindAsync(id);
+            _context.Orders.Remove(order);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("ListOrders","Administration");
         }
     }
 }
