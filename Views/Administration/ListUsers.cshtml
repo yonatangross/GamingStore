@@ -23,7 +23,7 @@
         foreach (var user in Model)
         {
             userNum++;
-            var userNameString = "user" + userNum;@*adding user number to div*@
+            var userNameString = "user" + userNum; @*adding user number to div*@
             <div class="card mb-3 @userNameString">
                 <div class="card-header">
                     User Id : @user.Id
@@ -39,7 +39,7 @@
                     </a>
                     <span id="confirmDeleteSpan_@user.Id" style="display: none">
                         <span>Are you sure you want to delete?</span>
-                        <input type="button" onclick="confirmDeleteUserAjax('@user.Id','@userNum','@user.Email')" class="btn btn-danger" value="Yes">
+                        <input type="button" onclick="confirmDeleteUserAjax('@user.Id', '@userNum', '@user.Email')" class="btn btn-danger" value="Yes">
 
                         <a href="javascript:void(0)" class="btn btn-primary"
                            onclick="toggleConfirmDeleteUserButton('@user.Id', false)">

@@ -65,3 +65,4 @@ $("ul li").click(function () {
 /*todo: add center map to active store*/
     $(this).parent().children("li").not(this).removeClass("active");
 });
+
