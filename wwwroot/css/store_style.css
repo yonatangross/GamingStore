@@ -156,7 +156,7 @@
         color: #a3a3a3 !important;
     }
 
-    .header_search_input::input-placeholder {
+    .header_search_input:input-placeholder {
         font-size: 16px !important;
         font-weight: 300;
         line-height: 50px;
