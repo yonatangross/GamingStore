@@ -191,6 +191,7 @@ namespace GamingStore.Controllers
         }
 
         // GET: Items/Edit/5
+        [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(string id)
         {
@@ -205,8 +206,46 @@ namespace GamingStore.Controllers
             {
                 return NotFound();
             }
+
+            var viewModel = new EditOrdersViewModel
+            {
+                Customers = await _context.Customers.Where(customer => !string.IsNullOrWhiteSpace(customer.UserName)).Distinct().ToListAsync(),
+                Order = order
+            };
             
+            return View(viewModel);
+        }
+
+        
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(order);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!OrderExists(order.Id))
+                    {
+                        return NotFound();
+                    }
+
+                    throw;
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
             return View(order);
+        }
+
+        private bool OrderExists(string id)
+        {
+            return _context.Orders.Any(e => e.Id == id);
         }
 
         // GET: Items/Delete/5
