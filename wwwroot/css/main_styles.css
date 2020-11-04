@@ -3360,3 +3360,12 @@ select option
 {
 	margin-right: 0px;
 }
+
+
+/*
+	D3.js
+*/
+
+.bar {
+    fill: steelblue;
+}
