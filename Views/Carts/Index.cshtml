@@ -44,7 +44,11 @@
                                                 </div>
                                             </div>
                                         </li>
-                                        <hr />
+
+                                        if (Model.Carts.Last().Id != itemCart.Id)
+                                        {
+                                            <hr />
+                                        }
                                     }
                                 }
                                 else

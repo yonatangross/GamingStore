@@ -189,5 +189,82 @@ namespace GamingStore.Controllers
 
             return View(order);
         }
+
+        // GET: Items/Edit/5
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Order order = await _context.Orders.FindAsync(id);
+            
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new EditOrdersViewModel
+            {
+                Customers = await _context.Customers.Where(customer => !string.IsNullOrWhiteSpace(customer.UserName)).Distinct().ToListAsync(),
+                Order = order
+            };
+            
+            return View(viewModel);
+        }
+
+        
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(order);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!OrderExists(order.Id))
+                    {
+                        return NotFound();
+                    }
+
+                    throw;
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View(order);
+        }
+
+        private bool OrderExists(string id)
+        {
+            return _context.Orders.Any(e => e.Id == id);
+        }
+
+        // GET: Items/Delete/5
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Order order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+        }
     }
 }

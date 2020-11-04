@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using GamingStore.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Models;
+using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
 namespace GamingStore.Controllers
@@ -18,10 +23,12 @@ namespace GamingStore.Controllers
     {
         private readonly StoreContext _context;
         private readonly UserManager<Customer> _userManager;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
-        public ItemsController(StoreContext context, UserManager<Customer> userManager)
+        public ItemsController(StoreContext context, UserManager<Customer> userManager, IHostingEnvironment hostingEnvironment)
         {
             _userManager = userManager;
+            _hostingEnvironment = hostingEnvironment;
             _context = context;
         }
 
@@ -70,7 +77,13 @@ namespace GamingStore.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
-            return View();
+            Category[] allCategories = _context.Items.Select(item => item.Category).Distinct().ToArray();
+            string categoriesString = $"[\"{string.Join("\",\"", allCategories)}\"]";
+
+            return View(new CreateItemViewModel
+            {
+                Categories = allCategories
+            });
         }
 
         // POST: Items/Create
@@ -79,16 +92,43 @@ namespace GamingStore.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Manufacturer,Price,Category,PropertiesList")] Item item)
+        public async Task<IActionResult> Create(CreateItemViewModel model)
         {
-            if (ModelState.IsValid)
+            var directoryName = model.Item.Title.Trim().Replace(" ", string.Empty);
+            var uploadFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images", "items", directoryName);
+            
+            // do other validations on your model as needed
+            if (model.File1 != null)
             {
-                _context.Add(item);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                Directory.CreateDirectory(uploadFolder);
+                const string uniqueFileName = "1.jpg";
+                var filePath = Path.Combine(uploadFolder, uniqueFileName);
+                await model.File1.CopyToAsync(new FileStream(filePath, FileMode.Create));
+
+                model.Item.ImageUrl = $"images/items/{directoryName}";
             }
-            return View(item);
+
+            if (model.File2 != null)
+            {
+                const string uniqueFileName = "2.jpg";
+                var filePath = Path.Combine(uploadFolder, uniqueFileName);
+                await model.File2.CopyToAsync(new FileStream(filePath, FileMode.Create));
+            }
+
+            if (model.File3 != null)
+            {
+                const string uniqueFileName = "3.jpg";
+                var filePath = Path.Combine(uploadFolder, uniqueFileName);
+                await model.File3.CopyToAsync(new FileStream(filePath, FileMode.Create));
+            }
+
+            await _context.Items.AddAsync(model.Item);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("ListItems", "Administration");
         }
+
+
 
         // GET: Items/Edit/5
         [Authorize(Roles = "Admin")]
@@ -152,8 +192,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            var item = await _context.Items
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var item = await _context.Items.FirstOrDefaultAsync(m => m.Id == id);
             if (item == null)
             {
                 return NotFound();
