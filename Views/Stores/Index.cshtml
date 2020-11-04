@@ -9,19 +9,57 @@
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/store_style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
-    <script src="js/stores.js"></script>
-  
+    <script>
+        var storesObject = [];
+    </script>
+    <script src="/js/stores.js"></script>
 </head>
+
+
 <div class="store_container">
+    <div class="col-lg-7 col-12 order-lg-2 order-3 text-lg-left text-right">
+        <div class="header_search">
+            <div class="header_search_content">
+                <div class="header_search_form_container">
+                    <form action="#" class="header_search_form clearfix">
+                        <input type="search" required="required" class="header_search_input" placeholder="Search for Stores...">
+                        <div class="custom_dropdown">
+                            <div class="custom_dropdown_list">
+                                <span class="custom_dropdown_placeholder">All Categories</span>
+                                <i class="fas fa-chevron-down"></i>
+                                <ul class="custom_list">
+                                    <li>
+                                        <a href="#">All Categories</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Computers</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Laptops</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Cameras</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button type="submit" class="header_search_button trans_300" value="Submit">
+                            <img src="~/images/search.png" alt="">
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-lg-5">
-                <ul class="list-group store_list">
+                <ul class="list-group store_list" id="storesList" role="tablist">
                     @{
                         foreach (var store in Model)
                         {
                             var isWarehouse = store.Name == "Warehouse" ? true : false;
-                            <li class="list-group-item">
+                            <li class="list-group-item list-group-item-action" id="store_@store.Id" data-toggle="list" role="tab" aria-controls="store_@store.Id">
                                 <div class="store_title">
                                     <h4>
                                         @{
@@ -47,6 +85,37 @@
                                     Email:
                                     <a href="mailto:@store.Email">@store.Email </a>
                                 </div>
+                                <div class="store_detail">
+                                    Opening Hours:
+                                    <table class="opening_hours">
+                                        <tr>
+                                            @{
+                                                foreach (var day in store.OpeningHours)
+                                                {
+                                                    <th> @day.DayOfWeek.ToString().Substring(0, 3)</th>
+                                                }
+                                            }
+                                        </tr>
+                                        <tr>
+                                            @{
+                                                foreach (var day in store.OpeningHours)
+                                                {
+                                                    <td>
+                                                        <span>
+                                                            @($"{day.OpeningTime:hh\\:mm}")
+                                                        </span>
+                                                        <span>
+                                                            @($"{day.ClosingTime:hh\\:mm}")
+                                                        </span>
+
+                                                    </td>
+                                                }
+                                            }
+                                        </tr>
+                                    </table>
+
+
+                                </div>
                             </li>
                         }
                     }
@@ -59,5 +128,4 @@
         </div>
     </div>
 </div>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVO7D0J75IZJhAcreAuPINi6xoDFnGUXg&callback=initMap&libraries=&v=weekly"
-        type="text/javascript"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQW-EZXnLLmmNmtLX-T9i4si_ZeKaqXXA&callback=initMap" type="text/javascript"></script>
