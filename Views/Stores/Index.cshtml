@@ -12,44 +12,27 @@
     <script>
         var storesObject = [];
     </script>
-    <script src="/js/stores.js"></script>
 </head>
 
-
 <div class="store_container">
-    <div class="col-lg-7 col-12 order-lg-2 order-3 text-lg-left text-right">
-        <div class="header_search">
-            <div class="header_search_content">
-                <div class="header_search_form_container">
-                    <form action="#" class="header_search_form clearfix">
-                        <input type="search" required="required" class="header_search_input" placeholder="Search for Stores...">
-                        <div class="custom_dropdown">
-                            <div class="custom_dropdown_list">
-                                <span class="custom_dropdown_placeholder">All Categories</span>
-                                <i class="fas fa-chevron-down"></i>
-                                <ul class="custom_list">
-                                    <li>
-                                        <a href="#">All Categories</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Computers</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Laptops</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Cameras</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <button type="submit" class="header_search_button trans_300" value="Submit">
-                            <img src="~/images/search.png" alt="">
-                        </button>
-                    </form>
+    <div class="search-box ">               
+        <form action="">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search by</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">City</a>
+                        <a class="dropdown-item" href="#">Open Stores</a>
+                        @*<div role="separator" class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated Category</a>*@
+                    </div>
+                </div>
+                <input type="text" class="form-control" aria-label="Search input with dropdown button">
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="button">Search</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
     <div class="container">
         <div class="row">
@@ -113,8 +96,6 @@
                                             }
                                         </tr>
                                     </table>
-
-
                                 </div>
                             </li>
                         }
@@ -128,4 +109,9 @@
         </div>
     </div>
 </div>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJ8e0GNYL2ZJLC1g68-2-0Iv-yXGrZkAQ&callback=initMap" type="text/javascript"></script>
+
+@section Scripts{
+    @*loads after all scripts are rendered like jQuery and scripts from _NewLayout https://stackoverflow.com/questions/37923853/how-to-use-jquery-in-asp-net-core/37923947*@
+    <script type="text/javascript" src="/js/stores.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJ8e0GNYL2ZJLC1g68-2-0Iv-yXGrZkAQ&callback=initMap" type="text/javascript"></script>
+}

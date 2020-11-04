@@ -14,6 +14,7 @@ var storeIndex = 0;
 var delay = 100;
 console.log(`first`);
 
+
 function initMap() {
     const map = new google.maps.Map(document.getElementById("map"),
         {
@@ -56,36 +57,11 @@ function getStoreAddress(map, geocoder, store, storeIndex) {
 }
 
 
+
+
+
 $("ul li").click(function () {
     $(this).addClass("active");
+/*todo: add center map to active store*/
     $(this).parent().children("li").not(this).removeClass("active");
 });
-
-
-function searchUsers(searchUserString) {
-    $.ajax({
-            type: "POST",
-            url: "Administration/ListUsersBySearch",
-            data: {
-                searchUserString: searchUserString
-            },
-            success: function (data, textStatus, jqXhr) {
-
-                $("#users").empty();
-                for (let userIndex = 0; userIndex < Object.keys(data).length; userIndex++) {
-                    $("#users").append(card(data[userIndex].id, data[userIndex].email, userIndex + 1));
-                }
-                console.log("success: ");
-            },
-            complete: function (response) {
-                console.log(`completed: ${response}`);
-            },
-            failure: function (response) {
-                console.log(`failure: ${response}`);
-            },
-            error: function (response) {
-                console.log(`error: ${response}`);
-            }
-        }
-    );
-}
