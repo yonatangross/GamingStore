@@ -24,7 +24,34 @@ namespace GamingStore.Controllers
         // GET: Stores
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Stores.ToListAsync());
+            var stores = await _context.Stores.ToListAsync();
+            // get stores with cities uniquely 
+            HashSet<string> uniqueCities = new HashSet<string>();
+            foreach (var element in stores)
+                uniqueCities.Add(element.Address.City);
+
+            // get open stores
+            List<Store> openStores = new List<Store>();
+            var currentDateTime = DateTime.Now;
+            var curDay = currentDateTime.Day-1;
+            var curTime = currentDateTime.TimeOfDay;
+            foreach (var store in stores)
+            {
+                
+                if (store.OpeningHours[curDay].OpeningTime <= curTime &&
+                    curTime <= store.OpeningHours[curDay].ClosingTime)
+                    openStores.Add(store);
+            }
+
+
+            var viewModel = new StoresCitiesViewModel
+            {
+                Stores = stores,
+                CitiesWithStores = uniqueCities.ToList(),
+                OpenStores = openStores
+            };
+
+            return View(viewModel);
         }
 
 
