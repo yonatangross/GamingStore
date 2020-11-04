@@ -5,8 +5,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - GamingStore</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="GamingStore shop project">
@@ -16,254 +16,115 @@
     <link rel="stylesheet" type="text/css" href="~/lib/OwlCarousel2-2.2.1/owl.theme.default.css">
     <link rel="stylesheet" type="text/css" href="~/lib/OwlCarousel2-2.2.1/animate.css">
     <link rel="stylesheet" type="text/css" href="~/lib/slick-1.8.0/slick.css">
-    <link rel="stylesheet" type="text/css" href="~/css/site.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/site.css"/>
 </head>
 
 <body>
-    <div class="super_container">
-        <!-- Header -->
-        <header class="header">
-            <!-- Top Bar -->
-            <div class="top_bar">
-                <div class="container">
-                    <div class="row">
-                        <div class="col d-flex flex-row">
-                            <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="~/images/mail.png" alt=""></div><a href="mailto:gamingstoreproject@gmail.com">gamingstoreproject@gmail.com</a></div>
-                            @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                            {
-                                <div class="top_bar_contact_item ">
-                                    <a asp-controller="Administration" asp-action="Index">Admin CP</a>
-                                </div>
-                            }
-                            <div class="ml-auto">
-                                <partial name="_NewLoginPartial" />
-                            </div>
+<div class="super_container">
+<!-- Header -->
+<header class="header">
+    <!-- Top Bar -->
+    <div class="top_bar">
+        <div class="container">
+            <div class="row">
+                <div class="col d-flex flex-row">
+                    <div class="top_bar_contact_item">
+                        <div class="top_bar_icon">
+                            <img src="~/images/mail.png" alt="">
+                        </div><a href="mailto:gamingstoreproject@gmail.com">gamingstoreproject@gmail.com</a>
+                    </div>
+                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        <div class="top_bar_contact_item ">
+                            <a asp-controller="Administration" asp-action="Index">Admin CP</a>
                         </div>
-
+                    }
+                    <div class="ml-auto">
+                        <partial name="_NewLoginPartial"/>
                     </div>
                 </div>
+
             </div>
-
-            <!-- Header Main -->
-
-            <div class="header_main">
-                <div class="container">
-                    <div class="row">
-
-                        <!-- Logo -->
-                        <div class="col-lg-3 col-sm-3 col-3 order-1">
-                            <div class="logo_container">
-                                <div class="logo"><a href="~/"><img src="~/images/logo.png" alt="Gaming Store" style="width: 85%;"></a></div>
-                            </div>
-                        </div>
-
-                        <!-- Search -->
-                        <div class="col-lg-7 col-12 order-lg-2 order-3 text-lg-left text-right">
-                            <div class="header_search">
-                                <div class="header_search_content">
-                                    <div class="header_search_form_container">
-                                        <form action="#" class="header_search_form clearfix">
-                                            <input type="search" required="required" class="header_search_input" placeholder="Search for products...">
-                                            <div class="custom_dropdown">
-                                                <div class="custom_dropdown_list">
-                                                    <span class="custom_dropdown_placeholder">All Categories</span>
-                                                    <i class="fas fa-chevron-down"></i>
-                                                    <ul class="custom_list">
-                                                        <li><a href="#">All Categories</a></li>
-                                                        <li><a href="#">Computers</a></li>
-                                                        <li><a href="#">Laptops</a></li>
-                                                        <li><a href="#">Cameras</a></li>
-                                                        <li><a href="#">Hardware</a></li>
-                                                        <li><a href="#">Smart-phones</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <button type="submit" class="header_search_button trans_300" value="Submit"><img src="~/images/search.png" alt=""></button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Wishlist -->
-                        <div class="col-lg-2 col-9 order-lg-3 order-2 text-lg-left text-right align-self-center">
-                            <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
-                                <!-- Cart -->
-                                <div>
-                                    <div class="d-flex flex-row align-items-center justify-content-end">
-                                        <div class="cart_icon">
-                                            <img src="~/images/cart.png" alt="">
-                                            <div class="cart_count"><span></span></div>
-                                        </div>
-                                        <div class="cart_content">
-                                            <div class="cart_text"><a class="nav-link text-dark" asp-controller="Carts" asp-action="Index">Cart</a></div>
-                                            <div class="cart_price"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Main Navigation -->
-
-            <nav class="main_nav">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-
-                            <div class="main_nav_content d-flex flex-row">
-
-                                <!-- Categories Menu -->
-
-                                <div class="cat_menu_container">
-                                    <div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
-                                        <div class="cat_burger"><span></span><span></span><span></span></div>
-                                        <div class="cat_menu_text">categories</div>
-                                    </div>
-                                    <ul class="cat_menu">
-
-                                        @for (int categoryIndex = 0; categoryIndex < Enum.GetNames(typeof(Category)).Length; categoryIndex++)
-                                        {
-                                            var category = (Category)categoryIndex;
-                                            /*todo: add links to items specified by the category*/
-                                            <li><a href="#">@Html.DisplayFor(e => category)<i class="fas fa-chevron-right ml-auto"></i></a></li>
-                                        }
-                                    </ul>
-                                </div>
-
-                                <!-- Main Nav Menu -->
-
-                                <div class="main_nav_menu ml-auto">
-                                    <ul class="standard_dropdown main_nav_dropdown">
-                                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a asp-area="" asp-controller="Stores" asp-action="Index">Stores<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a asp-area="" asp-controller="Items" asp-action="Index">Products<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a asp-area="" asp-controller="Home" asp-action="ContactUs">Contact<i class="fas fa-chevron-down"></i></a></li>
-
-                                    </ul>
-                                </div>
-
-                                <!-- Menu Trigger -->
-
-                                <div class="menu_trigger_container ml-auto">
-                                    <div class="menu_trigger d-flex flex-row align-items-center justify-content-end">
-                                        <div>
-                                            <div class="menu_trigger_text">menu</div>
-                                            <div class="cat_burger menu_burger_inner"><span></span><span></span><span></span></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-
-
-
-        </header>
-
-        <div class="container" style="margin-top: 1%">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
         </div>
+    </div>
 
+    <!-- Header Main -->
 
-        <!-- Footer -->
+    <div class="header_main">
+        <div class="container">
+            <div class="row">
 
-        <div style="
-        background: #fafafa;
-        width: 100%;
-        padding-top: 60px;
-        padding-bottom: 60px;
-        box-shadow: 0px 5px 20px rgba(0,0,0,0.1);">
-
-        </div>
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-4 footer_col">
-                        <div class="footer_column footer_contact">
-                            <div class="logo_container">
-                                <div class="logo"><a href="#">GamingStore</a></div>
-                            </div>
-                            <div class="footer_title">Got Question? Call Us 24/7</div>
-                            <div class="footer_phone">+972 506656474</div>
-                            <div class="footer_contact_text">
-                                <p>48 Yirmiyahu Street, Tel Aviv</p>
-                                <p>Israel</p>
-                            </div>
-                            <div class="footer_social">
-                                <ul>
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-google"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-vimeo-v"></i></a></li>
-                                </ul>
-                            </div>
+                <!-- Logo -->
+                <div class="col-lg-3 col-sm-3 col-3 order-1">
+                    <div class="logo_container">
+                        <div class="logo">
+                            <a href="~/">
+                                <img src="~/images/logo.png" alt="Gaming Store" style="width: 85%;">
+                            </a>
                         </div>
                     </div>
-
-                    <div class="col-lg-2 offset-lg-3">
-                        <div class="footer_column">
-                            <div class="footer_title">Find it Fast</div>
-                            <ul class="footer_list">
-                                @for (int categoryIndex = 0; categoryIndex < Enum.GetNames(typeof(Category)).Length; categoryIndex++)
-                                {
-                                    var category = (Category)categoryIndex;
-                                    /*todo: add links to items specified by the category*/
-                                    <li><a href="#">@Html.DisplayFor(e => category)<i class="fas fa-chevron-right ml-auto"></i></a></li>
-                                }
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class=" col-lg-2 offset-lg-1">
-                        <div class="footer_column">
-                            <div class="footer_title">Customer Care</div>
-                            <ul class="footer_list">
-                                <li><a href="#">My Account</a></li>
-                                <li><a href="#">Order Tracking</a></li>
-                                <li><a href="#">Customer Services</a></li>
-                                <li><a href="#">Returns / Exchange</a></li>
-                                <li><a href="#">FAQs</a></li>
-                                <li><a href="#">Product Support</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
                 </div>
-            </div>
-        </footer>
 
-        <!-- Copyright -->
-
-        <div class="copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-
-                        <div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
-                            <div class="copyright_content">
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                Copyright &copy;
-                                <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                <!-- Search -->
+                <div class="col-lg-7 col-12 order-lg-2 order-3 text-lg-left text-right">
+                    <div class="header_search">
+                        <div class="header_search_content">
+                            <div class="header_search_form_container">
+                                <form action="#" class="header_search_form clearfix">
+                                    <input type="search" required="required" class="header_search_input" placeholder="Search for products...">
+                                    <div class="custom_dropdown">
+                                        <div class="custom_dropdown_list">
+                                            <span class="custom_dropdown_placeholder">All Categories</span>
+                                            <i class="fas fa-chevron-down"></i>
+                                            <ul class="custom_list">
+                                                <li>
+                                                    <a href="#">All Categories</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Computers</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Laptops</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Cameras</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Hardware</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Smart-phones</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="header_search_button trans_300" value="Submit">
+                                        <img src="~/images/search.png" alt="">
+                                    </button>
+                                </form>
                             </div>
-                            <div class="logos ml-sm-auto">
-                                <ul class="logos_list">
-                                    <li><a href="#"><img src="~/images/logos_1.png" alt=""></a></li>
-                                    <li><a href="#"><img src="~/images/logos_2.png" alt=""></a></li>
-                                    <li><a href="#"><img src="~/images/logos_3.png" alt=""></a></li>
-                                    <li><a href="#"><img src="~/images/logos_4.png" alt=""></a></li>
-                                </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wishlist -->
+                <div class="col-lg-2 col-9 order-lg-3 order-2 text-lg-left text-right align-self-center">
+                    <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
+                        <!-- Cart -->
+                        <div>
+                            <div class="d-flex flex-row align-items-center justify-content-end">
+                                <div class="cart_icon">
+                                    <img src="~/images/cart.png" alt="">
+                                    <div class="cart_count">
+                                        <span></span>
+                                    </div>
+                                </div>
+                                <div class="cart_content">
+                                    <div class="cart_text">
+                                        <a class="nav-link text-dark" asp-controller="Carts" asp-action="Index">Cart</a>
+                                    </div>
+                                    <div class="cart_price"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -272,23 +133,253 @@
         </div>
     </div>
 
-    <script src="~/js/jquery-3.3.1.min.js"></script>
-    <script src="~/js/popper.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/lib/greensock/TweenMax.min.js"></script>
-    <script src="~/lib/greensock/TimelineMax.min.js"></script>
-    <script src="~/lib/scrollmagic/ScrollMagic.min.js"></script>
-    <script src="~/lib/greensock/animation.gsap.min.js"></script>
-    <script src="~/lib/greensock/ScrollToPlugin.min.js"></script>
-    <script src="~/lib/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-    <script src="~/lib/slick-1.8.0/slick.js"></script>
-    <script src="~/lib/easing/easing.js"></script>
-    <script src="~/js/custom.js"></script>
-    <script src="~/js/product_custom.js"></script>
-    <script src="~/js/cart_custom.js"></script>
-    <script src="~/lib/notifyjs/notify.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+    <!-- Main Navigation -->
+
+    <nav class="main_nav">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+
+                    <div class="main_nav_content d-flex flex-row">
+
+                        <!-- Categories Menu -->
+
+                        <div class="cat_menu_container">
+                            <div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
+                                <div class="cat_burger">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <div class="cat_menu_text">categories</div>
+                            </div>
+                            <ul class="cat_menu">
+
+                                @for (int categoryIndex = 0; categoryIndex < Enum.GetNames(typeof(Category)).Length; categoryIndex++)
+                                {
+                                    var category = (Category) categoryIndex;
+                                    /*todo: add links to items specified by the category*/
+                                    <li>
+                                        <a href="#">
+                                            @Html.DisplayFor(e => category)<i class="fas fa-chevron-right ml-auto"></i>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+
+                        <!-- Main Nav Menu -->
+
+                        <div class="main_nav_menu ml-auto">
+                            <ul class="standard_dropdown main_nav_dropdown">
+                                <li>
+                                    <a asp-area="" asp-controller="Home" asp-action="Index">Home<i class="fas fa-chevron-down"></i></a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Stores" asp-action="Index">Stores<i class="fas fa-chevron-down"></i></a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Items" asp-action="Index">Products<i class="fas fa-chevron-down"></i></a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Home" asp-action="ContactUs">Contact<i class="fas fa-chevron-down"></i></a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                        <!-- Menu Trigger -->
+
+                        <div class="menu_trigger_container ml-auto">
+                            <div class="menu_trigger d-flex flex-row align-items-center justify-content-end">
+                                <div>
+                                    <div class="menu_trigger_text">menu</div>
+                                    <div class="cat_burger menu_burger_inner">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+</header>
+
+<div class="container" style="margin-top: 1%">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
+
+<!-- Footer -->
+
+<div style="background: #fafafa; width: 100%; padding-top: 60px; padding-bottom: 60px; box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);">
+
+</div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-4 footer_col">
+                <div class="footer_column footer_contact">
+                    <div class="logo_container">
+                        <div class="logo">
+                            <a href="#">GamingStore</a>
+                        </div>
+                    </div>
+                    <div class="footer_title">Got Question? Call Us 24/7</div>
+                    <div class="footer_phone">+972 506656474</div>
+                    <div class="footer_contact_text">
+                        <p>48 Yirmiyahu Street, Tel Aviv</p>
+                        <p>Israel</p>
+                    </div>
+                    <div class="footer_social">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fab fa-google"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fab fa-vimeo-v"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-2 offset-lg-3">
+                <div class="footer_column">
+                    <div class="footer_title">Find it Fast</div>
+                    <ul class="footer_list">
+                        @for (int categoryIndex = 0; categoryIndex < Enum.GetNames(typeof(Category)).Length; categoryIndex++)
+                        {
+                            var category = (Category) categoryIndex;
+                            /*todo: add links to items specified by the category*/
+                            <li>
+                                <a href="#">
+                                    @Html.DisplayFor(e => category)<i class="fas fa-chevron-right ml-auto"></i>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <div class=" col-lg-2 offset-lg-1">
+                <div class="footer_column">
+                    <div class="footer_title">Customer Care</div>
+                    <ul class="footer_list">
+                        <li>
+                            <a href="#">My Account</a>
+                        </li>
+                        <li>
+                            <a href="#">Order Tracking</a>
+                        </li>
+                        <li>
+                            <a href="#">Customer Services</a>
+                        </li>
+                        <li>
+                            <a href="#">Returns / Exchange</a>
+                        </li>
+                        <li>
+                            <a href="#">FAQs</a>
+                        </li>
+                        <li>
+                            <a href="#">Product Support</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</footer>
+
+<!-- Copyright -->
+
+<div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
+                    <div class="copyright_content">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </div>
+                    <div class="logos ml-sm-auto">
+                        <ul class="logos_list">
+                            <li>
+                                <a href="#">
+                                    <img src="~/images/logos_1.png" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="~/images/logos_2.png" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="~/images/logos_3.png" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="~/images/logos_4.png" alt="">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<script src="~/js/popper.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/lib/greensock/TweenMax.min.js"></script>
+<script src="~/lib/greensock/TimelineMax.min.js"></script>
+<script src="~/lib/scrollmagic/ScrollMagic.min.js"></script>
+<script src="~/lib/greensock/animation.gsap.min.js"></script>
+<script src="~/lib/greensock/ScrollToPlugin.min.js"></script>
+<script src="~/lib/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="~/lib/slick-1.8.0/slick.js"></script>
+<script src="~/lib/easing/easing.js"></script>
+<script src="~/js/custom.js"></script>
+<script src="~/js/product_custom.js"></script>
+<script src="~/js/cart_custom.js"></script>
+<script src="~/lib/notifyjs/notify.min.js"></script>
+<script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>
+
+@RenderSection("Scripts", required: false)
 </body>
 
 </html>
