@@ -12,26 +12,26 @@ const icons = {
 
 var storeIndex = 0;
 var delay = 100;
-console.log(`first`);
-
+var map;
+var geocoder;
 
 function initMap() {
-    const map = new google.maps.Map(document.getElementById("map"),
+     map = new google.maps.Map(document.getElementById("map"),
         {
             zoom: 15,
             center: { lat: 32.086813, lng: 34.77630 }
         });
-    const geocoder = new google.maps.Geocoder();
+     geocoder = new google.maps.Geocoder();
 
-
-    /*while (storeIndex < storesObject.length) {
-        getStoreAddress(map, geocoder, storesObject[storeIndex], storeIndex);
+/*change store number*/
+    while (storeIndex < 8) {
+        getStoreAddress(storesObject[storeIndex], storeIndex);
         storeIndex++;
-    };*/
+    };
 }
 
 
-function getStoreAddress(map, geocoder, store, storeIndex) {
+function getStoreAddress(store, storeIndex) {
     let [address, name, isWarehouse] = store;
     console.log(`store: ${name} index:${storeIndex}`);
     geocoder.geocode({ address: address },
@@ -62,7 +62,17 @@ function getStoreAddress(map, geocoder, store, storeIndex) {
 
 $("ul li").click(function () {
     $(this).addClass("active");
-/*todo: add center map to active store*/
+
     $(this).parent().children("li").not(this).removeClass("active");
+    var store_address = $(this).find(".store_address")[0].innerText.toString();
+
+    geocoder.geocode({ address: store_address },
+        (results, status) => {
+            if (status === "OK") {
+                map.setCenter(results[0].geometry.location);
+            } else {
+                console.log(`error recentering the map to ${store_address}.`);
+            }
+        });
 });
 
