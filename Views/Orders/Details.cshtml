@@ -14,10 +14,18 @@
                 <div class="col-sm-4">
                     <h5><strong>Shipping Address</strong></h5>
                     <ul>
-                        <li>@Model.ShippingAddress.FullName</li>
-                        <li>@Model.ShippingAddress.Address1</li>
-                        <li>@Model.ShippingAddress.City, @Model.ShippingAddress.PostalCode</li>
-                        <li>@Model.ShippingAddress.Country</li>
+                        @if (Model.ShippingAddress != null)
+                        {
+                            <li>@Model.ShippingAddress.FullName</li>
+                            <li>@Model.ShippingAddress.Address1</li>
+                            <li>@Model.ShippingAddress.City, @Model.ShippingAddress.PostalCode</li>
+                            <li>@Model.ShippingAddress.Country</li>
+                        }
+                        else
+                        {
+                            <li>No shipping address</li>
+                        }
+
                     </ul>
                 </div>
 
