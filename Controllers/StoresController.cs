@@ -78,9 +78,9 @@ namespace GamingStore.Controllers
                 Stores = stores,
                 CitiesWithStores = uniqueCities.ToArray(),
                 OpenStores = openStores,
-                Name = "",
-                City = null,
-                IsOpen = false,
+                Name = received.Name,
+                City = received.City,
+                IsOpen = received.IsOpen,
             };
 
             return View(viewModel);

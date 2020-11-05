@@ -1,5 +1,5 @@
 ﻿@using GamingStore.Contracts
-@model IEnumerable<GamingStore.Models.Item>
+@model GamingStore.ViewModels.GetItemsViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -16,14 +16,104 @@
                 <!-- Shop Sidebar -->
                 <div class="shop_sidebar">
                     <div class="sidebar_section">
+                        @{
+                            var selectedCategory = Model.ItemsFilter.Category;
+                            var selectedManufacture = Model.ItemsFilter.Manufacture;
+                            var selectedPrices = Model.ItemsFilter.PriceRange;
+
+                            var filterCategory = new ItemsFilter()
+                            {
+                                Manufacture = Model.ItemsFilter.Manufacture,
+                                Category = Model.ItemsFilter.Category,
+                                PriceRange = Model.ItemsFilter.PriceRange
+                            };
+
+                            var filterManufacture = new ItemsFilter()
+                            {
+                                Manufacture = Model.ItemsFilter.Manufacture,
+                                Category = Model.ItemsFilter.Category,
+                                PriceRange = Model.ItemsFilter.PriceRange
+                            };
+
+                            var filterPrices = new ItemsFilter()
+                            {
+                                Manufacture = Model.ItemsFilter.Manufacture,
+                                Category = Model.ItemsFilter.Category,
+                                PriceRange = Model.ItemsFilter.PriceRange
+                            };
+
+                        } 
                         <div class="sidebar_title">Categories</div>
                         <ul class="sidebar_categories">
-                            @foreach (var category in Enum.GetNames(typeof(Category)))
+                            @foreach (var category in Model.Categories)
                             {
                                 <li>
-                                    <a asp-action="Index" asp-controller="Items" asp-route-category="@category">@Html.DisplayFor(e => category)</a>
+                                    <span>
+                                        @{
+                                            filterCategory.Category = category.ToString();
+                                            filterCategory.Manufacture = null;
+                                        }
+                                        @if (selectedCategory == category.ToString())
+                                        {
+                                            <strong>
+                                                @Html.ActionLink(category.ToString(), "Index", "Items", filterCategory)
+                                            </strong>
+                                        }
+                                        else
+                                        {
+                                            @Html.ActionLink(category.ToString(), "Index", "Items", filterCategory)
+                                        }
+                                    </span>
                                 </li>
                             }
+
+                            <li>
+                                @*<a asp-action="Index" asp-controller="Items" asp-route-category="@category">@Html.DisplayFor(e => category)</a>*@
+                            </li>
+
+                        </ul>
+                        @if (Model.Manufactures.Any())
+                        {
+                            <hr/>
+                            <div class="sidebar_title">Brand</div>
+                        }
+                        <ul class="sidebar_categories">
+                            @foreach (var manufacture in Model.Manufactures)
+                            {
+                                <li>
+                                    <span>
+                                        @{
+                                            filterManufacture.Manufacture = manufacture;
+                                        }
+                                        @if (selectedManufacture == manufacture)
+                                        {
+                                            <strong>
+                                                @Html.ActionLink(manufacture, "Index", "Items", filterManufacture)
+                                            </strong>
+                                        }
+                                        else
+                                        {
+                                            @Html.ActionLink(manufacture, "Index", "Items", filterManufacture)
+                                        }
+                                    </span>
+                                </li>
+                            }
+                        </ul>
+                        <hr/>
+                        <div class="sidebar_title">Price Range</div>
+                        <ul class="sidebar_categories">
+                            <li>
+                                0-25
+                            </li>
+                            <li>
+                                26-50
+                            </li>
+                            <li>
+                                51-100
+                            </li>
+                            <li>
+                                100+
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -33,24 +123,11 @@
                 <!-- Shop Content -->
                 <div class="shop_content">
                     <div class="shop_bar clearfix">
-                        <div class="shop_product_count"><span>@Model.Count()</span> products found</div>
-                        <div class="shop_sorting">
-                            <span>Sort by:</span>
-                            <ul>
-                                <li>
-                                    <span class="sorting_text">highest rated<i class="fas fa-chevron-down"></i></span>
-                                    <ul>
-                                        <li class="shop_sorting_button" data-isotope-option="{ &quot;sortBy&quot;: &quot;original-order&quot; }">highest rated</li>
-                                        <li class="shop_sorting_button" data-isotope-option="{ &quot;sortBy&quot;: &quot;name&quot; }">name</li>
-                                        <li class="shop_sorting_button" data-isotope-option="{ &quot;sortBy&quot;: &quot;price&quot; }">price</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
+                        <div class="shop_product_count"><span>@Model.Items.Count()</span> products found</div>
                     </div>
                     <div class="product_grid">
                         @{
-                            foreach (var item in Model)
+                            foreach (var item in Model.Items)
                             {
                                 <!-- Product Item -->
                                 <div class="product_item">
