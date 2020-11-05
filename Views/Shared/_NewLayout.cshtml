@@ -269,7 +269,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-2 offset-lg-3">
+                    <div class="col-lg-2 offset-lg-1">
                         <div class="footer_column">
                             <div class="footer_title">Find it Fast</div>
                             <ul class="footer_list">
@@ -279,6 +279,20 @@
                                         <a asp-action="Index" asp-controller="Items" asp-route-category="@category">@Html.DisplayFor(e => category)</a>
                                     </li>
                                 }
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class=" col-lg-0 offset-lg-1">
+                        <div class="footer_column">
+                            <div class="footer_title"> Navigation</div>
+                            <ul class="footer_list">
+                                <li>
+                                    <a href="/Stores">Stores</a>
+                                </li>
+                                <li>
+                                    <a href="/Items">Products</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -300,73 +314,34 @@
                         </div>
                     </div>
 
+
+
                 </div>
             </div>
         </footer>
 
-        <!-- Copyright -->
 
-        <div class="copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
 
-                        <div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
-                            <div class="copyright_content">
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                Copyright &copy;
-                                <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            </div>
-                            <div class="logos ml-sm-auto">
-                                <ul class="logos_list">
-                                    <li>
-                                        <a href="#">
-                                            <img src="~/images/logos_1.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img src="~/images/logos_2.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img src="~/images/logos_3.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img src="~/images/logos_4.png" alt="">
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+        <script src="~/js/jquery-3.3.1.min.js"></script>
+        <script src="~/js/popper.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="~/lib/greensock/TweenMax.min.js"></script>
+        <script src="~/lib/greensock/TimelineMax.min.js"></script>
+        <script src="~/lib/scrollmagic/ScrollMagic.min.js"></script>
+        <script src="~/lib/greensock/animation.gsap.min.js"></script>
+        <script src="~/lib/greensock/ScrollToPlugin.min.js"></script>
+        <script src="~/lib/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+        <script src="~/lib/slick-1.8.0/slick.js"></script>
+        <script src="~/lib/easing/easing.js"></script>
+        <script src="~/js/custom.js"></script>
+        <script src="~/js/product_custom.js"></script>
+        <script src="~/js/cart_custom.js"></script>
+        <script src="~/lib/notifyjs/notify.min.js"></script>
+        <script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>
+
+        @RenderSection("Scripts", required: false)
     </div>
-
-    <script src="~/js/jquery-3.3.1.min.js"></script>
-    <script src="~/js/popper.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/lib/greensock/TweenMax.min.js"></script>
-    <script src="~/lib/greensock/TimelineMax.min.js"></script>
-    <script src="~/lib/scrollmagic/ScrollMagic.min.js"></script>
-    <script src="~/lib/greensock/animation.gsap.min.js"></script>
-    <script src="~/lib/greensock/ScrollToPlugin.min.js"></script>
-    <script src="~/lib/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-    <script src="~/lib/slick-1.8.0/slick.js"></script>
-    <script src="~/lib/easing/easing.js"></script>
-    <script src="~/js/custom.js"></script>
-    <script src="~/js/product_custom.js"></script>
-    <script src="~/js/cart_custom.js"></script>
-    <script src="~/lib/notifyjs/notify.min.js"></script>
-    <script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>
-
-    @RenderSection("Scripts", required: false)
 </body>
 
 </html>
