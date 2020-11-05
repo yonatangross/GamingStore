@@ -1,61 +1,78 @@
-﻿
-//d3js
+﻿// set the dimensions and margins of the graph
+var margin = { top: 20, right: 30, bottom: 40, left: 90 },
+    width = 500 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
-var svg = d3.select("svg"),
-    margin = 200,
-    width = svg.attr("width") - margin,
-    height = svg.attr("height") - margin;
+// append the svg object to the body of the page
+var svg = d3.select("svg")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform",
+        "translate(" + margin.left + "," + margin.top + ")");
 
-svg.append("text")
-    .attr("transform", "translate(100,0)")
-    .attr("x", 50)
-    .attr("y", 50)
-    .attr("font-size", "24px")
-    .text("Stores");
+/*console.log(`in administration_stats.js, myData is: \n ${myData}`);*/
 
-var xScale = d3.scaleBand().range([0, width]).padding(0.4),
-    yScale = d3.scaleLinear().range([height, 0]);
+// Parse the Data
+d3.json("/data/BarChartData.json",
+    function(data) {
 
-var g = svg.append("g")
-    .attr("transform", "translate(" + 100 + "," + 100 + ")");
+        // Add X axis
+        var x = d3.scaleLinear()
+            .domain([0, 13000])
+            .range([0, width]);
 
-d3.csv("xyz.csv", function (error, data) {
-    if (error) {
-        throw error;
-    }
+        svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x))
+            .selectAll("text")
+            .attr("transform", "translate(-10,0)rotate(-45)")
+            .style("text-anchor", "end");
 
-    xScale.domain(data.map(function (d) { return d.year; }));
-    yScale.domain([0, d3.max(data, function (d) { return d.value; })]);
+        svg.append("text") // text label for the x axis
+            .attr("x", width / 2)
+            .attr("y", height + margin.bottom)
+            .style("text-anchor", "middle")
+            .text("Date");
 
-    g.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(xScale))
-        .append("text")
-        .attr("y", height - 250)
-        .attr("x", width - 100)
-        .attr("text-anchor", "end")
-        .attr("stroke", "black")
-        .text("Year");
 
-    g.append("g")
-        .call(d3.axisLeft(yScale).tickFormat(function (d) {
-                return "$" + d;
-            })
-            .ticks(10))
-        .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .attr("dy", "-5.1em")
-        .attr("text-anchor", "end")
-        .attr("stroke", "black")
-        .text("Stock Price");
+        // Y axis
+        var y = d3.scaleBand()
+            .range([0, height])
+            .domain(data.map(function(d) { return d.Date; }))
+            .padding(.1);
 
-    g.selectAll(".bar")
-        .data(data)
-        .enter().append("rect")
-        .attr("class", "bar")
-        .attr("x", function (d) { return xScale(d.year); })
-        .attr("y", function (d) { return yScale(d.value); })
-        .attr("width", xScale.bandwidth())
-        .attr("height", function (d) { return height - yScale(d.value); });
-});
+        svg.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 0 - margin.left)
+            .attr("x", 0 - (height / 2))
+            .attr("dy", "1em")
+            .style("text-anchor", "middle")
+            .text("Value");
+
+        svg.append("g")
+            .call(d3.axisLeft(y));
+
+      
+
+        //Bars
+        svg.selectAll("myRect")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("x", x(0))
+            .attr("y", function(d) { return y(d.Date); })
+            .attr("width", function(d) { return x(d.Value); })
+            .attr("height", y.bandwidth())
+            .attr("fill", "#69b3a2")
+            .attr("text", function (d) { return x(d.Value) });
+
+        svg.append("text")
+            .attr("x", (width / 2)+40)
+            .attr("y", 22)
+            .attr("text-anchor", "middle")
+            .style("font-size", "36px")
+            .style("text-decoration", "bold")
+            .text("Sales in $ per month");
+    });

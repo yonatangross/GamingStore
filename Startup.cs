@@ -93,13 +93,6 @@ namespace GamingStore
             app.UseAuthentication();
             app.UseAuthorization();
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllerRoute(
-            //        name: "default",
-            //        pattern: "{controller=Orders}/{action=Details}/{id=78c87045-8b25-4187-a416-ce408adab2b4}");
-            //    endpoints.MapRazorPages();
-            //});
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using GamingStore.Contracts;
 using GamingStore.Data;
 using GamingStore.Models;
 using GamingStore.ViewModels;
@@ -9,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace GamingStore.Controllers
 {
@@ -19,7 +22,8 @@ namespace GamingStore.Controllers
         private readonly UserManager<Customer> _userManager;
         private readonly StoreContext _context;
 
-        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<Customer> userManager, StoreContext context)
+        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<Customer> userManager,
+            StoreContext context)
         {
             _roleManager = roleManager;
             _userManager = userManager;
@@ -53,7 +57,55 @@ namespace GamingStore.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View();
+            var orders = await _context.Orders.Include(o => o.Payment).ToListAsync();
+            var stats = CalcStats(orders);
+
+            var viewModel = new AdminStatsViewModel()
+            {
+                OrderMonthlySumDictionary = stats
+            };
+
+            return View(viewModel);
+        }
+
+        private static string CalcStats(List<Order> orders)
+        {
+            var orderMonthlyList = new List<BarChartFormat>();
+            orders.Sort((x, y) => x.OrderDate.CompareTo(y.OrderDate));
+            orders.Reverse();
+
+            foreach (var order in orders)
+            {
+                var orderDate = order.OrderDate.Date.ToString("Y");
+                var itemsCost = order.Payment.ItemsCost;
+
+                if (orderMonthlyList.Any(d => d.Date == orderDate))
+                {
+                    BarChartFormat barChartFormat = orderMonthlyList.FirstOrDefault(d => d.Date == orderDate);
+                    if (barChartFormat != null)
+                    {
+                        barChartFormat.Value += itemsCost;
+                    }
+                }
+                else
+                {
+                    orderMonthlyList.Add(new BarChartFormat()
+                    {
+                        Date = orderDate,
+                        Value = itemsCost
+                    });
+                }
+            }
+
+
+            var serializeObject = JsonConvert.SerializeObject(orderMonthlyList, Formatting.Indented);
+
+            //write string to file
+            string barChartDataPath = "data\\BarChartData.json";
+            var fileDir = $@"{Directory.GetCurrentDirectory()}\wwwroot\{barChartDataPath}";
+            System.IO.File.WriteAllText(fileDir, serializeObject);
+
+            return serializeObject;
         }
 
         [HttpPost]
@@ -99,7 +151,7 @@ namespace GamingStore.Controllers
                 users = users.Where(user => user.Email.Contains(searchUserString));
             }
 
-            var jsonResult= new JsonResult(users.ToList());
+            var jsonResult = new JsonResult(users.ToList());
             return jsonResult;
         }
 
@@ -157,7 +209,8 @@ namespace GamingStore.Controllers
         [HttpGet]
         public async Task<IActionResult> ListOrders()
         {
-            return View(await _context.Orders.Include(order => order.Customer).Include(order => order.Payment).ToListAsync());
+            return View(await _context.Orders.Include(order => order.Customer).Include(order => order.Payment)
+                .ToListAsync());
         }
 
         // This action responds to HttpPost and receives EditRoleViewModel
