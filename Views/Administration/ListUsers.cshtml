@@ -23,7 +23,7 @@
         foreach (var user in Model)
         {
             userNum++;
-            var userNameString = "user" + userNum; @*adding user number to div*@
+            var userNameString = "user" + userNum;@*adding user number to div*@
             <div class="card mb-3 @userNameString">
                 <div class="card-header">
                     User Id : @user.Id
@@ -67,3 +67,8 @@
         </div>
     }
 </div>
+
+@section Scripts{
+    <script type="text/javascript" src="/js/list_users.js"></script>
+
+}

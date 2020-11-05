@@ -17,6 +17,6 @@ namespace GamingStore.ViewModels
 
         public string Name { get; set; }
         public string City { get; set; }
-        public bool IsOpen { get; set; } = false;
+        public bool IsOpen { get; set; } 
     }
 }
