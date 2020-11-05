@@ -35,25 +35,41 @@ namespace GamingStore.Controllers
         private Task<Customer> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Items
-        public async Task<IActionResult> Index(string category)
+        public async Task<IActionResult> Index(string category, string manufacture, string priceRange)
         {
-            if (string.IsNullOrEmpty(category))
+
+            var items = await _context.Items.ToListAsync();
+
+            var categories = items.Select(i => i.Category).Distinct().ToList();
+            var manufactures = new List<string>();
+
+            if (!string.IsNullOrWhiteSpace(category))
             {
-                return View(await _context.Items.ToListAsync());
+                items = items.Where(item => item.Category.ToString() == category).ToList();
+                manufactures = items.Select(i => i.Manufacturer).Distinct().ToList();
             }
 
-            List<Item> items = new List<Item>();
-
-            foreach (var item in _context.Items)
+            if (!string.IsNullOrWhiteSpace(manufacture))
             {
-                if (item.Category.ToString() == category)
+                items = items.Where(item => item.Manufacturer == manufacture).ToList();
+            }
+
+            var viewModel = new GetItemsViewModel()
+            {
+                Categories = categories,
+                Manufactures = manufactures,
+                Items = items.ToArray(),
+                ItemsFilter = new ItemsFilter()
                 {
-                    items.Add(item);
+                    Category = category,
+                    Manufacture = manufacture,
+                    PriceRange = priceRange
                 }
-            }
-         
-            return View(items);
+            };
+
+            return View(viewModel);
         }
+
 
         // GET: Items/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -95,7 +111,7 @@ namespace GamingStore.Controllers
         {
             var directoryName = model.Item.Title.Trim().Replace(" ", string.Empty);
             var uploadFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images", "items", directoryName);
-            
+
             // do other validations on your model as needed
             if (model.File1 != null)
             {
@@ -282,7 +298,7 @@ namespace GamingStore.Controllers
             }
             catch (Exception e)
             {
-                
+
             }
 
             return RedirectToAction(nameof(Index));
