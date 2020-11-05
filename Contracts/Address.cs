@@ -7,15 +7,18 @@ namespace GamingStore.Contracts
 {
     public class Address 
     {
+        [Display(Name = "Full Name")]
         public string? FullName { get; set; }
 
         [Required]
+        [Display(Name = "Address")]
         public string? Address1 { get; set; }
 
         [Required] 
         public string? City { get; set; }
 
-        [Required] 
+        [Required]
+        [Display(Name = "Postal Code")]
         public string? PostalCode { get; set; }
 
         public string? Country { get; set; } = "Israel";
