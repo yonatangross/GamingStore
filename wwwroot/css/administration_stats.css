@@ -1,0 +1,14 @@
+﻿/*
+	D3.js
+*/
+
+h3 {
+    margin-top: 200px;
+}
+svg {
+    margin-top: 50px;
+}
+
+.bar {
+    fill: steelblue;
+}

@@ -23,8 +23,8 @@ function initMap() {
         });
      geocoder = new google.maps.Geocoder();
 
-/*change store number*/
-    while (storeIndex < 8) {
+/*todo: change store number*/
+    while (storeIndex < 3) {
         getStoreAddress(storesObject[storeIndex], storeIndex);
         storeIndex++;
     };
@@ -43,7 +43,7 @@ function getStoreAddress(store, storeIndex) {
                         map,
                         title: name,
                         icon: {
-                            url: isWarehouse === true ? icons.warehouseStore.icon : icons.regularStore.icon,
+                            url: isWarehouse === "true" ? icons.warehouseStore.icon : icons.regularStore.icon,
                             scaledSize: new google.maps.Size(40, 40)
                         }
                     }

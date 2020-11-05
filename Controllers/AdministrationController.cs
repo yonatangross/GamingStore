@@ -92,7 +92,7 @@ namespace GamingStore.Controllers
 
         public JsonResult ListUsersBySearch(string searchUserString)
         {
-            var users = from user in _userManager.Users select user;
+            var users = _userManager.Users;
 
             if (!string.IsNullOrEmpty(searchUserString))
             {
