@@ -78,9 +78,8 @@ namespace GamingStore.Controllers
         public IActionResult Create()
         {
             Category[] allCategories = _context.Items.Select(item => item.Category).Distinct().ToArray();
-            string categoriesString = $"[\"{string.Join("\",\"", allCategories)}\"]";
 
-            return View(new CreateItemViewModel
+            return View(new CreateEditItemViewModel
             {
                 Categories = allCategories
             });
@@ -92,7 +91,7 @@ namespace GamingStore.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateItemViewModel model)
+        public async Task<IActionResult> Create(CreateEditItemViewModel model)
         {
             var directoryName = model.Item.Title.Trim().Replace(" ", string.Empty);
             var uploadFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images", "items", directoryName);
@@ -134,17 +133,27 @@ namespace GamingStore.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
+            Category[] allCategories = _context.Items.Select(i => i.Category).Distinct().ToArray();
+
             if (id == null)
             {
                 return NotFound();
             }
 
             var item = await _context.Items.FindAsync(id);
+
             if (item == null)
             {
                 return NotFound();
             }
-            return View(item);
+
+            var viewModel = new CreateEditItemViewModel()
+            {
+                Item = item,
+                Categories = allCategories
+            };
+
+            return View(viewModel);
         }
 
         // POST: Items/Edit/5
@@ -153,23 +162,45 @@ namespace GamingStore.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Manufacturer,Price,Category,PropertiesList")] Item item)
+        public async Task<IActionResult> Edit(CreateEditItemViewModel model)
         {
-            if (id != item.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(item);
+                    var itemOnDb = await _context.Items.FirstOrDefaultAsync(i => i.Id == model.Item.Id);
+
+                    if (model.Item.Title != itemOnDb.Title)
+                    {
+                        itemOnDb.Title = model.Item.Title;
+                    }
+
+                    if (model.Item.Description != itemOnDb.Description)
+                    {
+                        itemOnDb.Description = model.Item.Description;
+                    }
+
+                    if (model.Item.Manufacturer != itemOnDb.Manufacturer)
+                    {
+                        itemOnDb.Manufacturer = model.Item.Manufacturer;
+                    }
+
+                    if (model.Item.Price != itemOnDb.Price)
+                    {
+                        itemOnDb.Price = model.Item.Price;
+                    }
+
+                    if (model.Item.Category != itemOnDb.Category)
+                    {
+                        itemOnDb.Category = model.Item.Category;
+                    }
+
+                    _context.Update(itemOnDb);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ItemExists(item.Id))
+                    if (!ItemExists(model.Item.Id))
                     {
                         return NotFound();
                     }
@@ -180,7 +211,11 @@ namespace GamingStore.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+
+            Category[] allCategories = _context.Items.Select(i => i.Category).Distinct().ToArray();
+            model.Categories = allCategories;
+
+            return View(model);
         }
 
         // GET: Items/Delete/5
