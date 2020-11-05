@@ -12,8 +12,11 @@ namespace GamingStore.ViewModels
     {
         public IEnumerable<Store> Stores { get; set; }
 
-        public IEnumerable<string> CitiesWithStores { get; set; }
+        public string[] CitiesWithStores { get; set; }
         public IEnumerable<Store> OpenStores{ get; set; }
 
+        public string Name { get; set; }
+        public string City { get; set; }
+        public bool IsOpen { get; set; } = false;
     }
 }

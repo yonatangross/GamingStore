@@ -41,5 +41,14 @@ namespace GamingStore.Models
         public ICollection<Order> Orders { get; set; }
 
         public ICollection<StoreItem> StoreItems { get; set; } // many to many relationship
+
+        public bool IsOpen()
+        {
+            var currentDateTime = DateTime.Now;
+            var curDay = currentDateTime.Day - 1;
+            var curTime = currentDateTime.TimeOfDay;
+
+            return OpeningHours[curDay].OpeningTime <= curTime && curTime <= OpeningHours[curDay].ClosingTime;
+        }
     }
 }
