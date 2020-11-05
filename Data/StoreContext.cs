@@ -27,8 +27,8 @@ namespace GamingStore.Data
             #region OneToOne
 
             // Order 1-1 Payment
-            modelBuilder.Entity<Order>().HasOne(b => b.Payment).WithOne(i => i.Order)
-                .HasForeignKey<Payment>(p => p.OrderForeignKey);
+            //modelBuilder.Entity<Order>().HasOne(b => b.Payment).WithOne(i => i.Order)
+            //    .HasForeignKey<Payment>(p => p.OrderForeignKey);
 
             #endregion
 
