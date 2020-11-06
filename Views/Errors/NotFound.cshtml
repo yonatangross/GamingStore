@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "404 Not Found Error";
+}
+
+<div class="row">
+    <div class="col-md-6 align-self-center">
+        <img src="/images/error.png" alt="" />
+    </div>
+    <div class="col-md-6 align-self-center">
+        <h2>UH OH! We're lost.</h2>
+        <p>
+            The page you are looking for does not exist. How you got here is a mystery.<br />
+            Please contact support for help.
+        </p>
+
+        <button type="button" class="btn btn-primary" onclick="location.href = '@Url.Action("ContactUs", "Home")'">Contact Support</button>
+    </div>
+</div>

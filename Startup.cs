@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GamingStore.Data;
+using GamingStore.Extensions;
 using GamingStore.Models;
 using GamingStore.Services;
 using GamingStore.Services.Email;
@@ -85,6 +86,7 @@ namespace GamingStore
                 app.UseHsts();
             }
 
+            app.ConfigureExceptionHandler();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
