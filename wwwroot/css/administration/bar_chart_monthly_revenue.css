@@ -12,3 +12,12 @@ svg {
 .bar {
     fill: steelblue;
 }
+
+svg rect {
+    fill: orange;
+}
+
+svg text {
+    fill: black;
+    font: 10px sans-serif;
+}
