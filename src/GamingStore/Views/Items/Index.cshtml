@@ -103,16 +103,20 @@
                         <div class="sidebar_title">Price Range</div>
                         <ul class="sidebar_categories">
                             <li>
-                                0-25
+                                <a asp-controller="Items"
+                                   asp-action="Index" asp-route-priceRange="0-25">0-25</a>
                             </li>
                             <li>
-                                26-50
+                                <a asp-controller="Items"
+                                   asp-action="Index" asp-route-priceRange="26-50">26-50</a>
                             </li>
                             <li>
-                                51-100
+                                <a asp-controller="Items"
+                                   asp-action="Index" asp-route-priceRange="51-99">51-99</a>
                             </li>
                             <li>
-                                100+
+                                <a asp-controller="Items"
+                                   asp-action="Index" asp-route-priceRange="100+">100+</a>
                             </li>
                         </ul>
                     </div>

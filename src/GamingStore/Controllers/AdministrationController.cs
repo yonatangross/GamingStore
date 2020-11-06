@@ -201,6 +201,12 @@ namespace GamingStore.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> ListStores()
+        {
+            return View(await _context.Stores.ToListAsync());
+        }
+
+        [HttpGet]
         public async Task<IActionResult> ListItems()
         {
             return View(await _context.Items.ToListAsync());

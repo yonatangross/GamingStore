@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Policy;
@@ -28,13 +29,13 @@ namespace GamingStore.Models
         public string Name { get; set; }
 
         [Required] public Address Address { get; set; }
-
+        [DisplayName("Phone Number")]
         [Required, DataType(DataType.PhoneNumber), StringLength(50), Phone]
         public string PhoneNumber { get; set; }
 
         [DataType(DataType.EmailAddress), EmailAddress]
         public string Email { get; set; }
-
+        [DisplayName("Opening Hours")]
         public OpeningHours[] OpeningHours { get; set; }
 
         //public Dictionary<Item,uint> Stock { get; set; } // determines how many items there are in the store. example: {{fridge, 5},{mouse,6}}

@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace GamingStore.Controllers
 {
@@ -52,6 +53,22 @@ namespace GamingStore.Controllers
             if (!string.IsNullOrWhiteSpace(manufacture))
             {
                 items = items.Where(item => item.Manufacturer == manufacture).ToList();
+            }
+
+            var endPrice = items.Select(i => i.Price).Max();
+            if (!string.IsNullOrWhiteSpace(priceRange))
+            {
+                if (priceRange.Contains("0-25"))
+                    items = items.Where(item => item.Price >= 0 && item.Price <= 25).ToList();
+                if (priceRange.Contains("26-50"))
+                    items = items.Where(item => item.Price >= 26 && item.Price <= 50).ToList();
+                if (priceRange.Contains("51-99"))
+                    items = items.Where(item => item.Price >= 51 && item.Price <= 99).ToList();
+                if (priceRange.Contains("100+"))
+                    items = items.Where(item => item.Price >= 100 && item.Price <= int.MaxValue).ToList();
+
+
+                //items = items.Where(item => item.Manufacturer == manufacture).ToList();
             }
 
             var viewModel = new GetItemsViewModel()
