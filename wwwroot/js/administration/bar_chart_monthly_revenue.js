@@ -12,8 +12,6 @@ var svg = d3.select("svg")
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
 
-/*console.log(`in administration_stats.js, myData is: \n ${myData}`);*/
-
 // Parse the Data
 d3.json("/data/BarChartData.json",
     function(data) {
@@ -34,7 +32,7 @@ d3.json("/data/BarChartData.json",
             .attr("x", width / 2)
             .attr("y", height + margin.bottom)
             .style("text-anchor", "middle")
-            .text("Date");
+            .text("Value");
 
 
         // Y axis
@@ -49,30 +47,28 @@ d3.json("/data/BarChartData.json",
             .attr("x", 0 - (height / 2))
             .attr("dy", "1em")
             .style("text-anchor", "middle")
-            .text("Value");
+            .text("Date");
 
         svg.append("g")
             .call(d3.axisLeft(y));
 
-      
-
         //Bars
-        svg.selectAll("myRect")
+        var bar = svg.selectAll("myRect")
             .data(data)
-            .enter()
-            .append("rect")
+            .enter();
+        bar.append("rect")
             .attr("x", x(0))
             .attr("y", function(d) { return y(d.Date); })
             .attr("width", function(d) { return x(d.Value); })
             .attr("height", y.bandwidth())
-            .attr("fill", "#69b3a2")
-            .attr("text", function (d) { return x(d.Value) });
+            .attr("fill", "#69b3a2");
+
 
         svg.append("text")
             .attr("x", (width / 2)+40)
             .attr("y", 22)
             .attr("text-anchor", "middle")
-            .style("font-size", "36px")
+            .style("font-size", "22px")
             .style("text-decoration", "bold")
             .text("Sales in $ per month");
     });
