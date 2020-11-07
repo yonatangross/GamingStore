@@ -46,7 +46,6 @@ namespace GamingStore.Controllers
             if (!string.IsNullOrWhiteSpace(category))
             {
                 items = items.Where(item => item.Category.ToString() == category).ToList();
-                manufactures = items.Select(i => i.Manufacturer).Distinct().ToList();
             }
 
             if (!string.IsNullOrWhiteSpace(manufacture))
@@ -71,7 +70,7 @@ namespace GamingStore.Controllers
                 SortByFilter.PriceHighToLow => items.OrderByDescending(i => i.Price).ToList(),
                 _ => throw new ArgumentOutOfRangeException(nameof(sortBy), sortBy, null)
             };
-
+            manufactures = items.Select(i => i.Manufacturer).Distinct().ToList();
             var viewModel = new GetItemsViewModel()
             {
                 Categories = categories,
@@ -81,7 +80,9 @@ namespace GamingStore.Controllers
                 {
                     Category = category,
                     Manufacture = manufacture,
-                    SortBy = sortBy
+                    SortBy = sortBy,
+                    PriceMin = priceMin,
+                    PriceMax = priceMax
                 }
             };
 
