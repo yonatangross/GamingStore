@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 
 namespace GamingStore.Contracts
 {
@@ -12,6 +14,6 @@ namespace GamingStore.Contracts
         [Display(Name = "Monitors")] Monitors,
         [Display(Name = "Keyboards")] Keyboards,
         [Display(Name = "Mouses")] Mouses,
-
     }
+
 }

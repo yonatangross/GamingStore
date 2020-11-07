@@ -273,10 +273,11 @@
                         <div class="footer_column">
                             <div class="footer_title">Find it Fast</div>
                             <ul class="footer_list">
-                                @foreach (var category in Enum.GetNames(typeof(Category)))
+                                @for (int categoryIndex = 0; categoryIndex < Enum.GetNames(typeof(Category)).Length; categoryIndex++)
                                 {
+                                    var category = (Category)categoryIndex;
                                     <li>
-                                        <a asp-action="Index" asp-controller="Items" asp-route-category="@category">@Html.DisplayFor(e => category)</a>
+                                        <a href="/Items?Category=@category">@Html.DisplayFor(e => category)</a>
                                     </li>
                                 }
                             </ul>

@@ -11,8 +11,8 @@ namespace GamingStore.Contracts
 
         public string Manufacture { get; set; }
 
-        public int PriceFrom { get; set; }
+        public int? PriceMin { get; set; }
         
-        public int PriceTo { get; set; }
+        public int? PriceMax { get; set; }
     }
 }
