@@ -1,4 +1,5 @@
 ﻿@using GamingStore.Contracts
+@using GamingStore.Extensions
 @model GamingStore.ViewModels.GetItemsViewModel
 
 @{
@@ -14,44 +15,45 @@
 <div class="shop">
     <div class="container">
         <div class="row">
-            <div class="col-lg-2">
+            <div class="col-lg-3">
                 <!-- Shop Sidebar -->
-                <div class="shop_sidebar">
+                <div class="shop_sidebar" style="margin-left: 15%">
                     <div class="sidebar_section">
                         @{
-                            var selectedCategory = Model.ItemsFilter.Category;
-                            var selectedManufacture = Model.ItemsFilter.Manufacture;
-                            var selectedPriceFrom = Model.ItemsFilter.PriceFrom;
-                            var selectedPriceTo = Model.ItemsFilter.PriceTo;
+                            string selectedCategory = Model.ItemsFilter.Category;
+                            string selectedManufacture = Model.ItemsFilter.Manufacture;
+                            var selectedSort = Model.ItemsFilter.SortBy;
 
                             var filterCategory = new ItemsFilter()
                             {
                                 Manufacture = Model.ItemsFilter.Manufacture,
                                 Category = Model.ItemsFilter.Category,
-                                PriceFrom = Model.ItemsFilter.PriceFrom,
-                                PriceTo = Model.ItemsFilter.PriceTo
+                                PriceMin = Model.ItemsFilter.PriceMin,
+                                PriceMax = Model.ItemsFilter.PriceMax,
+                                SortBy = Model.ItemsFilter.SortBy
                             };
 
                             var filterManufacture = new ItemsFilter()
                             {
                                 Manufacture = Model.ItemsFilter.Manufacture,
                                 Category = Model.ItemsFilter.Category,
-                                PriceFrom = Model.ItemsFilter.PriceFrom,
-                                PriceTo = Model.ItemsFilter.PriceTo
+                                PriceMin = Model.ItemsFilter.PriceMin,
+                                PriceMax = Model.ItemsFilter.PriceMax,
+                                SortBy = Model.ItemsFilter.SortBy
                             };
 
-                            var filterPrices = new ItemsFilter()
+                            var filterSort = new ItemsFilter()
                             {
                                 Manufacture = Model.ItemsFilter.Manufacture,
                                 Category = Model.ItemsFilter.Category,
-                                PriceFrom = Model.ItemsFilter.PriceFrom,
-                                PriceTo = Model.ItemsFilter.PriceTo
+                                PriceMin = Model.ItemsFilter.PriceMin,
+                                PriceMax = Model.ItemsFilter.PriceMax,
+                                SortBy = Model.ItemsFilter.SortBy
                             };
-
                         }
                         <div class="sidebar_title">Categories</div>
                         <ul class="sidebar_categories">
-                            @foreach (var category in Model.Categories)
+                            @foreach (Category category in Model.Categories)
                             {
                                 <li>
                                     <span>
@@ -62,111 +64,120 @@
                                         @if (selectedCategory == category.ToString())
                                         {
                                             <strong>
-                                                @Html.ActionLink(category.ToString(), "Index", "Items", filterCategory)
+                                                @Html.ActionLink(category.GetDisplayName(), "Index", "Items", filterCategory)
                                             </strong>
                                         }
                                         else
                                         {
-                                            @Html.ActionLink(category.ToString(), "Index", "Items", filterCategory)
+                                            @Html.ActionLink(category.GetDisplayName(), "Index", "Items", filterCategory)
                                         }
                                     </span>
                                 </li>
                             }
-
-                            <li>
-                                @*<a asp-action="Index" asp-controller="Items" asp-route-category="@category">@Html.DisplayFor(e => category)</a>*@
-                            </li>
-
                         </ul>
                     </div>
                     <hr />
 
                     <div class="sidebar_section">
                         <div class="sidebar_title">Filter By</div>
+
+                        <!-- Filter by price range -->
+                        <div>
+                            <div class="sidebar_subtitle">Price Range</div>
+
+                            @using (Html.BeginForm("Index", "Items", FormMethod.Get, new { @class = "brands_list" }))
+                            {
+                                <div class="input-group input-group-sm mb-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                    @Html.TextBox("PriceMin", null, new { maxlength = "9", placeholder = "Min", @class = "form-control form-control-sm col-3" })
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                    @Html.TextBox("PriceMax", null, new { maxlength = "9", placeholder = "Max", @class = "form-control form-control-sm col-3" })
+                                    @Html.Hidden("Category")
+                                    @Html.Hidden("Manufacture")
+                                    <input type="submit" value="Go" class="btn btn-light btn-sm" />
+                                </div>
+                            }
+                        </div>
+
                         <!-- Filter by brands -->
                         <div>
                             @if (Model.Manufactures.Any())
                             {
                                 <div class="sidebar_subtitle">Brands</div>
-                            }
-                            <ul class="brands_list">
-                                @foreach (var manufacture in Model.Manufactures)
-                                {
-                                    <li>
-                                        <span>
-                                            @{
-                                                filterManufacture.Manufacture = manufacture;
-                                            }
-                                            @if (selectedManufacture == manufacture)
-                                            {
-                                                <strong>
-                                                    @Html.ActionLink(manufacture, "Index", "Items", filterManufacture)
-                                                </strong>
-                                            }
-                                            else
-                                            {
-                                                @Html.ActionLink(manufacture, "Index", "Items", filterManufacture)
-                                            }
-                                        </span>
-                                    </li>
-                                }
-                            </ul>
-                        </div>
-
-                        <!-- Filter by price range -->
-
-                        <div>
-                            @if (Model.Items.Length > 3)
-                            {
-                                <div class="sidebar_subtitle">Price Range</div>
-                                <div class="row">
-                                    @using (Html.BeginForm("Index", "Items", FormMethod.Get, new { @class = "form-inline", style = "margin-left: 8%; margin-top: 5%" }))
+                                <ul class="brands_list">
+                                    @foreach (var manufacture in Model.Manufactures)
                                     {
-                                        <div class="input-group input-group-sm mb-3">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">$</div>
-                                            </div>
-                                            @Html.TextBox("PriceFrom", null, new { maxlength = "9", placeholder = "Min", @class = "form-control form-control-sm col-3" })
-
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">$</div>
-                                            </div>
-                                            @Html.TextBox("PriceTo", null, new { maxlength = "9", placeholder = "Max", @class = "form-control form-control-sm col-3" })
-
-                                            <input type="submit" value="Go" class="btn btn-light btn-sm" />
-                                        </div>
+                                        <li>
+                                            <span>
+                                                @{
+                                                    filterManufacture.Manufacture = manufacture;
+                                                }
+                                                @if (selectedManufacture == manufacture)
+                                                {
+                                                    <strong>
+                                                        @Html.ActionLink(manufacture, "Index", "Items", filterManufacture)
+                                                    </strong>
+                                                }
+                                                else
+                                                {
+                                                    @Html.ActionLink(manufacture, "Index", "Items", filterManufacture)
+                                                }
+                                            </span>
+                                        </li>
                                     }
-                                </div>
+                                </ul>
                             }
                         </div>
-
-                        @*<ul class="sidebar_categories">
-                                <li>
-                                    <a asp-controller="Items"
-                                       asp-action="Index" asp-route-priceRange="0-25">0-25</a>
-                                </li>
-                                <li>
-                                    <a asp-controller="Items"
-                                       asp-action="Index" asp-route-priceRange="26-50">26-50</a>
-                                </li>
-                                <li>
-                                    <a asp-controller="Items"
-                                       asp-action="Index" asp-route-priceRange="51-99">51-99</a>
-                                </li>
-                                <li>
-                                    <a asp-controller="Items"
-                                       asp-action="Index" asp-route-priceRange="100+">100+</a>
-                                </li>
-                            </ul>*@
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-10">
+            <div class="col-lg-9">
                 <!-- Shop Content -->
                 <div class="shop_content">
                     <div class="shop_bar clearfix">
                         <div class="shop_product_count"><span>@Model.Items.Count()</span> products found</div>
+                        <div class="shop_sorting">
+                            <span>Sort by:</span>
+                            <ul>
+                                <li>
+                                @for (int sortByIndex = 0; sortByIndex < Enum.GetNames(typeof(SortByFilter)).Length; sortByIndex++)
+                                {
+                                    var sortBy = (SortByFilter) sortByIndex;
+                                    @if (selectedSort == sortBy)
+                                    {
+                                        <span class="sorting_text">@sortBy.GetDisplayName()<i class="fas fa-chevron-down"></i></span>
+                                    }
+                                }
+                                    <ul>
+                                        @for (int sortByIndex = 0; sortByIndex < Enum.GetNames(typeof(SortByFilter)).Length; sortByIndex++)
+                                        {
+                                            var sortBy = (SortByFilter) sortByIndex;
+                                            filterSort.SortBy = sortBy;
+
+                                            @if (selectedSort == sortBy)
+                                            {
+                                                <li>
+                                                    <strong>
+                                                        @Html.ActionLink(sortBy.GetDisplayName(), "Index", "Items", filterSort, new { style= "color: rgba(0,0,0,0.5)" })
+                                                    </strong>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    @Html.ActionLink(sortBy.GetDisplayName(), "Index", "Items", filterSort, new { style = "color: rgba(0,0,0,0.5)" })
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="product_grid">
                         @{
@@ -192,11 +203,3 @@
         </div>
     </div>
 </div>
-
-@section scripts{
-    <script src="js/shop_custom.js"></script>
-    <script src="lib/jquery-ui-1.12.1.custom/dist/js/jquery-ui.js"></script>
-    <script src="lib/Isotope/isotope.pkgd.min.js"></script>
-    <script src="lib/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-    <script src="js/jquery-3.3.1.min.js"></script>
-}

@@ -36,12 +36,11 @@ namespace GamingStore.Controllers
         private Task<Customer> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Items
-        public async Task<IActionResult> Index(string category, string manufacture, int priceFrom, int priceTo)
+        public async Task<IActionResult> Index(string category, string manufacture, int? priceMin, int? priceMax, SortByFilter sortBy = SortByFilter.NewestArrivals)
         {
+            List<Item> items = await _context.Items.ToListAsync();
 
-            var items = await _context.Items.ToListAsync();
-
-            var categories = items.Select(i => i.Category).Distinct().ToList();
+            List<Category> categories = items.Select(i => i.Category).Distinct().ToList();
             var manufactures = new List<string>();
 
             if (!string.IsNullOrWhiteSpace(category))
@@ -50,31 +49,28 @@ namespace GamingStore.Controllers
                 manufactures = items.Select(i => i.Manufacturer).Distinct().ToList();
             }
 
-            if (priceFrom > 0)
+            if (!string.IsNullOrWhiteSpace(manufacture))
             {
-                items = items.Where(item => item.Price > priceFrom).ToList();
+                items = items.Where(item => item.Manufacturer == manufacture).ToList();
             }
 
-            if (priceTo > 0)
+            if (priceMin > 0)
             {
-                items = items.Where(item => item.Price < priceTo).ToList();
+                items = items.Where(item => item.Price >= priceMin).ToList();
             }
 
-            var endPrice = items.Select(i => i.Price).Max();
-            //if (!string.IsNullOrWhiteSpace(priceRange))
-            //{
-            //    if (priceRange.Contains("0-25"))
-            //        items = items.Where(item => item.Price >= 0 && item.Price <= 25).ToList();
-            //    if (priceRange.Contains("26-50"))
-            //        items = items.Where(item => item.Price >= 26 && item.Price <= 50).ToList();
-            //    if (priceRange.Contains("51-99"))
-            //        items = items.Where(item => item.Price >= 51 && item.Price <= 99).ToList();
-            //    if (priceRange.Contains("100+"))
-            //        items = items.Where(item => item.Price >= 100 && item.Price <= int.MaxValue).ToList();
+            if (priceMax > 0)
+            {
+                items = items.Where(item => item.Price <= priceMax).ToList();
+            }
 
-
-            //    //items = items.Where(item => item.Manufacturer == manufacture).ToList();
-            //}
+            items = sortBy switch
+            {
+                SortByFilter.NewestArrivals => items.OrderByDescending(i => i.Id).ToList(),
+                SortByFilter.PriceLowToHigh => items.OrderBy(i => i.Price).ToList(),
+                SortByFilter.PriceHighToLow => items.OrderByDescending(i => i.Price).ToList(),
+                _ => throw new ArgumentOutOfRangeException(nameof(sortBy), sortBy, null)
+            };
 
             var viewModel = new GetItemsViewModel()
             {
@@ -85,8 +81,7 @@ namespace GamingStore.Controllers
                 {
                     Category = category,
                     Manufacture = manufacture,
-                    PriceFrom = priceFrom,
-                    PriceTo = priceTo
+                    SortBy = sortBy
                 }
             };
 
