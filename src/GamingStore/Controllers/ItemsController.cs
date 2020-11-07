@@ -36,14 +36,14 @@ namespace GamingStore.Controllers
         private Task<Customer> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Items
-        public async Task<IActionResult> Index(string category, string manufacture, int? priceMin, int? priceMax, SortByFilter sortBy = SortByFilter.NewestArrivals)
+        public async Task<IActionResult> Index(string category, string manufacture, int? priceMin, int? priceMax, string keywords, SortByFilter sortBy = SortByFilter.NewestArrivals)
         {
             List<Item> items = await _context.Items.ToListAsync();
 
             List<Category> categories = items.Select(i => i.Category).Distinct().ToList();
             var manufactures = new List<string>();
 
-            if (!string.IsNullOrWhiteSpace(category))
+            if (!string.IsNullOrWhiteSpace(category) && category != "All Categories")
             {
                 items = items.Where(item => item.Category.ToString() == category).ToList();
             }
@@ -61,6 +61,11 @@ namespace GamingStore.Controllers
             if (priceMax > 0)
             {
                 items = items.Where(item => item.Price <= priceMax).ToList();
+            }
+            
+            if (!string.IsNullOrWhiteSpace(keywords))
+            {
+                items = items.Where(item => item.Title.ToLower().Contains(keywords.ToLower()) || item.Manufacturer.ToLower().Contains(keywords.ToLower())).ToList();
             }
 
             items = sortBy switch
@@ -82,7 +87,8 @@ namespace GamingStore.Controllers
                     Manufacture = manufacture,
                     SortBy = sortBy,
                     PriceMin = priceMin,
-                    PriceMax = priceMax
+                    PriceMax = priceMax,
+                    Keywords = keywords
                 }
             };
 
