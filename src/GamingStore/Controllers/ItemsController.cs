@@ -36,7 +36,7 @@ namespace GamingStore.Controllers
         private Task<Customer> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Items
-        public async Task<IActionResult> Index(string category, string manufacture, int? priceMin, int? priceMax)
+        public async Task<IActionResult> Index(string category, string manufacture, int? priceMin, int? priceMax, SortByFilter sortBy = SortByFilter.NewestArrivals)
         {
             List<Item> items = await _context.Items.ToListAsync();
 
@@ -64,6 +64,14 @@ namespace GamingStore.Controllers
                 items = items.Where(item => item.Price <= priceMax).ToList();
             }
 
+            items = sortBy switch
+            {
+                SortByFilter.NewestArrivals => items.OrderByDescending(i => i.Id).ToList(),
+                SortByFilter.PriceLowToHigh => items.OrderBy(i => i.Price).ToList(),
+                SortByFilter.PriceHighToLow => items.OrderByDescending(i => i.Price).ToList(),
+                _ => throw new ArgumentOutOfRangeException(nameof(sortBy), sortBy, null)
+            };
+
             var viewModel = new GetItemsViewModel()
             {
                 Categories = categories,
@@ -73,6 +81,7 @@ namespace GamingStore.Controllers
                 {
                     Category = category,
                     Manufacture = manufacture,
+                    SortBy = sortBy
                 }
             };
 

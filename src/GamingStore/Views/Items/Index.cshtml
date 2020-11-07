@@ -22,13 +22,15 @@
                         @{
                             string selectedCategory = Model.ItemsFilter.Category;
                             string selectedManufacture = Model.ItemsFilter.Manufacture;
+                            var selectedSort = Model.ItemsFilter.SortBy;
 
                             var filterCategory = new ItemsFilter()
                             {
                                 Manufacture = Model.ItemsFilter.Manufacture,
                                 Category = Model.ItemsFilter.Category,
                                 PriceMin = Model.ItemsFilter.PriceMin,
-                                PriceMax = Model.ItemsFilter.PriceMax
+                                PriceMax = Model.ItemsFilter.PriceMax,
+                                SortBy = Model.ItemsFilter.SortBy
                             };
 
                             var filterManufacture = new ItemsFilter()
@@ -36,7 +38,17 @@
                                 Manufacture = Model.ItemsFilter.Manufacture,
                                 Category = Model.ItemsFilter.Category,
                                 PriceMin = Model.ItemsFilter.PriceMin,
-                                PriceMax = Model.ItemsFilter.PriceMax
+                                PriceMax = Model.ItemsFilter.PriceMax,
+                                SortBy = Model.ItemsFilter.SortBy
+                            };
+
+                            var filterSort = new ItemsFilter()
+                            {
+                                Manufacture = Model.ItemsFilter.Manufacture,
+                                Category = Model.ItemsFilter.Category,
+                                PriceMin = Model.ItemsFilter.PriceMin,
+                                PriceMax = Model.ItemsFilter.PriceMax,
+                                SortBy = Model.ItemsFilter.SortBy
                             };
                         }
                         <div class="sidebar_title">Categories</div>
@@ -129,6 +141,43 @@
                 <div class="shop_content">
                     <div class="shop_bar clearfix">
                         <div class="shop_product_count"><span>@Model.Items.Count()</span> products found</div>
+                        <div class="shop_sorting">
+                            <span>Sort by:</span>
+                            <ul>
+                                <li>
+                                @for (int sortByIndex = 0; sortByIndex < Enum.GetNames(typeof(SortByFilter)).Length; sortByIndex++)
+                                {
+                                    var sortBy = (SortByFilter) sortByIndex;
+                                    @if (selectedSort == sortBy)
+                                    {
+                                        <span class="sorting_text">@sortBy.GetDisplayName()<i class="fas fa-chevron-down"></i></span>
+                                    }
+                                }
+                                    <ul>
+                                        @for (int sortByIndex = 0; sortByIndex < Enum.GetNames(typeof(SortByFilter)).Length; sortByIndex++)
+                                        {
+                                            var sortBy = (SortByFilter) sortByIndex;
+                                            filterSort.SortBy = sortBy;
+
+                                            @if (selectedSort == sortBy)
+                                            {
+                                                <li>
+                                                    <strong>
+                                                        @Html.ActionLink(sortBy.GetDisplayName(), "Index", "Items", filterSort, new { style= "color: rgba(0,0,0,0.5)" })
+                                                    </strong>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    @Html.ActionLink(sortBy.GetDisplayName(), "Index", "Items", filterSort, new { style = "color: rgba(0,0,0,0.5)" })
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="product_grid">
                         @{

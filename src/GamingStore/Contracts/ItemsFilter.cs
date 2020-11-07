@@ -14,5 +14,7 @@ namespace GamingStore.Contracts
         public int? PriceMin { get; set; }
         
         public int? PriceMax { get; set; }
+
+        public SortByFilter SortBy { get; set; }
     }
 }
