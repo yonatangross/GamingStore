@@ -8,6 +8,8 @@
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/shop_responsive.css">
     <link rel="stylesheet" type="text/css" href="~/css/shop_styles.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/jquery-ui-1.12.1.custom/dist/css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <div class="shop">
     <div class="container">
@@ -19,30 +21,34 @@
                         @{
                             var selectedCategory = Model.ItemsFilter.Category;
                             var selectedManufacture = Model.ItemsFilter.Manufacture;
-                            var selectedPrices = Model.ItemsFilter.PriceRange;
+                            var selectedPriceFrom = Model.ItemsFilter.PriceFrom;
+                            var selectedPriceTo = Model.ItemsFilter.PriceTo;
 
                             var filterCategory = new ItemsFilter()
                             {
                                 Manufacture = Model.ItemsFilter.Manufacture,
                                 Category = Model.ItemsFilter.Category,
-                                PriceRange = Model.ItemsFilter.PriceRange
+                                PriceFrom = Model.ItemsFilter.PriceFrom,
+                                PriceTo = Model.ItemsFilter.PriceTo
                             };
 
                             var filterManufacture = new ItemsFilter()
                             {
                                 Manufacture = Model.ItemsFilter.Manufacture,
                                 Category = Model.ItemsFilter.Category,
-                                PriceRange = Model.ItemsFilter.PriceRange
+                                PriceFrom = Model.ItemsFilter.PriceFrom,
+                                PriceTo = Model.ItemsFilter.PriceTo
                             };
 
                             var filterPrices = new ItemsFilter()
                             {
                                 Manufacture = Model.ItemsFilter.Manufacture,
                                 Category = Model.ItemsFilter.Category,
-                                PriceRange = Model.ItemsFilter.PriceRange
+                                PriceFrom = Model.ItemsFilter.PriceFrom,
+                                PriceTo = Model.ItemsFilter.PriceTo
                             };
 
-                        } 
+                        }
                         <div class="sidebar_title">Categories</div>
                         <ul class="sidebar_categories">
                             @foreach (var category in Model.Categories)
@@ -72,53 +78,86 @@
                             </li>
 
                         </ul>
-                        @if (Model.Manufactures.Any())
-                        {
-                            <hr/>
-                            <div class="sidebar_title">Brand</div>
-                        }
-                        <ul class="sidebar_categories">
-                            @foreach (var manufacture in Model.Manufactures)
+                    </div>
+                    <div class="sidebar_section">
+                        <div class="sidebar_title">Filter By</div>
+                        <!-- Filter by brands -->
+                        <div>
+                            @if (Model.Manufactures.Any())
                             {
-                                <li>
-                                    <span>
-                                        @{
-                                            filterManufacture.Manufacture = manufacture;
-                                        }
-                                        @if (selectedManufacture == manufacture)
-                                        {
-                                            <strong>
-                                                @Html.ActionLink(manufacture, "Index", "Items", filterManufacture)
-                                            </strong>
-                                        }
-                                        else
-                                        {
-                                            @Html.ActionLink(manufacture, "Index", "Items", filterManufacture)
-                                        }
-                                    </span>
-                                </li>
+                                <hr />
+                                <div class="sidebar_subtitle">Brands</div>
                             }
-                        </ul>
-                        <hr/>
-                        <div class="sidebar_title">Price Range</div>
-                        <ul class="sidebar_categories">
-                            <li>
-                                <a asp-controller="Items"
-                                   asp-action="Index" asp-route-priceRange="0-25">0-25</a>
-                            </li>
-                            <li>
-                                <a asp-controller="Items"
-                                   asp-action="Index" asp-route-priceRange="26-50">26-50</a>
-                            </li>
-                            <li>
-                                <a asp-controller="Items"
-                                   asp-action="Index" asp-route-priceRange="51-99">51-99</a>
-                            </li>
-                            <li>
-                                <a asp-controller="Items"
-                                   asp-action="Index" asp-route-priceRange="100+">100+</a>
-                            </li>
-                        </ul>
+                            <ul class="brands_list">
+                                @foreach (var manufacture in Model.Manufactures)
+                                {
+                                    <li>
+                                        <span>
+                                            @{
+                                                filterManufacture.Manufacture = manufacture;
+                                            }
+                                            @if (selectedManufacture == manufacture)
+                                            {
+                                                <strong>
+                                                    @Html.ActionLink(manufacture, "Index", "Items", filterManufacture)
+                                                </strong>
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(manufacture, "Index", "Items", filterManufacture)
+                                            }
+                                        </span>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <hr />
+
+                        <!-- Filter by price range -->
+
+                        <div>
+                            @if (Model.Items.Length > 3)
+                            {
+                                <div class="sidebar_subtitle">Price Range</div>
+                                <div class="row">
+                                    @using (Html.BeginForm("Index", "Items", FormMethod.Get, new { @class = "form-inline", style = "margin-left: 8%; margin-top: 5%" }))
+                                    {
+                                        <div class="input-group input-group-sm mb-3">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">$</div>
+                                            </div>
+                                            @Html.TextBox("PriceFrom", null, new { maxlength = "9", placeholder = "Min", @class = "form-control form-control-sm col-3" })
+
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">$</div>
+                                            </div>
+                                            @Html.TextBox("PriceTo", null, new { maxlength = "9", placeholder = "Max", @class = "form-control form-control-sm col-3" })
+
+                                            <input type="submit" value="Go" class="btn btn-light btn-sm" />
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+
+                        @*<ul class="sidebar_categories">
+                                <li>
+                                    <a asp-controller="Items"
+                                       asp-action="Index" asp-route-priceRange="0-25">0-25</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Items"
+                                       asp-action="Index" asp-route-priceRange="26-50">26-50</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Items"
+                                       asp-action="Index" asp-route-priceRange="51-99">51-99</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Items"
+                                       asp-action="Index" asp-route-priceRange="100+">100+</a>
+                                </li>
+                            </ul>*@
                     </div>
                 </div>
             </div>
@@ -153,3 +192,11 @@
         </div>
     </div>
 </div>
+
+@section scripts{
+    <script src="js/shop_custom.js"></script>
+    <script src="lib/jquery-ui-1.12.1.custom/dist/js/jquery-ui.js"></script>
+    <script src="lib/Isotope/isotope.pkgd.min.js"></script>
+    <script src="lib/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+}
