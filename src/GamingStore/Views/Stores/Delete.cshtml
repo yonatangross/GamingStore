@@ -21,8 +21,9 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Address)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Address)
+        <dd class="col-sm-10">
+            @{ var formattedAddress = Model.Address.ToString();}
+            @Html.DisplayFor(model => formattedAddress)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.PhoneNumber)
@@ -40,7 +41,31 @@
             @Html.DisplayNameFor(model => model.OpeningHours)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OpeningHours)
+            <table class="opening_hours">
+                <tr>
+                    @{
+                        foreach (var day in Model.OpeningHours)
+                        {
+                            <th style="padding: 1%"> @day.DayOfWeek.ToString().Substring(0, 3)</th>
+                        }
+                    }
+                </tr>
+                <tr>
+                    @{
+                        foreach (var day in Model.OpeningHours)
+                        {
+                            <td style="padding: 1%">
+                                <span>
+                                    @($"{day.OpeningTime:hh\\:mm}")
+                                </span>
+                                <span>
+                                    @($"{day.ClosingTime:hh\\:mm}")
+                                </span>
+                            </td>
+                        }
+                    }
+                </tr>
+            </table>
         </dd>
     </dl>
     

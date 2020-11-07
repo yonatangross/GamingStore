@@ -5,50 +5,85 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Edit</h1>
-
-<h4>Store</h4>
+<h3>Edit Order# @Model.Id</h3>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                @* bug: removes data after post *@
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control"/>
-                <span asp-validation-for="Address"  class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OpeningHours" class="control-label"></label>
-                <input asp-for="OpeningHours" class="form-control" />
-                <span asp-validation-for="OpeningHours" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+    @using (Html.BeginForm("Edit", "Stores", FormMethod.Post, new { @class = "col-10" }))
+    {
+        @*@Html.HiddenFor(m => m.Id)*@
 
-<div>
-    <a asp-action="Index">Back to List</a>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Name, new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-5">
+                <div class="form-check">
+                    @Html.TextBoxFor(s => s.Name, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Address.Address1, new { @class = "col-sm-2 col-form-label" })
+                <div class="col-sm-5">
+                    <div class="form-check">
+                        @Html.TextBoxFor(s => s.Address.Address1, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Address.City, new { @class = "col-sm-2 col-form-label" })
+                <div class="col-sm-5">
+                    <div class="form-check">
+                        @Html.TextBoxFor(s => s.Address.City, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Address.PostalCode, new { @class = "col-sm-2 col-form-label" })
+                <div class="col-sm-5">
+                    <div class="form-check">
+                        @Html.TextBoxFor(s => s.Address.PostalCode, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Address.Country, new { @class = "col-sm-2 col-form-label" })
+                <div class="col-sm-5">
+                    <div class="form-check">
+                        @Html.TextBoxFor(s => s.Address.Country, new { @class = "form-control" ,@disabled="disabled" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-5">
+                <div class="form-check">
+                    @Html.TextBoxFor(s => s.PhoneNumber, new { @class = "form-control"})
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Email, new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-5">
+                <div class="form-check">
+                    @Html.TextBoxFor(s => s.Email, new { @class = "form-control"})
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Active, new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-5">
+                <div class="form-check">
+                    @Html.CheckBoxFor(m => m.Active, new { @class = "form-check-input", style = "margin: auto; position: inherit;" })
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 8%">
+            <input type="submit" value="Save" class="btn btn-primary" style="margin-right: 8%" />
+        </div>
+    }
+
 </div>
 
 @section Scripts {

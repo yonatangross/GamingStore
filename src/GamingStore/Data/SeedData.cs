@@ -462,7 +462,7 @@ namespace GamingStore.Data
 
             #region StoresSeed
             string dataStores = System.IO.File.ReadAllText(directoryPath + @"\Data\Mock_Data\Stores.json");
-            var stores = JsonConvert.DeserializeObject<List<Store>>(dataStores);
+            List<Store> stores = JsonConvert.DeserializeObject<List<Store>>(dataStores);
 
             if (context.Items.Any() && context.Customers.Any())
             {

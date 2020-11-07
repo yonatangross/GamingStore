@@ -165,14 +165,8 @@ namespace GamingStore.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,PhoneNumber,Email,OpeningHours")]
-            Store store)
+        public async Task<IActionResult> Edit(Store store)
         {
-            if (id != store.Id)
-            {
-                return NotFound();
-            }
-
             if (!ModelState.IsValid)
             {
                 return View(store);
@@ -193,7 +187,7 @@ namespace GamingStore.Controllers
                 throw;
             }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("ListStores", "Administration");
         }
 
         // GET: Stores/Delete/5
@@ -225,7 +219,7 @@ namespace GamingStore.Controllers
             _context.Stores.Remove(store);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("ListStores", "Administration");
         }
 
         private bool StoreExists(int id)

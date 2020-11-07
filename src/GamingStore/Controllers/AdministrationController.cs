@@ -203,10 +203,12 @@ namespace GamingStore.Controllers
         [HttpGet]
         public async Task<IActionResult> ListStores()
         {
-            return View(await _context.Stores.ToListAsync());
+            var listStoresModel = await _context.Stores.Include(s => s.Orders).ToListAsync();
+
+            return View(listStoresModel);
         }
 
-        [HttpGet]
+            [HttpGet]
         public async Task<IActionResult> ListItems()
         {
             return View(await _context.Items.ToListAsync());
