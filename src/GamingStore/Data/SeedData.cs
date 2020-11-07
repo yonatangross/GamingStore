@@ -441,7 +441,149 @@ namespace GamingStore.Data
                         },
                     ImageUrl = "images/items/RazerDeathAdderv2Ergonomic",
                     Description="With over 10 million Razer DeathAdders sold, the most celebrated and awarded gaming mouse in the world has earned its popularity through its exceptional ergonomic design. Perfectly suited for a palm grip, it also works well with claw and fingertip styles. The Razer DeathAdder V2 continues this legacy, retaining its signature shape while shedding more weight for quicker handling to improve your gameplay. Going beyond conventional office ergonomics, the optimized design also provides greater comfort for gaming—important for those long raids or when you’re grinding your rank on ladder."
-                }
+                },
+                //START HERE.................
+                new Item
+                {
+                    Title = "AMD Ryzen 5 3600XT 6-core, 12-threads unlocked", Manufacturer = "AMD", Price = 233.30,
+                    Category = Category.CPUs, PropertiesList =
+                        new Dictionary<string, string>()
+                        {
+                            {"Processor Speed", "4.5 GHz"},
+                            {"Processor Socket", "Socket AM4"},
+                            {"TDP", "95W"},
+                            {"GameCache", "35MB"}
+                        },
+                    ImageUrl = "images/items/AMDRyzen53600XT",
+                    Description="The AMD Ryzen 5 3600XT. Light Years Ahead. Featuring award winning performance and optimized technology for gamers, for creators, for everyone."
+                },
+                new Item
+                {
+                    Title = "Intel Core i5-8400 Desktop Processor 6 Cores", Manufacturer = "Intel", Price = 205,
+                    Category = Category.CPUs, PropertiesList =
+                        new Dictionary<string, string>()
+                        {
+                            {"Processor Speed", "2.8 GHz"},
+                            {"Processor Socket", "LGA 1151"},
+                            {"UHD Graphics", "630"},
+                            {"Smart Cache", "9MB"}
+                        },
+                    ImageUrl = "images/items/IntelCorei5-8400",
+                    Description="Intel Core i5-8400 Processor (9M Cache, up to 2.80 GHz)"},
+                
+                new Item
+                {
+                    Title = "Intel Core i3-9100F Desktop Processor 4 Core", Manufacturer = "Intel", Price = 91.95,
+                    Category = Category.CPUs, PropertiesList =
+                        new Dictionary<string, string>()
+                        {
+                            {"Processor Speed", "3.6 GHz"},
+                            {"Processor Socket", "LGA 1151"},
+                            {"TDP", "65W"},
+                            {"Smart Cache", "6MB"}
+                        },
+                    ImageUrl = "images/items/IntelCorei3-9100F",
+                    Description="9th Gen Intel Core i3-9100f desktop processor without processor graphics."
+                },
+                
+                new Item
+                {
+                    Title = "Intel Core i3-10100 Desktop Processor 4 Cores", Manufacturer = "Intel", Price = 149.69,
+                    Category = Category.CPUs, PropertiesList =
+                        new Dictionary<string, string>()
+                        {
+                            {"Processor Speed", "4.3 GHz"},
+                            {"Processor Socket", "LGA 1200"},
+                            {"TDP", "85W"},
+                            {"Smart Cache", "9MB"}
+                        },
+                    ImageUrl = "images/items/IntelCorei3-10100",
+                    Description="10th Gen Intel Core i3-10100 desktop processor optimized for everyday computing. Cooler included in the box. ONLY compatible with 400 series chipset based motherboard. 65W."
+                },
+                
+                new Item
+                {
+                    Title = "Intel Core i3-8100 Desktop Processor 4", Manufacturer = "Intel", Price = 123.80,
+                    Category = Category.CPUs, PropertiesList =
+                        new Dictionary<string, string>()
+                        {
+                            {"Processor Speed", "3.6 GHz"},
+                            {"Processor Socket", "LGA 1156"},
+                            {"UHD Graphics", "630"},
+                            {"Smart Cache", "6MB"}
+                        },
+                    ImageUrl = "images/items/IntelCorei3-8100",
+                    Description="Intel Core i3-8100 Desktop Processor 4 Cores up to 3.6 GHz Turbo Unlocked LGA1151 300 Series 95W"},
+
+                new Item
+                {
+                    Title = "AMD Ryzen 3 3200G 4-Core", Manufacturer = "AMD", Price = 130,
+                    Category = Category.CPUs, PropertiesList =
+                        new Dictionary<string, string>()
+                        {
+                            {"Processor Speed", "4.0 GHz"},
+                            {"Processor Socket", "Socket AM4"},
+                            {"TDP", "65W"},
+                            {"Cache", "6MB"}
+                        },
+                    ImageUrl = "images/items/AMDRyzen33200G",
+                    Description="AMD Ryzen 3 3200G, With Wraith Stealth C."
+                },
+                new Item
+                {
+                    Title = "Intel Core i7-9700 Desktop Processor 8 Cores", Manufacturer = "Intel", Price = 292.60,
+                    Category = Category.CPUs, PropertiesList =
+                        new Dictionary<string, string>()
+                        {
+                            {"Processor Speed", "3.0 GHz"},
+                            {"Processor Socket", "LGA 1151"},
+                            {"TDP", "75W"},
+                            {"Cache", "9MB"}
+                        },
+                    ImageUrl = "images/items/IntelCorei7-9700",
+                    Description="9th Gen Intel Core i7-9700 desktop processor with Intel Turbo Boost Technology 2.0 and Intel vPro Technology."
+                },
+                new Item
+                {
+                    Title = "AMD Ryzen 7 3700X 8-Core", Manufacturer = "AMD", Price = 304.99,
+                    Category = Category.CPUs, PropertiesList =
+                        new Dictionary<string, string>()
+                        {
+                            {"Processor Speed", "4.4 GHz"},
+                            {"Processor Socket", "Socket AM4"},
+                            {"TDP", "65W"},
+                            {"Cache", "6MB"}
+                        },
+                    ImageUrl = "images/items/AMDRyzen73700X",
+                    Description="AMD Ryzen 7 3700X 8 core, 16 thread unlocked desktop processor with Wraith Prism LED cooler. Base Clock - 3.6GHz.Default TDP / TDP: 65W."},
+                //START HERE.................
+                new Item
+                {
+                    Title = "Intel Core i5-9400 Desktop Processor 6 Cores", Manufacturer = "Intel", Price = 164.70,
+                    Category = Category.CPUs, PropertiesList =
+                        new Dictionary<string, string>()
+                        {
+                            {"Processor Speed", "2.9 GHz"},
+                            {"Processor Socket", "LGA 1151"},
+                            {"TDP", "75W"},
+                            {"Cache", "9MB"}
+                        },
+                    ImageUrl = "images/items/IntelCorei5-9400",
+                    Description="Intel Core i5-9400 Desktop Processor 6 Cores 2. 90 GHz up to 4. 10 GHz Turbo LGA1151 300 Series 65W Processors BX80684I59400"
+                },
+                new Item
+                {
+                    Title = "Intel Core i9-9900K Desktop Processor 8 Cores", Manufacturer = "Intel", Price = 399.99,
+                    Category = Category.CPUs, PropertiesList =
+                        new Dictionary<string, string>()
+                        {
+                            {"Processor Speed", "5.0 GHz"},
+                            {"Processor Socket", "LGA 1151"},
+                            {"TDP", "95W"},
+                            {"Cache", "12MB"}
+                        },
+                    ImageUrl = "images/items/IntelCorei9-9900K",
+                    Description="Intel Core i9-9900K Desktop Processor 8 Cores up to 5.0 GHz Turbo unlocked LGA1151 300 Series 95W"}
             };
             foreach (Item item in items)
             {
