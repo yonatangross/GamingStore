@@ -5,7 +5,7 @@ const graphWidth = width - margin.left - margin.right;
 const graphHeight = height - margin.top - margin.bottom;
 
 var format = d3.format(",.2r");
-const svg = d3.select(".canvas")
+const svg = d3.select(".barchart")
     .append("svg")
     .attr("width", width)
     .attr("height", height);
@@ -58,7 +58,7 @@ d3.json("/data/BarChartData.json").then(data => {
         .attr("dx", -4)
         .text(d => format(d.Value)+" $" )
         .text(d => format(d.Value)+" $" )
-        .call(text => text.filter(d => d.Value < 1000) // short bars for values 
+        .call(text => text.filter(d => d.Value > 0) // short bars for values 
             .attr("dx", +4)
             .attr("fill", "black")
             .attr("text-anchor", "start"));
