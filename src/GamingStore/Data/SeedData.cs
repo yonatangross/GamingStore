@@ -14,18 +14,18 @@ namespace GamingStore.Data
 {
     public class SeedData
     {
-        public static async Task Initialize(IServiceProvider serviceProvider,string adminPassword)
+        public static async Task Initialize(IServiceProvider serviceProvider, string adminPassword)
         {
             await using var context = new StoreContext(serviceProvider.GetRequiredService<DbContextOptions<StoreContext>>());
             var userManager = serviceProvider.GetService<UserManager<Customer>>();
             var roleManager = serviceProvider.GetService<RoleManager<IdentityRole>>();
 
-            await CreateRolesAndUsers(context,userManager, roleManager,adminPassword);
+            await CreateRolesAndUsers(context, userManager, roleManager, adminPassword);
 
             SeedDatabase(context);
         }
 
-        private static async Task CreateRolesAndUsers(StoreContext context,UserManager<Customer> userManager, RoleManager<IdentityRole> roleManager,string adminPassword)
+        private static async Task CreateRolesAndUsers(StoreContext context, UserManager<Customer> userManager, RoleManager<IdentityRole> roleManager, string adminPassword)
         {
             const string admin = "Admin";
             const string storeManager = "StoreManager";
@@ -36,7 +36,7 @@ namespace GamingStore.Data
             if (!roleExists)
             {
                 // first we create Admin roll    
-                var role = new IdentityRole {Name = admin};
+                var role = new IdentityRole { Name = admin };
                 await roleManager.CreateAsync(role);
 
                 //Here we create a Admin super users who will maintain the website                   
@@ -47,7 +47,7 @@ namespace GamingStore.Data
             roleExists = await roleManager.RoleExistsAsync(storeManager);
             if (!roleExists)
             {
-                var role = new IdentityRole {Name = storeManager};
+                var role = new IdentityRole { Name = storeManager };
                 await roleManager.CreateAsync(role);
             }
 
@@ -55,7 +55,7 @@ namespace GamingStore.Data
             roleExists = await roleManager.RoleExistsAsync(customer);
             if (!roleExists)
             {
-                var role = new IdentityRole {Name = customer};
+                var role = new IdentityRole { Name = customer };
                 await roleManager.CreateAsync(role);
             }
             await context.SaveChangesAsync();
@@ -470,7 +470,7 @@ namespace GamingStore.Data
                         },
                     ImageUrl = "images/items/IntelCorei5-8400",
                     Description="Intel Core i5-8400 Processor (9M Cache, up to 2.80 GHz)"},
-                
+
                 new Item
                 {
                     Title = "Intel Core i3-9100F Desktop Processor 4 Core", Manufacturer = "Intel", Price = 91.95,
@@ -485,7 +485,7 @@ namespace GamingStore.Data
                     ImageUrl = "images/items/IntelCorei3-9100F",
                     Description="9th Gen Intel Core i3-9100f desktop processor without processor graphics."
                 },
-                
+
                 new Item
                 {
                     Title = "Intel Core i3-10100 Desktop Processor 4 Cores", Manufacturer = "Intel", Price = 149.69,
@@ -500,7 +500,7 @@ namespace GamingStore.Data
                     ImageUrl = "images/items/IntelCorei3-10100",
                     Description="10th Gen Intel Core i3-10100 desktop processor optimized for everyday computing. Cooler included in the box. ONLY compatible with 400 series chipset based motherboard. 65W."
                 },
-                
+
                 new Item
                 {
                     Title = "Intel Core i3-8100 Desktop Processor 4", Manufacturer = "Intel", Price = 123.80,
@@ -571,6 +571,7 @@ namespace GamingStore.Data
                     ImageUrl = "images/items/IntelCorei5-9400",
                     Description="Intel Core i5-9400 Desktop Processor 6 Cores 2. 90 GHz up to 4. 10 GHz Turbo LGA1151 300 Series 65W Processors BX80684I59400"
                 },
+
                 new Item
                 {
                     Title = "Intel Core i9-9900K Desktop Processor 8 Cores", Manufacturer = "Intel", Price = 399.99,
@@ -583,7 +584,92 @@ namespace GamingStore.Data
                             {"Cache", "12MB"}
                         },
                     ImageUrl = "images/items/IntelCorei9-9900K",
-                    Description="Intel Core i9-9900K Desktop Processor 8 Cores up to 5.0 GHz Turbo unlocked LGA1151 300 Series 95W"}
+                    Description="Intel Core i9-9900K Desktop Processor 8 Cores up to 5.0 GHz Turbo unlocked LGA1151 300 Series 95W"
+
+                },
+                new Item
+                {
+                    Title = "AOC C24G1A 24 Curved Frameless Gaming Monitor, FHD 1920x1080", Manufacturer = "AOC", Price = 399.99,
+                    Category = Category.Monitors, PropertiesList =
+                        new Dictionary<string, string>()
+                        {
+                            {"Display Size", "24 Inches"},
+                            {"Resolution", "FHD 1920x1080"},
+                            {"Hardware Interface", "VGA, HDMI"},
+                            {"Display Technology", "LED"}
+                        },
+                    ImageUrl = "images/items/AOC_black_monitor",
+                    Description="AOC CQ32G1 31.5 Curved Frameless Gaming Monitor, Quad HD 2560x1440 ,4 ms Response Time, 144Hz, FreeSync, DisplayPort/HDMI/VGA, VESA, Black"
+
+
+                },
+
+                new Item
+                {
+                    Title = "Hbada Gaming Chair Racing", Manufacturer = "Hbada", Price = 159.99,
+                    Category = Category.GamingChairs, PropertiesList =
+                        new Dictionary<string, string>()
+                        {
+                            {"Chair Style", "Gaming chair"},
+                            {"Headrest Features", "Padded"},
+                            {"Swivel Angle", "360 degrees"},
+                            {"Color", "Black"}
+                        },
+                    ImageUrl = "images/items/Hbada_Gaiming_Chair_Style",
+                    Description="High Back Computer Chair with Height Adjustment, Headrest and Lumbar Support E-Sports Swivel Chair"
+
+
+                },
+
+                new Item
+                {
+                    Title = "PHILIPS RGB Wired Gaming Mouse", Manufacturer = "PHILIPS", Price = 29.99,
+                    Category = Category.Mouses, PropertiesList =
+                        new Dictionary<string, string>()
+                        {
+                            {"Mouse Shape", "Right-Handed"},
+                            {"Connection Type", "Wired"},
+                            {"Weight", "56g"},
+                            {"Water Resistant", "No"}
+                        },
+                    ImageUrl = "images/items/PHILIPS_Gaming_MICE",
+                    Description="Gaming Mouse, 7 Programmable Buttons, Adjustable DPI, Comfortable Grip Ergonomic Optical PC Computer Gamer Mice"
+
+
+
+                },
+
+                new Item
+                {
+                    Title = "Corsair Harpoon PRO", Manufacturer = "Corsair", Price = 49.99,
+                    Category = Category.Mouses, PropertiesList =
+                        new Dictionary<string, string>()
+                        {
+                            {"Mouse Shape", "Right-Handed"},
+                            {"Connection Type", "Wired"},
+                            {"Weight", "85g"},
+                            {"Water Resistant", "yes"}
+                        },
+                    ImageUrl = "images/items/Corsair_mice",
+                    Description="RGB Gaming Mouse - Lightweight Design - 12,000 DPI Optical Sensor"
+
+
+                },
+
+                new Item
+                {
+                    Title = "KLIM Puma - USB Gamer Headset with Mic", Manufacturer = "KLIM Puma", Price = 44.99,
+                    Category = Category.GamingHeadsets, PropertiesList =
+                        new Dictionary<string, string>()
+                        {
+                            {"Sound Mode", "Stereo"},
+                            {"Connection Type", "Wired"},
+                            {"Water Resistant", "Yes"}
+                        },
+                    ImageUrl = "images/items/KLIM_headset",
+                    Description = "7.1 Surround Sound Audio - Integrated Vibrations - Perfect for PC and PS4 Gaming - New 2020 Version - Black"
+
+                },
             };
             foreach (Item item in items)
             {
@@ -637,7 +723,7 @@ namespace GamingStore.Data
             }
             catch (Exception e)
             {
-                
+
             }
             #endregion
 
@@ -660,7 +746,7 @@ namespace GamingStore.Data
             //}
             //catch (Exception e)
             //{
-                
+
             //}
             #endregion
         }
@@ -668,26 +754,27 @@ namespace GamingStore.Data
         private static void GenerateStoreItems(IEnumerable<Store> stores, Item[] items, IReadOnlyCollection<Customer> customersList)
         {
             var random = new Random();
-            
+
             foreach (Store store in stores)
             {
                 foreach (Item item in items)
                 {
                     bool itemCreated = random.Next(2) == 1; // 1 - True  - False
-                    
+
                     if (!itemCreated)
                     {
                         continue;
                     }
 
                     const float itemsNumberMultiplier = 0.3f;
-                    
+
                     store.StoreItems.Add(new StoreItem
                     {
-                        ItemId = item.Id, StoreId = store.Id,
+                        ItemId = item.Id,
+                        StoreId = store.Id,
                         ItemsCount =
-                            (uint) random.Next(1,
-                                (int) (customersList.Count * itemsNumberMultiplier)) // customers number times 0.3
+                            (uint)random.Next(1,
+                                (int)(customersList.Count * itemsNumberMultiplier)) // customers number times 0.3
                     });
                 }
             }
@@ -706,14 +793,14 @@ namespace GamingStore.Data
             foreach (Customer customer in customersList)
             {
                 int numOfOrdersForCustomer = rand.Next(minValue: 0, maxValue: 5);
-                
+
                 for (var orderNumber = 0; orderNumber < numOfOrdersForCustomer; orderNumber++)
                 {
                     const int minItems = 1;
                     const int maxItems = 5;
                     int numItemsOrdered = rand.Next(minItems, maxItems);
                     Store store = GenerateRelatedStore(customer, storesList);
-                    
+
                     var order = new Order
                     {
                         CustomerId = customer.Id,
@@ -737,7 +824,7 @@ namespace GamingStore.Data
         {
             List<Store> storesInCustomerCity = storesList.Where(store => store.Address.City == customer.Address.City).ToList();
             var rand = new Random();
-            
+
             return storesInCustomerCity[rand.Next(storesInCustomerCity.Count)];
         }
 
@@ -746,13 +833,13 @@ namespace GamingStore.Data
             var itemsList = new List<Item>(items); // copy list in order to alter it.
             var rand = new Random();
             var orderItems = new List<OrderItem>();
-            
+
             for (var orderItemIndex = 0; orderItemIndex < numItemsOrdered; orderItemIndex++)
             {
                 int curIndex = rand.Next(itemsList.Count);
                 Item curItem = itemsList[curIndex];
                 itemsList.Remove(curItem);
-                
+
                 var orderItem = new OrderItem()
                 {
                     OrderId = orderId,
@@ -766,7 +853,8 @@ namespace GamingStore.Data
 
             payment = new Payment
             {
-                ItemsCost = CalculateOrderSum(orderItems), PaymentMethod = (PaymentMethod) rand.Next(0, 3),
+                ItemsCost = CalculateOrderSum(orderItems),
+                PaymentMethod = (PaymentMethod)rand.Next(0, 3),
                 ShippingCost = 0,
                 Paid = true
             };
@@ -776,7 +864,7 @@ namespace GamingStore.Data
 
         private static double CalculateOrderSum(IEnumerable<OrderItem> orderItems)
         {
-            return orderItems.Sum(orderItem => (orderItem.Item.Price * (double) orderItem.ItemsCount));
+            return orderItems.Sum(orderItem => (orderItem.Item.Price * (double)orderItem.ItemsCount));
         }
     }
 }
