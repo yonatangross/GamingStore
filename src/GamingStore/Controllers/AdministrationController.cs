@@ -55,7 +55,14 @@ namespace GamingStore.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Statistics()
         {
             var orders = await _context.Orders.Include(o => o.Payment).ToListAsync();
             var stats = CalcStats(orders);

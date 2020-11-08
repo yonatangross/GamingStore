@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/d3-format.v2.min.js"></script>
 </head>
 <body>
 <header>
@@ -19,16 +20,13 @@
             <div class="row">
                 <div class="col d-flex flex-row">
                     <ul class="top_bar_contact_item">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Manage
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" asp-controller="Administration" asp-action="ListUsers">Users</a>
-                                <a class="dropdown-item" asp-controller="Administration" asp-action="ListRoles">Roles</a>
-                            </div>
-                        </li>
+                        <a class="top_bar_contact_item nav-link text-dark" asp-controller="Administration" asp-action="Index">Menu</a>
+                    </ul>
+                    <ul class="top_bar_contact_item">
+                        <a class="top_bar_contact_item nav-link text-dark" asp-controller="Administration" asp-action="ListUsers">Users</a>
+                    </ul>
+                    <ul class="top_bar_contact_item">
+                        <a class="top_bar_contact_item nav-link text-dark" asp-controller="Administration" asp-action="ListRoles">Roles</a>
                     </ul>
                     <ul class="top_bar_contact_item">
                         <a class="top_bar_contact_item nav-link text-dark" asp-controller="Administration" asp-action="ListOrders">Orders</a>
@@ -40,7 +38,7 @@
                         <a class="top_bar_contact_item nav-link text-dark" asp-controller="Administration" asp-action="ListStores">Stores</a>
                     </ul>
                     <ul class="top_bar_contact_item">
-                        <a class="top_bar_contact_item nav-link text-dark" asp-controller="Administration" asp-action="Index">Statistics</a>
+                        <a class="top_bar_contact_item nav-link text-dark" asp-controller="Administration" asp-action="Statistics">Statistics</a>
                     </ul>
                     <div class="ml-auto">
                         <partial name="_NewLoginPartial" />

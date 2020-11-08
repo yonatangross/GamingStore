@@ -94,7 +94,7 @@ namespace GamingStore
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Administration}/{action=ListStores}");
+                    pattern: "{controller=Administration}/{action=Index}");
                 endpoints.MapRazorPages();
             });
         }
