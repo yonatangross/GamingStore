@@ -51,6 +51,7 @@
     <None Include="wwwroot\images\items\NVIDIAGeForceRTX3090.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GamingStore.Contracts\GamingStore.Contracts.csproj" />
     <ProjectReference Include="..\LoggerService\LoggerService.csproj" />
   </ItemGroup>
   <ItemGroup>

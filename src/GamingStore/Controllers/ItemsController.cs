@@ -115,7 +115,7 @@ namespace GamingStore.Controllers
                 //var userIntId = GetCurrentUserAsync().Result.CustomerNumber;
                 RelatedItem relatedItem = new RelatedItem(user.CustomerNumber, item.Id);
                 var relatedItems =
-                    _context.RelatedItems.Any(ri => ri.ItemId == item.Id && ri.CustomerIntId == user.CustomerNumber);
+                    _context.RelatedItems.Any(ri => ri.ItemId == item.Id && ri.CustomerNumber == user.CustomerNumber);
                 if (!relatedItems)
                     await _context.RelatedItems.AddAsync(relatedItem);
 
