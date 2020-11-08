@@ -1,26 +1,4 @@
-﻿/*
-	D3.js
-*/
-
-/*svg {
-    margin-top: 50px;
-}
-
-.bar {
-    fill: steelblue;
-}
-
-svg rect {
-    fill: orange;
-}
-
-svg text {
-    fill: black;
-    font: 10px sans-serif;
-}*/
-
-
-rect.bar-rect {
+﻿rect.bar-rect {
     fill: #189ad3;
 }
 

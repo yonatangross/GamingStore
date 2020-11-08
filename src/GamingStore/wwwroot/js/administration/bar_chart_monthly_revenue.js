@@ -1,6 +1,6 @@
-﻿const width = 600;
+﻿const width = 800;
 const height = 700;
-const margin = { top: 20, right: 20, bottom: 100, left: 100 };
+const margin = { top: 20, right: 100, bottom: 100, left: 100 };
 const graphWidth = width - margin.left - margin.right;
 const graphHeight = height - margin.top - margin.bottom;
 

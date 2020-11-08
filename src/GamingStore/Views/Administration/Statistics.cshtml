@@ -1,15 +1,19 @@
-﻿@model GamingStore.ViewModels.AdminStatsViewModel
-
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <head>
     <link rel="stylesheet" href="~/css/administration/bar_chart_monthly_revenue.css" />
+    <link rel="stylesheet" href="~/css/administration/pie_chart_store_revenue.css" />
 </head>
 <h3>Monthly revenue by months</h3>
-<div class="canvas"></div>
+<div class="barchart"></div>
+
+<h3>Store revenues</h3>
+<div class="piechart"></div>
+
 @section Scripts{
     <script src="/js/administration/bar_chart_monthly_revenue.js"></script>
+    <script src="/js/administration/pie_chart_store_revenue.js"></script>
 }

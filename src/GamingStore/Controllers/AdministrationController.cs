@@ -64,18 +64,50 @@ namespace GamingStore.Controllers
         [HttpGet]
         public async Task<IActionResult> Statistics()
         {
-            var orders = await _context.Orders.Include(o => o.Payment).ToListAsync();
-            var stats = CalcStats(orders);
+            var orders = await _context.Orders.Include(o => o.Payment).Include(o=>o.Store).ToListAsync();
+             CreateBarChartData(orders);
+             CreatePieChartData(orders);
+         
 
-            var viewModel = new AdminStatsViewModel()
-            {
-                OrderMonthlySumDictionary = stats
-            };
-
-            return View(viewModel);
+            return View();
         }
 
-        private static string CalcStats(List<Order> orders)
+        private void CreatePieChartData(List<Order> orders)
+        {
+            var orderMonthlyList = new List<PieChartFormat>();
+
+            foreach (var order in orders)
+            {
+                var storeName = order.Store.Name.Replace("Store","");
+                var itemsCost = order.Payment.ItemsCost;
+
+                if (orderMonthlyList.Any(d => d.Name == storeName))
+                {
+                    PieChartFormat pieChartFormat = orderMonthlyList.FirstOrDefault(d => d.Name == storeName);
+                    if (pieChartFormat != null)
+                    {
+                        pieChartFormat.Value += itemsCost;
+                    }
+                }
+                else
+                {
+                    orderMonthlyList.Add(new PieChartFormat()
+                    {
+                        Name = storeName,
+                        Value = itemsCost
+                    });
+                }
+            }
+
+            var serializeObject = JsonConvert.SerializeObject(orderMonthlyList, Formatting.Indented);
+
+            //write string to file
+            string pieChartDataPath = "data\\PieChart.json";
+            var fileDir = $@"{Directory.GetCurrentDirectory()}\wwwroot\{pieChartDataPath}";
+            System.IO.File.WriteAllText(fileDir, serializeObject);
+        }
+
+        private static void CreateBarChartData(List<Order> orders)
         {
             var orderMonthlyList = new List<BarChartFormat>();
             orders.Sort((x, y) => x.OrderDate.CompareTo(y.OrderDate));
@@ -104,15 +136,12 @@ namespace GamingStore.Controllers
                 }
             }
 
-
             var serializeObject = JsonConvert.SerializeObject(orderMonthlyList, Formatting.Indented);
 
             //write string to file
             string barChartDataPath = "data\\BarChartData.json";
             var fileDir = $@"{Directory.GetCurrentDirectory()}\wwwroot\{barChartDataPath}";
             System.IO.File.WriteAllText(fileDir, serializeObject);
-
-            return serializeObject;
         }
 
         [HttpPost]
