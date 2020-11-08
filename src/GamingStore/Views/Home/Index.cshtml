@@ -4,10 +4,42 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<head>
-    <link rel="stylesheet" type="text/css" href="~/css/main_styles.css">
-    <link rel="stylesheet" type="text/css" href="~/css/responsive.css">
-</head>
+
+@functions
+{
+    void createAdvertItem(Item item)
+    {
+                    @{
+                        foreach (var day in store.OpeningHours)
+                        {
+                            <!-- Advert Item -->
+
+                            <div class="ml-item advert d-flex flex-row align-items-center justify-content-start">
+                                <div class="advert_content">
+                                    <div class="advert_title">
+                                        <a href="/Items/Details?id=8">Trend 2021</a>
+                                    </div>
+                                    <div class="advert_text">The New Hottest IntelCore I9!</div>
+                                </div>
+                                <div class="ml-auto">
+                                    <div class="advert_image" style="max-width: 70%">
+                                        <a href="/Items/Details?id=8">
+                                            <img src="~/images/items/IntelCorei9-10850KACometLakeBox/1.jpg" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+    }
+}
+
+    <
+
+    head>
+<link rel="stylesheet" type="text/css" href="~/css/main_styles.css">
+<link rel="stylesheet" type="text/css" href="~/css/responsive.css">
+                </head>
 <body>
 
     <div class="characteristics">
@@ -17,7 +49,9 @@
                 <div class="col-lg-3 col-md-6 char_col">
 
                     <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                        <div class="char_icon"><img src="~/images/char_1.png" alt=""></div>
+                        <div class="char_icon">
+                            <img src="~/images/char_1.png" alt="">
+                        </div>
                         <div class="char_content">
                             <div class="char_title">Free Delivery</div>
                             <div class="char_subtitle">from $50</div>
@@ -29,7 +63,9 @@
                 <div class="col-lg-3 col-md-6 char_col">
 
                     <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                        <div class="char_icon"><img src="~/images/char_2.png" alt=""></div>
+                        <div class="char_icon">
+                            <img src="~/images/char_2.png" alt="">
+                        </div>
                         <div class="char_content">
                             <div class="char_title">Great New Products</div>
                             <div class="char_subtitle" style="margin: 5px">Every Week</div>
@@ -41,7 +77,9 @@
                 <div class="col-lg-3 col-md-6 char_col">
 
                     <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                        <div class="char_icon"><img src="~/images/char_3.png" alt=""></div>
+                        <div class="char_icon">
+                            <img src="~/images/char_3.png" alt="">
+                        </div>
                         <div class="char_content">
                             <div class="char_title" style="margin: 6px"> Cheapest Online Gaming Store </div>
                             <div class="char_subtitle" style="margin: 5px">Best Seller Store</div>
@@ -53,7 +91,9 @@
                 <div class="col-lg-3 col-md-6 char_col">
 
                     <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                        <div class="char_icon"><img src="~/images/char_4.png" alt=""></div>
+                        <div class="char_icon">
+                            <img src="~/images/char_4.png" alt="">
+                        </div>
                         <div class="char_content">
                             <div class="char_title">Best Offers Every Day</div>
                             <div class="char_subtitle">Save Money</div>
@@ -67,8 +107,14 @@
         <div style="position: absolute; top: 33px; right: 50px; background-image: url('https://svg-clipart.com/clipart/grey/U6U98tr-new-icon-clipart.png'); height: 200px; width: 200px; background-size: contain"></div>
         <div class="col-9">
             <div>
-                <h1 class="h1" style="color: yellowgreen"><span><strong>GEFORCE RTX 3070</strong></span></h1>
-                <h2 class="h3" style="color: white"><strong>THE ULTIMATE PLAY</strong></h2>
+                <h1 class="h1" style="color: yellowgreen">
+                    <span>
+                        <strong>GEFORCE RTX 3070</strong>
+                    </span>
+                </h1>
+                <h2 class="h3" style="color: white">
+                    <strong>THE ULTIMATE PLAY</strong>
+                </h2>
                 <div style="color: white">
                     <p>The GeForce RTX<sup>™</sup> 3070 is powered by Ampere—NVIDIA’s 2nd gen RTX architecture. Built with enhanced Ray Tracing Cores and Tensor Cores, new streaming multiprocessors, and high-speed G6 memory, it gives you the power you need to rip through the most demanding games.</p>
                 </div>
@@ -103,7 +149,11 @@
                             <div class="advert_text">New Surround Gaming Headset For Best Experience!</div>
                         </div>
                         <div class="ml-auto">
-                            <div class="advert_image" style="max-width: 70%"><a href="/Items/Details?id=1"><img src="/images/items/G432Wired7dot1SurroundSoundGamingHeadset/1.jpg" alt=""></a></div>
+                            <div class="advert_image" style="max-width: 70%">
+                                <a href="/Items/Details?id=1">
+                                    <img src="/images/items/G432Wired7dot1SurroundSoundGamingHeadset/1.jpg" alt="">
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -115,11 +165,17 @@
                     <div class="advert d-flex flex-row align-items-center justify-content-start">
                         <div class="advert_content">
                             <div class="advert_subtitle"></div>
-                            <div class="advert_title_2"><a href="/Items/Details?id=6">Sale -15%</a></div>
-                            <div class="advert_text" >New Powerful GPU Nvidia GeForce RTX3090</div>
+                            <div class="advert_title_2">
+                                <a href="/Items/Details?id=6">Sale -15%</a>
+                            </div>
+                            <div class="advert_text">New Powerful GPU Nvidia GeForce RTX3090</div>
                         </div>
                         <div class="ml-auto">
-                            <div class="advert_image" style="max-width: 70%"> <a href="/Items/Details?id=6"> <img src="/images/items/NVIDIAGeForceRTX3090/1.jpg" alt=""> </a></div>
+                            <div class="advert_image" style="max-width: 70%">
+                                <a href="/Items/Details?id=6">
+                                    <img src="/images/items/NVIDIAGeForceRTX3090/1.jpg" alt="">
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -130,11 +186,17 @@
 
                     <div class="advert d-flex flex-row align-items-center justify-content-start">
                         <div class="advert_content">
-                            <div class="advert_title"><a href="/Items/Details?id=8">Trend 2021</a></div>
+                            <div class="advert_title">
+                                <a href="/Items/Details?id=8">Trend 2021</a>
+                            </div>
                             <div class="advert_text">The New Hottest IntelCore I9!</div>
                         </div>
                         <div class="ml-auto">
-                            <div class="advert_image" style="max-width: 70%">  <a href="/Items/Details?id=8"> <img src="~/images/items/IntelCorei9-10850KACometLakeBox/1.jpg" alt=""> </a></div>
+                            <div class="advert_image" style="max-width: 70%">
+                                <a href="/Items/Details?id=8">
+                                    <img src="~/images/items/IntelCorei9-10850KACometLakeBox/1.jpg" alt="">
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -142,5 +204,215 @@
             </div>
         </div>
     </div>
+
+
+    <div class="best_sellers">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="tabbed_container">
+                        <div class="tabs clearfix tabs-right">
+                            <div class="new_arrivals_title">Hot Best Sellers</div>
+                            <div class="tabs_line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding: 3%">
+                <div class="col-lg-4 advert_col">
+
+                    <!-- Advert Item -->
+
+                    <div class="ml-item advert d-flex flex-row align-items-center justify-content-start">
+                        <div class="advert_content">
+                            <div class="advert_title">
+                                <a href="/Items/Details?id=8">Trend 2021</a>
+                            </div>
+                            <div class="advert_text">The New Hottest IntelCore I9!</div>
+                        </div>
+                        <div class="ml-auto">
+                            <div class="advert_image" style="max-width: 70%">
+                                <a href="/Items/Details?id=8">
+                                    <img src="~/images/items/IntelCorei9-10850KACometLakeBox/1.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 advert_col">
+
+                    <!-- Advert Item -->
+
+                    <div class="advert d-flex flex-row align-items-center justify-content-start">
+                        <div class="advert_content">
+                            <div class="advert_title">
+                                <a href="/Items/Details?id=8">Trend 2021</a>
+                            </div>
+                            <div class="advert_text">The New Hottest IntelCore I9!</div>
+                        </div>
+                        <div class="ml-auto">
+                            <div class="advert_image" style="max-width: 70%">
+                                <a href="/Items/Details?id=8">
+                                    <img src="~/images/items/IntelCorei9-10850KACometLakeBox/1.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 advert_col">
+
+                    <!-- Advert Item -->
+
+                    <div class="advert d-flex flex-row align-items-center justify-content-start">
+                        <div class="advert_content">
+                            <div class="advert_title">
+                                <a href="/Items/Details?id=8">Trend 2021</a>
+                            </div>
+                            <div class="advert_text">The New Hottest IntelCore I9!</div>
+                        </div>
+                        <div class="ml-auto">
+                            <div class="advert_image" style="max-width: 70%">
+                                <a href="/Items/Details?id=8">
+                                    <img src="~/images/items/IntelCorei9-10850KACometLakeBox/1.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding: 3%">
+                <div class="col-lg-4 advert_col">
+
+                    <!-- Advert Item -->
+
+                    <div class="advert d-flex flex-row align-items-center justify-content-start">
+                        <div class="advert_content">
+                            <div class="advert_title">
+                                <a href="/Items/Details?id=8">Trend 2021</a>
+                            </div>
+                            <div class="advert_text">The New Hottest IntelCore I9!</div>
+                        </div>
+                        <div class="ml-auto">
+                            <div class="advert_image" style="max-width: 70%">
+                                <a href="/Items/Details?id=8">
+                                    <img src="~/images/items/IntelCorei9-10850KACometLakeBox/1.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 advert_col">
+
+                    <!-- Advert Item -->
+
+                    <div class="advert d-flex flex-row align-items-center justify-content-start">
+                        <div class="advert_content">
+                            <div class="advert_title">
+                                <a href="/Items/Details?id=8">Trend 2021</a>
+                            </div>
+                            <div class="advert_text">The New Hottest IntelCore I9!</div>
+                        </div>
+                        <div class="ml-auto">
+                            <div class="advert_image" style="max-width: 70%">
+                                <a href="/Items/Details?id=8">
+                                    <img src="~/images/items/IntelCorei9-10850KACometLakeBox/1.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 advert_col">
+
+                    <!-- Advert Item -->
+
+                    <div class="advert d-flex flex-row align-items-center justify-content-start">
+                        <div class="advert_content">
+                            <div class="advert_title">
+                                <a href="/Items/Details?id=8">Trend 2021</a>
+                            </div>
+                            <div class="advert_text">The New Hottest IntelCore I9!</div>
+                        </div>
+                        <div class="ml-auto">
+                            <div class="advert_image" style="max-width: 70%">
+                                <a href="/Items/Details?id=8">
+                                    <img src="~/images/items/IntelCorei9-10850KACometLakeBox/1.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @*<div class="row">
+            <div class="col-md-4 border border-primary rounded">
+                <div class="thumbnail">
+                        <a href="#">
+                            <img src="/images/items/G432Wired7dot1SurroundSoundGamingHeadset/1.jpg" alt="Lights" style="width: 100%">
+                            <div class="caption">
+                                <p>Lorem ipsum...</p>
+                            </div>
+                        </a>
+                    </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href="#">
+                        <img src="/images/items/CloudStingerWiredStereoGamingHeadset/1.jpg" alt="Nature" style="width: 100%" class="rounded">
+                        <div class="caption">
+                            <p>Lorem ipsum...</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href="#">
+                        <img src="/images/items/GeForceRTX2080SUPERBLACKGAMING/1.jpg" alt="Fjords" style="width: 100%" class="rounded">
+                        <div class="caption">
+                            <p>Lorem ipsum...</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href="#">
+                        <img src="/images/items/G432Wired7dot1SurroundSoundGamingHeadset/1.jpg" alt="Lights" style="width:100%" class="rounded">
+                        <div class="caption">
+                            <p>Lorem ipsum...</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href="#">
+                        <img src="/images/items/CloudStingerWiredStereoGamingHeadset/1.jpg" alt="Nature" style="width:100%" class="rounded">
+                        <div class="caption">
+                            <p>Lorem ipsum...</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href="#">
+                        <img src="/images/items/GeForceRTX2080SUPERBLACKGAMING/1.jpg" alt="Fjords" style="width:100%" class="rounded">
+                        <div class="caption">
+                            <p>Lorem ipsum...</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>*@
+
     <script type="text/javascript" src="/js/home.js"></script>
 </body>
+
+
