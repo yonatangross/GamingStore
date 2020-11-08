@@ -47,10 +47,10 @@ namespace GamingStore.Models
         public bool IsOpen()
         {
             var currentDateTime = DateTime.Now;
-            var curDay = currentDateTime.Day - 1;
+            var dayOfWeek = (int)currentDateTime.DayOfWeek;
             var curTime = currentDateTime.TimeOfDay;
 
-            return OpeningHours[curDay].OpeningTime <= curTime && curTime <= OpeningHours[curDay].ClosingTime;
+            return OpeningHours[dayOfWeek].OpeningTime <= curTime && curTime <= OpeningHours[dayOfWeek].ClosingTime;
         }
     }
 }
