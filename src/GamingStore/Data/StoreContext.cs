@@ -50,9 +50,9 @@ namespace GamingStore.Data
             modelBuilder.Entity<StoreItem>().HasOne(storeItem => storeItem.Item).WithMany(item => item.StoreItems)
                 .HasForeignKey(storeItem => storeItem.ItemId);
 
-            modelBuilder.Entity<ItemsBundle>().HasKey(table => new {
-                table.FirstItemId,
-                table.SecondItemId
+            modelBuilder.Entity<RelatedItem>().HasKey(table => new {
+                CustomerId = table.CustomerIntId,
+                ItemId = table.ItemId
             });
             #endregion
 
@@ -81,7 +81,7 @@ namespace GamingStore.Data
             modelBuilder.Entity<Cart>().ToTable("Carts");
         }
 
-        public DbSet<ItemsBundle> ItemsBundles{ get; set; }
+        public DbSet<RelatedItem> RelatedItems { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Store> Stores { get; set; }

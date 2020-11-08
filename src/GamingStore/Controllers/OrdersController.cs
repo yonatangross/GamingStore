@@ -124,22 +124,33 @@ namespace GamingStore.Controllers
             //items bundles
 
 
+            /*
             for (var i = 0; i < itemsInCart.Count - 1; i++)
             {
                 for (var j = i + 1; j < itemsInCart.Count; j++)
                 {
-                    var frontItemBundle = new ItemsBundle(itemsInCart[i].ItemId, itemsInCart[j].ItemId);
-                    var backItemBundle = new ItemsBundle(itemsInCart[j].ItemId, itemsInCart[i].ItemId);
+                    var frontItemBundle = new RelatedItem(itemsInCart[i].ItemId, itemsInCart[j].ItemId);
+                    var backItemBundle = new RelatedItem(itemsInCart[j].ItemId, itemsInCart[i].ItemId);
+                    try
+                    {
+                        var a = _context.ItemsBundles.Where(i =>
+                            i.CustomerId == frontItemBundle.CustomerId && i.ItemId == frontItemBundle.ItemId);
+                        if (!a.Any())
+                            await _context.ItemsBundles.AddAsync(frontItemBundle);
 
-                    var a = _context.ItemsBundles.Where(i =>
-                        i.FirstItemId == frontItemBundle.FirstItemId &&
-                        i.SecondItemId == frontItemBundle.SecondItemId ||
-                        i.FirstItemId == backItemBundle.FirstItemId && i.SecondItemId == backItemBundle.SecondItemId);
-                    if (a.Any()) continue;
-                    await _context.ItemsBundles.AddAsync(frontItemBundle);
-                    await _context.ItemsBundles.AddAsync(backItemBundle);
+                        var b = _context.ItemsBundles.Where(i =>
+                            i.CustomerId == backItemBundle.CustomerId && i.ItemId == backItemBundle.ItemId);
+                        if (!b.Any())
+                            await _context.ItemsBundles.AddAsync(backItemBundle);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
+                  
                 }
-            }
+            }*/
 
             //add order to db
             _context.Add(order);
