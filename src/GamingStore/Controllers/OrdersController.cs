@@ -41,7 +41,9 @@ namespace GamingStore.Controllers
                 Customer customer = await GetCurrentUserAsync();
                 List<Cart> itemsInCart = await GetItemsInCart(customer);
                 const int defaultPaymentCost = 10;
-                double itemsCost = itemsInCart.Aggregate<Cart, double>(0, (current, cart) => current + cart.Item.Price * cart.Quantity);
+                double itemsCost =
+                    itemsInCart.Aggregate<Cart, double>(0,
+                        (current, cart) => current + cart.Item.Price * cart.Quantity);
                 double totalCost = itemsCost + defaultPaymentCost;
 
                 var viewModel = new CreateOrderViewModel
@@ -95,7 +97,8 @@ namespace GamingStore.Controllers
             order.Payment.Paid = true;
             order.PaymentId = order.Payment.Id;
             List<Cart> itemsInCart = await GetItemsInCart(customer);
-            order.Payment.ItemsCost = itemsInCart.Aggregate<Cart, double>(0, (current, cart) => current + cart.Item.Price * cart.Quantity);
+            order.Payment.ItemsCost =
+                itemsInCart.Aggregate<Cart, double>(0, (current, cart) => current + cart.Item.Price * cart.Quantity);
             order.Payment.Total = order.Payment.ItemsCost + order.Payment.ShippingCost;
             order.ShippingMethod = order.Payment.ShippingCost switch
             {
@@ -118,6 +121,26 @@ namespace GamingStore.Controllers
                 });
             }
 
+            //items bundles
+
+
+            for (var i = 0; i < itemsInCart.Count - 1; i++)
+            {
+                for (var j = i + 1; j < itemsInCart.Count; j++)
+                {
+                    var frontItemBundle = new ItemsBundle(itemsInCart[i].ItemId, itemsInCart[j].ItemId);
+                    var backItemBundle = new ItemsBundle(itemsInCart[j].ItemId, itemsInCart[i].ItemId);
+
+                    var a = _context.ItemsBundles.Where(i =>
+                        i.FirstItemId == frontItemBundle.FirstItemId &&
+                        i.SecondItemId == frontItemBundle.SecondItemId ||
+                        i.FirstItemId == backItemBundle.FirstItemId && i.SecondItemId == backItemBundle.SecondItemId);
+                    if (a.Any()) continue;
+                    await _context.ItemsBundles.AddAsync(frontItemBundle);
+                    await _context.ItemsBundles.AddAsync(backItemBundle);
+                }
+            }
+
             //add order to db
             _context.Add(order);
             await _context.SaveChangesAsync();
@@ -135,7 +158,7 @@ namespace GamingStore.Controllers
             _context.Carts.RemoveRange(carts);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("ThankYouIndex", new { id = order.Id, items });
+            return RedirectToAction("ThankYouIndex", new {id = order.Id, items});
         }
 
         public async Task<IActionResult> ThankYouIndex(string id, int items)
@@ -176,8 +199,9 @@ namespace GamingStore.Controllers
             {
                 return NotFound();
             }
-            
-            Order order = await _context.Orders.Include(x => x.OrderItems).ThenInclude(y => y.Item).FirstOrDefaultAsync(o => o.Id == id);
+
+            Order order = await _context.Orders.Include(x => x.OrderItems).ThenInclude(y => y.Item)
+                .FirstOrDefaultAsync(o => o.Id == id);
 
             if (order == null)
             {
@@ -209,13 +233,14 @@ namespace GamingStore.Controllers
 
             var viewModel = new EditOrdersViewModel
             {
-                Customers = await _context.Customers.Where(customer => !string.IsNullOrWhiteSpace(customer.UserName)).Distinct().ToListAsync(),
+                Customers = await _context.Customers.Where(customer => !string.IsNullOrWhiteSpace(customer.UserName))
+                    .Distinct().ToListAsync(),
                 Order = order
             };
-            
+
             return View(viewModel);
         }
-        
+
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(Order order)
@@ -224,7 +249,8 @@ namespace GamingStore.Controllers
             {
                 try
                 {
-                    Order orderOnDb = await _context.Orders.Include(o => o.Payment).FirstOrDefaultAsync(o => o.Id == order.Id);
+                    Order orderOnDb = await _context.Orders.Include(o => o.Payment)
+                        .FirstOrDefaultAsync(o => o.Id == order.Id);
                     orderOnDb.Payment.Paid = order.Payment.Paid;
                     orderOnDb.Payment.PaymentMethod = order.Payment.PaymentMethod;
                     orderOnDb.Payment.ShippingCost = order.Payment.ShippingCost;
@@ -250,7 +276,8 @@ namespace GamingStore.Controllers
 
             var viewModel = new EditOrdersViewModel
             {
-                Customers = await _context.Customers.Where(customer => !string.IsNullOrWhiteSpace(customer.UserName)).Distinct().ToListAsync(),
+                Customers = await _context.Customers.Where(customer => !string.IsNullOrWhiteSpace(customer.UserName))
+                    .Distinct().ToListAsync(),
                 Order = order
             };
 
@@ -290,7 +317,7 @@ namespace GamingStore.Controllers
             _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("ListOrders","Administration");
+            return RedirectToAction("ListOrders", "Administration");
         }
     }
 }
