@@ -1,74 +1,58 @@
 [
   {
-    "Name": "Babbleset",
-    "Value": 6455.84
+    "Name": "InnoZ",
+    "Value": 8394.33
   },
   {
     "Name": "Topiclounge",
-    "Value": 13796.320000000002
+    "Value": 21550.14
   },
   {
-    "Name": "Bubbletube",
-    "Value": 4904.669999999999
-  },
-  {
-    "Name": "Chatterpoint",
-    "Value": 1941.19
-  },
-  {
-    "Name": "Edgeclub",
-    "Value": 3759.98
-  },
-  {
-    "Name": "InnoZ",
-    "Value": 1063.31
-  },
-  {
-    "Name": "Demimbu",
-    "Value": 5685.55
-  },
-  {
-    "Name": "Innotype",
-    "Value": 1789.1
-  },
-  {
-    "Name": "Wikizz",
-    "Value": 1952.96
-  },
-  {
-    "Name": "Yozio",
-    "Value": 5212.8
-  },
-  {
-    "Name": "Fliptune",
-    "Value": 4125.57
-  },
-  {
-    "Name": "Fivebridge",
-    "Value": 123.8
+    "Name": "Babbleset",
+    "Value": 351.1
   },
   {
     "Name": "Quire",
-    "Value": 1097.04
+    "Value": 9058.26
+  },
+  {
+    "Name": "Edgeclub",
+    "Value": 7198.98
+  },
+  {
+    "Name": "Chatterpoint",
+    "Value": 980.6899999999999
   },
   {
     "Name": "Devbug",
-    "Value": 454.0
+    "Value": 5481.27
   },
   {
-    "Name": "Gabspot",
-    "Value": 329.4
+    "Name": "Yozio",
+    "Value": 6154.76
   },
   {
-    "Name": "Geba",
-    "Value": 2627.49
+    "Name": "Wikizz",
+    "Value": 255.42
   },
   {
     "Name": "Warehouse",
-    "Value": 2265.58
+    "Value": 4430.0
   },
   {
     "Name": "Skajo",
-    "Value": 1165.1399999999999
+    "Value": 9853.97
+  },
+  {
+    "Name": "Fivebridge",
+    "Value": 4879.95
+  },
+  {
+    "Name": "Fliptune",
+    "Value": 5104.52
+  },
+  {
+    "Name": "Demimbu",
+    "Value": 4456.400000000001
   }
 ]
