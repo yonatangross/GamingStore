@@ -26,7 +26,8 @@ namespace GamingStore.Controllers
         private readonly UserManager<Customer> _userManager;
         private readonly IHostingEnvironment _hostingEnvironment;
 
-        public ItemsController(StoreContext context, UserManager<Customer> userManager, IHostingEnvironment hostingEnvironment)
+        public ItemsController(StoreContext context, UserManager<Customer> userManager,
+            IHostingEnvironment hostingEnvironment)
         {
             _userManager = userManager;
             _hostingEnvironment = hostingEnvironment;
@@ -36,7 +37,8 @@ namespace GamingStore.Controllers
         private Task<Customer> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Items
-        public async Task<IActionResult> Index(string category, string manufacture, int? priceMin, int? priceMax, string keywords, SortByFilter sortBy = SortByFilter.NewestArrivals)
+        public async Task<IActionResult> Index(string category, string manufacture, int? priceMin, int? priceMax,
+            string keywords, SortByFilter sortBy = SortByFilter.NewestArrivals)
         {
             List<Item> items = await _context.Items.ToListAsync();
 
@@ -62,10 +64,12 @@ namespace GamingStore.Controllers
             {
                 items = items.Where(item => item.Price <= priceMax).ToList();
             }
-            
+
             if (!string.IsNullOrWhiteSpace(keywords))
             {
-                items = items.Where(item => item.Title.ToLower().Contains(keywords.ToLower()) || item.Manufacturer.ToLower().Contains(keywords.ToLower())).ToList();
+                items = items.Where(item =>
+                    item.Title.ToLower().Contains(keywords.ToLower()) ||
+                    item.Manufacturer.ToLower().Contains(keywords.ToLower())).ToList();
             }
 
             items = sortBy switch
@@ -105,10 +109,17 @@ namespace GamingStore.Controllers
             }
 
             Item item = await _context.Items.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (item == null)
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
             {
-                return NotFound();
+                //var userIntId = GetCurrentUserAsync().Result.CustomerNumber;
+                RelatedItem relatedItem = new RelatedItem(user.CustomerNumber, item.Id);
+                var relatedItems =
+                    _context.RelatedItems.Any(ri => ri.ItemId == item.Id && ri.CustomerIntId == user.CustomerNumber);
+                if (!relatedItems)
+                    await _context.RelatedItems.AddAsync(relatedItem);
+
+                await _context.SaveChangesAsync();
             }
 
             return View(item);
@@ -167,7 +178,6 @@ namespace GamingStore.Controllers
 
             return RedirectToAction("ListItems", "Administration");
         }
-
 
 
         // GET: Items/Edit/5
@@ -250,6 +260,7 @@ namespace GamingStore.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -323,7 +334,6 @@ namespace GamingStore.Controllers
             }
             catch (Exception e)
             {
-
             }
 
             return RedirectToAction(nameof(Index));

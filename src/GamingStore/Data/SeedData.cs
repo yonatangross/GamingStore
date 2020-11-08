@@ -23,6 +23,8 @@ namespace GamingStore.Data
             await CreateRolesAndUsers(context,userManager, roleManager,adminPassword);
 
             SeedDatabase(context);
+
+            
         }
 
         private static async Task CreateRolesAndUsers(StoreContext context,UserManager<Customer> userManager, RoleManager<IdentityRole> roleManager,string adminPassword)
