@@ -1,74 +1,84 @@
-﻿// set the dimensions and margins of the graph
-var margin = { top: 20, right: 30, bottom: 40, left: 90 },
-    width = 500 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+﻿const width = 600;
+const height = 700;
+const margin = { top: 20, right: 20, bottom: 100, left: 100 };
+const graphWidth = width - margin.left - margin.right;
+const graphHeight = height - margin.top - margin.bottom;
 
-// append the svg object to the body of the page
-var svg = d3.select("svg")
+var format = d3.format(",.2r");
+const svg = d3.select(".canvas")
     .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
+    .attr("width", width)
+    .attr("height", height);
+const graph = svg.append("g")
+    .attr("width", graphWidth)
+    .attr("height", graphHeight)
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+const gXAxis = graph.append("g")
+    .attr("transform", `translate(0, ${graphHeight})`);
+const gYAxis = graph.append("g");
 
-// Parse the Data
-d3.json("/data/BarChartData.json",
-    function(data) {
+d3.json("/data/BarChartData.json").then(data => {
+    const x = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.Value)])
+        .range([0, graphWidth]);
 
-        // Add X axis
-        var x = d3.scaleLinear()
-            .domain([0, 13000])
-            .range([0, width]);
+    const y = d3.scaleBand()
+        .domain(data.map(item => item.Date))
+        .range([0, graphHeight])
+        .paddingInner(0.1)
+        .paddingOuter(0.2);
 
-        svg.append("g")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x))
-            .selectAll("text")
-            .attr("transform", "translate(-10,0)rotate(-45)")
-            .style("text-anchor", "end");
+    const rects = graph.selectAll("rect")
+        .data(data);
 
-        svg.append("text") // text label for the x axis
-            .attr("x", width / 2)
-            .attr("y", height + margin.bottom)
-            .style("text-anchor", "middle")
-            .text("Value");
+    rects.attr("class", "bar-rect")
+        .attr("height", y.bandwidth)
+        .attr("width", d =>  x(d.Value)-x(0))
+        .attr("x", d => x(0))
+        .attr("y", d => y(d.Date));
 
+    rects.enter()
+        .append("rect")
+        .attr("class", "bar-rect")
+        .attr("height", y.bandwidth)
+        .attr("width", d=> x(d.Value) - x(0))
+        .attr("x", d => x(0))
+        .attr("y", d => y(d.Date));
 
-        // Y axis
-        var y = d3.scaleBand()
-            .range([0, height])
-            .domain(data.map(function(d) { return d.Date; }))
-            .padding(.1);
-
-        svg.append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", 0 - margin.left)
-            .attr("x", 0 - (height / 2))
-            .attr("dy", "1em")
-            .style("text-anchor", "middle")
-            .text("Date");
-
-        svg.append("g")
-            .call(d3.axisLeft(y));
-
-        //Bars
-        var bar = svg.selectAll("myRect")
-            .data(data)
-            .enter();
-        bar.append("rect")
-            .attr("x", x(0))
-            .attr("y", function(d) { return y(d.Date); })
-            .attr("width", function(d) { return x(d.Value); })
-            .attr("height", y.bandwidth())
-            .attr("fill", "#69b3a2");
+    rects.enter()
+        .append("text")
+        .attr("class", "text-rect")
+        .attr("fill", "white")
+        .attr("text-anchor", "end")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", 10)
+        .attr("x", d => x(d.Value))
+        .attr("y", (d) => y(d.Date))
+        .attr("dy", "1.30em")
+        .attr("dx", -4)
+        .text(d => format(d.Value)+" $" )
+        .text(d => format(d.Value)+" $" )
+        .call(text => text.filter(d => d.Value < 1000) // short bars for values 
+            .attr("dx", +4)
+            .attr("fill", "black")
+            .attr("text-anchor", "start"));
 
 
-        svg.append("text")
-            .attr("x", (width / 2)+40)
-            .attr("y", 22)
-            .attr("text-anchor", "middle")
-            .style("font-size", "22px")
-            .style("text-decoration", "bold")
-            .text("Sales in $ per month");
-    });
+    const xAxis = d3.axisBottom(x)
+        .ticks(5)
+        .tickFormat(d => `${d}$`);
+
+    const yAxis = d3.axisLeft(y);
+
+
+    gXAxis.call(xAxis);
+    gYAxis.call(yAxis);
+    gXAxis.selectAll("text")
+        .attr("transform", "translate(-10,10)rotate(-45)")
+        .style("text-anchor", "end")
+        .style("font-size", 15);
+
+    gYAxis.selectAll("text")
+        .style("font-size", 10).style("text-anchor", "start").style("font-weight", "bold")
+        .attr('transform', () => { return 'translate(-80,0)' });
+});

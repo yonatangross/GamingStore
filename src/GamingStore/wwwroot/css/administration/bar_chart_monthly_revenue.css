@@ -2,10 +2,7 @@
 	D3.js
 */
 
-h3 {
-    margin-top: 200px;
-}
-svg {
+/*svg {
     margin-top: 50px;
 }
 
@@ -20,4 +17,14 @@ svg rect {
 svg text {
     fill: black;
     font: 10px sans-serif;
+}*/
+
+
+rect.bar-rect {
+    fill: #189ad3;
+}
+
+rect.bar-rect:hover {
+    fill: #107dac;
+    transition: all .2s;
 }
