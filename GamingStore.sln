@@ -7,7 +7,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{30E8D4AE-6FE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamingStore", "src\GamingStore\GamingStore.csproj", "{911ED4ED-C382-42F9-A9C9-8CE9F2F87C40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "src\LoggerService\LoggerService.csproj", "{1D7C5F30-2ED2-47C0-A130-583A333B4824}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggerService", "src\LoggerService\LoggerService.csproj", "{1D7C5F30-2ED2-47C0-A130-583A333B4824}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamingStore.MachineLearning", "src\GamingStore.MachineLearning\GamingStore.MachineLearning.csproj", "{041C0D9B-019B-4106-8C70-BF6B3DF0F122}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{7694C763-5E5C-4EF5-8172-E28953E9B869}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamingStore.Tester", "tools\GamingStore.Tester\GamingStore.Tester.csproj", "{C600670D-3C1A-4537-A9B1-3FCB5ECEEFD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +29,14 @@ Global
 		{1D7C5F30-2ED2-47C0-A130-583A333B4824}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D7C5F30-2ED2-47C0-A130-583A333B4824}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D7C5F30-2ED2-47C0-A130-583A333B4824}.Release|Any CPU.Build.0 = Release|Any CPU
+		{041C0D9B-019B-4106-8C70-BF6B3DF0F122}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{041C0D9B-019B-4106-8C70-BF6B3DF0F122}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{041C0D9B-019B-4106-8C70-BF6B3DF0F122}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{041C0D9B-019B-4106-8C70-BF6B3DF0F122}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C600670D-3C1A-4537-A9B1-3FCB5ECEEFD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C600670D-3C1A-4537-A9B1-3FCB5ECEEFD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C600670D-3C1A-4537-A9B1-3FCB5ECEEFD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C600670D-3C1A-4537-A9B1-3FCB5ECEEFD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +44,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{911ED4ED-C382-42F9-A9C9-8CE9F2F87C40} = {30E8D4AE-6FEB-4AE7-9A71-9A7F7CEB74D8}
 		{1D7C5F30-2ED2-47C0-A130-583A333B4824} = {30E8D4AE-6FEB-4AE7-9A71-9A7F7CEB74D8}
+		{041C0D9B-019B-4106-8C70-BF6B3DF0F122} = {30E8D4AE-6FEB-4AE7-9A71-9A7F7CEB74D8}
+		{C600670D-3C1A-4537-A9B1-3FCB5ECEEFD4} = {7694C763-5E5C-4EF5-8172-E28953E9B869}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {57618E16-C28A-45F0-A1EC-E8B7F72DAE5A}
