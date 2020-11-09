@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using Newtonsoft.Json;
@@ -12,16 +13,16 @@ namespace GamingStore.ProductParser
     {
         static void Main(string[] args)
         {
-            var asin = "N82E16817371128";
-            var filesDirectory = @"D:\Repos\GamingStore\src\GamingStore\wwwroot\images\items";
+            var asin = "N82E16824012012";
+            var filesDirectory = @"D:\repos\GamingStore\src\GamingStore\wwwroot\images\items";
 
             var webDriver = new ChromeDriver();
             webDriver.Navigate().GoToUrl($"https://www.newegg.com/global/il-en/p/{asin}");
             IWebElement mainElement = webDriver.FindElementByXPath("//div[@class='product-main display-flex']");
 
             var title = mainElement.FindElement(By.XPath(".//h1[@class='product-title']")).Text;
-            var convertedTitle = title.Replace(" ", string.Empty).Replace("\\", string.Empty).Replace("/", string.Empty).Substring(0, 40);
-            var imagesFolderPath = $@"{filesDirectory}\{convertedTitle}";
+            var convertedTitle = title.Replace(" ", string.Empty).Replace("\\", string.Empty).Replace("/", string.Empty).Replace("\"", string.Empty).Substring(0, 40);
+            var imagesFolderPath = $"{filesDirectory}\\{convertedTitle}";
             Directory.CreateDirectory(imagesFolderPath);
 
             try
@@ -56,6 +57,8 @@ namespace GamingStore.ProductParser
 
                 string json = JsonConvert.SerializeObject(item, (Newtonsoft.Json.Formatting)Formatting.Indented);
                 File.WriteAllText($@"{imagesFolderPath}\item.txt", json);
+
+                Process.Start("explorer.exe", imagesFolderPath);
             }
             catch (Exception e)
             {
