@@ -50,7 +50,7 @@ namespace GamingStore.Data
             modelBuilder.Entity<StoreItem>().HasOne(storeItem => storeItem.Item).WithMany(item => item.StoreItems)
                 .HasForeignKey(storeItem => storeItem.ItemId);
 
-            modelBuilder.HasSequence<int>("CustomerNumber_seq", "dbo")
+            modelBuilder.HasSequence<int>("Order_seq", schema: "dbo")
                 .StartsAt(0)
                 .IncrementsBy(1);
 
