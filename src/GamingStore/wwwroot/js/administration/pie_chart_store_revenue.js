@@ -1,8 +1,8 @@
-﻿
+﻿const width = 600;
 var format = d3.format(",.2r");
 
 d3.json("/data/PieChart.json").then(data => {
-    const pieHeight = Math.min(600, 600);
+    const pieHeight = 500;
 
 
     const color = d3.scaleOrdinal()
@@ -25,20 +25,18 @@ d3.json("/data/PieChart.json").then(data => {
 
     const svgPie = d3.select(".piechart")
         .append("svg")
-        .attr("width", 800)
-        .attr("height", pieHeight);
+        .attr("viewBox", [-width / 2, -pieHeight / 2, width, pieHeight]);
 
     svgPie.append("g")
         .attr("class", "pie-container")
         .attr("stroke", "white")
-        .attr("transform", "translate(250,250)")
         .selectAll("path")
         .data(arcs)
         .join("path")
         .attr("fill", d => color(d.data.Name))
         .attr("d", arc)
         .append("title")
-        .text(d => `${d.Name}: ${format(d.Value)}`);
+        .text(d => `${d.Name}: ${format(d.Value)}$`);
 
     svgPie.append("g")
         .attr("font-family", "sans-serif")
@@ -47,6 +45,7 @@ d3.json("/data/PieChart.json").then(data => {
         .selectAll("text")
         .data(arcs)
         .join("text")
+        .attr("y", "-0.4em")
         .attr("transform", d => `translate(${arcLabel.centroid(d)})`)
         .call(text => text.append("tspan")
             .attr("y", "-0.4em")

@@ -67,7 +67,7 @@ namespace GamingStore.Controllers
             var orders = await _context.Orders.Include(o => o.Payment).Include(o=>o.Store).ToListAsync();
              CreateBarChartData(orders);
 
-            return View();
+            return View("Statistics/BarChart");
         }
 
         [HttpGet]
@@ -76,7 +76,7 @@ namespace GamingStore.Controllers
             var orders = await _context.Orders.Include(o => o.Payment).Include(o => o.Store).ToListAsync();
             CreatePieChartData(orders);
 
-            return View();
+            return View("Statistics/PieChart");
         }
 
         private void CreatePieChartData(List<Order> orders)
