@@ -1,16 +1,24 @@
-﻿@model GamingStore.Models.Store
+﻿@using GamingStore.Contracts
+@model GamingStore.Models.Store
 
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h3>Edit Order# @Model.Id</h3>
+<h3>Edit Store# @Model.Id</h3>
 <hr />
 <div class="row">
     @using (Html.BeginForm("Edit", "Stores", FormMethod.Post, new { @class = "col-10" }))
     {
-        @*@Html.HiddenFor(m => m.Id)*@
+        @Html.HiddenFor(m => m.Id)
+
+        @Html.HiddenFor(m=>m.OpeningHours)
+
+        @for(var openingHourIndex = 0; openingHourIndex < Model.OpeningHours.Length; openingHourIndex++)
+        {
+            @Html.HiddenFor(model => Model.OpeningHours[openingHourIndex])
+        }
 
         <div class="form-group row">
             @Html.LabelFor(m => m.Name, new { @class = "col-sm-2 col-form-label" })
