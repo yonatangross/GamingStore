@@ -141,58 +141,64 @@
             </div>
         </div>
     </div>
-    <div class="best_sellers">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="tabbed_container">
-                        <div class="tabs clearfix tabs-right">
-                            <div class="new_arrivals_title">Hot Best Sellers</div>
-                            <div class="tabs_line"></div>
+    @if (Model != null && Model.Any())
+    {
+        <div class="best_sellers">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="tabbed_container">
+                            <div class="tabs clearfix tabs-right">
+                                <div class="new_arrivals_title">Hot Best Sellers</div>
+                                <div class="tabs_line"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row" style="padding: 3%">
-                @for (int i = 0; i <= 2; i++)
-                {
-                    <div class="col-lg-4 advert_col">
 
-                        <!-- Advert Item -->
 
-                        <div class="ml-item advert d-flex flex-row align-items-center justify-content-start">
-                            <div class="advert_content">
-                                <div class="advert_title"><a href="/Items/Details?id=@Model[i].Id">@Model[i].Title</a></div>
-                                <div class="advert_text">Few Words About on the product</div>
-                            </div>
-                            <div class="ml-auto">
-                                <div class="advert_image" style="max-width: 70%"> <a href="/Items/Details?id=@Model[i].Id"> <img src="/@Model[i].ImageUrl/1.jpg" alt=""> </a></div>
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
+                <div class="row" style="padding: 3%">
+                    @for (int i = 0; i <= 2; i++)
+                    {
+                        <div class="col-lg-4 advert_col">
 
-            <div class="row" style="padding:3%">
-                @for (int i = 3; i <= 5; i++)
-                {
-                    <div class="col-lg-4 advert_col">
+                            <!-- Advert Item -->
 
-                        <!-- Advert Item -->
-
-                        <div class="ml-item advert d-flex flex-row align-items-center justify-content-start">
-                            <div class="advert_content">
-                                <div class="advert_title"><a href="/Items/Details?id=@Model[i].Id">@Model[i].Title</a></div>
-                                <div class="advert_text">Few Words About on the product</div>
-                            </div>
-                            <div class="ml-auto">
-                                <div class="advert_image" style="max-width: 70%">  <a href="/Items/Details?id=@Model[i].Id"> <img src="/@Model[i].ImageUrl/1.jpg" alt=""> </a></div>
+                            <div class="ml-item advert d-flex flex-row align-items-center justify-content-start">
+                                <div class="advert_content">
+                                    <div class="advert_title"><a href="/Items/Details?id=@Model[i].Id">@Model[i].Title</a></div>
+                                    <div class="advert_text">Few Words About on the product</div>
+                                </div>
+                                <div class="ml-auto">
+                                    <div class="advert_image" style="max-width: 70%"> <a href="/Items/Details?id=@Model[i].Id"> <img src="/@Model[i].ImageUrl/1.jpg" alt=""> </a></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
+
+                <div class="row" style="padding:3%">
+                    @for (int i = 3; i <= 5; i++)
+                    {
+                        <div class="col-lg-4 advert_col">
+
+                            <!-- Advert Item -->
+
+                            <div class="ml-item advert d-flex flex-row align-items-center justify-content-start">
+                                <div class="advert_content">
+                                    <div class="advert_title"><a href="/Items/Details?id=@Model[i].Id">@Model[i].Title</a></div>
+                                    <div class="advert_text">Few Words About on the product</div>
+                                </div>
+                                <div class="ml-auto">
+                                    <div class="advert_image" style="max-width: 70%">  <a href="/Items/Details?id=@Model[i].Id"> <img src="/@Model[i].ImageUrl/1.jpg" alt=""> </a></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
-    </div>
+    }
     <script type="text/javascript" src="/js/home.js"></script>
+
 </body>
