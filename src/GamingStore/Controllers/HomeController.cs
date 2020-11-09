@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using GamingStore.Contracts.ML;
 using GamingStore.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using GamingStore.Models;
 using GamingStore.Services.Email;
 using GamingStore.Services.Email.Interfaces;
@@ -24,15 +23,13 @@ namespace GamingStore.Controllers
     public class HomeController : Controller
     {
         private readonly StoreContext _context;
-        private readonly ILogger<HomeController> _logger;
         private readonly IEmailSender _emailSender;
         private readonly UserManager<Customer> _userManager;
 
         private Task<Customer> GetCurrentUserAsync() => _userManager.GetUserAsync(User);
 
-        public HomeController(ILogger<HomeController> logger, IEmailSender emailSender, StoreContext context, UserManager<Customer> userManager)
+        public HomeController(IEmailSender emailSender, StoreContext context, UserManager<Customer> userManager)
         {
-            _logger = logger;
             _emailSender = emailSender;
             _context = context;
             _userManager = userManager;
@@ -41,33 +38,31 @@ namespace GamingStore.Controllers
         public async Task<IActionResult> Index()
         {
             List<ItemsCustomers> itemsCustomersList = _context.RelatedItems.Select(item => new ItemsCustomers() { CustomerNumber = item.CustomerNumber, ItemId = item.ItemId }).ToList();
+            Customer user = await GetCurrentUserAsync();
+
+            if (user == null)
+            {
+                return View();
+            }
+
+            var mlRequest = new Request()
+            {
+                ItemCustomersList = itemsCustomersList,
+                CustomerNumber = user.CustomerNumber,
+                AllItemsIds = _context.Items.Select(i => i.Id).Distinct().ToList(),
+            };
+
+            Dictionary<int, double> itemsScores = await MachineLearning.ML.Run(mlRequest);
+            IEnumerable<KeyValuePair<int, double>> topItems = itemsScores.OrderByDescending(pair => pair.Value).Take(6);
+            IQueryable<Item> items = _context.Items.Take(int.MaxValue);
 
             try
             {
-                Customer user = await GetCurrentUserAsync();
-
-                if (user == null)
-                {
-                    return View();
-                }
-
-                var mlRequest = new Request()
-                {
-                    ItemCustomersList = itemsCustomersList,
-                    CustomerNumber = user.CustomerNumber,
-                    AllItemsIds = _context.Items.Select(i => i.Id).Distinct().ToList(),
-                };
-
-                Dictionary<int, double> itemsScores = await GamingStore.MachineLearning.ML.Run(mlRequest);
-                var topItems = itemsScores.OrderByDescending(pair => pair.Value).Take(6);
-
-                var items = _context.Items.Take(int.MaxValue);
-
                 List<Item> itemsList = (from keyValuePair in topItems from item in items where keyValuePair.Key == item.Id select item).ToList();
 
                 return View(itemsList);
             }
-            catch (Exception e)
+            catch
             {
                 //ignored
             }
@@ -98,8 +93,7 @@ namespace GamingStore.Controllers
             message.Append(form.Message);
 
             //start email Thread
-            await Task.Run(() => { _emailSender.SendEmailAsync(toAddress, subject, message.ToString()); })
-                .ConfigureAwait(false);
+            await Task.Run(() => { _emailSender.SendEmailAsync(toAddress, subject, message.ToString()); }).ConfigureAwait(false);
 
             return View();
         }
