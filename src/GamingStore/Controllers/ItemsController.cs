@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Models;
+using GamingStore.Services;
 using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -110,7 +111,7 @@ namespace GamingStore.Controllers
 
             Item item = await _context.Items.FirstOrDefaultAsync(m => m.Id == id);
             Customer user = await _userManager.GetUserAsync(User);
-            
+
             if (user == null)
             {
                 return View(item);
@@ -118,7 +119,8 @@ namespace GamingStore.Controllers
 
             var userIntId = GetCurrentUserAsync().Result.CustomerNumber;
             var relatedItem = new RelatedItem(userIntId, item.Id);
-            bool relatedItems = _context.RelatedItems.Any(ri => ri.ItemId == item.Id && ri.CustomerNumber == user.CustomerNumber);
+            bool relatedItems =
+                _context.RelatedItems.Any(ri => ri.ItemId == item.Id && ri.CustomerNumber == user.CustomerNumber);
             if (!relatedItems) await _context.RelatedItems.AddAsync(relatedItem);
 
             await _context.SaveChangesAsync();
@@ -131,6 +133,7 @@ namespace GamingStore.Controllers
         public IActionResult Create()
         {
             Category[] allCategories = _context.Items.Select(item => item.Category).Distinct().ToArray();
+
 
             return View(new CreateEditItemViewModel
             {
@@ -177,7 +180,45 @@ namespace GamingStore.Controllers
             await _context.Items.AddAsync(model.Item);
             await _context.SaveChangesAsync();
 
+
+            #region TwitterPost
+
+            if (model.PublishItemFlag)
+            {
+              
+                PublishTweet( model.Item, uploadFolder);
+            }
+
+            #endregion
+
             return RedirectToAction("ListItems", "Administration");
+        }
+
+        private void PublishTweet( Item item, string itemImagesPath)
+        {
+            //todo: twitter async
+            string ConsumerKey = "CVXDTooXKg62g4qq6Ww0QujEV",
+                ConsumerKeySecret = "mz081uiCZwY6rogFahNqfz2DBfA5CaKoLWXjRqhDSvEd1Z1HTf",
+                AccessToken = "1324135248574238726-Kyrpj3MY96pLyHYbdSuXcUN4Claic4",
+                AccessTokenSecret = "vxBHC98lIdimimk79Ok53e8iskW8NN74SpbO5voIa0PrD";
+
+            var twitter = new Twitter(ConsumerKey, ConsumerKeySecret, AccessToken, AccessTokenSecret);
+
+            /*var fullImageUrl = itemImagesPath + "\\1.jpg";*/
+            var fullImageUrl = "C:\\Users\\Yonatan\\Source\\Repos\\yonatangross\\GamingStore\\src\\GamingStore\\wwwroot\\images\\user.png";
+
+            var tweet ="Gaming Store now sells "+ item.Title+ " only on "+item.Price+"$";
+            try
+            {
+
+                string response = twitter.PublishToTwitter(tweet, fullImageUrl);
+                Console.WriteLine(response);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
 

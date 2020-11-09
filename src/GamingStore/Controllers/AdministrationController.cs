@@ -7,6 +7,7 @@ using GamingStore.Contracts;
 using GamingStore.Data;
 using GamingStore.Models;
 using GamingStore.Models.Relationships;
+using GamingStore.Services;
 using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -58,6 +59,8 @@ namespace GamingStore.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+
+         
             return View();
         }
 

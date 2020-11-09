@@ -61,6 +61,7 @@ namespace GamingStore
                 options.ClientId = googleAuthNSection["ClientId"];
                 options.ClientSecret = googleAuthNSection["ClientSecret"];
             });
+
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageOptions>(Configuration);
             
@@ -94,7 +95,7 @@ namespace GamingStore
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Administration}/{action=ListStores}");
+                    pattern: "{controller=Administration}/{action=Index}");
                 endpoints.MapRazorPages();
             });
         }
