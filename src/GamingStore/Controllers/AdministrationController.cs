@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GamingStore.Contracts;
 using GamingStore.Data;
 using GamingStore.Models;
+using GamingStore.Models.Relationships;
 using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -71,21 +72,30 @@ namespace GamingStore.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> PieChartCategory()
+        {
+            var orders = await _context.Orders.Include(o => o.OrderItems).ThenInclude(oi => oi.Item).ToListAsync();
+            CreatePieChartByCategoryData(orders);
+
+            return View("Statistics/PieChartCategory");
+        }
+
+
         public async Task<IActionResult> PieChart()
         {
             var orders = await _context.Orders.Include(o => o.Payment).Include(o => o.Store).ToListAsync();
-            CreatePieChartData(orders);
+            createMonthlyPurchasesGraph(orders);
 
             return View("Statistics/PieChart");
         }
 
-        private void CreatePieChartData(List<Order> orders)
+        private void createMonthlyPurchasesGraph(List<Order> orders)
         {
             var orderMonthlyList = new List<PieChartFormat>();
 
             foreach (var order in orders)
             {
-                var storeName = order.Store.Name.Replace("Store","");
+                var storeName = order.Store.Name.Replace("Store", "");
                 var itemsCost = order.Payment.ItemsCost;
 
                 if (orderMonthlyList.Any(d => d.Name == storeName))
@@ -106,12 +116,51 @@ namespace GamingStore.Controllers
                 }
             }
 
-            orderMonthlyList.Sort((a,b)=>a.Value.CompareTo(b.Value));
+            orderMonthlyList.Sort((a, b) => a.Value.CompareTo(b.Value));
 
             var serializeObject = JsonConvert.SerializeObject(orderMonthlyList, Formatting.Indented);
 
             //write string to file
             string pieChartDataPath = "data\\PieChart.json";
+            var fileDir = $@"{Directory.GetCurrentDirectory()}\wwwroot\{pieChartDataPath}";
+            System.IO.File.WriteAllText(fileDir, serializeObject);
+        }
+
+        private void CreatePieChartByCategoryData(List<Order> orders)
+        {
+            var purchaseByCategoryList = new List<PieChartFormat>();
+
+            foreach (var order in orders)
+            {
+                foreach (OrderItem orderItem in order.OrderItems)
+                {
+                    var categoryName = orderItem.Item.Category.ToString();
+                    var itemsCost = orderItem.ItemsCount * orderItem.Item.Price;
+                    if (purchaseByCategoryList.Any(d => d.Name == categoryName))
+                    {
+                        PieChartFormat pieChartFormat = purchaseByCategoryList.FirstOrDefault(d => d.Name == categoryName);
+                        if (pieChartFormat != null)
+                        {
+                            pieChartFormat.Value += itemsCost;
+                        }
+                    }
+                    else
+                    {
+                        purchaseByCategoryList.Add(new PieChartFormat()
+                        {
+                            Name = categoryName,
+                            Value = itemsCost
+                        });
+                    }
+                }
+            }
+
+            purchaseByCategoryList.Sort((a,b)=>a.Value.CompareTo(b.Value));
+
+            var serializeObject = JsonConvert.SerializeObject(purchaseByCategoryList, Formatting.Indented);
+
+            //write string to file
+            string pieChartDataPath = "data\\PieChartCategory.json";
             var fileDir = $@"{Directory.GetCurrentDirectory()}\wwwroot\{pieChartDataPath}";
             System.IO.File.WriteAllText(fileDir, serializeObject);
         }

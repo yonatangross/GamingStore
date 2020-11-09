@@ -167,6 +167,8 @@ namespace GamingStore.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(Store store)
         {
+            //todo: get openinghours from db.
+
             if (!ModelState.IsValid)
             {
                 return View(store);

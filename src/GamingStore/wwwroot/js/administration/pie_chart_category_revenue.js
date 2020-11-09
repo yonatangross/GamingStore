@@ -1,6 +1,6 @@
 ﻿var format = d3.format(",.2r");
 var formatPrec = d3.format(".0%");
-d3.json("/data/PieChart.json").then(data => {
+d3.json("/data/PieChartCategory.json").then(data => {
     const size = 300;
     const fourth = size / 4;
     const half = size / 2;
@@ -55,7 +55,7 @@ d3.json("/data/PieChart.json").then(data => {
         .attr('x', 0)
         .style('font-weight', 'bold')
         .text(d => `${d.data.Name}`)
-        .call(text => text.filter(d => (d.data.Value / total) < 0.025) // short bars for values 
+        .call(text => text.filter(d => (d.data.Value / total) < 0.05) // short bars for values 
             .style("font-size", "0px"));
 
     labels.append('tspan')
