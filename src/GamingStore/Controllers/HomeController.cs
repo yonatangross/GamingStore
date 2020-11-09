@@ -51,24 +51,6 @@ namespace GamingStore.Controllers
                     return View();
                 }
 
-                var counter = 0;
-                var list = new List<ItemsCustomers>();
-                var customerNumber = 0;
-
-                //foreach (RelatedItem relatedItem in _context.RelatedItems)
-                //{
-                //    if (relatedItem.CustomerId == user.Id)
-                //    {
-                //        customerNumber = counter;
-                //    }
-
-                //    list.Add(new ItemsCustomers
-                //    {
-                //        CustomerNumber = counter,
-                //        ItemId = relatedItem.ItemId
-                //    });
-                //}
-
                 var mlRequest = new Request()
                 {
                     ItemCustomersList = itemsCustomersList,

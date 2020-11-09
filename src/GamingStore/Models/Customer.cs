@@ -12,7 +12,7 @@ namespace GamingStore.Models
         public Customer()
         {
             OrderHistory = new List<Order>();
-            CustomerNumber = Math.Abs(Guid.NewGuid().GetHashCode());
+            //CustomerNumber = Math.Abs(Guid.NewGuid().GetHashCode());
         }
 
         public int CustomerNumber { get; set; }
