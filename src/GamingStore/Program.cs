@@ -35,6 +35,7 @@ namespace GamingStore
                 // dotnet user-secrets set SeedUserPW <pw>
                 string adminPassword = config["SeedAdminPW"];
 
+
                 SeedData.Initialize(services,adminPassword).Wait();
             }
             catch (Exception ex)

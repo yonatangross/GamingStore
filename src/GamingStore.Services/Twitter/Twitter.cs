@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
-namespace GamingStore.Services
+namespace GamingStore.Services.Twitter
 {
     public class Twitter
     {

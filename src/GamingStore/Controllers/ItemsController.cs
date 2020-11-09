@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Models;
 using GamingStore.Services;
+using GamingStore.Services.Twitter;
 using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -158,7 +159,9 @@ namespace GamingStore.Controllers
                 Directory.CreateDirectory(uploadFolder);
                 const string uniqueFileName = "1.jpg";
                 var filePath = Path.Combine(uploadFolder, uniqueFileName);
-                await model.File1.CopyToAsync(new FileStream(filePath, FileMode.Create));
+                var fileStream = new FileStream(filePath, FileMode.Create);
+                await model.File1.CopyToAsync(fileStream);
+                fileStream.Close();
 
                 model.Item.ImageUrl = $"images/items/{directoryName}";
             }
@@ -167,14 +170,18 @@ namespace GamingStore.Controllers
             {
                 const string uniqueFileName = "2.jpg";
                 var filePath = Path.Combine(uploadFolder, uniqueFileName);
-                await model.File2.CopyToAsync(new FileStream(filePath, FileMode.Create));
+                var fileStream = new FileStream(filePath, FileMode.Create);
+                await model.File2.CopyToAsync(fileStream);
+                fileStream.Close();
             }
 
             if (model.File3 != null)
             {
                 const string uniqueFileName = "3.jpg";
                 var filePath = Path.Combine(uploadFolder, uniqueFileName);
-                await model.File3.CopyToAsync(new FileStream(filePath, FileMode.Create));
+                var fileStream = new FileStream(filePath, FileMode.Create);
+                await model.File3.CopyToAsync(fileStream);
+                fileStream.Close();
             }
 
             await _context.Items.AddAsync(model.Item);
@@ -204,8 +211,8 @@ namespace GamingStore.Controllers
 
             var twitter = new Twitter(ConsumerKey, ConsumerKeySecret, AccessToken, AccessTokenSecret);
 
-            /*var fullImageUrl = itemImagesPath + "\\1.jpg";*/
-            var fullImageUrl = "C:\\Users\\Yonatan\\Source\\Repos\\yonatangross\\GamingStore\\src\\GamingStore\\wwwroot\\images\\user.png";
+            var fullImageUrl = itemImagesPath + "\\1.jpg";
+            //var fullImageUrl = "C:\\Users\\Yonatan\\Source\\Repos\\yonatangross\\GamingStore\\src\\GamingStore\\wwwroot\\images\\user.png";
 
             var tweet ="Gaming Store now sells "+ item.Title+ " only on "+item.Price+"$";
             try

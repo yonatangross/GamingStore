@@ -4,6 +4,7 @@ using GamingStore.Extensions;
 using GamingStore.Models;
 using GamingStore.Services.Email;
 using GamingStore.Services.Email.Interfaces;
+using GamingStore.Services.Twitter;
 using LoggerService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,7 +31,8 @@ namespace GamingStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureLoggerService();
-            services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("StoreContext")));
+            services.AddDbContext<StoreContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("StoreContext")));
 
             // Authorization
             services.AddIdentity<Customer, IdentityRole>(options =>
@@ -41,10 +43,7 @@ namespace GamingStore
                     options.Password.RequireUppercase = false;
                     options.Password.RequiredLength = 6;
                     options.User.AllowedUserNameCharacters = null;
-                })
-                .AddRoles<IdentityRole>()
-                .AddDefaultUI()
-                .AddEntityFrameworkStores<StoreContext>()
+                }).AddRoles<IdentityRole>().AddDefaultUI().AddEntityFrameworkStores<StoreContext>()
                 .AddDefaultTokenProviders();
 
             // Authentication
@@ -55,16 +54,16 @@ namespace GamingStore
             });
             services.AddAuthentication().AddGoogle(options =>
             {
-                IConfigurationSection googleAuthNSection =
-                    Configuration.GetSection("Authentication:Google");
+                IConfigurationSection googleAuthNSection = Configuration.GetSection("Authentication:Google");
 
                 options.ClientId = googleAuthNSection["ClientId"];
                 options.ClientSecret = googleAuthNSection["ClientSecret"];
             });
 
+
+
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageOptions>(Configuration);
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -93,9 +92,7 @@ namespace GamingStore
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Administration}/{action=Index}");
+                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Administration}/{action=Index}");
                 endpoints.MapRazorPages();
             });
         }
