@@ -5,10 +5,13 @@ namespace GamingStore.MachineLearning
 {
     public class ProductEntry
     {
-        [KeyType(count: 262111)]
-        public int CustomerNumber { get; set; }
+        private const ulong _keyType = 10000;
 
-        [KeyType(count: 262111)]
-        public int RelatedItemId { get; set; }
+
+        [KeyType(_keyType)]
+        public uint CustomerNumber { get; set; }
+
+        [KeyType(_keyType)]
+        public uint RelatedItemId { get; set; }
     }
 }

@@ -109,18 +109,19 @@ namespace GamingStore.Controllers
             }
 
             Item item = await _context.Items.FirstOrDefaultAsync(m => m.Id == id);
-            var user = await _userManager.GetUserAsync(User);
-            if (user != null)
+            Customer user = await _userManager.GetUserAsync(User);
+            
+            if (user == null)
             {
-                //var userIntId = GetCurrentUserAsync().Result.CustomerNumber;
-                RelatedItem relatedItem = new RelatedItem(user.CustomerNumber, item.Id);
-                var relatedItems =
-                    _context.RelatedItems.Any(ri => ri.ItemId == item.Id && ri.CustomerNumber == user.CustomerNumber);
-                if (!relatedItems)
-                    await _context.RelatedItems.AddAsync(relatedItem);
-
-                await _context.SaveChangesAsync();
+                return View(item);
             }
+
+            var userIntId = GetCurrentUserAsync().Result.CustomerNumber;
+            var relatedItem = new RelatedItem(userIntId, item.Id);
+            bool relatedItems = _context.RelatedItems.Any(ri => ri.ItemId == item.Id && ri.CustomerNumber == user.CustomerNumber);
+            if (!relatedItems) await _context.RelatedItems.AddAsync(relatedItem);
+
+            await _context.SaveChangesAsync();
 
             return View(item);
         }

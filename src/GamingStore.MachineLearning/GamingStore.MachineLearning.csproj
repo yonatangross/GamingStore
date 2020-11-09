@@ -9,4 +9,8 @@
     <PackageReference Include="Microsoft.ML.Recommender" Version="0.17.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GamingStore.Contracts\GamingStore.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>

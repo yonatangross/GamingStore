@@ -6,7 +6,7 @@ namespace GamingStore.Contracts.ML
 {
     public class Request
     {
-        public List<ItemsCustomers> IdsList { get; set; }
+        public List<ItemsCustomers> ItemCustomersList { get; set; }
 
         public  List<int> AllItemsIds { get; set; }
 

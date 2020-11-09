@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GamingStore.Contracts.ML;
 using Microsoft.ML;
 using Microsoft.ML.Data;
 using Microsoft.ML.Trainers;
@@ -12,11 +13,11 @@ namespace GamingStore.MachineLearning
 {
     public class ML
     {
-        private const string TrainingDataLocation = "";
+        private const string TrainingDataLocation = @"D:\Compare.txt";
 
-        public static async Task<Dictionary<int, double>> Run(List<CustomersItems> customersItems, List<int> customerItemsIds, int customerNumber)
+        public static async Task<Dictionary<int, double>> Run(Request request)
         {
-            CreateFile(customersItems);
+            CreateFile(request.ItemCustomersList);
             //STEP 1: Create MLContext to be shared across the model creation workflow objects 
             var mlContext = new MLContext();
 
@@ -26,8 +27,8 @@ namespace GamingStore.MachineLearning
                                                       new[]
                                                                 {
                                                                     new TextLoader.Column("Label", DataKind.Single, 0),
-                                                                    new TextLoader.Column(nameof(ProductEntry.CustomerNumber), DataKind.UInt32, new [] { new TextLoader.Range(0) }, new KeyCount(262111)),
-                                                                    new TextLoader.Column(nameof(ProductEntry.RelatedItemId), DataKind.UInt32, new [] { new TextLoader.Range(1) }, new KeyCount(262111))
+                                                                    new TextLoader.Column(nameof(ProductEntry.CustomerNumber), DataKind.UInt32, new [] { new TextLoader.Range(0) }, new KeyCount(10000)),
+                                                                    new TextLoader.Column(nameof(ProductEntry.RelatedItemId), DataKind.UInt32, new [] { new TextLoader.Range(1) }, new KeyCount(10000))
                                                                 },
                                                       hasHeader: true);
 
@@ -59,12 +60,12 @@ namespace GamingStore.MachineLearning
             PredictionEngine<ProductEntry, PredictionScore> predictionEngine = mlContext.Model.CreatePredictionEngine<ProductEntry, PredictionScore>(model);
             var scores = new Dictionary<int, double>();
 
-            foreach (int itemId in customerItemsIds)
+            foreach (int itemId in request.AllItemsIds)
             {
                 var entry = new ProductEntry
                 {
-                    CustomerNumber = customerNumber,
-                    RelatedItemId = itemId
+                    CustomerNumber = (uint)request.CustomerNumber,
+                    RelatedItemId = (uint)itemId
                 };
 
                 PredictionScore predictionScore = predictionEngine.Predict(entry);
@@ -77,13 +78,14 @@ namespace GamingStore.MachineLearning
             return scores;
         }
 
-        private static void CreateFile(List<CustomersItems> customersItems)
+        private static void CreateFile(List<ItemsCustomers> customersItems)
         {
-            using var file = new StreamWriter("myfile.txt");
-            
+            File.Delete(@"D:\Compare.txt");
+            File.AppendAllText(@"D:\Compare.txt", $"ProductID	ProductID_Copurchased{Environment.NewLine}");
+
             foreach (var customerItem in customersItems)
             {
-                file.WriteLine("{0}    {1}", customerItem.CustomerNumber, customerItem.ItemId);
+                File.AppendAllText(@"D:\Compare.txt", $"{customerItem.CustomerNumber}	{customerItem.ItemId}{Environment.NewLine}");
             }
         }
 

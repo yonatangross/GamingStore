@@ -30,25 +30,60 @@ namespace GamingStore.Controllers
 
         private Task<Customer> GetCurrentUserAsync() => _userManager.GetUserAsync(User);
 
-        public HomeController(ILogger<HomeController> logger, IEmailSender emailSender, StoreContext context)
+        public HomeController(ILogger<HomeController> logger, IEmailSender emailSender, StoreContext context, UserManager<Customer> userManager)
         {
             _logger = logger;
             _emailSender = emailSender;
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
         {
-            var itemsCustomersList = _context.RelatedItems.Select(item => new ItemsCustomers() { CustomerNumber = item.CustomerNumber, ItemId = item.ItemId }).ToList();
+            List<ItemsCustomers> itemsCustomersList = _context.RelatedItems.Select(item => new ItemsCustomers() { CustomerNumber = item.CustomerNumber, ItemId = item.ItemId }).ToList();
 
-            var user = await GetCurrentUserAsync();
-            var mlRequest = new Request()
+            try
             {
-                IdsList = itemsCustomersList,
-                CustomerNumber = user.CustomerNumber,
-                AllItemsIds = _context.Items.Select(i => i.Id).Distinct().ToList()
-            };
+                Customer user = await GetCurrentUserAsync();
 
+                if (user == null)
+                {
+                    return View();
+                }
+
+                var counter = 0;
+                var list = new List<ItemsCustomers>();
+                var customerNumber = 0;
+
+                //foreach (RelatedItem relatedItem in _context.RelatedItems)
+                //{
+                //    if (relatedItem.CustomerId == user.Id)
+                //    {
+                //        customerNumber = counter;
+                //    }
+
+                //    list.Add(new ItemsCustomers
+                //    {
+                //        CustomerNumber = counter,
+                //        ItemId = relatedItem.ItemId
+                //    });
+                //}
+
+                var mlRequest = new Request()
+                {
+                    ItemCustomersList = itemsCustomersList,
+                    CustomerNumber = user.CustomerNumber,
+                    AllItemsIds = _context.Items.Select(i => i.Id).Distinct().ToList(),
+                };
+
+                Dictionary<int, double> itemsScores = await GamingStore.MachineLearning.ML.Run(mlRequest);
+
+
+            }
+            catch (Exception e)
+            {
+                //ignored
+            }
 
             return View();
         }
