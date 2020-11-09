@@ -106,6 +106,8 @@ namespace GamingStore.Controllers
                 }
             }
 
+            orderMonthlyList.Sort((a,b)=>a.Value.CompareTo(b.Value));
+
             var serializeObject = JsonConvert.SerializeObject(orderMonthlyList, Formatting.Indented);
 
             //write string to file
