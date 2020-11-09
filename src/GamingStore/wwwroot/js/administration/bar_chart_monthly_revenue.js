@@ -57,7 +57,6 @@ d3.json("/data/BarChartData.json").then(data => {
         .attr("dy", "1.30em")
         .attr("dx", -4)
         .text(d => format(d.Value)+" $" )
-        .text(d => format(d.Value)+" $" )
         .call(text => text.filter(d => d.Value > 0) // short bars for values 
             .attr("dx", +4)
             .attr("fill", "black")
