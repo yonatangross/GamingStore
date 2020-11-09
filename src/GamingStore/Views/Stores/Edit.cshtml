@@ -5,7 +5,6 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
 <h3>Edit Store# @Model.Id</h3>
 <hr />
 <div class="row">
@@ -13,9 +12,7 @@
     {
         @Html.HiddenFor(m => m.Id)
 
-        @Html.HiddenFor(m=>m.OpeningHours)
-
-        @for(var openingHourIndex = 0; openingHourIndex < Model.OpeningHours.Length; openingHourIndex++)
+        @for (var openingHourIndex = 0; openingHourIndex < Model.OpeningHours.Count; openingHourIndex++)
         {
             @Html.HiddenFor(model => Model.OpeningHours[openingHourIndex])
         }
@@ -57,7 +54,7 @@
                 @Html.LabelFor(m => m.Address.Country, new { @class = "col-sm-2 col-form-label" })
                 <div class="col-sm-5">
                     <div class="form-check">
-                        @Html.TextBoxFor(s => s.Address.Country, new { @class = "form-control" ,@disabled="disabled" })
+                        @Html.TextBoxFor(s => s.Address.Country, new { @class = "form-control", @disabled = "disabled" })
                     </div>
                 </div>
             </div>
@@ -67,7 +64,7 @@
             @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-sm-2 col-form-label" })
             <div class="col-sm-5">
                 <div class="form-check">
-                    @Html.TextBoxFor(s => s.PhoneNumber, new { @class = "form-control"})
+                    @Html.TextBoxFor(s => s.PhoneNumber, new { @class = "form-control" })
                 </div>
             </div>
         </div>
@@ -75,7 +72,7 @@
             @Html.LabelFor(m => m.Email, new { @class = "col-sm-2 col-form-label" })
             <div class="col-sm-5">
                 <div class="form-check">
-                    @Html.TextBoxFor(s => s.Email, new { @class = "form-control"})
+                    @Html.TextBoxFor(s => s.Email, new { @class = "form-control" })
                 </div>
             </div>
         </div>
@@ -87,6 +84,25 @@
                 </div>
             </div>
         </div>
+        <div class="store_detail">
+            <table class="opening_hours">
+
+                @for (var index = 0; index < Model.OpeningHours.Count; index++)
+                {
+                    var day = Model.OpeningHours[index];
+                    <tr>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <label class="col-2 col-form-label"> @day.DayOfWeek.ToString().Substring(0, 3)</label>
+
+                            @Html.TextBoxFor(m => m.OpeningHours[index].OpeningTime, new { @type = "time", @class = "form-control" })
+                            @Html.HiddenFor(m => m.OpeningHours[index].DayOfWeek)
+                            @Html.TextBoxFor(m => m.OpeningHours[index].ClosingTime, new { @type = "time", @class = "form-control" })
+                        </div>
+                    </tr>
+                }
+
+            </table>
+        </div>
         <div style="margin-top: 8%">
             <input type="submit" value="Save" class="btn btn-primary" style="margin-right: 8%" />
         </div>
@@ -95,5 +111,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

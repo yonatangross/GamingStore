@@ -52,12 +52,11 @@ namespace GamingStore.Controllers
                 AllItemsIds = _context.Items.Select(i => i.Id).Distinct().ToList(),
             };
 
-            Dictionary<int, double> itemsScores = await MachineLearning.ML.Run(mlRequest);
-            IEnumerable<KeyValuePair<int, double>> topItems = itemsScores.OrderByDescending(pair => pair.Value).Take(6);
-            IQueryable<Item> items = _context.Items.Take(int.MaxValue);
-
             try
             {
+                Dictionary<int, double> itemsScores = await MachineLearning.ML.Run(mlRequest);
+                IEnumerable<KeyValuePair<int, double>> topItems = itemsScores.OrderByDescending(pair => pair.Value).Take(6);
+                IQueryable<Item> items = _context.Items.Take(int.MaxValue);
                 List<Item> itemsList = (from keyValuePair in topItems from item in items where keyValuePair.Key == item.Id select item).ToList();
 
                 return View(itemsList);

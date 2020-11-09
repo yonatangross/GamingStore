@@ -75,7 +75,7 @@ namespace GamingStore.Data
             modelBuilder.Entity<Customer>().Property(c => c.Address).HasConversion(v => JsonConvert.SerializeObject(v),
                 v => JsonConvert.DeserializeObject<Address>(v));
             modelBuilder.Entity<Store>().Property(s => s.OpeningHours).HasConversion(
-                v => JsonConvert.SerializeObject(v), v => JsonConvert.DeserializeObject<OpeningHours[]>(v));
+                v => JsonConvert.SerializeObject(v), v => JsonConvert.DeserializeObject<List<OpeningHours>>(v));
             modelBuilder.Entity<Order>().Property(c => c.ShippingAddress)
                 .HasConversion(v => JsonConvert.SerializeObject(v), v => JsonConvert.DeserializeObject<Address>(v));
 
