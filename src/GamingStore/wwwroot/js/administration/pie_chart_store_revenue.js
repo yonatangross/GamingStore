@@ -13,7 +13,7 @@ d3.json("/data/PieChart.json").then(data => {
         .attr('viewBox', `0 0 ${size} ${size}`);
 
     const plotArea = chart.append('g')
-        .attr('transform', `translate(${half}, ${half - 30})`);
+        .attr('transform', `translate(${half}, ${half - 45})`);
 
     const color = d3.scaleOrdinal()
         .domain(data.map(d => d.name))
