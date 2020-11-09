@@ -1272,11 +1272,13 @@ select {
     height: 100px;
     box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
     border: solid 1px #e8e8e8;
-    padding-left: 36px;
+    padding-left: 3%;
+    padding-right: 3%;
 }
 
 .char_icon {
-    margin-right: 24px;
+    margin-left: 7%; 
+    margin-right: 7%;
 }
 
 .char_content {
