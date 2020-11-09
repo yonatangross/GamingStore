@@ -62,12 +62,19 @@ namespace GamingStore.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Statistics()
+        public async Task<IActionResult> BarChart()
         {
             var orders = await _context.Orders.Include(o => o.Payment).Include(o=>o.Store).ToListAsync();
              CreateBarChartData(orders);
-             CreatePieChartData(orders);
-         
+
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> PieChart()
+        {
+            var orders = await _context.Orders.Include(o => o.Payment).Include(o => o.Store).ToListAsync();
+            CreatePieChartData(orders);
 
             return View();
         }

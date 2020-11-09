@@ -5,6 +5,12 @@
     <UserSecretsId>3e15871e-3aa1-4c99-826a-3822d8f228b7</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Data\images\**" />
+    <Content Remove="Data\images\**" />
+    <EmbeddedResource Remove="Data\images\**" />
+    <None Remove="Data\images\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Views\Home\xyz.csv" />
   </ItemGroup>
   <ItemGroup>
@@ -32,9 +38,6 @@
     <PackageReference Include="Microsoft.ML.Recommender" Version="0.17.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="NLog" Version="4.7.5" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\images\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\images\items\CloudStingerWiredStereoGamingHeadset.jpg" />
