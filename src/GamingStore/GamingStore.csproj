@@ -35,7 +35,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\images\" />
-    <Folder Include="wwwroot\images\items\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\images\items\CloudStingerWiredStereoGamingHeadset.jpg" />
@@ -51,6 +50,8 @@
     <None Include="wwwroot\images\items\NVIDIAGeForceRTX3090.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GamingStore.Contracts\GamingStore.Contracts.csproj" />
+    <ProjectReference Include="..\GamingStore.MachineLearning\GamingStore.MachineLearning.csproj" />
     <ProjectReference Include="..\LoggerService\LoggerService.csproj" />
   </ItemGroup>
   <ItemGroup>

@@ -4,32 +4,87 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using GamingStore.Contracts.ML;
+using GamingStore.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using GamingStore.Models;
 using GamingStore.Services.Email;
 using GamingStore.Services.Email.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace GamingStore.Controllers
 {
     [AllowAnonymous]
     public class HomeController : Controller
     {
+        private readonly StoreContext _context;
         private readonly ILogger<HomeController> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly UserManager<Customer> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, IEmailSender emailSender)
+        private Task<Customer> GetCurrentUserAsync() => _userManager.GetUserAsync(User);
+
+        public HomeController(ILogger<HomeController> logger, IEmailSender emailSender, StoreContext context, UserManager<Customer> userManager)
         {
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
+            _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            List<ItemsCustomers> itemsCustomersList = _context.RelatedItems.Select(item => new ItemsCustomers() { CustomerNumber = item.CustomerNumber, ItemId = item.ItemId }).ToList();
+
+            try
+            {
+                Customer user = await GetCurrentUserAsync();
+
+                if (user == null)
+                {
+                    return View();
+                }
+
+                var counter = 0;
+                var list = new List<ItemsCustomers>();
+                var customerNumber = 0;
+
+                //foreach (RelatedItem relatedItem in _context.RelatedItems)
+                //{
+                //    if (relatedItem.CustomerId == user.Id)
+                //    {
+                //        customerNumber = counter;
+                //    }
+
+                //    list.Add(new ItemsCustomers
+                //    {
+                //        CustomerNumber = counter,
+                //        ItemId = relatedItem.ItemId
+                //    });
+                //}
+
+                var mlRequest = new Request()
+                {
+                    ItemCustomersList = itemsCustomersList,
+                    CustomerNumber = user.CustomerNumber,
+                    AllItemsIds = _context.Items.Select(i => i.Id).Distinct().ToList(),
+                };
+
+                Dictionary<int, double> itemsScores = await GamingStore.MachineLearning.ML.Run(mlRequest);
+
+
+            }
+            catch (Exception e)
+            {
+                //ignored
+            }
+
             return View();
         }
 
@@ -56,10 +111,8 @@ namespace GamingStore.Controllers
             message.Append(form.Message);
 
             //start email Thread
-            await Task.Run(() =>
-            {
-                _emailSender.SendEmailAsync(toAddress, subject, message.ToString());
-            }).ConfigureAwait(false);
+            await Task.Run(() => { _emailSender.SendEmailAsync(toAddress, subject, message.ToString()); })
+                .ConfigureAwait(false);
 
             return View();
         }

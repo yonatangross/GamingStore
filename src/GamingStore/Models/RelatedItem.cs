@@ -2,13 +2,13 @@
 {
     public class RelatedItem
     {
-        public RelatedItem(int customerIntId, int itemId)
+        public RelatedItem(int customerNumber, int itemId)
         {
-            CustomerIntId = customerIntId;
+            CustomerNumber = customerNumber;
             ItemId = itemId;
         }
 
-        public int CustomerIntId { get; set; }
+        public int CustomerNumber { get; set; }
         public int ItemId { get; set; }
 
     }

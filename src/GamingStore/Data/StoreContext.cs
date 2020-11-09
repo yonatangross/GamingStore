@@ -51,7 +51,7 @@ namespace GamingStore.Data
                 .HasForeignKey(storeItem => storeItem.ItemId);
 
             modelBuilder.Entity<RelatedItem>().HasKey(table => new {
-                CustomerId = table.CustomerIntId,
+                CustomerId = table.CustomerNumber,
                 ItemId = table.ItemId
             });
             #endregion
