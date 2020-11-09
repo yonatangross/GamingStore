@@ -59,8 +59,13 @@ namespace GamingStore.Controllers
                 };
 
                 Dictionary<int, double> itemsScores = await GamingStore.MachineLearning.ML.Run(mlRequest);
+                var topItems = itemsScores.OrderByDescending(pair => pair.Value).Take(6);
 
+                var items = _context.Items.Take(int.MaxValue);
 
+                List<Item> itemsList = (from keyValuePair in topItems from item in items where keyValuePair.Key == item.Id select item).ToList();
+
+                return View(itemsList);
             }
             catch (Exception e)
             {
