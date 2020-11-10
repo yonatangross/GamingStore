@@ -79,10 +79,10 @@
 
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
+@section Scripts {
     <script>
+        @*todo: move to js file*@
         $(function () {
 
             $("#btnSubmit").click(function (e) {
@@ -99,4 +99,5 @@
             });
         });
     </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

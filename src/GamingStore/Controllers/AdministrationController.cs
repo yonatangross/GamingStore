@@ -333,11 +333,12 @@ namespace GamingStore.Controllers
                 Orders = orders,
                 ItemsInCart = await CountItemsInCart()
             };
-            return View(await Context.Orders.Include(order => order.Customer).Include(order => order.Payment)
-                .ToListAsync());
+
+
+
+            return View(viewModel);
         }
 
-        // This action responds to HttpPost and receives EditRoleViewModel
         [HttpPost]
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {

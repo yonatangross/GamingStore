@@ -6,10 +6,9 @@
 }
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/cart_styles.css">
-    <link rel="stylesheet" type="text/css" href="~/css/cart_responsive.css">
+    <link rel="stylesheet" type="text/css" href="~/css/check_out.css">
 </head>
 <body>
-    <link rel="stylesheet" type="text/css" href="~/css/check_out.css">
     @using (Html.BeginForm("Create", "Orders", FormMethod.Post, null))
     {
         <div class="row">
@@ -137,7 +136,6 @@
                         <p>
                             <span>Shipping:</span><span class="price" id="shipping_amount">10.00</span><span class="price">$</span>
                         </p>
-
                         <!-- Order Total -->
                         <p>
                             <h4>

@@ -11,6 +11,7 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <div>
+            @*Bug: Error here *@
             <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
         </div>
         <div>
