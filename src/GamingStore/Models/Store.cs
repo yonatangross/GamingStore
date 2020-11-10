@@ -34,7 +34,7 @@ namespace GamingStore.Models
         [Required, DataType(DataType.PhoneNumber), StringLength(50), Phone]
         public string PhoneNumber { get; set; }
 
-        [DataType(DataType.EmailAddress), EmailAddress]
+        [Required, DataType(DataType.EmailAddress), EmailAddress]
         public string Email { get; set; }
 
         [DisplayName("Opening Hours")] public List<OpeningHours> OpeningHours { get; set; } = new List<OpeningHours>(7);
