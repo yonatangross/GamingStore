@@ -22,11 +22,17 @@ namespace GamingStore.Models
         [Key, DatabaseGenerated((DatabaseGeneratedOption.None))]
         public int Id { get; set; }
 
-        [DataType(DataType.Text)] public string CustomerId { get; set; }
-        [DataType(DataType.Currency)] public int ItemId { get; set; }
-        [DataType(DataType.Currency)] public int Quantity { get; set; }
+        [DataType(DataType.Text)]
+        public string CustomerId { get; set; }
 
-        [NotMapped]//todo: why?
+        [DataType(DataType.Currency)]
+        public int ItemId { get; set; }
+
+        [DataType(DataType.Currency)]
+        [Range(1, 9, ErrorMessage = "only 1-9 items is allowed")]
+        public int Quantity { get; set; }
+
+        [NotMapped] //todo: why?
         public Item Item { get; set; }
     }
 }

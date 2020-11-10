@@ -20,23 +20,25 @@
                             <h3>Shipping Address</h3>
                             <br>
                             <label><i class="fa fa-user"></i>Full Name</label>
-                            @Html.TextBoxFor(m => m.ShippingAddress.FullName, new { @placeholder = "John", @type = "text", @required = "required", @id = "fname", @name = "firstname" })
+                            @Html.TextBoxFor(m => m.ShippingAddress.FullName)
+                            @Html.ValidationMessageFor(m => m.ShippingAddress.FullName)
 
                             <label><i class="fa"></i> Address</label>
-                            @Html.TextBoxFor(m => m.ShippingAddress.Address1, new { @placeholder = "542 W. 15th Street", @type = "text", @required = "required", @id = "adr", @name = "address" })
+                            @Html.TextBoxFor(m => m.ShippingAddress.Address1)
+                            @Html.ValidationMessageFor(m => m.ShippingAddress.Address1)
 
                             <label><i class="fa"></i> City</label>
-                            @Html.TextBoxFor(m => m.ShippingAddress.City, new { @placeholder = "Tel Aviv", @type = "text", @required = "required", @id = "city", @name = "city" })
-
+                            @Html.TextBoxFor(m => m.ShippingAddress.City)
+                            @Html.ValidationMessageFor(m => m.ShippingAddress.City)
                             <div class="row">
                                 <div class="col-50">
                                     <label>Country</label>
-                                    @Html.TextBoxFor(m => m.ShippingAddress.Country, new { @type = "text", @id = "state", @name = "state", @disabled = "disabled" })
+                                    @Html.TextBoxFor(m => m.ShippingAddress.Country, new { disabled = "disabled" })
+                                    @Html.ValidationMessageFor(m => m.ShippingAddress.Country)
                                 </div>
-
                                 <div class="col-50">
                                     <label>Postal Code</label>
-                                    @Html.TextBoxFor(m => m.ShippingAddress.PostalCode, new { @placeholder = "1000001", @type = "text", @required = "required", @id = "zip", @name = "zip" })
+                                    @Html.TextBoxFor(m => m.ShippingAddress.PostalCode)
                                     @Html.ValidationMessageFor(m => m.ShippingAddress.PostalCode)
                                 </div>
                             </div>
@@ -45,36 +47,38 @@
                             <h3>Payment</h3>
                             <br>
                             <label for="cname">Name on Card</label>
-                            @Html.TextBoxFor(m => m.CreditCard.OwnerName, new { @type = "text", @required = "required", @id = "cname", @name = "cardname" })
+                            @Html.TextBoxFor(m => m.CreditCard.OwnerName)
+                            @Html.ValidationMessageFor(m => m.CreditCard.OwnerName)
 
                             <label for="ccnum">Credit card number</label>
-                            @Html.TextBoxFor(m => m.CreditCard.Number, new { @placeholder = "1111-2222-3333-4444", @type = "text", @required = "required", @id = "ccnum", @name = "cardnumber" })
+                            @Html.TextBoxFor(m => m.CreditCard.Number)
+                            @Html.ValidationMessageFor(m => m.CreditCard.Number)
 
                             <div class="row">
                                 <div class="col-50">
                                     <label for="expmonth">Exp Month</label>
-                                    @Html.TextBoxFor(m => m.CreditCard.ExpirationMonth, new { @placeholder = "mm", @type = "text", @required = "required", @id = "expmonth", @name = "expmonth" })
+                                    @Html.TextBoxFor(m => m.CreditCard.ExpirationMonth)
                                     @Html.ValidationMessageFor(m => m.CreditCard.ExpirationMonth)
 
                                 </div>
                                 <div class="col-50">
                                     <label for="expyear">Exp Year</label>
-                                    @Html.TextBoxFor(m => m.CreditCard.ExpirationYear, new { @placeholder = "yyyy", @type = "text", @required = "required", @id = "expyear", @name = "expyear" })
+                                    @Html.TextBoxFor(m => m.CreditCard.ExpirationYear)
+                                    @Html.ValidationMessageFor(m => m.CreditCard.ExpirationYear)
                                 </div>
                             </div>
-                            
+
                             <label for="cvv">CVV</label>
-                            @Html.TextBoxFor(m => m.CreditCard.CVV, new {@type = "text", @required = "required", @id = "cvv", @name = "cvv"})
+                            @Html.TextBoxFor(m => m.CreditCard.CVV)
+                            @Html.ValidationMessageFor(m => m.CreditCard.CVV)
                         </div>
-
-
                         <div class="col-50">
                             <br>
                             <h3>Shipping options</h3>
                             <fieldset>
                                 <label>Choose a delivery option:</label>
                                 <div data-isscheduleddelivery="0">
-                                    @Html.RadioButtonFor(m => m.Payment.ShippingCost, "0", new { @checked = "checked" })
+                                    @Html.RadioButtonFor(m => m.Payment.ShippingCost, "0")
                                     <span>
                                         <strong>Pickup</strong>
                                     </span>
@@ -82,7 +86,7 @@
                                     <span>$0.00 -&nbsp;FREE&nbsp;</span>
                                 </div>
                                 <div data-isscheduleddelivery="0">
-                                    @Html.RadioButtonFor(m => m.Payment.ShippingCost, "10", new { @checked = "checked" })
+                                    @Html.RadioButtonFor(m => m.Payment.ShippingCost, "10")
                                     <span>
                                         <strong>
                                             Averages 7-10 business days
@@ -92,7 +96,7 @@
                                     <span>$10.00&nbsp;-&nbsp;Standard Shipping&nbsp;</span>
                                 </div>
                                 <div data-isscheduleddelivery="0">
-                                    @Html.RadioButtonFor(m => m.Payment.ShippingCost, "45", new { @checked = "checked" })
+                                    @Html.RadioButtonFor(m => m.Payment.ShippingCost, "45")
                                     <span>
                                         <strong>
                                             Averages 2-5 business days
@@ -102,11 +106,11 @@
                                     <span>$45.00&nbsp;-&nbsp;Express Shipping&nbsp;</span>
                                 </div>
                             </fieldset>
+                            @Html.ValidationMessageFor(m => m.Payment.ShippingCost)
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="col-4">
                 <div class="container">
                     <h3>
@@ -144,7 +148,6 @@
                                 }
                             </h4>
                         </p>
-
                     </span>
                     <input type="submit" value="Place Order" class="btn btn-primary btn-lg btn-block">
                 </div>

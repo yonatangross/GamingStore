@@ -13,5 +13,4 @@ namespace GamingStore.Contracts
         [Display(Name = "Keyboards")] Keyboards,
         [Display(Name = "Mouses")] Mouses,
     }
-
 }

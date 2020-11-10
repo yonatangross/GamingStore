@@ -17,19 +17,23 @@ namespace GamingStore.Models
         public string Id { get; set; }
 
         public string OrderForeignKey { get; set; }
-        
-        //public Order Order { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true), Display(Name = "Items Cost")]
+        [Required]
+        [Display(Name = "Items Cost")]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         public double ItemsCost { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true),Display(Name = "Shipping Cost")]
-        public int ShippingCost { get; set; }
+        [Display(Name = "Shipping Cost")]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
+        public int ShippingCost { get; set; } = 0;
 
+        [Required]
         [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         public double Total { get; set; }
         
+        [Required]
         public PaymentMethod PaymentMethod { get; set; }
-        public bool Paid { get; set; }
+
+        public bool Paid { get; set; } = true;
     }
 }

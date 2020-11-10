@@ -22,23 +22,29 @@ namespace GamingStore.Models
         [Key, DatabaseGenerated((DatabaseGeneratedOption.None))]
         public int Id { get; set; }
 
+        [Required]
         [DataType(DataType.Text)]
         public string Title { get; set; }
         
         [DataType(DataType.Text)]
         public string Manufacturer { get; set; }
 
-        [DataType(DataType.Currency),DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
+        [Required]
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
+        [Range(1, 99999, ErrorMessage = "Price between 1 to 99999")]
         public double Price { get; set; }
 
         [DataType(DataType.Text)]
         public string Description { get; set; }
         
+        [Required]
         [DataType(DataType.Text)] 
         public Category Category { get; set; }
         
         public Dictionary<string, string> PropertiesList { get; set; }
 
+        [Required]
         public string ImageUrl { get; set; }
         
         public ICollection<StoreItem> StoreItems { get; set; } // many to many relationship

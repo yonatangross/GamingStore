@@ -20,11 +20,20 @@ namespace GamingStore.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Id { get; set; }
 
-        [Required] public string CustomerId { get; set; }
+        [Required] 
+        public string CustomerId { get; set; }
+        
         public Customer Customer { get; set; }
-        [Required] public int StoreId { get; set; }
+
+        [Required]
+        public int StoreId { get; set; }
+        
         public Store Store { get; set; }
+
+        [Required]
         public DateTime OrderDate { get; set; }
+
+        [Required]
         public OrderState State { get; set; }
 
         [NotMapped]
@@ -32,13 +41,15 @@ namespace GamingStore.Models
 
         public Address ShippingAddress { get; set; }
 
+        [Required]
         public ShippingMethod ShippingMethod { get; set; }
 
-        [Required] public string PaymentId { get; set; }
+        [Required] 
+        public string PaymentId { get; set; }
 
-        [Required] public Payment Payment { get; set; }
+        [Required] 
+        public Payment Payment { get; set; }
 
-        //todo: add coupons maybe
         public ICollection<OrderItem> OrderItems { get; set; } // many to many relationship
     }
 }

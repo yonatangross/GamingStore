@@ -49,6 +49,11 @@ namespace GamingStore.Controllers
                         (current, cart) => current + cart.Item.Price * cart.Quantity);
                 double totalCost = itemsCost + defaultPaymentCost;
 
+                if (customer.Address == null)
+                {
+                    customer.Address = new Address();
+                }
+
                 var viewModel = new CreateOrderViewModel
                 {
                     Cart = itemsInCart,
@@ -60,7 +65,8 @@ namespace GamingStore.Controllers
                         ItemsCost = itemsCost,
                         Total = totalCost
                     },
-                    ItemsInCart = await CountItemsInCart()
+                    ItemsInCart = await CountItemsInCart(),
+                    
                 };
 
                 return View(viewModel);
@@ -126,44 +132,12 @@ namespace GamingStore.Controllers
                 });
             }
 
-            //items bundles
-
-
-            /*
-            for (var i = 0; i < itemsInCart.Count - 1; i++)
-            {
-                for (var j = i + 1; j < itemsInCart.Count; j++)
-                {
-                    var frontItemBundle = new RelatedItem(itemsInCart[i].ItemId, itemsInCart[j].ItemId);
-                    var backItemBundle = new RelatedItem(itemsInCart[j].ItemId, itemsInCart[i].ItemId);
-                    try
-                    {
-                        var a = _context.ItemsBundles.Where(i =>
-                            i.CustomerId == frontItemBundle.CustomerId && i.ItemId == frontItemBundle.ItemId);
-                        if (!a.Any())
-                            await _context.ItemsBundles.AddAsync(frontItemBundle);
-
-                        var b = _context.ItemsBundles.Where(i =>
-                            i.CustomerId == backItemBundle.CustomerId && i.ItemId == backItemBundle.ItemId);
-                        if (!b.Any())
-                            await _context.ItemsBundles.AddAsync(backItemBundle);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                        throw;
-                    }
-                  
-                }
-            }*/
-
             //add order to db
             Context.Add(order);
             await Context.SaveChangesAsync();
 
             //clear cart
             IQueryable<Cart> carts = Context.Carts.Where(c => c.CustomerId == customer.Id);
-
             var items = 0;
 
             foreach (Cart itemInCart in carts)

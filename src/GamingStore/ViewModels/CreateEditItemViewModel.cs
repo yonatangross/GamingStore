@@ -19,6 +19,7 @@ namespace GamingStore.ViewModels
         public IFormFile File3 { set; get; }
 
         public Category[] Categories { get; set; }
+        
         public bool PublishItemFlag { get; set; }
     }
 }

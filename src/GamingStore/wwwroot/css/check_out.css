@@ -51,8 +51,6 @@ label {
     font-size: 24px;
 }
 
-
-
 span.price {
     float: right;
     color: grey;
@@ -67,4 +65,12 @@ span.price {
     .col-25 {
         margin-bottom: 20px;
     }
+}
+
+input[type=text].input-validation-error {
+    border: 2px solid #dc3545
+}
+
+.field-validation-error {
+    display: none;
 }

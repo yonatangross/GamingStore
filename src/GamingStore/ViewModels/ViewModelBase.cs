@@ -9,7 +9,5 @@ namespace GamingStore.ViewModels
     public abstract class ViewModelBase
     {
         public int? ItemsInCart { get; set; } = null;
-
-
     }
 }
