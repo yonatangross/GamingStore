@@ -182,3 +182,16 @@
 	width: 100%;
 	height: calc(100% + 30px);
 }
+
+
+input[type=text].input-validation-error {
+	border: 2px solid #dc3545
+}
+
+.input-validation-error {
+	border: 2px solid #dc3545
+}
+
+.field-validation-error {
+	display: none;
+}

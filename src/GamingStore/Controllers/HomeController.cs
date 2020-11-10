@@ -27,7 +27,7 @@ namespace GamingStore.Controllers
     {
         private readonly IEmailSender _emailSender;
 
-        public HomeController(IEmailSender emailSender, UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager) : base( userManager,  context, roleManager)
+        public HomeController(IEmailSender emailSender, UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager) : base(userManager, context, roleManager)
         {
             _emailSender = emailSender;
         }
@@ -74,16 +74,35 @@ namespace GamingStore.Controllers
             return View(viewModel);
         }
 
-        public IActionResult ContactUs()
+        public async Task<IActionResult> ContactUs()
         {
             //todo: change to viewmodel but move first to mail service
+
+            Customer customer = await GetCurrentUserAsync();
+
+
+            if (customer != null)
+            {
+                return View(new ContactViewModel
+                {
+                    Mail = new Mail
+                    {
+                        Name = $"{customer.FirstName} {customer.LastName}",
+                        Email = customer.Email,
+                        PhoneNumber = customer.PhoneNumber
+                    }
+                });
+            }
+
             return View();
         }
 
         [HttpPost]
         public async Task<ActionResult> ContactUs(Mail form)
         {
-            //todo: change to viewmodel but move first to mail service
+            //todo: move first to mail service
+            Customer customer = await GetCurrentUserAsync();
+            var customerId = customer != null ? customer.Id : "Not Logged In";
 
             if (!ModelState.IsValid)
             {
@@ -96,7 +115,8 @@ namespace GamingStore.Controllers
             var message = new StringBuilder();
             message.Append($"Name: {form.Name}\n");
             message.Append($"Email: {form.Email}\n");
-            message.Append($"Telephone: {form.Telephone}\n\n");
+            message.Append($"Telephone: {form.PhoneNumber}\n\n");
+            message.Append($"CustomerId: '{customerId}'\n\n");
             message.Append(form.Message);
 
             //start email Thread

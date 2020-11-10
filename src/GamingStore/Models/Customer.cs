@@ -16,10 +16,16 @@ namespace GamingStore.Models
 
         public int CustomerNumber { get; set; }
 
-        [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"[a-zA-Z]{2,}$")]
+        [Required]
+        [DataType(DataType.Text)]
+        [StringLength(50)]
+        [RegularExpression(@"[a-zA-Z]{2,}$")]
         public string FirstName { get; set; }
 
-        [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"[a-zA-Z]{2,}$")]
+        [Required]
+        [DataType(DataType.Text)]
+        [StringLength(50)]
+        [RegularExpression(@"[a-zA-Z]{2,}$")]
         public string LastName { get; set; }
 
         public Address Address { get; set; }
