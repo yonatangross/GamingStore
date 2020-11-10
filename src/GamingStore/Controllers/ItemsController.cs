@@ -26,7 +26,7 @@ namespace GamingStore.Controllers
     {
         private readonly StoreContext _context;
         private readonly UserManager<Customer> _userManager;
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IHostingEnvironment _hostingEnvironment; //todo: fix obsolete
 
         public ItemsController(StoreContext context, UserManager<Customer> userManager,
             IHostingEnvironment hostingEnvironment)
@@ -90,7 +90,7 @@ namespace GamingStore.Controllers
                 ItemsFilter = new ItemsFilter()
                 {
                     Category = category,
-                    Manufacture = manufacture,
+                    Manufacturer = manufacture,
                     SortBy = sortBy,
                     PriceMin = priceMin,
                     PriceMax = priceMax,

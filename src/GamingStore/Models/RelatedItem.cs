@@ -1,4 +1,6 @@
-﻿namespace GamingStore.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GamingStore.Models
 {
     public class RelatedItem
     {
@@ -7,8 +9,10 @@
             CustomerNumber = customerNumber;
             ItemId = itemId;
         }
-
+        [DataType(DataType.Custom)]
         public int CustomerNumber { get; set; }
+        [DataType(DataType.Custom)]
+
         public int ItemId { get; set; }
 
     }

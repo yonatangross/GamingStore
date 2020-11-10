@@ -20,17 +20,16 @@ namespace GamingStore.Models
         
         //public Order Order { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true), Display(Name = "Items Cost")]
         public double ItemsCost { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true),Display(Name = "Shipping Cost")]
         public int ShippingCost { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         public double Total { get; set; }
         
         public PaymentMethod PaymentMethod { get; set; }
-        
         public bool Paid { get; set; }
     }
 }

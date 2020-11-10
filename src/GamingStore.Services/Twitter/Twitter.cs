@@ -98,7 +98,7 @@ namespace GamingStore.Services.Twitter
                     {
                         return $"Error sending post to Twitter. {rezTextJson["errors"][0]["message"].Value<string>()}";
                     }
-                    catch (Exception ex) // return unknown error
+                    catch (Exception) // return unknown error
                     {
                         // log exception somewhere
                         return "Unknown error sending post to Twitter";
@@ -107,7 +107,7 @@ namespace GamingStore.Services.Twitter
 
                 return "OK";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // log exception somewhere
                 return "Unknown error publishing to Twitter";

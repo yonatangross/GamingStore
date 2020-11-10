@@ -14,7 +14,6 @@ namespace GamingStore.Models
             OrderHistory = new List<Order>();
             //CustomerNumber = Math.Abs(Guid.NewGuid().GetHashCode());
         }
-
         public int CustomerNumber { get; set; }
 
         [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"[a-zA-Z]{2,}$")]

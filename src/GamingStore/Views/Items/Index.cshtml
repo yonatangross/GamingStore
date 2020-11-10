@@ -21,12 +21,12 @@
                     <div class="sidebar_section">
                         @{
                             string selectedCategory = Model.ItemsFilter.Category;
-                            string selectedManufacture = Model.ItemsFilter.Manufacture;
+                            string selectedManufacturer = Model.ItemsFilter.Manufacturer;
                             var selectedSort = Model.ItemsFilter.SortBy;
 
                             var filterCategory = new ItemsFilter()
                             {
-                                Manufacture = Model.ItemsFilter.Manufacture,
+                                Manufacturer = Model.ItemsFilter.Manufacturer,
                                 Category = Model.ItemsFilter.Category,
                                 PriceMin = Model.ItemsFilter.PriceMin,
                                 PriceMax = Model.ItemsFilter.PriceMax,
@@ -36,7 +36,7 @@
 
                             var filterManufacture = new ItemsFilter()
                             {
-                                Manufacture = Model.ItemsFilter.Manufacture,
+                                Manufacturer = Model.ItemsFilter.Manufacturer,
                                 Category = Model.ItemsFilter.Category,
                                 PriceMin = Model.ItemsFilter.PriceMin,
                                 PriceMax = Model.ItemsFilter.PriceMax,
@@ -46,7 +46,7 @@
 
                             var filterSort = new ItemsFilter()
                             {
-                                Manufacture = Model.ItemsFilter.Manufacture,
+                                Manufacturer = Model.ItemsFilter.Manufacturer,
                                 Category = Model.ItemsFilter.Category,
                                 PriceMin = Model.ItemsFilter.PriceMin,
                                 PriceMax = Model.ItemsFilter.PriceMax,
@@ -62,7 +62,7 @@
                                     <span>
                                         @{
                                             filterCategory.Category = category.ToString();
-                                            filterCategory.Manufacture = null;
+                                            filterCategory.Manufacturer = null;
                                         }
                                         @if (selectedCategory == category.ToString())
                                         {
@@ -100,7 +100,7 @@
                                     </div>
                                     @Html.TextBox("PriceMax", null, new { maxlength = "9", placeholder = "Max", @class = "form-control form-control-sm col-3" })
                                     @Html.Hidden("Category")
-                                    @Html.Hidden("Manufacture")
+                                    @Html.Hidden("Manufacturer")
                                     <input type="submit" value="Go" class="btn btn-light btn-sm" />
                                 </div>
                             }
@@ -117,9 +117,9 @@
                                         <li>
                                             <span>
                                                 @{
-                                                    filterManufacture.Manufacture = manufacture;
+                                                    filterManufacture.Manufacturer = manufacture;
                                                 }
-                                                @if (selectedManufacture == manufacture)
+                                                @if (selectedManufacturer == manufacture)
                                                 {
                                                     <strong>
                                                         @Html.ActionLink(manufacture, "Index", "Items", filterManufacture)

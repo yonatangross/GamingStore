@@ -7,6 +7,7 @@ namespace GamingStore.Models
 {
     public class Mail
     {
+        //todo: should be merged with the mail service
         public string Name { get; set; }
         
         public string Email { get; set; }

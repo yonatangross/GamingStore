@@ -28,9 +28,10 @@ namespace GamingStore.Models
         [DataType(DataType.Text)]
         public string Manufacturer { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Currency),DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         public double Price { get; set; }
 
+        [DataType(DataType.Text)]
         public string Description { get; set; }
         
         [DataType(DataType.Text)] 

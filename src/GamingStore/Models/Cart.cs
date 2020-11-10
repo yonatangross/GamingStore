@@ -21,14 +21,12 @@ namespace GamingStore.Models
 
         [Key, DatabaseGenerated((DatabaseGeneratedOption.None))]
         public int Id { get; set; }
-        
-        public string CustomerId { get; set; }
 
-        public int ItemId { get; set; }
+        [DataType(DataType.Text)] public string CustomerId { get; set; }
+        [DataType(DataType.Currency)] public int ItemId { get; set; }
+        [DataType(DataType.Currency)] public int Quantity { get; set; }
 
-        public int Quantity { get; set; }
-        
-        [NotMapped]
+        [NotMapped]//todo: why?
         public Item Item { get; set; }
     }
 }

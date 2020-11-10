@@ -29,14 +29,15 @@ namespace GamingStore.Models
         public string Name { get; set; }
 
         [Required] public Address Address { get; set; }
+
         [DisplayName("Phone Number")]
         [Required, DataType(DataType.PhoneNumber), StringLength(50), Phone]
         public string PhoneNumber { get; set; }
 
         [DataType(DataType.EmailAddress), EmailAddress]
         public string Email { get; set; }
-        [DisplayName("Opening Hours")]
-        public List<OpeningHours> OpeningHours { get; set; } =new List<OpeningHours>(7);
+
+        [DisplayName("Opening Hours")] public List<OpeningHours> OpeningHours { get; set; } = new List<OpeningHours>(7);
 
         //public Dictionary<Item,uint> Stock { get; set; } // determines how many items there are in the store. example: {{fridge, 5},{mouse,6}}
         public ICollection<Order> Orders { get; set; }
@@ -47,7 +48,7 @@ namespace GamingStore.Models
         public bool IsOpen()
         {
             var currentDateTime = DateTime.Now;
-            var dayOfWeek = (int)currentDateTime.DayOfWeek;
+            var dayOfWeek = (int) currentDateTime.DayOfWeek;
             var curTime = currentDateTime.TimeOfDay;
 
             return OpeningHours[dayOfWeek].OpeningTime <= curTime && curTime <= OpeningHours[dayOfWeek].ClosingTime;
