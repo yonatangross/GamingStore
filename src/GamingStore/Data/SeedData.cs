@@ -346,7 +346,7 @@ namespace GamingStore.Data
                             {"Resolution", "QHD Wide 1440p"},
                             {"Response Time", "1ms"}
                         },
-                    ImageUrl = "images/items/AsusVG278QR27GamingMonitor",
+                    ImageUrl = "images/items/LG27GL83A-B",
                     Description = "The 27” Ultra Gear QHD IPS 1ms 144Hz monitor is G-Sync Compatible and has a 3-Side Virtually Borderless bezel. Other features includes: Tilt / Height / Pivot Adjustable Stand."
                 },
                 new Item
@@ -640,7 +640,6 @@ namespace GamingStore.Data
 
 
                 },
-
                 new Item
                 {
                     Title = "Corsair Harpoon PRO", Manufacturer = "Corsair", Price = 49.99,
@@ -657,7 +656,106 @@ namespace GamingStore.Data
 
 
                 },
+                new Item
+                {
+                    Title = "Gaming Monitor 240Hz 1080P Adaptive Sync",
+                    Manufacturer = "AORUS",
+                    Price = 429.99,
+                    Category = Category.Monitors,
+                    ImageUrl = "images/items/AORUSFI25F24.5240Hz1080PAdaptiveSyncGami",
+                    Description="FHD WITH 240HZ Supports Adaptive-Sync (FreeSync Premium) Technology 24.5” FHD panel (1920 x 1080 resolution)"
+                },
+                new Item
+                {
+                    Title = " Gaming Monitor Full HD 1920 x 1080",
+                    Manufacturer = "ASUS", 
+                    Price = 344.99,
+                    Category = Category.Monitors,
+                    ImageUrl = "images/items/ASUSTUFGamingVG279QM27FullHD1920x10801ms",
+                    Description="1 ms 280Hz (Overclocking)"
+                },
+                new Item
+                {
+                    Title = "Gaming Monitor 27 inch QHD 2560 x 1440",
+                    Manufacturer = "Acer",
+                    Price = 211.99,
+                    Category = Category.Monitors,
+                    ImageUrl = "images/items/AcerKA272UbiipxUM.HX2AA.00427QHD2560x144",
+                    Description="DisplayPort AMD RADEON FreeSync Technology Gaming Monitor"
+                },
+                new Item
+                {
+                    Title = "Gaming Monitor 3440 x 1440 UWHD 144Hz",
+                    Manufacturer = "MSI",
+                    Price = 689.99,
+                    Category = Category.Monitors,
+                    ImageUrl = "images/items/MSIOptixMPG341CQR343440x1440UWHD144Hz1ms",
+                    Description="1ms 2xHDMI DisplayPort USB Type-C AMD FreeSync HDR"
+                },
+                new Item
+                {
+                    Title = "Gaming Monitor 3840 x 1080 1ms 144Hz",
+                    Manufacturer = "Samsung",
+                    Price = 789.99,
+                    Category = Category.Monitors,
+                    ImageUrl = "images/items/SamsungCHG90SeriesC49HG90493840x10801ms1",
+                    Description="2x HDMI DisplayPort Mini-DisplayPort HDR AMD FreeSync USB"
+                },
+                new Item
+                {
+                    Title = "GeForce GTX 1660 Ti",
+                    Manufacturer = "MSI",
+                    Price = 242.99,
+                    Category = Category.GPUs,
+                    ImageUrl = "images/items/MSIGeForceGTX1660TiDirectX12GTX1660TIVEN",
+                    Description="DirectX 12 GTX 1660 TI VENTUS XS 6G OC 6GB 192-Bit GDDR6"
 
+                },
+                new Item
+                {
+                    Title = "GIGABYTE Radeon RX 5700 ",
+                    Manufacturer = "GIGABYTE",
+                    Price = 368.99,
+                    Category = Category.GPUs,
+                    ImageUrl = "images/items/GIGABYTERadeonRX5700XTDirectX12GV-R57XTG",
+                    Description="Powered by AMD Radeon 8GB 256-Bit GDDR6"
+                },
+                new Item
+                {
+                    Title = "GeForce GTX 1050 Ti",
+                    Manufacturer = "MSI",
+                    Price = 138.65,
+                    Category = Category.GPUs,
+                    ImageUrl = "images/items/MSIGeForceGTX1050TiDirectX12GTX1050TiGAM",
+                    Description="GAMING X 4G 4GB 128-Bit GDDR5"
+                },
+                new Item
+                {
+                    Title = "Intel Core i9-10900K",
+                    Manufacturer = "Intel",
+                    Price = 484.87,
+                    Category = Category.CPUs,
+                    ImageUrl = "images/items/IntelCorei9-10900K10-Core3.7GHzLGA120012",
+                    Description="10th Gen Intel Core Desktop Processor"
+                },
+                new Item
+                {
+                    Title = "Gaming Mouse M65 RGB ELITE",
+                    Manufacturer = "Corsair",
+                    Price = 54.89,
+                    Category = Category.Mouses,
+                    ImageUrl = "images/items/CorsairM65RGBELITETunableFPSGamingMouse,",
+                    Description="gaming mouse takes your FPS gameplay to the next level"
+                },
+                new Item
+                {
+                    Title = "Glossy Black Gaming Mouse",
+                    Manufacturer = "Glorious ",
+                    Price = 36.99,
+                    Category = Category.Mouses,
+                    ImageUrl = "images/items/GloriousModelOMinusGOM-GBLACKGlossyBlack",
+                    Description="58mm width at grip, 63mm with at back, 58mm at front, 120mm long"
+                },
                 new Item
                 {
                     Title = "KLIM Puma - USB Gamer Headset with Mic", Manufacturer = "KLIM Puma", Price = 44.99,

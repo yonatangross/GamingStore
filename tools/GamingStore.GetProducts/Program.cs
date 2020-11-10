@@ -13,8 +13,8 @@ namespace GamingStore.ProductParser
     {
         static void Main(string[] args)
         {
-            var asin = "N82E16824012012";
-            var filesDirectory = @"D:\repos\GamingStore\src\GamingStore\wwwroot\images\items";
+            var asin = "N82E16826805004";
+            var filesDirectory = @"\\Mac\Home\Desktop\Project\GamingStore\src\GamingStore\wwwroot\images\items";
 
             var webDriver = new ChromeDriver();
             webDriver.Navigate().GoToUrl($"https://www.newegg.com/global/il-en/p/{asin}");
