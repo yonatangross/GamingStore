@@ -4,13 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using GamingStore.Models;
+using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GamingStore.Areas.Identity.Pages.Account.Manage
 {
-    public partial class IndexModel : PageModel
+    public partial class IndexModel : ViewModelBase
     {
         private readonly UserManager<Customer> _userManager;
         private readonly SignInManager<Customer> _signInManager;
@@ -37,7 +38,6 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
             [Display(Name = "First Name")]
             public string FirstName { get; set; }
 
-            [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
         }

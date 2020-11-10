@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GamingStore.Models;
 using GamingStore.Services.Email.Interfaces;
+using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,7 +15,7 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace GamingStore.Areas.Identity.Pages.Account.Manage
 {
-    public partial class EmailModel : PageModel
+    public partial class EmailModel : ViewModelBase
     {
         private readonly UserManager<Customer> _userManager;
         private readonly SignInManager<Customer> _signInManager;
