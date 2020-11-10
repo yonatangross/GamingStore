@@ -658,7 +658,7 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = "Gaming Monitor 240Hz 1080P Adaptive Sync",
+                    Title = "AORUS Gaming Monitor 240Hz 1080P Adaptive Sync",
                     Manufacturer = "AORUS",
                     Price = 429.99,
                     Category = Category.Monitors,
@@ -667,8 +667,8 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = " Gaming Monitor Full HD 1920 x 1080",
-                    Manufacturer = "ASUS", 
+                    Title = "Asus Gaming Monitor Full HD 1920 x 1080",
+                    Manufacturer = "Asus", 
                     Price = 344.99,
                     Category = Category.Monitors,
                     ImageUrl = "images/items/ASUSTUFGamingVG279QM27FullHD1920x10801ms",
@@ -676,7 +676,7 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = "Gaming Monitor 27 inch QHD 2560 x 1440",
+                    Title = "Acer Gaming Monitor 27 inch QHD 2560 x 1440",
                     Manufacturer = "Acer",
                     Price = 211.99,
                     Category = Category.Monitors,
@@ -685,7 +685,7 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = "Gaming Monitor 3440 x 1440 UWHD 144Hz",
+                    Title = "MSI Gaming Monitor 3440 x 1440 UWHD 144Hz",
                     Manufacturer = "MSI",
                     Price = 689.99,
                     Category = Category.Monitors,
@@ -694,7 +694,7 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = "Gaming Monitor 3840 x 1080 1ms 144Hz",
+                    Title = "Samsung Gaming Monitor 3840 x 1080 1ms 144Hz",
                     Manufacturer = "Samsung",
                     Price = 789.99,
                     Category = Category.Monitors,
@@ -703,7 +703,7 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = "GeForce GTX 1660 Ti",
+                    Title = "MSI GeForce GTX 1660 Ti",
                     Manufacturer = "MSI",
                     Price = 242.99,
                     Category = Category.GPUs,
@@ -722,7 +722,7 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = "GeForce GTX 1050 Ti",
+                    Title = "MSI GeForce GTX 1050 Ti",
                     Manufacturer = "MSI",
                     Price = 138.65,
                     Category = Category.GPUs,
@@ -740,7 +740,7 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = "Gaming Mouse M65 RGB ELITE",
+                    Title = "Corsair Gaming Mouse M65 RGB ELITE",
                     Manufacturer = "Corsair",
                     Price = 54.89,
                     Category = Category.Mouses,
@@ -749,7 +749,7 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = "Glossy Black Gaming Mouse",
+                    Title = "Glorious Glossy Black Gaming Mouse",
                     Manufacturer = "Glorious ",
                     Price = 36.99,
                     Category = Category.Mouses,
