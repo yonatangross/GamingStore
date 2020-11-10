@@ -32,8 +32,7 @@ namespace GamingStore.Controllers
         }
 
         // GET: Items
-        public async Task<IActionResult> Index(string category, string manufacture, int? priceMin, int? priceMax,
-            string keywords, SortByFilter sortBy = SortByFilter.NewestArrivals)
+        public async Task<IActionResult> Index(string category, string manufacture, int? priceMin, int? priceMax, string keywords, SortByFilter sortBy = SortByFilter.NewestArrivals)
         {
             List<Item> items = await Context.Items.ToListAsync();
 
