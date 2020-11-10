@@ -10,10 +10,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
+using GamingStore.Extensions;
 using GamingStore.Models;
 using GamingStore.Services;
 using GamingStore.Services.Twitter;
 using GamingStore.ViewModels;
+using GamingStore.ViewModels.Items;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -32,8 +34,7 @@ namespace GamingStore.Controllers
         }
 
         // GET: Items
-        public async Task<IActionResult> Index(string category, string manufacture, int? priceMin, int? priceMax,
-            string keywords, SortByFilter sortBy = SortByFilter.NewestArrivals)
+        public async Task<IActionResult> Index(string category, string manufacturer, int? priceMin, int? priceMax, string keywords, SortByFilter sortBy = SortByFilter.NewestArrivals)
         {
             List<Item> items = await Context.Items.ToListAsync();
 
@@ -44,9 +45,9 @@ namespace GamingStore.Controllers
                 items = items.Where(item => item.Category.ToString() == category).ToList();
             }
 
-            if (!string.IsNullOrWhiteSpace(manufacture))
+            if (!string.IsNullOrWhiteSpace(manufacturer))
             {
-                items = items.Where(item => item.Manufacturer == manufacture).ToList();
+                items = items.Where(item => item.Manufacturer == manufacturer).ToList();
             }
 
             if (priceMin > 0)
@@ -82,7 +83,7 @@ namespace GamingStore.Controllers
                 ItemsFilter = new ItemsFilter()
                 {
                     Category = category,
-                    Manufacturer = manufacture,
+                    Manufacturer = manufacturer,
                     SortBy = sortBy,
                     PriceMin = priceMin,
                     PriceMax = priceMax,
@@ -119,9 +120,12 @@ namespace GamingStore.Controllers
 
             var userIntId = GetCurrentUserAsync().Result.CustomerNumber;
             var relatedItem = new RelatedItem(userIntId, item.Id);
-            bool relatedItems =
-                Context.RelatedItems.Any(ri => ri.ItemId == item.Id && ri.CustomerNumber == user.CustomerNumber);
-            if (!relatedItems) await Context.RelatedItems.AddAsync(relatedItem);
+            var relatedItems = Context.RelatedItems.Any(ri => ri.ItemId == item.Id && ri.CustomerNumber == user.CustomerNumber);
+            
+            if (!relatedItems)
+            {
+                await Context.RelatedItems.AddAsync(relatedItem);
+            }
 
             await Context.SaveChangesAsync();
 
@@ -134,11 +138,9 @@ namespace GamingStore.Controllers
         {
             Category[] allCategories = Context.Items.Select(item => item.Category).Distinct().ToArray();
 
-
             return View(new CreateEditItemViewModel
             {
                 Categories = allCategories,
-                ItemsInCart = await CountItemsInCart()
             });
         }
 
@@ -152,7 +154,8 @@ namespace GamingStore.Controllers
         {
             var directoryName = model.Item.Title.Trim().Replace(" ", string.Empty);
             var uploadFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images", "items", directoryName);
-
+            model.Item.Manufacturer = model.Item.Manufacturer.Trim().FirstCharToUpper();
+            
             // do other validations on your model as needed
             if (model.File1 != null)
             {
@@ -186,7 +189,6 @@ namespace GamingStore.Controllers
 
             await Context.Items.AddAsync(model.Item);
             await Context.SaveChangesAsync();
-
 
             #region TwitterPost
 
@@ -247,11 +249,12 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
+            item.Manufacturer = item.Manufacturer.Trim().FirstCharToUpper();
+
             var viewModel = new CreateEditItemViewModel()
             {
                 Item = item,
                 Categories = allCategories,
-                ItemsInCart = await CountItemsInCart()
             };
 
             return View(viewModel);
@@ -270,31 +273,11 @@ namespace GamingStore.Controllers
                 try
                 {
                     var itemOnDb = await Context.Items.FirstOrDefaultAsync(i => i.Id == model.Item.Id);
-
-                    if (model.Item.Title != itemOnDb.Title)
-                    {
-                        itemOnDb.Title = model.Item.Title;
-                    }
-
-                    if (model.Item.Description != itemOnDb.Description)
-                    {
-                        itemOnDb.Description = model.Item.Description;
-                    }
-
-                    if (model.Item.Manufacturer != itemOnDb.Manufacturer)
-                    {
-                        itemOnDb.Manufacturer = model.Item.Manufacturer;
-                    }
-
-                    if (model.Item.Price != itemOnDb.Price)
-                    {
-                        itemOnDb.Price = model.Item.Price;
-                    }
-
-                    if (model.Item.Category != itemOnDb.Category)
-                    {
-                        itemOnDb.Category = model.Item.Category;
-                    }
+                    itemOnDb.Title = model.Item.Title;
+                    itemOnDb.Description = model.Item.Description;
+                    itemOnDb.Manufacturer = model.Item.Manufacturer.Trim().FirstCharToUpper();
+                    itemOnDb.Price = model.Item.Price;
+                    itemOnDb.Category = model.Item.Category;
 
                     Context.Update(itemOnDb);
                     await Context.SaveChangesAsync();
@@ -314,9 +297,8 @@ namespace GamingStore.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            Category[] allCategories = Context.Items.Select(i => i.Category).Distinct().ToArray();
+            var allCategories = Context.Items.Select(i => i.Category).Distinct().ToArray();
             model.Categories = allCategories;
-            model.ItemsInCart = await CountItemsInCart();
 
             return View(model);
         }
@@ -345,7 +327,8 @@ namespace GamingStore.Controllers
         }
 
         // POST: Items/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using GamingStore.Models;
 
-namespace GamingStore.ViewModels
+namespace GamingStore.ViewModels.Orders
 {
     public class EditOrdersViewModel : ViewModelBase
     {

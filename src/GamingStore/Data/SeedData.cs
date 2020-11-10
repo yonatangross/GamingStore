@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GamingStore.Contracts;
+using GamingStore.Extensions;
 using GamingStore.Models;
 using GamingStore.Models.Relationships;
 using Microsoft.AspNetCore.Identity;
@@ -183,7 +184,7 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = "Logitech G440 Hard Gaming", Manufacturer = "Logitech ", Price = 130,
+                    Title = "Logitech G440 Hard Gaming", Manufacturer = "Logitech", Price = 130,
                     Category = Category.MousePads, PropertiesList =
                         new Dictionary<string, string>()
                         {
@@ -771,8 +772,9 @@ namespace GamingStore.Data
 
                 },
             };
-            foreach (Item item in items)
+            foreach (var item in items)
             {
+                item.Manufacturer = item.Manufacturer.Trim().FirstCharToUpper();
                 context.Items.Add(item);
             }
 

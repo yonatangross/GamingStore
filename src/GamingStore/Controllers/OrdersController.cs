@@ -9,6 +9,7 @@ using GamingStore.Data;
 using GamingStore.Models;
 using GamingStore.Models.Relationships;
 using GamingStore.ViewModels;
+using GamingStore.ViewModels.Orders;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 

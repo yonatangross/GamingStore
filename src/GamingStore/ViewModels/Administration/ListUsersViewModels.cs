@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using GamingStore.Models;
 
-namespace GamingStore.ViewModels
+namespace GamingStore.ViewModels.Administration
 {
     public class ListUsersViewModels: ViewModelBase
     {

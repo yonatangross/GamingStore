@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GamingStore.Contracts;
+﻿using System.Collections.Generic;
 using GamingStore.Models;
-using Microsoft.AspNetCore.Http;
 
-namespace GamingStore.ViewModels
+namespace GamingStore.ViewModels.Administration
 {
     public class ListOrdersViewModel : ViewModelBase
     {

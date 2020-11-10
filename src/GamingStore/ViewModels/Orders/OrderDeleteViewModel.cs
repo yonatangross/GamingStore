@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using GamingStore.Models;
+﻿using GamingStore.Models;
 
-namespace GamingStore.ViewModels
+namespace GamingStore.ViewModels.Orders
 {
     public class OrderDeleteViewModel : ViewModelBase
     {

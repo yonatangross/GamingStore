@@ -1,6 +1,6 @@
 ﻿using GamingStore.Models;
 
-namespace GamingStore.ViewModels
+namespace GamingStore.ViewModels.Items
 {
     public class ItemViewModel : ViewModelBase
     {

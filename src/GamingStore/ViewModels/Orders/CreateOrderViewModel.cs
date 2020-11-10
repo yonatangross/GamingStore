@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using GamingStore.Contracts;
 using GamingStore.Models;
-using GamingStore.Models.Relationships;
 
-namespace GamingStore.ViewModels
+namespace GamingStore.ViewModels.Orders
 {
     public class CreateOrderViewModel : ViewModelBase
     {
@@ -31,7 +28,7 @@ namespace GamingStore.ViewModels
 
         public CreditCard CreditCard { get; set; }
 
-        public List<Cart> Cart { get; set; }
+        public List<Models.Cart> Cart { get; set; }
 
         [Required]
         public Payment Payment { get; set; }

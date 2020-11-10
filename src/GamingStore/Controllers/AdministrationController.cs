@@ -8,6 +8,7 @@ using GamingStore.Data;
 using GamingStore.Models;
 using GamingStore.Models.Relationships;
 using GamingStore.ViewModels;
+using GamingStore.ViewModels.Administration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

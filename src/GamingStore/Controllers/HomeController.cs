@@ -15,6 +15,7 @@ using GamingStore.Models;
 using GamingStore.Services.Email;
 using GamingStore.Services.Email.Interfaces;
 using GamingStore.ViewModels;
+using GamingStore.ViewModels.Home;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Models;
 using GamingStore.ViewModels;
+using GamingStore.ViewModels.Cart;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;

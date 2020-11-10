@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GamingStore.Contracts;
+﻿using GamingStore.Contracts;
 using GamingStore.Models;
 using Microsoft.AspNetCore.Http;
 
-namespace GamingStore.ViewModels
+namespace GamingStore.ViewModels.Items
 {
-    public class CreateEditItemViewModel : ViewModelBase
+    public class CreateEditItemViewModel
     {
         public Item Item { get; set; }
         

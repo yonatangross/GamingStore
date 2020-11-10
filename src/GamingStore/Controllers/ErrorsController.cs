@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GamingStore.Data;
 using GamingStore.Models;
 using GamingStore.ViewModels;
+using GamingStore.ViewModels.Errors;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

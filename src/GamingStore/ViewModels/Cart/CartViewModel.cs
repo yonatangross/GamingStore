@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using GamingStore.Models;
 
-namespace GamingStore.ViewModels
+namespace GamingStore.ViewModels.Cart
 {
     public class CartViewModel : ViewModelBase
     {
-        public List<Cart> Carts { get; set; }
+        public List<Models.Cart> Carts { get; set; }
 
         public Payment Payment { get; set; }
     }

@@ -1,8 +1,7 @@
-﻿
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Identity;
 
-namespace GamingStore.ViewModels
+namespace GamingStore.ViewModels.Administration
 {
     public class ListRolesViewModel : ViewModelBase
     {

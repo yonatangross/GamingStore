@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace GamingStore.ViewModels
+namespace GamingStore.ViewModels.Errors
 {
     public class ErrorViewModel:ViewModelBase
     {
