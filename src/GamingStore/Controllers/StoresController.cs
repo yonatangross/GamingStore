@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GamingStore.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Models;
+using GamingStore.Models.Relationships;
 using GamingStore.ViewModels;
+using GamingStore.ViewModels.Stores;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
@@ -13,8 +17,7 @@ namespace GamingStore.Controllers
 {
     public class StoresController : BaseController
     {
-        public StoresController(UserManager<Customer> userManager, StoreContext context,
-            RoleManager<IdentityRole> roleManager) : base(userManager, context, roleManager)
+        public StoresController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager) : base(userManager, context, roleManager)
         {
         }
 
@@ -125,7 +128,20 @@ namespace GamingStore.Controllers
         {
             var viewModel = new CreateStoreViewModel()
             {
-                Store = null,
+                Store = new Store()
+                {
+                    Active = true,
+                    OpeningHours = new List<OpeningHours>(7)
+                    {
+                        new OpeningHours() {OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Sunday},
+                        new OpeningHours() {OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Monday},
+                        new OpeningHours() {OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Tuesday},
+                        new OpeningHours() {OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Wednesday},
+                        new OpeningHours() {OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Thursday},
+                        new OpeningHours() {OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Friday},
+                        new OpeningHours() {OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Saturday}
+                    }
+                },
                 ItemsInCart = await CountItemsInCart()
             };
             return View(viewModel);
