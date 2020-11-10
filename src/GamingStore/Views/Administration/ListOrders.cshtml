@@ -1,4 +1,5 @@
-﻿@model IEnumerable<GamingStore.Models.Order>
+﻿@using System.Linq
+@model GamingStore.ViewModels.ListOrdersViewModel
 
 @{
     ViewData["Title"] = "Admin Items";
@@ -11,28 +12,28 @@
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Id)
+            @Html.DisplayNameFor(model => model.Orders.First().Id)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Customer.UserName)
+            @Html.DisplayNameFor(model => model.Orders.First().Customer.UserName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OrderDate)
+            @Html.DisplayNameFor(model => model.Orders.First().OrderDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.State)
+            @Html.DisplayNameFor(model => model.Orders.First().State)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Store)
+            @Html.DisplayNameFor(model => model.Orders.First().Store)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Payment.Total)
+            @Html.DisplayNameFor(model => model.Orders.First().Payment.Total)
         </th>
         <th></th>
     </tr>
     </thead>
     <tbody>
-    @foreach (var order in Model)
+    @foreach (var order in Model.Orders)
     {
         <tr>
             <td>

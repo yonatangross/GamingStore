@@ -1,8 +1,4 @@
-﻿/*********************************
-Shop
-*********************************/
-
-.shop
+﻿.shop
 {
 	background: #FFFFFF;
 	padding-top: 80px;
@@ -113,7 +109,7 @@ Shop
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	column-gap: 10px;
-    row-gap: 15px;
+	row-gap: 15px;
 }
 
 .product_item {
@@ -128,15 +124,15 @@ Shop
 	padding-top: 40px;
 	padding-bottom: 24px;
 	text-align: center;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
-    border-radius: 15px;
+	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+	border-radius: 15px;
 }
 
 .product_image {
-    display: inline-block;
-    align-items: center;
-    justify-content: center;
-    width: 150px;
+	display: inline-block;
+	align-items: center;
+	justify-content: center;
+	width: 150px;
 	height: 115px;
 }
 .product_image img
@@ -144,7 +140,7 @@ Shop
 	display: block;
 	position: relative;
 	max-width: 100%;
-    max-height: 100%;
+	max-height: 100%;
 }
 .product_content
 {
