@@ -97,7 +97,7 @@
                                     <div class="d-flex flex-row align-items-center justify-content-end">
                                         <div class="cart_icon">
                                             <img src="~/images/cart.png" alt="">
-                                            <div class="cart_count" >
+                                            <div class="cart_count">
                                                 <span id="cart_items_count">@Model?.ItemsInCart</span>
                                             </div>
                                         </div>
@@ -302,7 +302,8 @@
         <script src="~/js/cart_custom.js"></script>
         <script src="~/lib/notifyjs/notify.min.js"></script>
         <script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>
-
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
         @RenderSection("Scripts", required: false)
     </div>
 </body>
