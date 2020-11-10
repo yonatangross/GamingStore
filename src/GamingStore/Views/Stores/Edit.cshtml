@@ -1,102 +1,101 @@
-﻿@using GamingStore.Contracts
-@model GamingStore.Models.Store
+﻿@model GamingStore.ViewModels.StoreDetailsViewModel
 
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<h3>Edit Store# @Model.Id</h3>
+<h3>Edit Store# @Model.Store.Id</h3>
 <hr />
 <div class="row">
     @using (Html.BeginForm("Edit", "Stores", FormMethod.Post, new { @class = "col-10" }))
     {
-        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.Store.Id)
 
-        @for (var openingHourIndex = 0; openingHourIndex < Model.OpeningHours.Count; openingHourIndex++)
+        @for (var openingHourIndex = 0; openingHourIndex < Model.Store.OpeningHours.Count; openingHourIndex++)
         {
-            @Html.HiddenFor(model => Model.OpeningHours[openingHourIndex])
+            @Html.HiddenFor(model => Model.Store.OpeningHours[openingHourIndex])
         }
 
         <div class="form-group row">
-            @Html.LabelFor(m => m.Name, new { @class = "col-sm-2 col-form-label" })
+            @Html.LabelFor(m => m.Store.Name, new { @class = "col-sm-2 col-form-label" })
             <div class="col-sm-5">
                 <div class="form-check">
-                    @Html.TextBoxFor(s => s.Name, new { @class = "form-control" })
+                    @Html.TextBoxFor(s => s.Store.Name, new { @class = "form-control" })
                 </div>
             </div>
         </div>
         <div>
             <div class="form-group row">
-                @Html.LabelFor(m => m.Address.Address1, new { @class = "col-sm-2 col-form-label" })
+                @Html.LabelFor(m => m.Store.Address.Address1, new { @class = "col-sm-2 col-form-label" })
                 <div class="col-sm-5">
                     <div class="form-check">
-                        @Html.TextBoxFor(s => s.Address.Address1, new { @class = "form-control" })
+                        @Html.TextBoxFor(s => s.Store.Address.Address1, new { @class = "form-control" })
                     </div>
                 </div>
             </div>
             <div class="form-group row">
-                @Html.LabelFor(m => m.Address.City, new { @class = "col-sm-2 col-form-label" })
+                @Html.LabelFor(m => m.Store.Address.City, new { @class = "col-sm-2 col-form-label" })
                 <div class="col-sm-5">
                     <div class="form-check">
-                        @Html.TextBoxFor(s => s.Address.City, new { @class = "form-control" })
+                        @Html.TextBoxFor(s => s.Store.Address.City, new { @class = "form-control" })
                     </div>
                 </div>
             </div>
             <div class="form-group row">
-                @Html.LabelFor(m => m.Address.PostalCode, new { @class = "col-sm-2 col-form-label" })
+                @Html.LabelFor(m => m.Store.Address.PostalCode, new { @class = "col-sm-2 col-form-label" })
                 <div class="col-sm-5">
                     <div class="form-check">
-                        @Html.TextBoxFor(s => s.Address.PostalCode, new { @class = "form-control" })
+                        @Html.TextBoxFor(s => s.Store.Address.PostalCode, new { @class = "form-control" })
                     </div>
                 </div>
             </div>
             <div class="form-group row">
-                @Html.LabelFor(m => m.Address.Country, new { @class = "col-sm-2 col-form-label" })
+                @Html.LabelFor(m => m.Store.Address.Country, new { @class = "col-sm-2 col-form-label" })
                 <div class="col-sm-5">
                     <div class="form-check">
-                        @Html.TextBoxFor(s => s.Address.Country, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.TextBoxFor(s => s.Store.Address.Country, new { @class = "form-control", @disabled = "disabled" })
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="form-group row">
-            @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-sm-2 col-form-label" })
+            @Html.LabelFor(m => m.Store.PhoneNumber, new { @class = "col-sm-2 col-form-label" })
             <div class="col-sm-5">
                 <div class="form-check">
-                    @Html.TextBoxFor(s => s.PhoneNumber, new { @class = "form-control" })
+                    @Html.TextBoxFor(s => s.Store.PhoneNumber, new { @class = "form-control" })
                 </div>
             </div>
         </div>
         <div class="form-group row">
-            @Html.LabelFor(m => m.Email, new { @class = "col-sm-2 col-form-label" })
+            @Html.LabelFor(m => m.Store.Email, new { @class = "col-sm-2 col-form-label" })
             <div class="col-sm-5">
                 <div class="form-check">
-                    @Html.TextBoxFor(s => s.Email, new { @class = "form-control" })
+                    @Html.TextBoxFor(s => s.Store.Email, new { @class = "form-control" })
                 </div>
             </div>
         </div>
         <div class="form-group row">
-            @Html.LabelFor(m => m.Active, new { @class = "col-sm-2 col-form-label" })
+            @Html.LabelFor(m => m.Store.Active, new { @class = "col-sm-2 col-form-label" })
             <div class="col-sm-5">
                 <div class="form-check">
-                    @Html.CheckBoxFor(m => m.Active, new { @class = "form-check-input", style = "margin: auto; position: inherit;" })
+                    @Html.CheckBoxFor(m => m.Store.Active, new { @class = "form-check-input", style = "margin: auto; position: inherit;" })
                 </div>
             </div>
         </div>
         <div class="store_detail">
             <table class="opening_hours">
 
-                @for (var index = 0; index < Model.OpeningHours.Count; index++)
+                @for (var index = 0; index < Model.Store.OpeningHours.Count; index++)
                 {
-                    var day = Model.OpeningHours[index];
+                    var day = Model.Store.OpeningHours[index];
                     <tr>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <label class="col-2 col-form-label"> @day.DayOfWeek.ToString().Substring(0, 3)</label>
 
-                            @Html.TextBoxFor(m => m.OpeningHours[index].OpeningTime, new { @type = "time", @class = "form-control" })
-                            @Html.HiddenFor(m => m.OpeningHours[index].DayOfWeek)
-                            @Html.TextBoxFor(m => m.OpeningHours[index].ClosingTime, new { @type = "time", @class = "form-control" })
+                            @Html.TextBoxFor(m => m.Store.OpeningHours[index].OpeningTime, new { @type = "time", @class = "form-control" })
+                            @Html.HiddenFor(m => m.Store.OpeningHours[index].DayOfWeek)
+                            @Html.TextBoxFor(m => m.Store.OpeningHours[index].ClosingTime, new { @type = "time", @class = "form-control" })
                         </div>
                     </tr>
                 }

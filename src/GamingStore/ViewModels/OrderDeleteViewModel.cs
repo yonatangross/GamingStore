@@ -3,8 +3,8 @@ using GamingStore.Models;
 
 namespace GamingStore.ViewModels
 {
-    public class OrderViewModel : ViewModelBase
+    public class OrderDeleteViewModel : ViewModelBase
     {
-        public List<Order> OrderList { get; set; }
+        public Order Order { get; set; }
     }
 }

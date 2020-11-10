@@ -28,13 +28,13 @@ namespace GamingStore.Controllers
             List<Order> listStoreContext = await storeContext.ToListAsync();
 
 
-            var orderViewModel = new OrderViewModel()
+            var orderIndexViewModel = new OrderIndexViewModel()
             {
                 OrderList = listStoreContext,
                 ItemsInCart = await CountItemsInCart()
             };
 
-            return View(orderViewModel);
+            return View(orderIndexViewModel);
         }
 
         public async Task<IActionResult> CheckOutIndex()
@@ -258,7 +258,8 @@ namespace GamingStore.Controllers
             {
                 Customers = await Context.Customers.Where(customer => !string.IsNullOrWhiteSpace(customer.UserName))
                     .Distinct().ToListAsync(),
-                Order = order
+                Order = order,
+                ItemsInCart = await CountItemsInCart(),
             };
 
             return View(viewModel);
@@ -301,7 +302,9 @@ namespace GamingStore.Controllers
             {
                 Customers = await Context.Customers.Where(customer => !string.IsNullOrWhiteSpace(customer.UserName))
                     .Distinct().ToListAsync(),
-                Order = order
+                Order = order,
+                ItemsInCart = await CountItemsInCart(),
+
             };
 
             return View(viewModel);
@@ -328,7 +331,13 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            return View(order);
+            var viewModel = new OrderDeleteViewModel()
+            {
+                Order = order,
+                ItemsInCart = await CountItemsInCart(),
+            };
+
+            return View(viewModel);
         }
 
         // POST: Orders/Delete/5

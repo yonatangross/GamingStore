@@ -28,9 +28,13 @@ namespace GamingStore.Controllers
         protected async Task<int> CountItemsInCart()
         {
             var user = await GetCurrentUserAsync();
-            var userCart = await Context.Carts.FirstOrDefaultAsync(cart => cart.CustomerId == user.Id);
 
-            return userCart?.Quantity ?? 0;
+            if (user == null)
+            {
+                return 0;
+            }
+
+            return await Context.Carts.CountAsync(cart => cart.CustomerId == user.Id);
         }
     }
 }

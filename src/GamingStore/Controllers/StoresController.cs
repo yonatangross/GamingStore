@@ -15,9 +15,11 @@ namespace GamingStore.Controllers
 {
     public class StoresController : BaseController
     {
-        public StoresController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager) : base(userManager, context, roleManager)
+        public StoresController(UserManager<Customer> userManager, StoreContext context,
+            RoleManager<IdentityRole> roleManager) : base(userManager, context, roleManager)
         {
         }
+
         // GET: Stores
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -31,7 +33,8 @@ namespace GamingStore.Controllers
             {
                 Stores = stores,
                 CitiesWithStores = uniqueCities.ToArray(),
-                OpenStores = openStores
+                OpenStores = openStores,
+                ItemsInCart = await CountItemsInCart()
             };
 
             return View(viewModel);
@@ -109,14 +112,25 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            return View(store);
+            var viewModel = new StoreDetailsViewModel()
+            {
+                Store = store,
+                ItemsInCart = await CountItemsInCart()
+            };
+
+            return View(viewModel);
         }
 
         // GET: Stores/Create
         [Authorize(Roles = "Admin")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var viewModel = new CreateStoreViewModel()
+            {
+                Store = null,
+                ItemsInCart = await CountItemsInCart()
+            };
+            return View(viewModel);
         }
 
         // POST: Stores/Create
@@ -128,9 +142,15 @@ namespace GamingStore.Controllers
         public async Task<IActionResult> Create([Bind("Id,Name,Address,PhoneNumber,Email,OpeningHours")]
             Store store)
         {
+            var viewModel = new CreateStoreViewModel()
+            {
+                Store = store,
+                ItemsInCart = await CountItemsInCart()
+            };
+
             if (!ModelState.IsValid)
             {
-                return View(store);
+                return View(viewModel);
             }
 
             Context.Add(store);
@@ -148,13 +168,18 @@ namespace GamingStore.Controllers
             }
 
             Store store = await Context.Stores.FindAsync(id);
+            var viewModel = new StoreDetailsViewModel()
+            {
+                Store = store,
+                ItemsInCart = await CountItemsInCart()
+            };
 
             if (store == null)
             {
                 return NotFound();
             }
 
-            return View(store);
+            return View(viewModel);
         }
 
         // POST: Stores/Edit/5
@@ -167,7 +192,7 @@ namespace GamingStore.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(store);
+                return View(new StoreDetailsViewModel {Store = store, ItemsInCart = await CountItemsInCart()});
             }
 
             try
@@ -198,13 +223,16 @@ namespace GamingStore.Controllers
             }
 
             Store store = await Context.Stores.FirstOrDefaultAsync(m => m.Id == id);
-
+            var viewModel = new StoreDetailsViewModel()
+            {
+                Store = store, ItemsInCart = await CountItemsInCart()
+            };
             if (store == null)
             {
                 return NotFound();
             }
 
-            return View(store);
+            return View(viewModel);
         }
 
         // POST: Stores/Delete/5
@@ -224,7 +252,5 @@ namespace GamingStore.Controllers
         {
             return Context.Stores.Any(e => e.Id == id);
         }
-
-
     }
 }

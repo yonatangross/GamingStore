@@ -61,20 +61,20 @@
                     {
                         <div class="row" style="padding: 2%">
                             <div class="col-3">
-                                <div class="image_selected"><img src="/@orderItem.Order.Item.Order.ImageUrl/1.jpg" alt="" width="60%"></div>
+                                <div class="image_selected"><img src="/@orderItem.Item.ImageUrl/1.jpg" alt="" width="60%"></div>
                             </div>
                             <div class="col-9">
-                                <div class="row">@orderItem.Order.ItemsCount x @orderItem.Order.Item.Order.Title</div>
+                                <div class="row">@orderItem.ItemsCount x @orderItem.Item.Title</div>
                                 @{
-                                    var price = orderItem.Order.Item.Order.Price;
-                                    var count = orderItem.Order.ItemsCount;
+                                    var price = orderItem.Item.Price;
+                                    var count = orderItem.ItemsCount;
                                     var totalItemCost = Math.Round(price * count, 2);
                                 }
                                 <div class="row">$@totalItemCost</div>
 
                             </div>
                         </div>
-                        if (Model.Order.OrderItems.Last().ItemId != orderItem.Order.ItemId)
+                        if (Model.Order.OrderItems.Last().ItemId != orderItem.ItemId)
                         {
                             <hr />
                         }
