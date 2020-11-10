@@ -4,12 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using GamingStore.Contracts;
 using GamingStore.Models;
-using GamingStore.Models.Relationships;
+using Microsoft.AspNetCore.Http;
 
 namespace GamingStore.ViewModels
 {
-    public class OrderDetailsViewModel : ViewModelBase
+    public class ListStoresViewModel : ViewModelBase
     {
-        public Order Order { get; set; }
+        public IEnumerable<Store> Stores { get; set; }
     }
 }

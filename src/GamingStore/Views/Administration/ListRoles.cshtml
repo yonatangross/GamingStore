@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@model IEnumerable<IdentityRole>
+@model GamingStore.ViewModels.ListRolesViewModel
 
 @{
     ViewBag.Title = "All Roles";
@@ -8,10 +8,10 @@
 
 <h1>All Roles</h1>
 
-@if (Model.Any())
+@if (Model.Roles.Any())
 {
 
-    foreach (var role in Model)
+    foreach (var role in Model.Roles)
     {
         <div class="card mb-3">
             <div class="card-header">

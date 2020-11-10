@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GamingStore.Models.Order>
+﻿@model GamingStore.ViewModels.OrderViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -14,22 +14,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Customer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Store)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.State)
+                @Html.DisplayNameFor(model => model.OrderList.First().Customer)
+            </th>                                   
+            <th>                                    
+                @Html.DisplayNameFor(model => model.OrderList.First().Store)
+            </th>                                   
+            <th>                                    
+                @Html.DisplayNameFor(model => model.OrderList.First().OrderDate)
+            </th>                                   
+            <th>                                    
+                @Html.DisplayNameFor(model => model.OrderList.First().State)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.OrderList) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Customer.Id)

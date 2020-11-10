@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GamingStore.Models.Store>
+﻿@model GamingStore.ViewModels.ListStoresViewModel
 
 @{
     ViewData["Title"] = "Admin Stores";
@@ -14,32 +14,32 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                @Html.DisplayNameFor(model => model.Stores.First().Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Stores.First().Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address)
+                @Html.DisplayNameFor(model => model.Stores.First().Address)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.Stores.First().Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Active)
+                @Html.DisplayNameFor(model => model.Stores.First().Active)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
+                @Html.DisplayNameFor(model => model.Stores.First().PhoneNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OpeningHours)
+                @Html.DisplayNameFor(model => model.Stores.First().OpeningHours)
             </th>
 
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (Store store in Model)
+        @foreach (Store store in Model.Stores)
         {
             <tr>
                 <td>

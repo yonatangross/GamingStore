@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Microsoft.CodeAnalysis.CSharp.Syntax
-@model IEnumerable<Customer>
+@model GamingStore.ViewModels.ListUsersViewModels
 
 @{
     ViewBag.Title = "All Users";
@@ -17,10 +17,10 @@
 </div>
 
 <div id="users">
-    @if (Model.Any())
+    @if (Model.Users.Any())
     {
         var userNum = 0;
-        foreach (var user in Model)
+        foreach (var user in Model.Users)
         {
             userNum++;
             var userNameString = "user" + userNum;@*adding user number to div*@
