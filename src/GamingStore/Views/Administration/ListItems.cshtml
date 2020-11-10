@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GamingStore.Models.Item>
+﻿@model GamingStore.ViewModels.ListItemsViewModel
 
 @{
     ViewData["Title"] = "Admin Items";
@@ -14,25 +14,25 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.Items.First().Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Manufacturer)
+                @Html.DisplayNameFor(model => model.Items.First().Manufacturer)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                @Html.DisplayNameFor(model => model.Items.First().Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Category)
+                @Html.DisplayNameFor(model => model.Items.First().Category)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PropertiesList)
+                @Html.DisplayNameFor(model => model.Items.First().PropertiesList)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (Item item in Model)
+        @foreach (Item item in Model.Items)
         {
             <tr>
                 <td>

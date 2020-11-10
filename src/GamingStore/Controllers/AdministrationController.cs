@@ -7,7 +7,6 @@ using GamingStore.Contracts;
 using GamingStore.Data;
 using GamingStore.Models;
 using GamingStore.Models.Relationships;
-using GamingStore.Services;
 using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -20,7 +19,8 @@ namespace GamingStore.Controllers
     [Authorize(Roles = "Admin")]
     public class AdministrationController : BaseController
     {
-        public AdministrationController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager) : base(userManager, context, roleManager)
+        public AdministrationController(UserManager<Customer> userManager, StoreContext context,
+            RoleManager<IdentityRole> roleManager) : base(userManager, context, roleManager)
         {
         }
 
@@ -42,7 +42,8 @@ namespace GamingStore.Controllers
                 Id = user.Id,
                 Email = user.Email,
                 UserName = user.UserName,
-                Roles = userRoles
+                Roles = userRoles,
+                ItemsInCart = await CountItemsInCart()
             };
 
             return View(model);
@@ -51,8 +52,6 @@ namespace GamingStore.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-
-         
             return View();
         }
 
@@ -60,8 +59,8 @@ namespace GamingStore.Controllers
         [HttpGet]
         public async Task<IActionResult> BarChart()
         {
-            var orders = await Context.Orders.Include(o => o.Payment).Include(o=>o.Store).ToListAsync();
-             CreateBarChartData(orders);
+            var orders = await Context.Orders.Include(o => o.Payment).Include(o => o.Store).ToListAsync();
+            CreateBarChartData(orders);
 
             return View("Statistics/BarChart");
         }
@@ -133,7 +132,8 @@ namespace GamingStore.Controllers
                     var itemsCost = orderItem.ItemsCount * orderItem.Item.Price;
                     if (purchaseByCategoryList.Any(d => d.Name == categoryName))
                     {
-                        PieChartFormat pieChartFormat = purchaseByCategoryList.FirstOrDefault(d => d.Name == categoryName);
+                        PieChartFormat pieChartFormat =
+                            purchaseByCategoryList.FirstOrDefault(d => d.Name == categoryName);
                         if (pieChartFormat != null)
                         {
                             pieChartFormat.Value += itemsCost;
@@ -150,7 +150,7 @@ namespace GamingStore.Controllers
                 }
             }
 
-            purchaseByCategoryList.Sort((a,b)=>a.Value.CompareTo(b.Value));
+            purchaseByCategoryList.Sort((a, b) => a.Value.CompareTo(b.Value));
 
             var serializeObject = JsonConvert.SerializeObject(purchaseByCategoryList, Formatting.Indented);
 
@@ -209,6 +209,7 @@ namespace GamingStore.Controllers
 
             user.Email = model.Email;
             user.UserName = model.UserName;
+            model.ItemsInCart = await CountItemsInCart();
             IdentityResult result = await UserManager.UpdateAsync(user);
 
             if (result.Succeeded)
@@ -225,10 +226,49 @@ namespace GamingStore.Controllers
         }
 
         [HttpGet]
-        public IActionResult ListRoles()
+        public async Task<IActionResult> ListRoles()
         {
-            var roles = RoleManager.Roles;
-            return View(roles);
+            IQueryable<IdentityRole> roles = RoleManager.Roles;
+
+            var viewModel = new ListRolesViewModel()
+            {
+                Roles = roles,
+                ItemsInCart = await CountItemsInCart()
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditRole(string id)
+        {
+            IdentityRole role = await RoleManager.FindByIdAsync(id);
+
+            if (role == null)
+            {
+                return Error(id, "role");
+            }
+
+            var model = new EditRoleViewModel
+            {
+                Id = role.Id,
+                RoleName = role.Name,
+                ItemsInCart = await CountItemsInCart()
+            };
+
+            // Retrieve all the Users
+            foreach (Customer user in UserManager.Users)
+            {
+                /*If the user is in this role, add the username to
+                Users property of EditRoleViewModel. This model
+                object is then passed to the view for display*/
+                if (await UserManager.IsInRoleAsync(user, role.Name))
+                {
+                    model.Users.Add(user.UserName);
+                }
+            }
+
+            return View(model);
         }
 
         public JsonResult ListUsersBySearch(string searchUserString)
@@ -246,66 +286,53 @@ namespace GamingStore.Controllers
 
         public async Task<IActionResult> ListUsers()
         {
-            var users = UserManager.Users;
+            var users = await UserManager.Users.ToListAsync();
 
-            Console.WriteLine("users was loaded from ListUsers");
-            return View(await users.ToListAsync());
-        }
-
-        /// <summary>
-        /// Role ID is passed from the URL to the action
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public async Task<IActionResult> EditRole(string id)
-        {
-            // Find the role by Role ID
-            IdentityRole role = await RoleManager.FindByIdAsync(id);
-
-            if (role == null)
+            var viewModel = new ListUsersViewModels()
             {
-                return Error(id, "role");
-            }
-
-            var model = new EditRoleViewModel
-            {
-                Id = role.Id,
-                RoleName = role.Name
+                Users = users,
+                ItemsInCart = await CountItemsInCart()
             };
-
-            // Retrieve all the Users
-            foreach (Customer user in UserManager.Users)
-            {
-                // If the user is in this role, add the username to
-                // Users property of EditRoleViewModel. This model
-                // object is then passed to the view for display
-                if (await UserManager.IsInRoleAsync(user, role.Name))
-                {
-                    model.Users.Add(user.UserName);
-                }
-            }
-
-            return View(model);
+            return View(viewModel);
         }
+
 
         [HttpGet]
         public async Task<IActionResult> ListStores()
         {
-            var listStoresModel = await Context.Stores.Include(s => s.Orders).ToListAsync();
+            List<Store> stores = await Context.Stores.Include(s => s.Orders).ToListAsync();
+            var viewModel = new ListStoresViewModel()
+            {
+                Stores = stores,
+                ItemsInCart = await CountItemsInCart()
+            };
 
-            return View(listStoresModel);
+            return View(viewModel);
         }
 
-            [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> ListItems()
         {
-            return View(await Context.Items.ToListAsync());
+            List<Item> items = await Context.Items.ToListAsync();
+            var viewModel = new ListItemsViewModel()
+            {
+                Items = items,
+                ItemsInCart = await CountItemsInCart()
+            };
+            return View(viewModel);
         }
 
         [HttpGet]
         public async Task<IActionResult> ListOrders()
         {
+            List<Order> orders = await Context.Orders.Include(order => order.Customer).Include(order => order.Payment)
+                .ToListAsync();
+
+            var viewModel = new ListOrdersViewModel()
+            {
+                Orders = orders,
+                ItemsInCart = await CountItemsInCart()
+            };
             return View(await Context.Orders.Include(order => order.Customer).Include(order => order.Payment)
                 .ToListAsync());
         }
@@ -336,6 +363,8 @@ namespace GamingStore.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
 
+            model.ItemsInCart = await CountItemsInCart();
+
             return View(model);
         }
 
@@ -351,7 +380,10 @@ namespace GamingStore.Controllers
                 return Error(roleId, "role");
             }
 
-            var model = new List<UserRoleViewModel>();
+            var viewModel = new ListUserRoleViewModel()
+            {
+                ItemsInCart = await CountItemsInCart()
+            };
 
             foreach (Customer user in UserManager.Users)
             {
@@ -360,13 +392,14 @@ namespace GamingStore.Controllers
                     UserId = user.Id,
                     UserName = user.Email,
                     Email = user.Email,
-                    IsSelected = await UserManager.IsInRoleAsync(user, role.Name)
+                    IsSelected = await UserManager.IsInRoleAsync(user, role.Name),
+                    ItemsInCart = await CountItemsInCart()
                 };
 
-                model.Add(userRoleViewModel);
+                viewModel.List.Add(userRoleViewModel);
             }
 
-            return View(model);
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -447,7 +480,5 @@ namespace GamingStore.Controllers
             ViewBag.ErrorMessage = $"{type} with Id = {id} cannot be found";
             return View("NotFound");
         }
-
-      
     }
 }

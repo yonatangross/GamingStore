@@ -1,5 +1,5 @@
 ﻿@using GamingStore.Contracts
-@model List<GamingStore.Models.Item>
+@model GamingStore.ViewModels.HomeViewModel
 
 @{
     ViewData["Title"] = "Home Page";
@@ -63,7 +63,7 @@
             </div>
         </div>
     </div>
-    @if (Model != null && Model.Any())
+    @if (Model != null && Model.Items.Any())
     {
         <div class="best_sellers" style="border-radius: 2%; margin-top: auto ;margin-bottom:5%">
             <div class="container">
@@ -90,7 +90,7 @@
                                 <div class="col-7">
                                     <div class="row">
                                         @{
-                                            var a = Model[i].Title.Split(' ');
+                                            var a = Model.Items[i].Title.Split(' ');
                                             var counter = 0;
                                             var title = string.Empty;
                                             foreach (var tfii in a)
@@ -103,16 +103,16 @@
                                                 }
                                             }
                                         }
-                                        <div class="advert_title" style="margin-left:10%"><a href="/Items/Details?id=@Model[i].Id">@title</a></div>
+                                        <div class="advert_title" style="margin-left:10%"><a href="/Items/Details?id=@Model.Items[i].Id">@title</a></div>
                                     </div>
                                     <hr />
                                     <div class="row">
-                                        <div class="advert_price" style="margin:auto;font-size:20px">$@Model[i].Price</div>
+                                        <div class="advert_price" style="margin:auto;font-size:20px">$@Model.Items[i].Price</div>
                                         <div></div>
                                     </div>
                                 </div>
                                 <div class="col-5" style="margin:auto">
-                                    <div class="advert_image" style="max-height: 80%; max-width: 100%; margin: auto;"> <a href="/Items/Details?id=@Model[i].Id"> <img src="/@Model[i].ImageUrl/1.jpg" alt=""> </a></div>
+                                    <div class="advert_image" style="max-height: 80%; max-width: 100%; margin: auto;"> <a href="/Items/Details?id=@Model.Items[i].Id"> <img src="/@Model.Items[i].ImageUrl/1.jpg" alt=""> </a></div>
                                 </div>
                             </div>
 
@@ -131,7 +131,7 @@
                                 <div class="col-7">
                                     <div class="row">
                                         @{
-                                            var a = Model[i].Title.Split(' ');
+                                            var a = Model.Items[i].Title.Split(' ');
                                             var counter = 0;
                                             var title = string.Empty;
                                             foreach (var tfii in a)
@@ -144,16 +144,16 @@
                                                 }
                                             }
                                         }
-                                        <div class="advert_title" style="margin-left:10%"><a href="/Items/Details?id=@Model[i].Id">@title</a></div>
+                                        <div class="advert_title" style="margin-left:10%"><a href="/Items/Details?id=@Model.Items[i].Id">@title</a></div>
                                     </div>
                                     <hr />
                                     <div class="row">
-                                        <div class="advert_price" style="margin: auto;font-size:20px">$@Model[i].Price</div>
+                                        <div class="advert_price" style="margin: auto;font-size:20px">$@Model.Items[i].Price</div>
                                         <div></div>
                                     </div>
                                 </div>
                                 <div class="col-5" style="margin:auto">
-                                    <div class="advert_image" style="max-height: 80%; max-width: 100%; margin: auto;"> <a href="/Items/Details?id=@Model[i].Id"> <img src="/@Model[i].ImageUrl/1.jpg" alt=""> </a></div>
+                                    <div class="advert_image" style="max-height: 80%; max-width: 100%; margin: auto;"> <a href="/Items/Details?id=@Model.Items[i].Id"> <img src="/@Model.Items[i].ImageUrl/1.jpg" alt=""> </a></div>
                                 </div>
                             </div>
 

@@ -36,9 +36,15 @@ namespace GamingStore.Controllers
             List<ItemsCustomers> itemsCustomersList = Context.RelatedItems.Select(item => new ItemsCustomers() { CustomerNumber = item.CustomerNumber, ItemId = item.ItemId }).ToList();
             Customer user = await GetCurrentUserAsync();
 
+            var viewModel = new HomeViewModel()
+            {
+                Items = new List<Item>(),
+                ItemsInCart = await CountItemsInCart()
+            };
+
             if (user == null)
             {
-                return View();
+                return View(viewModel);
             }
 
             var mlRequest = new Request()
@@ -55,24 +61,29 @@ namespace GamingStore.Controllers
                 IQueryable<Item> items = Context.Items.Take(int.MaxValue);
                 List<Item> itemsList = (from keyValuePair in topItems from item in items where keyValuePair.Key == item.Id select item).ToList();
 
-                return View(itemsList);
+                viewModel.Items = itemsList;
+
+                return View(viewModel);
             }
             catch
             {
                 //ignored
             }
 
-            return View();
+            return View(viewModel);
         }
 
         public IActionResult ContactUs()
         {
+            //todo: change to viewmodel but move first to mail service
             return View();
         }
 
         [HttpPost]
         public async Task<ActionResult> ContactUs(Mail form)
         {
+            //todo: change to viewmodel but move first to mail service
+
             if (!ModelState.IsValid)
             {
                 return View();

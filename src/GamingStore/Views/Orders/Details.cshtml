@@ -1,5 +1,4 @@
-﻿@model GamingStore.Models.Order
-
+﻿@model GamingStore.ViewModels.OrderDetailsViewModel
 @{
     ViewData["Title"] = "Order Details";
     Layout = "~/Views/Shared/_NewLayout.cshtml";
@@ -8,18 +7,18 @@
     <h1>Order Details</h1>
 
     <div>
-        <p>Ordered on @Model.OrderDate<span class="text-secondary" style="padding:2%;">|</span>Order# @Model.Id</p>
+        <p>Ordered on @Model.Order.OrderDate<span class="text-secondary" style="padding:2%;">|</span>Order# @Model.Order.Id</p>
         <div class="card">
             <div class="card-body row">
                 <div class="col-sm-4">
                     <h5><strong>Shipping Address</strong></h5>
                     <ul>
-                        @if (Model.ShippingAddress != null)
+                        @if (Model.Order.ShippingAddress != null)
                         {
-                            <li>@Model.ShippingAddress.FullName</li>
-                            <li>@Model.ShippingAddress.Address1</li>
-                            <li>@Model.ShippingAddress.City, @Model.ShippingAddress.PostalCode</li>
-                            <li>@Model.ShippingAddress.Country</li>
+                            <li>@Model.Order.ShippingAddress.FullName</li>
+                            <li>@Model.Order.ShippingAddress.Address1</li>
+                            <li>@Model.Order.ShippingAddress.City, @Model.Order.ShippingAddress.PostalCode</li>
+                            <li>@Model.Order.ShippingAddress.Country</li>
                         }
                         else
                         {
@@ -31,22 +30,22 @@
 
                 <div class="col-sm-4">
                     <h5><strong>Payment Method</strong></h5>
-                    <span>@Html.DisplayFor(m => m.Payment.PaymentMethod)</span>
+                    <span>@Html.DisplayFor(m => m.Order.Payment.PaymentMethod)</span>
                 </div>
 
                 <div class="col-sm-4">
                     <h5><strong>Order Summary</strong></h5>
                     <div class="row">
                         <div class="col-sm-6">Item(s) Subtotal:</div>
-                        <div class="col-sm-6">@Html.DisplayFor(m => m.Payment.ItemsCost)</div>
+                        <div class="col-sm-6">@Html.DisplayFor(m => m.Order.Payment.ItemsCost)</div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">Shipping:</div>
-                        <div class="col-sm-6">@Html.DisplayFor(m => m.Payment.ShippingCost)</div>
+                        <div class="col-sm-6">@Html.DisplayFor(m => m.Order.Payment.ShippingCost)</div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">Grand Total:</div>
-                        <div class="col-sm-6">@Html.DisplayFor(m => m.Payment.Total)</div>
+                        <div class="col-sm-6">@Html.DisplayFor(m => m.Order.Payment.Total)</div>
                     </div>
                 </div>
             </div>
@@ -56,26 +55,26 @@
             <div class="card-body row">
                 <div class="col-8">
                     <div class="container">
-                        <div><h4><strong>@Model.State</strong></h4></div>
+                        <div><h4><strong>@Model.Order.State</strong></h4></div>
                     </div>
-                    @foreach (var orderItem in @Model.OrderItems)
+                    @foreach (var orderItem in @Model.Order.OrderItems)
                     {
                         <div class="row" style="padding: 2%">
                             <div class="col-3">
-                                <div class="image_selected"><img src="/@orderItem.Item.ImageUrl/1.jpg" alt="" width="60%"></div>
+                                <div class="image_selected"><img src="/@orderItem.Order.Item.Order.ImageUrl/1.jpg" alt="" width="60%"></div>
                             </div>
                             <div class="col-9">
-                                <div class="row">@orderItem.ItemsCount x @orderItem.Item.Title</div>
+                                <div class="row">@orderItem.Order.ItemsCount x @orderItem.Order.Item.Order.Title</div>
                                 @{
-                                    var price = orderItem.Item.Price;
-                                    var count = orderItem.ItemsCount;
+                                    var price = orderItem.Order.Item.Order.Price;
+                                    var count = orderItem.Order.ItemsCount;
                                     var totalItemCost = Math.Round(price * count, 2);
                                 }
                                 <div class="row">$@totalItemCost</div>
 
                             </div>
                         </div>
-                        if (Model.OrderItems.Last().ItemId != orderItem.ItemId)
+                        if (Model.Order.OrderItems.Last().ItemId != orderItem.Order.ItemId)
                         {
                             <hr />
                         }

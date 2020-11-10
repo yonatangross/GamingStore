@@ -16,14 +16,25 @@ namespace GamingStore.Controllers
 {
     public class OrdersController : BaseController
     {
-        public OrdersController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager) : base(userManager, context, roleManager)
+        public OrdersController(UserManager<Customer> userManager, StoreContext context,
+            RoleManager<IdentityRole> roleManager) : base(userManager, context, roleManager)
         {
         }
+
         // GET: Orders
         public async Task<IActionResult> Index()
         {
             var storeContext = Context.Orders.Include(o => o.Customer).Include(o => o.Store);
-            return View(await storeContext.ToListAsync());
+            List<Order> listStoreContext = await storeContext.ToListAsync();
+
+
+            var orderViewModel = new OrderViewModel()
+            {
+                OrderList = listStoreContext,
+                ItemsInCart = await CountItemsInCart()
+            };
+
+            return View(orderViewModel);
         }
 
         public async Task<IActionResult> CheckOutIndex()
@@ -49,15 +60,17 @@ namespace GamingStore.Controllers
                         ItemsCost = itemsCost,
                         Total = totalCost
                     },
+                    ItemsInCart = await CountItemsInCart()
                 };
 
                 return View(viewModel);
             }
             catch (Exception e)
             {
+                // ignored
             }
 
-            return View();
+            return View(new CreateOrderViewModel(){ItemsInCart =await  CountItemsInCart()});
         }
 
         private async Task<List<Cart>> GetItemsInCart(Customer customer)
@@ -188,7 +201,8 @@ namespace GamingStore.Controllers
             {
                 ItemsCount = items,
                 Customer = customer,
-                ShippingAddress = order.ShippingAddress
+                ShippingAddress = order.ShippingAddress,
+                ItemsInCart = await CountItemsInCart()
             };
 
             return View(viewModel);
@@ -214,7 +228,13 @@ namespace GamingStore.Controllers
             order.Customer = await GetCurrentUserAsync();
             order.Payment = await Context.Payments.FirstOrDefaultAsync(payment => payment.Id == order.PaymentId);
 
-            return View(order);
+            var viewModel = new OrderDetailsViewModel()
+            {
+                ItemsInCart = await CountItemsInCart(),
+                Order = order
+            };
+
+            return View(viewModel);
         }
 
         // GET: Items/Edit/5
@@ -322,7 +342,5 @@ namespace GamingStore.Controllers
 
             return RedirectToAction("ListOrders", "Administration");
         }
-
-       
     }
 }

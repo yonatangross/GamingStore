@@ -331,12 +331,17 @@ namespace GamingStore.Controllers
             }
 
             var item = await Context.Items.FirstOrDefaultAsync(m => m.Id == id);
+            var viewModel = new ItemViewModel()
+            {
+                Item = item,
+                ItemsInCart = await CountItemsInCart()
+            };
             if (item == null)
             {
                 return NotFound();
             }
 
-            return View(item);
+            return View(viewModel);
         }
 
         // POST: Items/Delete/5

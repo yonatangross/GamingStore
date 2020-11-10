@@ -97,7 +97,7 @@
                                     <div class="d-flex flex-row align-items-center justify-content-end">
                                         <div class="cart_icon">
                                             <img src="~/images/cart.png" alt="">
-                                            <div class="cart_count" >
+                                            <div class="cart_count">
                                                 <span id="cart_items_count">@Model?.ItemsInCart</span>
                                             </div>
                                         </div>
@@ -283,28 +283,27 @@
             </div>
         </footer>
 
-
-
-
-        <script src="~/js/jquery-3.3.1.min.js"></script>
-        <script src="~/js/popper.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="~/lib/greensock/TweenMax.min.js"></script>
-        <script src="~/lib/greensock/TimelineMax.min.js"></script>
-        <script src="~/lib/scrollmagic/ScrollMagic.min.js"></script>
-        <script src="~/lib/greensock/animation.gsap.min.js"></script>
-        <script src="~/lib/greensock/ScrollToPlugin.min.js"></script>
-        <script src="~/lib/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-        <script src="~/lib/slick-1.8.0/slick.js"></script>
-        <script src="~/lib/easing/easing.js"></script>
-        <script src="~/js/custom.js"></script>
-        <script src="~/js/product_custom.js"></script>
-        <script src="~/js/cart_custom.js"></script>
-        <script src="~/lib/notifyjs/notify.min.js"></script>
-        <script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>
-
-        @RenderSection("Scripts", required: false)
     </div>
+
+
+
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<script src="~/js/popper.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/lib/greensock/TweenMax.min.js"></script>
+<script src="~/lib/greensock/TimelineMax.min.js"></script>
+<script src="~/lib/scrollmagic/ScrollMagic.min.js"></script>
+<script src="~/lib/greensock/animation.gsap.min.js"></script>
+<script src="~/lib/greensock/ScrollToPlugin.min.js"></script>
+<script src="~/lib/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="~/lib/slick-1.8.0/slick.js"></script>
+<script src="~/lib/easing/easing.js"></script>
+<script src="~/js/custom.js"></script>
+<script src="~/js/product_custom.js"></script>
+<script src="~/js/cart_custom.js"></script>
+<script src="~/lib/notifyjs/notify.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 
 </html>
