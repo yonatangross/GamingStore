@@ -8,7 +8,7 @@ using GamingStore.Models.Relationships;
 
 namespace GamingStore.ViewModels
 {
-    public class OrderDetailsViewModel
+    public class OrderDetailsViewModel : ViewModelBase
     {
         public DateTime OrderDate { get; set; }
 

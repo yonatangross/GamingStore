@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace GamingStore.ViewModels
 {
-    public class StoresCitiesViewModel
+    public class StoresCitiesViewModel : ViewModelBase
     {
         public IEnumerable<Store> Stores { get; set; }
 

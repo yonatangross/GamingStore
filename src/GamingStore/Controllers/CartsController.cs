@@ -16,30 +16,22 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace GamingStore.Controllers
 {
     [Route("cart")]
-    public class CartsController : Controller
+    public class CartsController : BaseController
     {
-        private readonly UserManager<Customer> _userManager;
-        private readonly StoreContext _context;
-
-        public CartsController(StoreContext context, UserManager<Customer> userManager)
+        public CartsController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager) : base(userManager, context, roleManager)
         {
-            _context = context;
-            _userManager = userManager;
         }
-
-        private Task<Customer> GetCurrentUserAsync() => _userManager.GetUserAsync(User);
-
         [Authorize]
         public async Task<IActionResult> Index()
         {
             try
             {
                 Customer customer = await GetCurrentUserAsync();
-                IQueryable<Cart> itemsInCart = _context.Carts.Where(c => c.CustomerId == customer.Id);
+                IQueryable<Cart> itemsInCart = Context.Carts.Where(c => c.CustomerId == customer.Id);
 
                 foreach (Cart cartItem in itemsInCart)
                 {
-                    Item item = _context.Items.First(i => i.Id == cartItem.ItemId);
+                    Item item = Context.Items.First(i => i.Id == cartItem.ItemId);
                     cartItem.Item = item;
                 }
 
@@ -56,7 +48,8 @@ namespace GamingStore.Controllers
                     Payment = new Payment
                     {
                         ItemsCost = itemsPrice
-                    }
+                    },
+                    ItemsInCart = itemsInCart.Count()
                 };
 
                 return View(viewModel);
@@ -65,7 +58,7 @@ namespace GamingStore.Controllers
             catch(Exception e)
             {
                 //no items in cart
-                return View();
+                return View(new CartViewModel {ItemsInCart = 0});
             }
         }
 
@@ -74,11 +67,13 @@ namespace GamingStore.Controllers
         public async Task<IActionResult> Delete()
         {
             Customer customer = await GetCurrentUserAsync();
-            IQueryable<Cart> cart = _context.Carts.Where(c => c.CustomerId == customer.Id);
-            _context.Carts.RemoveRange(cart);
-            await _context.SaveChangesAsync();
+            IQueryable<Cart> cart = Context.Carts.Where(c => c.CustomerId == customer.Id);
+            Context.Carts.RemoveRange(cart);
+            await Context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
+
+       
     }
 }

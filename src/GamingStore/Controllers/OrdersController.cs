@@ -14,23 +14,15 @@ using Microsoft.AspNetCore.Identity;
 
 namespace GamingStore.Controllers
 {
-    public class OrdersController : Controller
+    public class OrdersController : BaseController
     {
-        private readonly StoreContext _context;
-        private readonly UserManager<Customer> _userManager;
-
-        public OrdersController(StoreContext context, UserManager<Customer> userManager)
+        public OrdersController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager) : base(userManager, context, roleManager)
         {
-            _context = context;
-            _userManager = userManager;
         }
-
-        private Task<Customer> GetCurrentUserAsync() => _userManager.GetUserAsync(User);
-
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var storeContext = _context.Orders.Include(o => o.Customer).Include(o => o.Store);
+            var storeContext = Context.Orders.Include(o => o.Customer).Include(o => o.Store);
             return View(await storeContext.ToListAsync());
         }
 
@@ -70,11 +62,11 @@ namespace GamingStore.Controllers
 
         private async Task<List<Cart>> GetItemsInCart(Customer customer)
         {
-            List<Cart> itemsInCart = await _context.Carts.Where(c => c.CustomerId == customer.Id).ToListAsync();
+            List<Cart> itemsInCart = await Context.Carts.Where(c => c.CustomerId == customer.Id).ToListAsync();
 
             foreach (Cart cartItem in itemsInCart)
             {
-                Item item = _context.Items.First(i => i.Id == cartItem.ItemId);
+                Item item = Context.Items.First(i => i.Id == cartItem.ItemId);
                 cartItem.Item = item;
             }
 
@@ -153,11 +145,11 @@ namespace GamingStore.Controllers
             }*/
 
             //add order to db
-            _context.Add(order);
-            await _context.SaveChangesAsync();
+            Context.Add(order);
+            await Context.SaveChangesAsync();
 
             //clear cart
-            IQueryable<Cart> carts = _context.Carts.Where(c => c.CustomerId == customer.Id);
+            IQueryable<Cart> carts = Context.Carts.Where(c => c.CustomerId == customer.Id);
 
             var items = 0;
 
@@ -166,8 +158,8 @@ namespace GamingStore.Controllers
                 items += itemInCart.Quantity;
             }
 
-            _context.Carts.RemoveRange(carts);
-            await _context.SaveChangesAsync();
+            Context.Carts.RemoveRange(carts);
+            await Context.SaveChangesAsync();
 
             return RedirectToAction("ThankYouIndex", new {id = order.Id, items});
         }
@@ -175,12 +167,12 @@ namespace GamingStore.Controllers
         public async Task<IActionResult> ThankYouIndex(string id, int items)
         {
             Customer customer = await GetCurrentUserAsync();
-            List<Cart> carts = await _context.Carts.Where(c => c.CustomerId == customer.Id).ToListAsync();
+            List<Cart> carts = await Context.Carts.Where(c => c.CustomerId == customer.Id).ToListAsync();
             Order order = null;
 
             try
             {
-                order = _context.Orders.Include(o => o.Customer).First(o => o.Id == id);
+                order = Context.Orders.Include(o => o.Customer).First(o => o.Id == id);
             }
             catch
             {
@@ -211,7 +203,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            Order order = await _context.Orders.Include(x => x.OrderItems).ThenInclude(y => y.Item)
+            Order order = await Context.Orders.Include(x => x.OrderItems).ThenInclude(y => y.Item)
                 .FirstOrDefaultAsync(o => o.Id == id);
 
             if (order == null)
@@ -220,7 +212,7 @@ namespace GamingStore.Controllers
             }
 
             order.Customer = await GetCurrentUserAsync();
-            order.Payment = await _context.Payments.FirstOrDefaultAsync(payment => payment.Id == order.PaymentId);
+            order.Payment = await Context.Payments.FirstOrDefaultAsync(payment => payment.Id == order.PaymentId);
 
             return View(order);
         }
@@ -235,7 +227,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            Order order = await _context.Orders.Include(o => o.Payment).FirstOrDefaultAsync(o => o.Id == id);
+            Order order = await Context.Orders.Include(o => o.Payment).FirstOrDefaultAsync(o => o.Id == id);
 
             if (order == null)
             {
@@ -244,7 +236,7 @@ namespace GamingStore.Controllers
 
             var viewModel = new EditOrdersViewModel
             {
-                Customers = await _context.Customers.Where(customer => !string.IsNullOrWhiteSpace(customer.UserName))
+                Customers = await Context.Customers.Where(customer => !string.IsNullOrWhiteSpace(customer.UserName))
                     .Distinct().ToListAsync(),
                 Order = order
             };
@@ -260,7 +252,7 @@ namespace GamingStore.Controllers
             {
                 try
                 {
-                    Order orderOnDb = await _context.Orders.Include(o => o.Payment)
+                    Order orderOnDb = await Context.Orders.Include(o => o.Payment)
                         .FirstOrDefaultAsync(o => o.Id == order.Id);
                     orderOnDb.Payment.Paid = order.Payment.Paid;
                     orderOnDb.Payment.PaymentMethod = order.Payment.PaymentMethod;
@@ -269,8 +261,8 @@ namespace GamingStore.Controllers
                     orderOnDb.Payment.Total = order.Payment.Total;
                     orderOnDb.State = order.State;
 
-                    _context.Update(orderOnDb);
-                    await _context.SaveChangesAsync();
+                    Context.Update(orderOnDb);
+                    await Context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -287,7 +279,7 @@ namespace GamingStore.Controllers
 
             var viewModel = new EditOrdersViewModel
             {
-                Customers = await _context.Customers.Where(customer => !string.IsNullOrWhiteSpace(customer.UserName))
+                Customers = await Context.Customers.Where(customer => !string.IsNullOrWhiteSpace(customer.UserName))
                     .Distinct().ToListAsync(),
                 Order = order
             };
@@ -297,7 +289,7 @@ namespace GamingStore.Controllers
 
         private async Task<bool> OrderExists(string id)
         {
-            return await _context.Orders.AnyAsync(e => e.Id == id);
+            return await Context.Orders.AnyAsync(e => e.Id == id);
         }
 
         // GET: Orders/Delete/5
@@ -309,7 +301,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            Order order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
+            Order order = await Context.Orders.FirstOrDefaultAsync(m => m.Id == id);
 
             if (order == null)
             {
@@ -324,11 +316,13 @@ namespace GamingStore.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            Order order = await _context.Orders.FindAsync(id);
-            _context.Orders.Remove(order);
-            await _context.SaveChangesAsync();
+            Order order = await Context.Orders.FindAsync(id);
+            Context.Orders.Remove(order);
+            await Context.SaveChangesAsync();
 
             return RedirectToAction("ListOrders", "Administration");
         }
+
+       
     }
 }

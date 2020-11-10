@@ -6,10 +6,10 @@ using GamingStore.Models;
 
 namespace GamingStore.ViewModels
 {
-    public class EditOrdersViewModel : ViewModelBase
+    public abstract class ViewModelBase
     {
-        public List<Customer> Customers { get; set; }
+        public int? ItemsInCart { get; set; } = null;
 
-        public Order Order { get; set; }
+
     }
 }

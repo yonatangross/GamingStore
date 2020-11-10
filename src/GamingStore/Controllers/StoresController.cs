@@ -9,23 +9,20 @@ using GamingStore.Data;
 using GamingStore.Models;
 using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace GamingStore.Controllers
 {
-    public class StoresController : Controller
+    public class StoresController : BaseController
     {
-        private readonly StoreContext _context;
-
-        public StoresController(StoreContext context)
+        public StoresController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager) : base(userManager, context, roleManager)
         {
-            _context = context;
         }
-
         // GET: Stores
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var stores = await _context.Stores.ToListAsync();
+            var stores = await Context.Stores.ToListAsync();
             var uniqueCities = GetUniqueCities(stores);
             var openStores = GetOpenStores(stores);
 
@@ -51,7 +48,7 @@ namespace GamingStore.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(StoresCitiesViewModel received)
         {
-            var stores = await _context.Stores.ToListAsync();
+            var stores = await Context.Stores.ToListAsync();
             var uniqueCities = GetUniqueCities(stores);
 
             // get open stores
@@ -81,6 +78,7 @@ namespace GamingStore.Controllers
                 Name = received.Name,
                 City = received.City,
                 IsOpen = received.IsOpen,
+                ItemsInCart = await CountItemsInCart()
             };
 
             return View(viewModel);
@@ -105,7 +103,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            Store store = await _context.Stores.FirstOrDefaultAsync(m => m.Id == id);
+            Store store = await Context.Stores.FirstOrDefaultAsync(m => m.Id == id);
             if (store == null)
             {
                 return NotFound();
@@ -135,8 +133,8 @@ namespace GamingStore.Controllers
                 return View(store);
             }
 
-            _context.Add(store);
-            await _context.SaveChangesAsync();
+            Context.Add(store);
+            await Context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
@@ -149,7 +147,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            Store store = await _context.Stores.FindAsync(id);
+            Store store = await Context.Stores.FindAsync(id);
 
             if (store == null)
             {
@@ -174,8 +172,8 @@ namespace GamingStore.Controllers
 
             try
             {
-                _context.Update(store);
-                await _context.SaveChangesAsync();
+                Context.Update(store);
+                await Context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -199,7 +197,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            Store store = await _context.Stores.FirstOrDefaultAsync(m => m.Id == id);
+            Store store = await Context.Stores.FirstOrDefaultAsync(m => m.Id == id);
 
             if (store == null)
             {
@@ -215,16 +213,18 @@ namespace GamingStore.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            Store store = await _context.Stores.FindAsync(id);
-            _context.Stores.Remove(store);
-            await _context.SaveChangesAsync();
+            Store store = await Context.Stores.FindAsync(id);
+            Context.Stores.Remove(store);
+            await Context.SaveChangesAsync();
 
             return RedirectToAction("ListStores", "Administration");
         }
 
         private bool StoreExists(int id)
         {
-            return _context.Stores.Any(e => e.Id == id);
+            return Context.Stores.Any(e => e.Id == id);
         }
+
+
     }
 }

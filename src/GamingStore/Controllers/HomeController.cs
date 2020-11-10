@@ -14,30 +14,26 @@ using Microsoft.AspNetCore.Mvc;
 using GamingStore.Models;
 using GamingStore.Services.Email;
 using GamingStore.Services.Email.Interfaces;
+using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace GamingStore.Controllers
 {
     [AllowAnonymous]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly StoreContext _context;
         private readonly IEmailSender _emailSender;
-        private readonly UserManager<Customer> _userManager;
 
-        private Task<Customer> GetCurrentUserAsync() => _userManager.GetUserAsync(User);
-
-        public HomeController(IEmailSender emailSender, StoreContext context, UserManager<Customer> userManager)
+        public HomeController(IEmailSender emailSender, UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager) : base( userManager,  context, roleManager)
         {
             _emailSender = emailSender;
-            _context = context;
-            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
         {
-            List<ItemsCustomers> itemsCustomersList = _context.RelatedItems.Select(item => new ItemsCustomers() { CustomerNumber = item.CustomerNumber, ItemId = item.ItemId }).ToList();
+            List<ItemsCustomers> itemsCustomersList = Context.RelatedItems.Select(item => new ItemsCustomers() { CustomerNumber = item.CustomerNumber, ItemId = item.ItemId }).ToList();
             Customer user = await GetCurrentUserAsync();
 
             if (user == null)
@@ -49,14 +45,14 @@ namespace GamingStore.Controllers
             {
                 ItemCustomersList = itemsCustomersList,
                 CustomerNumber = user.CustomerNumber,
-                AllItemsIds = _context.Items.Select(i => i.Id).Distinct().ToList(),
+                AllItemsIds = Context.Items.Select(i => i.Id).Distinct().ToList(),
             };
 
             try
             {
                 Dictionary<int, double> itemsScores = await MachineLearning.ML.Run(mlRequest);
                 IEnumerable<KeyValuePair<int, double>> topItems = itemsScores.OrderByDescending(pair => pair.Value).Take(6);
-                IQueryable<Item> items = _context.Items.Take(int.MaxValue);
+                IQueryable<Item> items = Context.Items.Take(int.MaxValue);
                 List<Item> itemsList = (from keyValuePair in topItems from item in items where keyValuePair.Key == item.Id select item).ToList();
 
                 return View(itemsList);

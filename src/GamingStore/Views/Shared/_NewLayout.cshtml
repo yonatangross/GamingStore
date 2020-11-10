@@ -2,6 +2,7 @@
 @using GamingStore.Contracts
 @inject SignInManager<Customer> SignInManager
 @inject UserManager<Customer> UserManager
+@model GamingStore.ViewModels.ViewModelBase
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,18 +72,18 @@
                                 <div class="header_search_content">
                                     @using (Html.BeginForm("Index", "Items", FormMethod.Get))
                                     {
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">Search</div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">Search</div>
+                                            </div>
+                                            @Html.TextBox("Keywords", null, new { @class = "form-control" })
+                                            @{
+                                                var allCategories = new List<string> { "All Categories" };
+                                                allCategories.AddRange(Enum.GetNames(typeof(Category)));
+                                            }
+                                            @Html.DropDownList("Category", new SelectList(allCategories), null, new { @class = "form-control" })
+                                            <input type="image" class="btn-primary btn" src="/images/search.png" />
                                         </div>
-                                        @Html.TextBox("Keywords", null, new { @class = "form-control" })
-                                        @{
-                                            var allCategories = new List<string> {"All Categories"};
-                                            allCategories.AddRange(Enum.GetNames(typeof(Category)));
-                                        }
-                                        @Html.DropDownList("Category", new SelectList(allCategories), null, new { @class = "form-control" })
-                                        <input type="image" class="btn-primary btn" src="/images/search.png" />
-                                    </div>
                                     }
                                 </div>
                             </div>
@@ -96,8 +97,8 @@
                                     <div class="d-flex flex-row align-items-center justify-content-end">
                                         <div class="cart_icon">
                                             <img src="~/images/cart.png" alt="">
-                                            <div class="cart_count">
-                                                <span></span>
+                                            <div class="cart_count" >
+                                                <span id="cart_items_count">@Model?.ItemsInCart</span>
                                             </div>
                                         </div>
                                         <div class="cart_content">

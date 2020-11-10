@@ -7,7 +7,7 @@ using GamingStore.Models;
 
 namespace GamingStore.ViewModels
 {
-    public class OrderPlacedViewModel
+    public class OrderPlacedViewModel : ViewModelBase
     {
         public Customer Customer { get; set; }
 

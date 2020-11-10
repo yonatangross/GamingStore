@@ -6,7 +6,7 @@ using GamingStore.Models;
 
 namespace GamingStore.ViewModels
 {
-    public class RelatedItemViewModel
+    public class RelatedItemViewModel : ViewModelBase
     {
         public RelatedItemViewModel()
         {

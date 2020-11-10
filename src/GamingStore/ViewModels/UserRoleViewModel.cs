@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GamingStore.ViewModels
 {
-    public class UserRoleViewModel
+    public class UserRoleViewModel : ViewModelBase
     {
         public string UserId { get; set; }
         public string UserName { get; set; }

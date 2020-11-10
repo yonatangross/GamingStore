@@ -6,7 +6,7 @@ using GamingStore.Models;
 
 namespace GamingStore.ViewModels
 {
-    public class CartViewModel
+    public class CartViewModel : ViewModelBase
     {
         public List<Cart> Carts { get; set; }
 

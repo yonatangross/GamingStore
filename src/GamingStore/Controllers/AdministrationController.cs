@@ -18,24 +18,16 @@ using Newtonsoft.Json;
 namespace GamingStore.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class AdministrationController : Controller
+    public class AdministrationController : BaseController
     {
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly UserManager<Customer> _userManager;
-        private readonly StoreContext _context;
-
-        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<Customer> userManager,
-            StoreContext context)
+        public AdministrationController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager) : base(userManager, context, roleManager)
         {
-            _roleManager = roleManager;
-            _userManager = userManager;
-            _context = context;
         }
 
         [HttpGet]
         public async Task<IActionResult> EditUser(string id)
         {
-            Customer user = await _userManager.FindByIdAsync(id);
+            Customer user = await UserManager.FindByIdAsync(id);
 
             if (user == null)
             {
@@ -43,7 +35,7 @@ namespace GamingStore.Controllers
             }
 
             // GetRolesAsync returns the list of user Roles
-            IList<string> userRoles = await _userManager.GetRolesAsync(user);
+            IList<string> userRoles = await UserManager.GetRolesAsync(user);
 
             var model = new EditUserViewModel
             {
@@ -68,7 +60,7 @@ namespace GamingStore.Controllers
         [HttpGet]
         public async Task<IActionResult> BarChart()
         {
-            var orders = await _context.Orders.Include(o => o.Payment).Include(o=>o.Store).ToListAsync();
+            var orders = await Context.Orders.Include(o => o.Payment).Include(o=>o.Store).ToListAsync();
              CreateBarChartData(orders);
 
             return View("Statistics/BarChart");
@@ -77,7 +69,7 @@ namespace GamingStore.Controllers
         [HttpGet]
         public async Task<IActionResult> PieChartCategory()
         {
-            var orders = await _context.Orders.Include(o => o.OrderItems).ThenInclude(oi => oi.Item).ToListAsync();
+            var orders = await Context.Orders.Include(o => o.OrderItems).ThenInclude(oi => oi.Item).ToListAsync();
             CreatePieChartByCategoryData(orders);
 
             return View("Statistics/PieChartCategory");
@@ -86,7 +78,7 @@ namespace GamingStore.Controllers
 
         public async Task<IActionResult> PieChart()
         {
-            var orders = await _context.Orders.Include(o => o.Payment).Include(o => o.Store).ToListAsync();
+            var orders = await Context.Orders.Include(o => o.Payment).Include(o => o.Store).ToListAsync();
             createMonthlyPurchasesGraph(orders);
 
             return View("Statistics/PieChart");
@@ -208,7 +200,7 @@ namespace GamingStore.Controllers
         [HttpPost]
         public async Task<IActionResult> EditUser(EditUserViewModel model)
         {
-            Customer user = await _userManager.FindByIdAsync(model.Id);
+            Customer user = await UserManager.FindByIdAsync(model.Id);
 
             if (user == null)
             {
@@ -217,7 +209,7 @@ namespace GamingStore.Controllers
 
             user.Email = model.Email;
             user.UserName = model.UserName;
-            IdentityResult result = await _userManager.UpdateAsync(user);
+            IdentityResult result = await UserManager.UpdateAsync(user);
 
             if (result.Succeeded)
             {
@@ -235,13 +227,13 @@ namespace GamingStore.Controllers
         [HttpGet]
         public IActionResult ListRoles()
         {
-            var roles = _roleManager.Roles;
+            var roles = RoleManager.Roles;
             return View(roles);
         }
 
         public JsonResult ListUsersBySearch(string searchUserString)
         {
-            var users = _userManager.Users;
+            var users = UserManager.Users;
 
             if (!string.IsNullOrEmpty(searchUserString))
             {
@@ -254,7 +246,7 @@ namespace GamingStore.Controllers
 
         public async Task<IActionResult> ListUsers()
         {
-            var users = _userManager.Users;
+            var users = UserManager.Users;
 
             Console.WriteLine("users was loaded from ListUsers");
             return View(await users.ToListAsync());
@@ -269,7 +261,7 @@ namespace GamingStore.Controllers
         public async Task<IActionResult> EditRole(string id)
         {
             // Find the role by Role ID
-            IdentityRole role = await _roleManager.FindByIdAsync(id);
+            IdentityRole role = await RoleManager.FindByIdAsync(id);
 
             if (role == null)
             {
@@ -283,12 +275,12 @@ namespace GamingStore.Controllers
             };
 
             // Retrieve all the Users
-            foreach (Customer user in _userManager.Users)
+            foreach (Customer user in UserManager.Users)
             {
                 // If the user is in this role, add the username to
                 // Users property of EditRoleViewModel. This model
                 // object is then passed to the view for display
-                if (await _userManager.IsInRoleAsync(user, role.Name))
+                if (await UserManager.IsInRoleAsync(user, role.Name))
                 {
                     model.Users.Add(user.UserName);
                 }
@@ -300,7 +292,7 @@ namespace GamingStore.Controllers
         [HttpGet]
         public async Task<IActionResult> ListStores()
         {
-            var listStoresModel = await _context.Stores.Include(s => s.Orders).ToListAsync();
+            var listStoresModel = await Context.Stores.Include(s => s.Orders).ToListAsync();
 
             return View(listStoresModel);
         }
@@ -308,13 +300,13 @@ namespace GamingStore.Controllers
             [HttpGet]
         public async Task<IActionResult> ListItems()
         {
-            return View(await _context.Items.ToListAsync());
+            return View(await Context.Items.ToListAsync());
         }
 
         [HttpGet]
         public async Task<IActionResult> ListOrders()
         {
-            return View(await _context.Orders.Include(order => order.Customer).Include(order => order.Payment)
+            return View(await Context.Orders.Include(order => order.Customer).Include(order => order.Payment)
                 .ToListAsync());
         }
 
@@ -322,7 +314,7 @@ namespace GamingStore.Controllers
         [HttpPost]
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {
-            IdentityRole role = await _roleManager.FindByIdAsync(model.Id);
+            IdentityRole role = await RoleManager.FindByIdAsync(model.Id);
 
             if (role == null)
             {
@@ -332,7 +324,7 @@ namespace GamingStore.Controllers
             role.Name = model.RoleName;
 
             // Update the Role using UpdateAsync
-            IdentityResult result = await _roleManager.UpdateAsync(role);
+            IdentityResult result = await RoleManager.UpdateAsync(role);
 
             if (result.Succeeded)
             {
@@ -352,7 +344,7 @@ namespace GamingStore.Controllers
         {
             ViewBag.roleId = roleId;
 
-            IdentityRole role = await _roleManager.FindByIdAsync(roleId);
+            IdentityRole role = await RoleManager.FindByIdAsync(roleId);
 
             if (role == null)
             {
@@ -361,14 +353,14 @@ namespace GamingStore.Controllers
 
             var model = new List<UserRoleViewModel>();
 
-            foreach (Customer user in _userManager.Users)
+            foreach (Customer user in UserManager.Users)
             {
                 var userRoleViewModel = new UserRoleViewModel
                 {
                     UserId = user.Id,
                     UserName = user.Email,
                     Email = user.Email,
-                    IsSelected = await _userManager.IsInRoleAsync(user, role.Name)
+                    IsSelected = await UserManager.IsInRoleAsync(user, role.Name)
                 };
 
                 model.Add(userRoleViewModel);
@@ -380,7 +372,7 @@ namespace GamingStore.Controllers
         [HttpPost]
         public async Task<IActionResult> EditUsersInRole(List<UserRoleViewModel> model, string roleId)
         {
-            IdentityRole role = await _roleManager.FindByIdAsync(roleId);
+            IdentityRole role = await RoleManager.FindByIdAsync(roleId);
 
             if (role == null)
             {
@@ -389,19 +381,19 @@ namespace GamingStore.Controllers
 
             for (var i = 0; i < model.Count; i++)
             {
-                Customer user = await _userManager.FindByIdAsync(model[i].UserId);
+                Customer user = await UserManager.FindByIdAsync(model[i].UserId);
 
                 IdentityResult result;
 
-                if (model[i].IsSelected && !(await _userManager.IsInRoleAsync(user, role.Name)))
+                if (model[i].IsSelected && !(await UserManager.IsInRoleAsync(user, role.Name)))
                 {
                     user.UserName = user.Email;
-                    result = await _userManager.AddToRoleAsync(user, role.Name);
+                    result = await UserManager.AddToRoleAsync(user, role.Name);
                 }
-                else if (!model[i].IsSelected && await _userManager.IsInRoleAsync(user, role.Name))
+                else if (!model[i].IsSelected && await UserManager.IsInRoleAsync(user, role.Name))
                 {
                     user.UserName = user.Email;
-                    result = await _userManager.RemoveFromRoleAsync(user, role.Name);
+                    result = await UserManager.RemoveFromRoleAsync(user, role.Name);
                 }
                 else
                 {
@@ -428,14 +420,14 @@ namespace GamingStore.Controllers
         public async Task<IActionResult> DeleteUser(string id)
         {
             // Todo: change from deleteUser to disable user.
-            Customer user = await _userManager.FindByIdAsync(id);
+            Customer user = await UserManager.FindByIdAsync(id);
 
             if (user == null)
             {
                 return Error(id, "user");
             }
 
-            IdentityResult result = await _userManager.DeleteAsync(user);
+            IdentityResult result = await UserManager.DeleteAsync(user);
 
             if (result.Succeeded)
             {
@@ -455,5 +447,7 @@ namespace GamingStore.Controllers
             ViewBag.ErrorMessage = $"{type} with Id = {id} cannot be found";
             return View("NotFound");
         }
+
+      
     }
 }

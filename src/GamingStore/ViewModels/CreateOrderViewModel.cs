@@ -9,7 +9,7 @@ using GamingStore.Models.Relationships;
 
 namespace GamingStore.ViewModels
 {
-    public class CreateOrderViewModel
+    public class CreateOrderViewModel : ViewModelBase
     {
         public CreateOrderViewModel()
         {

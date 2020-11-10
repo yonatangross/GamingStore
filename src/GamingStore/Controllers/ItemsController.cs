@@ -22,30 +22,22 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace GamingStore.Controllers
 {
-    public class ItemsController : Controller
+    public class ItemsController : BaseController
     {
-        private readonly StoreContext _context;
-        private readonly UserManager<Customer> _userManager;
         private readonly IHostingEnvironment _hostingEnvironment; //todo: fix obsolete
 
-        public ItemsController(StoreContext context, UserManager<Customer> userManager,
-            IHostingEnvironment hostingEnvironment)
+        public ItemsController(IHostingEnvironment hostingEnvironment,UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager) : base(userManager, context, roleManager)
         {
-            _userManager = userManager;
             _hostingEnvironment = hostingEnvironment;
-            _context = context;
         }
-
-        private Task<Customer> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Items
         public async Task<IActionResult> Index(string category, string manufacture, int? priceMin, int? priceMax,
             string keywords, SortByFilter sortBy = SortByFilter.NewestArrivals)
         {
-            List<Item> items = await _context.Items.ToListAsync();
+            List<Item> items = await Context.Items.ToListAsync();
 
             List<Category> categories = items.Select(i => i.Category).Distinct().ToList();
-            var manufactures = new List<string>();
 
             if (!string.IsNullOrWhiteSpace(category) && category != "All Categories")
             {
@@ -81,7 +73,7 @@ namespace GamingStore.Controllers
                 SortByFilter.PriceHighToLow => items.OrderByDescending(i => i.Price).ToList(),
                 _ => throw new ArgumentOutOfRangeException(nameof(sortBy), sortBy, null)
             };
-            manufactures = items.Select(i => i.Manufacturer).Distinct().ToList();
+            var manufactures = items.Select(i => i.Manufacturer).Distinct().ToList();
             var viewModel = new GetItemsViewModel()
             {
                 Categories = categories,
@@ -95,7 +87,8 @@ namespace GamingStore.Controllers
                     PriceMin = priceMin,
                     PriceMax = priceMax,
                     Keywords = keywords
-                }
+                },
+                ItemsInCart = await CountItemsInCart()
             };
 
             return View(viewModel);
@@ -110,35 +103,42 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            Item item = await _context.Items.FirstOrDefaultAsync(m => m.Id == id);
-            Customer user = await _userManager.GetUserAsync(User);
+            Item item = await Context.Items.FirstOrDefaultAsync(m => m.Id == id);
+            Customer user = await UserManager.GetUserAsync(User);
+
+            var viewModel = new ItemViewModel()
+            {
+                Item = item,
+                ItemsInCart = await CountItemsInCart()
+            };
 
             if (user == null)
             {
-                return View(item);
+                return View(viewModel);
             }
 
             var userIntId = GetCurrentUserAsync().Result.CustomerNumber;
             var relatedItem = new RelatedItem(userIntId, item.Id);
             bool relatedItems =
-                _context.RelatedItems.Any(ri => ri.ItemId == item.Id && ri.CustomerNumber == user.CustomerNumber);
-            if (!relatedItems) await _context.RelatedItems.AddAsync(relatedItem);
+                Context.RelatedItems.Any(ri => ri.ItemId == item.Id && ri.CustomerNumber == user.CustomerNumber);
+            if (!relatedItems) await Context.RelatedItems.AddAsync(relatedItem);
 
-            await _context.SaveChangesAsync();
+            await Context.SaveChangesAsync();
 
-            return View(item);
+            return View(viewModel);
         }
 
         // GET: Items/Create
         [Authorize(Roles = "Admin")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            Category[] allCategories = _context.Items.Select(item => item.Category).Distinct().ToArray();
+            Category[] allCategories = Context.Items.Select(item => item.Category).Distinct().ToArray();
 
 
             return View(new CreateEditItemViewModel
             {
-                Categories = allCategories
+                Categories = allCategories,
+                ItemsInCart = await CountItemsInCart()
             });
         }
 
@@ -184,8 +184,8 @@ namespace GamingStore.Controllers
                 fileStream.Close();
             }
 
-            await _context.Items.AddAsync(model.Item);
-            await _context.SaveChangesAsync();
+            await Context.Items.AddAsync(model.Item);
+            await Context.SaveChangesAsync();
 
 
             #region TwitterPost
@@ -233,14 +233,14 @@ namespace GamingStore.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
-            Category[] allCategories = _context.Items.Select(i => i.Category).Distinct().ToArray();
+            Category[] allCategories = Context.Items.Select(i => i.Category).Distinct().ToArray();
 
             if (id == null)
             {
                 return NotFound();
             }
 
-            var item = await _context.Items.FindAsync(id);
+            var item = await Context.Items.FindAsync(id);
 
             if (item == null)
             {
@@ -250,7 +250,8 @@ namespace GamingStore.Controllers
             var viewModel = new CreateEditItemViewModel()
             {
                 Item = item,
-                Categories = allCategories
+                Categories = allCategories,
+                ItemsInCart = await CountItemsInCart()
             };
 
             return View(viewModel);
@@ -268,7 +269,7 @@ namespace GamingStore.Controllers
             {
                 try
                 {
-                    var itemOnDb = await _context.Items.FirstOrDefaultAsync(i => i.Id == model.Item.Id);
+                    var itemOnDb = await Context.Items.FirstOrDefaultAsync(i => i.Id == model.Item.Id);
 
                     if (model.Item.Title != itemOnDb.Title)
                     {
@@ -295,8 +296,8 @@ namespace GamingStore.Controllers
                         itemOnDb.Category = model.Item.Category;
                     }
 
-                    _context.Update(itemOnDb);
-                    await _context.SaveChangesAsync();
+                    Context.Update(itemOnDb);
+                    await Context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -313,8 +314,9 @@ namespace GamingStore.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            Category[] allCategories = _context.Items.Select(i => i.Category).Distinct().ToArray();
+            Category[] allCategories = Context.Items.Select(i => i.Category).Distinct().ToArray();
             model.Categories = allCategories;
+            model.ItemsInCart = await CountItemsInCart();
 
             return View(model);
         }
@@ -328,7 +330,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            var item = await _context.Items.FirstOrDefaultAsync(m => m.Id == id);
+            var item = await Context.Items.FirstOrDefaultAsync(m => m.Id == id);
             if (item == null)
             {
                 return NotFound();
@@ -343,16 +345,16 @@ namespace GamingStore.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            Item item = await _context.Items.FindAsync(id);
-            _context.Items.Remove(item);
-            await _context.SaveChangesAsync();
+            Item item = await Context.Items.FindAsync(id);
+            Context.Items.Remove(item);
+            await Context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
 
         private bool ItemExists(int id)
         {
-            return _context.Items.Any(e => e.Id == id);
+            return Context.Items.Any(e => e.Id == id);
         }
 
         [Authorize]
@@ -361,7 +363,7 @@ namespace GamingStore.Controllers
             try
             {
                 Customer customer = await GetCurrentUserAsync();
-                Cart cart = await _context.Carts.FirstOrDefaultAsync(c => c.CustomerId == customer.Id);
+                Cart cart = await Context.Carts.FirstOrDefaultAsync(c => c.CustomerId == customer.Id);
 
                 if (cart == null || cart.ItemId != id)
                 {
@@ -372,14 +374,14 @@ namespace GamingStore.Controllers
                         CustomerId = customer.Id
                     };
 
-                    _context.Carts.Add(cart);
-                    await _context.SaveChangesAsync();
+                    Context.Carts.Add(cart);
+                    await Context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
 
                 cart.Quantity++;
-                _context.Update(cart);
-                await _context.SaveChangesAsync();
+                Context.Update(cart);
+                await Context.SaveChangesAsync();
             }
             catch (Exception e)
             {

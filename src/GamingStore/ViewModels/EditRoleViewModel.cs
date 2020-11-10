@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GamingStore.ViewModels
 {
-    public class EditRoleViewModel
+    public class EditRoleViewModel : ViewModelBase
     {
         public EditRoleViewModel()
         {

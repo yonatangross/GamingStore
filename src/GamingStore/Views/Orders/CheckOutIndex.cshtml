@@ -37,6 +37,7 @@
                                 <div class="col-50">
                                     <label>Postal Code</label>
                                     @Html.TextBoxFor(m => m.ShippingAddress.PostalCode, new { @placeholder = "1000001", @type = "text", @required = "required", @id = "zip", @name = "zip" })
+                                    @Html.ValidationMessageFor(m => m.ShippingAddress.PostalCode)
                                 </div>
                             </div>
                         </div>
@@ -53,6 +54,8 @@
                                 <div class="col-50">
                                     <label for="expmonth">Exp Month</label>
                                     @Html.TextBoxFor(m => m.CreditCard.ExpirationMonth, new { @placeholder = "mm", @type = "text", @required = "required", @id = "expmonth", @name = "expmonth" })
+                                    @Html.ValidationMessageFor(m => m.CreditCard.ExpirationMonth)
+
                                 </div>
                                 <div class="col-50">
                                     <label for="expyear">Exp Year</label>
