@@ -5,45 +5,121 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Create</h1>
+<h3>Create Store</h3>
 
-<h4>Store</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Store.Name" class="control-label"></label>
-                <input asp-for="Store.Name" class="form-control" />
-                <span asp-validation-for="Store.Name" class="text-danger"></span>
+    @using (Html.BeginForm("Create", "Stores", FormMethod.Post, new { @class = "col-10" }))
+    {
+        @Html.HiddenFor(m => m.Store.Id)
+
+        @for (var openingHourIndex = 0; openingHourIndex < Model.Store.OpeningHours.Count; openingHourIndex++)
+        {
+            @Html.HiddenFor(model => Model.Store.OpeningHours[openingHourIndex])
+        }
+
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Store.Name, new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-5">
+                <div class="form-check">
+                    @Html.TextBoxFor(s => s.Store.Name, new { @class = "form-control" })
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Store.Address" class="control-label"></label>
-                <input asp-for="Store.Address" class="form-control" />
-                <span asp-validation-for="Store.Address" class="text-danger"></span>
+        </div>
+        <div>
+            
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Store.Address.FullName, new { @class = "col-sm-2 col-form-label" })
+                <div class="col-sm-5">
+                    <div class="form-check">
+                        @Html.TextBoxFor(s => s.Store.Address.FullName, new { @class = "form-control" })
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Store.PhoneNumber" class="control-label"></label>
-                <input asp-for="Store.PhoneNumber" class="form-control" required/>
-                <span asp-validation-for="Store.PhoneNumber" class="text-danger"></span>
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Store.Address.Address1, new {@class = "col-sm-2 col-form-label"})
+                <div class="col-sm-5">
+                    <div class="form-check">
+                        @Html.TextBoxFor(s => s.Store.Address.Address1, new {@class = "form-control"})
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Store.Email" class="control-label"></label>
-                <input asp-for="Store.Email" class="form-control" />
-                <span asp-validation-for="Store.Email" class="text-danger"></span>
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Store.Address.City, new {@class = "col-sm-2 col-form-label"})
+                <div class="col-sm-5">
+                    <div class="form-check">
+                        @Html.TextBoxFor(s => s.Store.Address.City, new {@class = "form-control"})
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Store.OpeningHours" class="control-label"></label>
-                <input asp-for="Store.OpeningHours" class="form-control" />
-                <span asp-validation-for="Store.OpeningHours" class="text-danger"></span>
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Store.Address.PostalCode, new {@class = "col-sm-2 col-form-label"})
+                <div class="col-sm-5">
+                    <div class="form-check">
+                        @Html.TextBoxFor(s => s.Store.Address.PostalCode, new {@class = "form-control"})
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Store.Address.Country, new {@class = "col-sm-2 col-form-label"})
+                <div class="col-sm-5">
+                    <div class="form-check">
+                        @Html.TextBoxFor(s => s.Store.Address.Country, new {@class = "form-control"})
+                    </div>
+                </div>
             </div>
-        </form>
-    </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Store.PhoneNumber, new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-5">
+                <div class="form-check">
+                    @Html.TextBoxFor(s => s.Store.PhoneNumber, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Store.Email, new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-5">
+                <div class="form-check">
+                    @Html.TextBoxFor(s => s.Store.Email, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Store.Active, new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-5">
+                <div class="form-check">
+                    @Html.CheckBoxFor(m => m.Store.Active, new { @class = "form-check-input", style = "margin: auto; position: inherit;" })
+                </div>
+            </div>
+        </div>
+        <div class="store_detail">
+            <table class="opening_hours">
+
+                @for (var index = 0; index < Model.Store.OpeningHours.Count; index++)
+                {
+                    var day = Model.Store.OpeningHours[index];
+                    <tr>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <label class="col-2 col-form-label"> @day.DayOfWeek.ToString().Substring(0, 3)</label>
+
+                            @Html.TextBoxFor(m => m.Store.OpeningHours[index].OpeningTime, new { @type = "time", @class = "form-control" })
+                            @Html.HiddenFor(m => m.Store.OpeningHours[index].DayOfWeek)
+                            @Html.TextBoxFor(m => m.Store.OpeningHours[index].ClosingTime, new { @type = "time", @class = "form-control" })
+                        </div>
+                    </tr>
+                }
+
+            </table>
+        </div>
+        <div style="margin-top: 8%">
+            <input type="submit" value="Save" class="btn btn-primary" style="margin-right: 8%" />
+        </div>
+    }
+
 </div>
+
 
 <div>
     <a asp-action="Index">Back to List</a>
