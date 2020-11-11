@@ -28,7 +28,8 @@ namespace GamingStore.Controllers
     {
         private readonly IEmailSender _emailSender;
 
-        public HomeController(IEmailSender emailSender, UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager) : base(userManager, context, roleManager)
+        public HomeController(IEmailSender emailSender, UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager)
+            : base(userManager, context, roleManager, signInManager)
         {
             _emailSender = emailSender;
         }

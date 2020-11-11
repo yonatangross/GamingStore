@@ -15,12 +15,14 @@ namespace GamingStore.Controllers
         protected readonly UserManager<Customer> UserManager;
         protected readonly StoreContext Context;
         protected readonly RoleManager<IdentityRole> RoleManager;
+        protected readonly SignInManager<Customer> SignInManager;
 
-        public BaseController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager)
+        public BaseController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager)
         {
             UserManager = userManager;
             Context = context;
             RoleManager = roleManager;
+            SignInManager = signInManager;
         }
 
         protected Task<Customer> GetCurrentUserAsync() => UserManager.GetUserAsync(User);

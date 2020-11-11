@@ -16,9 +16,11 @@ namespace GamingStore.Controllers
 {
     public class ErrorsController : BaseController
     {
-        public ErrorsController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager) : base(userManager, context, roleManager)
+        public ErrorsController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager)
+            : base(userManager, context, roleManager, signInManager)
         {
         }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> NotFound()
         {

@@ -28,7 +28,8 @@ namespace GamingStore.Controllers
     {
         private readonly IHostingEnvironment _hostingEnvironment; //todo: fix obsolete
 
-        public ItemsController(IHostingEnvironment hostingEnvironment,UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager) : base(userManager, context, roleManager)
+        public ItemsController(IHostingEnvironment hostingEnvironment,UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager)
+            : base(userManager, context, roleManager, signInManager)
         {
             _hostingEnvironment = hostingEnvironment;
         }
@@ -351,6 +352,12 @@ namespace GamingStore.Controllers
             try
             {
                 Customer customer = await GetCurrentUserAsync();
+
+                if (customer == null)
+                {
+                    return NotFound();
+                }
+
                 Cart cart = await Context.Carts.FirstOrDefaultAsync(c => c.CustomerId == customer.Id);
 
                 if (cart == null || cart.ItemId != id)

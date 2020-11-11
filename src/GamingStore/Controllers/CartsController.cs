@@ -19,9 +19,11 @@ namespace GamingStore.Controllers
     [Route("cart")]
     public class CartsController : BaseController
     {
-        public CartsController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager) : base(userManager, context, roleManager)
+        public CartsController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager)
+            : base(userManager, context, roleManager, signInManager)
         {
         }
+
         [Authorize]
         public async Task<IActionResult> Index()
         {
