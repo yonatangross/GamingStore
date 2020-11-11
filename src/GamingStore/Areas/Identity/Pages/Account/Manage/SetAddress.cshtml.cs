@@ -2,21 +2,17 @@
 using System.Threading.Tasks;
 using GamingStore.Contracts;
 using GamingStore.Models;
-using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 
 namespace GamingStore.Areas.Identity.Pages.Account.Manage
 {
-    public class SetAddressModel : ViewModelBase
+    public class SetAddressModel : PageModel
     {
         private readonly UserManager<Customer> _userManager;
 
-        public SetAddressModel(
-            UserManager<Customer> userManager,
-            ILogger<PersonalDataModel> logger)
+        public SetAddressModel(UserManager<Customer> userManager)
         {
             _userManager = userManager;
         }

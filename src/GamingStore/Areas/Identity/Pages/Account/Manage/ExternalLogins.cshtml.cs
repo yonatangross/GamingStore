@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GamingStore.Models;
-using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GamingStore.Areas.Identity.Pages.Account.Manage
 {
-    public class ExternalLoginsModel : ViewModelBase
+    public class ExternalLoginsModel : PageModel
     {
         private readonly UserManager<Customer> _userManager;
         private readonly SignInManager<Customer> _signInManager;
