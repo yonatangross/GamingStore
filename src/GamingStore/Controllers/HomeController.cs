@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using GamingStore.Contracts;
 using GamingStore.Contracts.ML;
 using GamingStore.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -85,12 +86,10 @@ namespace GamingStore.Controllers
             {
                 return View(new ContactViewModel
                 {
-                    Mail = new Mail
-                    {
-                        Name = $"{customer.FirstName} {customer.LastName}",
-                        Email = customer.Email,
-                        PhoneNumber = customer.PhoneNumber
-                    }
+                    Name = $"{customer.FirstName} {customer.LastName}",
+                    Email = customer.Email,
+                    PhoneNumber = customer.PhoneNumber,
+                    ItemsInCart = await CountItemsInCart()
                 });
             }
 
@@ -98,31 +97,25 @@ namespace GamingStore.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> ContactUs(Mail form)
+        public async Task<IActionResult> ConfirmContactUs(Mail model)
         {
             //todo: move first to mail service
             Customer customer = await GetCurrentUserAsync();
             var customerId = customer != null ? customer.Id : "Not Logged In";
 
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
             //prepare email
             const string toAddress = "gamingstoreproject+form@gmail.com";
-            string subject = $"ContactUs inquiry from {form.Name}";
+            string subject = $"ContactUs inquiry from {model.Name}";
             var message = new StringBuilder();
-            message.Append($"Name: {form.Name}\n");
-            message.Append($"Email: {form.Email}\n");
-            message.Append($"Telephone: {form.PhoneNumber}\n\n");
-            message.Append($"CustomerId: '{customerId}'\n\n");
-            message.Append(form.Message);
+            message.Append($"Name: {model.Name}{Environment.NewLine}");
+            message.Append($"Email: {model.Email}{Environment.NewLine}");
+            message.Append($"Telephone: {model.PhoneNumber}{Environment.NewLine}");
+            message.Append($"CustomerId: '{customerId}'{Environment.NewLine}");
+            message.Append(model.Message);
 
             //start email Thread
             await Task.Run(() => { _emailSender.SendEmailAsync(toAddress, subject, message.ToString()); }).ConfigureAwait(false);
-
-            return View();
+            return RedirectToAction(nameof(ContactUs));
         }
     }
 }

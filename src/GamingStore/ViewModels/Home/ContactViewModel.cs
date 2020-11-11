@@ -10,6 +10,23 @@ namespace GamingStore.ViewModels.Home
     public class ContactViewModel : ViewModelBase
     {
         [Required]
-        public Mail Mail { get; set; }
+        [DataType(DataType.Text)]
+        [StringLength(50)]
+        [RegularExpression(@"[a-zA-Z]{2,}$")]
+        public string Name { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [StringLength(50)]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Phone]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [StringLength(50, MinimumLength = 2)]
+        public string Message { get; set; }
     }
 }

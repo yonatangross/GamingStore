@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GamingStore.ViewModels
 {
-    public abstract class ViewModelBase : PageModel
+    public  class ViewModelBase : PageModel
     {
         public int? ItemsInCart { get; set; } = null;
     }

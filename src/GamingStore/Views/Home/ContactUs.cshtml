@@ -54,36 +54,40 @@
                     <div class="contact_form_container">
                         <div class="contact_form_title">Get in Touch</div>
 
-                        @using (Html.BeginForm("ContactUs", "Home", FormMethod.Post, new { role = "form" }))
+                        @using (Html.BeginForm("ConfirmContactUs", "Home", FormMethod.Post))
                         {
-                            <div class="contact_form_inputs d-flex flex-md-row flex-column justify-content-between">                                
-                                @{
-                                    var nameDisabled = "not disabled";
-                                    var emailDisabled = "not disabled";
+                    <div class="contact_form_inputs d-flex flex-md-row flex-column justify-content-between">
+                        @{
+                            if (!string.IsNullOrWhiteSpace(Model?.Name))
+                            {
+                                @Html.TextBoxFor(m => m.Name, new { @placeholder = "Your name", @class = "input_field", disabled = "disabled" })
+                                @Html.HiddenFor(m => m.Name)
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(m => m.Name, new { @placeholder = "Your name", @class = "input_field" })
+                            }
 
-                                    if (string.IsNullOrWhiteSpace(Model.Mail.Name))
-                                    {
-                                        nameDisabled = "disabled";
-                                    }
+                            if (!string.IsNullOrWhiteSpace(Model?.Email))
+                            {
+                                @Html.TextBoxFor(m => m.Email, new { @placeholder = "Your email", @type = "email", @class = "input_field", disabled = "disabled" })
+                                @Html.HiddenFor(m => m.Email)
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(m => m.Email, new { @placeholder = "Your email", @type = "email", @class = "input_field" })
+                            }
 
-                                    if (string.IsNullOrWhiteSpace(Model.Mail.Email))
-                                    {
-                                        emailDisabled = "disabled";
-                                    }
+                            @Html.ValidationMessageFor(m => m.Name)
+                            @Html.ValidationMessageFor(m => m.Email)
+                        }
 
-                                    @Html.TextBoxFor(m => m.Mail.Name, new { @placeholder = "Your name", @class = "input_field", disabled = nameDisabled})
-                                    @Html.ValidationMessageFor(m => m.Mail.Name)
-
-                                    @Html.TextBoxFor(m => m.Mail.Email, new { @placeholder = "Your email", @type = "email", @class = "input_field", disabled = emailDisabled })
-                                    @Html.ValidationMessageFor(m => m.Mail.Email)
-                                }
-                                
-                                @Html.TextBoxFor(m => m.Mail.PhoneNumber, new { @placeholder = "Your phone number", @class = "input_field" })
-                                @Html.ValidationMessageFor(m => m.Mail.PhoneNumber)
-                            </div>
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @placeholder = "Your phone number", @class = "input_field" })
+                        @Html.ValidationMessageFor(m => m.PhoneNumber)
+                    </div>
                             <div>
-                                @Html.TextAreaFor(m => m.Mail.Message, new { @placeholder = "Message (Must contains 5 letters and above)", @class = "text_field", @rows = "4" })
-                                @Html.ValidationMessageFor(m => m.Mail.Message)
+                                @Html.TextAreaFor(m => m.Message, new { @placeholder = "Message (Must contains 5 letters and above)", @class = "text_field", @rows = "4" })
+                                @Html.ValidationMessageFor(m => m.Message)
                             </div>
                             <div>
                                 <input type="submit" value="Send Message" name="submit" class="button contact_submit_button">
