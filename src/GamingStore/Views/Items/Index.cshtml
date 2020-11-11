@@ -7,7 +7,9 @@
     Layout = "~/Views/Shared/_NewLayout.cshtml";
 }
 <head>
+    @*<link rel="stylesheet" type="text/css" href="~/css/ItemIndexCheck.css">*@
     <link rel="stylesheet" type="text/css" href="~/css/shop_styles.css">
+
 </head>
 <div class="shop">
     <div class="container">
@@ -145,25 +147,27 @@
                             <span>Sort by:</span>
                             <ul>
                                 <li>
-                                @for (int sortByIndex = 0; sortByIndex < Enum.GetNames(typeof(SortByFilter)).Length; sortByIndex++)
-                                {
-                                    var sortBy = (SortByFilter) sortByIndex;
-                                    @if (selectedSort == sortBy)
+                                    @for (int sortByIndex = 0; sortByIndex < Enum.GetNames(typeof(SortByFilter)).Length; sortByIndex++)
                                     {
-                                        <span class="sorting_text">@sortBy.GetDisplayName()<i class="fas fa-chevron-down"></i></span>
+                                        var sortBy = (SortByFilter)sortByIndex;
+                                        @if (selectedSort == sortBy)
+                                        {
+                                            <span class="sorting_text">
+                                                @sortBy.GetDisplayName()<i class="fas fa-chevron-down"></i>
+                                            </span>
+                                        }
                                     }
-                                }
                                     <ul>
                                         @for (int sortByIndex = 0; sortByIndex < Enum.GetNames(typeof(SortByFilter)).Length; sortByIndex++)
                                         {
-                                            var sortBy = (SortByFilter) sortByIndex;
+                                            var sortBy = (SortByFilter)sortByIndex;
                                             filterSort.SortBy = sortBy;
 
                                             @if (selectedSort == sortBy)
                                             {
                                                 <li>
                                                     <strong>
-                                                        @Html.ActionLink(sortBy.GetDisplayName(), "Index", "Items", filterSort, new { style= "color: rgba(0,0,0,0.5)" })
+                                                        @Html.ActionLink(sortBy.GetDisplayName(), "Index", "Items", filterSort, new { style = "color: rgba(0,0,0,0.5)" })
                                                     </strong>
                                                 </li>
                                             }
@@ -179,19 +183,28 @@
                             </ul>
                         </div>
                     </div>
+                    @*<div class="product_grid">*@
                     <div class="product_grid">
                         @{
                             foreach (var item in Model.Items)
                             {
                                 <!-- Product Item -->
                                 <div class="product_item">
+
                                     <div class="product_image ">
-                                        <a href="/Items/Details?id=@item.Id">  <img src="/@item.ImageUrl/1.jpg" alt=""></a>
+                                        <a href="/Items/Details?id=@item.Id">
+                                            <img src="/@item.ImageUrl/1.jpg" alt="">
+                                        </a>
                                     </div>
                                     <div class="product_content">
                                         <div class="product_price">@Html.DisplayFor(m => item.Price)</div>
                                         <div class="product_name">
                                             <a asp-action="Details" asp-route-id="@item.Id" tabindex="0" style="overflow-wrap: break-word">@item.Title</a>
+                                        </div>
+                                        <div class="buttons d-flex flex-row">
+                                            <div class="cart">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </div> <button class="btn btn-success cart-button btn-block"><span class="dot">1</span>Add to cart </button>
                                         </div>
                                     </div>
                                 </div>
@@ -203,3 +216,4 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="/js/ItemIndexCheckJS.js"></script>

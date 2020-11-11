@@ -757,6 +757,97 @@ namespace GamingStore.Data
                     ImageUrl = "images/items/GloriousModelOMinusGOM-GBLACKGlossyBlack",
                     Description="58mm width at grip, 63mm with at back, 58mm at front, 120mm long"
                 },
+
+                new Item
+                {
+                    Title = "Corsair Gaming Headset HS70",
+                    Manufacturer = "Corsair",
+                    Price = 45.55 ,
+                    Category = Category.GamingHeadsets,
+                    ImageUrl = "images/items/CorsairHS70PROWIRELESSUSBConnectorCircum",
+                    Description="Play with the freedom of up to 40ft of wireless range and up to 16 hours of battery life"
+                },
+
+                new Item
+                {
+                    Title = "Mad Catz Gaming Headset 7.1",
+                    Manufacturer = "Mad Catz",
+                    Price =41.45 ,
+                    Category = Category.GamingHeadsets,
+                    ImageUrl = "images/items/MadCatzF.R.E.Q.4USBConnectorCircumauralG",
+                    Description="Fully immerse yourself in your game with dynamic, full-range sound pumped from super-sized 50mm neodymium drivers. Its 7.1 virtual sound lets you hear directional movement to gain a competitive edge, and its noise-canceling mic delivers crystal-clear audio without annoying background noise. This USB gaming headset also features brilliant RGB lighting, ergonomic comfort, and easy-access inline control for volume adjustment and mic mute."
+                },
+
+                new Item
+                {
+                    Title ="Corsair Gaming Headset",
+                    Manufacturer = "Corsair",
+                    Price =49.55 ,
+                    Category = Category.GamingHeadsets,
+                    ImageUrl = "images/items/CorsairGamingVOIDPRORGBWirelessPremiumGa",
+                    Description="Maximum audio performance with DTS Headphone: X 7.1 Surround for "
+                },
+
+                new Item
+                {
+                    Title = "Logitech Gaming Headset ",
+                    Manufacturer = "Logitech",
+                    Price = 39.89,
+                    Category = Category.GamingHeadsets,
+                    ImageUrl = "images/items/Logitech981-000681G4337.1WiredGamingHead",
+                    Description="Extremely lightweight for maximum comfort"
+                },
+
+                new Item
+                {
+                    Title = "Razer Gaming Keyboard",
+                    Manufacturer = "Razer",
+                    Price =220.45 ,
+                    Category = Category.Keyboards,
+                    ImageUrl = "images/items/RazerHuntsmanEliteOpto-MechanicalSwitch",
+                    Description="The New Razer Opto-Mechanical Switch - Actuation at the speed of light"
+                },
+
+                new Item
+                {
+                    Title = "Razer Pokemon Pikachu Edition Gaming Keyboard",
+                    Manufacturer = "Razer",
+                    Price =199.99,
+                    Category = Category.Keyboards,
+                    ImageUrl = "images/items/RazerPokemonPikachuEditionGamingKeyboard",
+                    Description="This is the special Pokemon Pikachu Edition China Exclusive by Razer."
+                },
+
+                new Item
+                {
+                    Title = "Razer Overwatch Razer BlackWidow Chroma Mechanical Gaming Keyboard",
+                    Manufacturer = "Razer",
+                    Price = 239.99,
+                    Category = Category.Keyboards,
+                    ImageUrl = "images/items/RazerOverwatchRazerBlackWidowChromaMecha",
+                    Description="Chroma customizable backlighting - With 16.8 Million color options,Exclusive Overwatch design"
+                },
+
+                new Item
+                {
+                    Title = "Razer Ornata Expert",
+                    Manufacturer = "Razer ",
+                    Price =119.99 ,
+                    Category = Category.Keyboards,
+                    ImageUrl = "images/items/RazerOrnataExpert-RevolutionaryMecha-Mem",
+                    Description="Designed from the ground up, the all-new Razer Mecha-Membrane combines the soft cushioned touch of a membrane rubber dome with the crisp tactile click of a mechanical switch"
+                },
+
+                new Item
+                {
+                    Title = "Razer BlackWidow X Tournament Edition Chroma",
+                    Manufacturer = "Razer ",
+                    Price =229.99 ,
+                    Category = Category.Keyboards,
+                    ImageUrl = "images/items/RazerBlackWidowXTournamentEditionChroma-",
+                    Description="Express your individuality and get the leg-up in games with Chroma backlighting and over 16.8 million color options"
+                },
+
                 new Item
                 {
                     Title = "KLIM Puma - USB Gamer Headset with Mic", Manufacturer = "KLIM Puma", Price = 44.99,

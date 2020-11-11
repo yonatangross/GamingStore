@@ -24,7 +24,7 @@ function initMap() {
      geocoder = new google.maps.Geocoder();
 
 /*todo: change store number*/
-    while (storeIndex < 3) {
+    while (storeIndex < storesObject.length) {
         getStoreAddress(storesObject[storeIndex], storeIndex);
         storeIndex++;
     };
@@ -64,14 +64,14 @@ $("ul li").click(function () {
     $(this).addClass("active");
 
     $(this).parent().children("li").not(this).removeClass("active");
-    var store_address = $(this).find(".store_address")[0].innerText.toString();
+    var storeAddress = $(this).find(".store_address")[0].innerText.toString();
 
-    geocoder.geocode({ address: store_address },
+    geocoder.geocode({ address: storeAddress },
         (results, status) => {
             if (status === "OK") {
                 map.setCenter(results[0].geometry.location);
             } else {
-                console.log(`error recentering the map to ${store_address}.`);
+                console.log(`error recentering the map to ${storeAddress}.`);
             }
         });
 });
