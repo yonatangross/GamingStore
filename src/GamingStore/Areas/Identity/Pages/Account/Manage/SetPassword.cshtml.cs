@@ -4,21 +4,18 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using GamingStore.Models;
-using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GamingStore.Areas.Identity.Pages.Account.Manage
 {
-    public class SetPasswordModel : ViewModelBase
+    public class SetPasswordModel : PageModel
     {
         private readonly UserManager<Customer> _userManager;
         private readonly SignInManager<Customer> _signInManager;
 
-        public SetPasswordModel(
-            UserManager<Customer> userManager,
-            SignInManager<Customer> signInManager)
+        public SetPasswordModel(UserManager<Customer> userManager, SignInManager<Customer> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

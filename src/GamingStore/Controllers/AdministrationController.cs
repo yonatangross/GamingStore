@@ -20,8 +20,8 @@ namespace GamingStore.Controllers
     [Authorize(Roles = "Admin")]
     public class AdministrationController : BaseController
     {
-        public AdministrationController(UserManager<Customer> userManager, StoreContext context,
-            RoleManager<IdentityRole> roleManager) : base(userManager, context, roleManager)
+        public AdministrationController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager) 
+            : base(userManager, context, roleManager, signInManager)
         {
         }
 

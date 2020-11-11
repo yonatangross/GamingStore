@@ -14,12 +14,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using GamingStore.Services.Email.Interfaces;
-using GamingStore.ViewModels;
 
 namespace GamingStore.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class RegisterModel : ViewModelBase
+    public class RegisterModel : PageModel
     {
         private readonly SignInManager<Customer> _signInManager;
         private readonly UserManager<Customer> _userManager;

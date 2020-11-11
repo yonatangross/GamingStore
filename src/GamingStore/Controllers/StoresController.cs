@@ -17,7 +17,8 @@ namespace GamingStore.Controllers
 {
     public class StoresController : BaseController
     {
-        public StoresController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager) : base(userManager, context, roleManager)
+        public StoresController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager)
+            : base(userManager, context, roleManager, signInManager)
         {
         }
 

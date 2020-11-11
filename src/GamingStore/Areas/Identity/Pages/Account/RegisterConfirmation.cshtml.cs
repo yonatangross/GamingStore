@@ -2,7 +2,6 @@
 using System.Text;
 using System.Threading.Tasks;
 using GamingStore.Models;
-using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +11,7 @@ using Microsoft.AspNetCore.WebUtilities;
 namespace GamingStore.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class RegisterConfirmationModel : ViewModelBase
+    public class RegisterConfirmationModel : PageModel
     {
         private readonly UserManager<Customer> _userManager;
         private readonly IEmailSender _sender;

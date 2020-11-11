@@ -5,7 +5,6 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using GamingStore.Models;
-using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,7 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GamingStore.Areas.Identity.Pages.Account.Manage
 {
-    public class DownloadPersonalDataModel : ViewModelBase
+    public class DownloadPersonalDataModel : PageModel
     {
         private readonly UserManager<Customer> _userManager;
         private readonly ILogger<DownloadPersonalDataModel> _logger;

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using GamingStore.Contracts;
 using GamingStore.Data;
 using GamingStore.Models;
-using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,7 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GamingStore.Areas.Identity.Pages.Account.Manage
 {
-    public class MyOrdersModel : ViewModelBase
+    public class MyOrdersModel : PageModel
     {
         private readonly UserManager<Customer> _userManager;
         private readonly StoreContext _context;

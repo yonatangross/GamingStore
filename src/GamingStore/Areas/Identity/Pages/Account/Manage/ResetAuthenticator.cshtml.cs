@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GamingStore.Models;
-using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,16 +10,13 @@ using Microsoft.Extensions.Logging;
 
 namespace GamingStore.Areas.Identity.Pages.Account.Manage
 {
-    public class ResetAuthenticatorModel : ViewModelBase
+    public class ResetAuthenticatorModel : PageModel
     {
-        UserManager<Customer> _userManager;
+        private readonly UserManager<Customer> _userManager;
         private readonly SignInManager<Customer> _signInManager;
-        ILogger<ResetAuthenticatorModel> _logger;
+        private readonly ILogger<ResetAuthenticatorModel> _logger;
 
-        public ResetAuthenticatorModel(
-            UserManager<Customer> userManager,
-            SignInManager<Customer> signInManager,
-            ILogger<ResetAuthenticatorModel> logger)
+        public ResetAuthenticatorModel(UserManager<Customer> userManager, SignInManager<Customer> signInManager, ILogger<ResetAuthenticatorModel> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -32,7 +28,8 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnGet()
         {
-            var user = await _userManager.GetUserAsync(User);
+            Customer user = await _userManager.GetUserAsync(User);
+
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -43,7 +40,8 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
+            Customer user = await _userManager.GetUserAsync(User);
+
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");

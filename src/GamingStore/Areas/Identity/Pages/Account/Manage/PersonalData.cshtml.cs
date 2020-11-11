@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using GamingStore.Models;
-using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -8,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GamingStore.Areas.Identity.Pages.Account.Manage
 {
-    public class PersonalDataModel : ViewModelBase
+    public class PersonalDataModel : PageModel
     {
         private readonly UserManager<Customer> _userManager;
         private readonly ILogger<PersonalDataModel> _logger;

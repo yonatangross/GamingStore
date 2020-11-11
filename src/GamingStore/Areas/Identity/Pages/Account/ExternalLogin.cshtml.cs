@@ -8,7 +8,6 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using GamingStore.Models;
 using GamingStore.Services.Email.Interfaces;
-using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +18,7 @@ using Microsoft.Extensions.Logging;
 namespace GamingStore.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class ExternalLoginModel : ViewModelBase
+    public class ExternalLoginModel : PageModel
     {
         private readonly SignInManager<Customer> _signInManager;
         private readonly UserManager<Customer> _userManager;
