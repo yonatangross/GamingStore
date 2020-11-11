@@ -1,18 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using GamingStore.Contracts;
+using GamingStore.Data;
 using GamingStore.Models;
+using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GamingStore.Areas.Identity.Pages.Account.Manage
 {
-    public class SetAddressModel : PageModel
+    public class SetAddressModel : ViewPageModel
     {
         private readonly UserManager<Customer> _userManager;
 
-        public SetAddressModel(UserManager<Customer> userManager)
+        public SetAddressModel(UserManager<Customer> userManager, StoreContext context) 
+            : base(context)
         {
             _userManager = userManager;
         }
@@ -56,6 +59,8 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnGetAsync()
         {
             Customer user = await _userManager.GetUserAsync(User);
+            ItemsInCart = await CountItemsInCart(user);
+            
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");

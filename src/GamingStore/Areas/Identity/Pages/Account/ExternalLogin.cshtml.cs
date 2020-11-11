@@ -6,8 +6,10 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using GamingStore.Data;
 using GamingStore.Models;
 using GamingStore.Services.Email.Interfaces;
+using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,18 +20,15 @@ using Microsoft.Extensions.Logging;
 namespace GamingStore.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class ExternalLoginModel : PageModel
+    public class ExternalLoginModel : ViewPageModel
     {
         private readonly SignInManager<Customer> _signInManager;
         private readonly UserManager<Customer> _userManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
 
-        public ExternalLoginModel(
-            SignInManager<Customer> signInManager,
-            UserManager<Customer> userManager,
-            ILogger<ExternalLoginModel> logger,
-            IEmailSender emailSender)
+        public ExternalLoginModel(SignInManager<Customer> signInManager, UserManager<Customer> userManager, ILogger<ExternalLoginModel> logger, IEmailSender emailSender, StoreContext context)
+            : base(context)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -60,8 +59,11 @@ namespace GamingStore.Areas.Identity.Pages.Account
             public string Email { get; set; }
         }
 
-        public IActionResult OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+            Customer user = await _userManager.GetUserAsync(User);
+            ItemsInCart = await CountItemsInCart(user);
+
             return RedirectToPage("./Login");
         }
 

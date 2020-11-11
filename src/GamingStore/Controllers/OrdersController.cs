@@ -97,10 +97,13 @@ namespace GamingStore.Controllers
         [Authorize]
         public async Task<IActionResult> Create(Order order)
         {
+
             //handle customer
             Customer customer = await GetCurrentUserAsync();
             order.Customer = customer;
             order.CustomerId = customer.Id;
+
+            List<Cart> itemsInCart = await GetItemsInCart(customer);
 
             //handle order
             order.State = OrderState.New;
@@ -108,9 +111,7 @@ namespace GamingStore.Controllers
             order.Payment.PaymentMethod = PaymentMethod.CreditCard;
             order.Payment.Paid = true;
             order.PaymentId = order.Payment.Id;
-            List<Cart> itemsInCart = await GetItemsInCart(customer);
-            order.Payment.ItemsCost =
-                itemsInCart.Aggregate<Cart, double>(0, (current, cart) => current + cart.Item.Price * cart.Quantity);
+            order.Payment.ItemsCost = itemsInCart.Aggregate<Cart, double>(0, (current, cart) => current + cart.Item.Price * cart.Quantity);
             order.Payment.Total = order.Payment.ItemsCost + order.Payment.ShippingCost;
             order.ShippingMethod = order.Payment.ShippingCost switch
             {
@@ -177,7 +178,8 @@ namespace GamingStore.Controllers
                 ItemsCount = items,
                 Customer = customer,
                 ShippingAddress = order.ShippingAddress,
-                ItemsInCart = await CountItemsInCart()
+                ItemsInCart = await CountItemsInCart(),
+                OrderId = id
             };
 
             return View(viewModel);

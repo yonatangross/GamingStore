@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using GamingStore.Data;
 using GamingStore.Models;
+using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -9,16 +11,14 @@ using Microsoft.Extensions.Logging;
 
 namespace GamingStore.Areas.Identity.Pages.Account.Manage
 {
-    public class DeletePersonalDataModel : PageModel
+    public class DeletePersonalDataModel : ViewPageModel
     {
         private readonly UserManager<Customer> _userManager;
         private readonly SignInManager<Customer> _signInManager;
         private readonly ILogger<DeletePersonalDataModel> _logger;
 
-        public DeletePersonalDataModel(
-            UserManager<Customer> userManager,
-            SignInManager<Customer> signInManager,
-            ILogger<DeletePersonalDataModel> logger)
+        public DeletePersonalDataModel(UserManager<Customer> userManager, SignInManager<Customer> signInManager, ILogger<DeletePersonalDataModel> logger, StoreContext context)
+            : base(context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -44,6 +44,8 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
+
+            ItemsInCart = await CountItemsInCart(user);
 
             RequirePassword = await _userManager.HasPasswordAsync(user);
             return Page();

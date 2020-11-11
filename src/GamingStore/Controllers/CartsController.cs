@@ -52,7 +52,7 @@ namespace GamingStore.Controllers
                     {
                         ItemsCost = itemsPrice
                     },
-                    ItemsInCart = itemsInCart.Count()
+                    ItemsInCart = await CountItemsInCart()
                 };
 
                 return View(viewModel);

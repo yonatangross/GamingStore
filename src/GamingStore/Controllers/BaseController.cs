@@ -27,16 +27,26 @@ namespace GamingStore.Controllers
 
         protected Task<Customer> GetCurrentUserAsync() => UserManager.GetUserAsync(User);
 
+        public Task<int> ItemsInCart =>  CountItemsInCart();
+
         protected async Task<int> CountItemsInCart()
         {
-            var user = await GetCurrentUserAsync();
+            Customer user = await GetCurrentUserAsync();
 
             if (user == null)
             {
                 return 0;
             }
 
-            return await Context.Carts.CountAsync(cart => cart.CustomerId == user.Id);
+            var itemsInCart = 0;
+
+            foreach (Cart itemInCart in Context.Carts.Where(c => c.CustomerId == user.Id))
+            {
+                itemsInCart += itemInCart.Quantity;
+            }
+
+
+            return itemsInCart;
         }
     }
 }

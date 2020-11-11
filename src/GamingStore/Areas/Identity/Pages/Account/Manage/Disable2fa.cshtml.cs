@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GamingStore.Data;
 using GamingStore.Models;
+using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,14 +12,13 @@ using Microsoft.Extensions.Logging;
 
 namespace GamingStore.Areas.Identity.Pages.Account.Manage
 {
-    public class Disable2faModel : PageModel
+    public class Disable2faModel : ViewPageModel
     {
         private readonly UserManager<Customer> _userManager;
         private readonly ILogger<Disable2faModel> _logger;
 
-        public Disable2faModel(
-            UserManager<Customer> userManager,
-            ILogger<Disable2faModel> logger)
+        public Disable2faModel(UserManager<Customer> userManager, ILogger<Disable2faModel> logger, StoreContext context) 
+            : base(context)
         {
             _userManager = userManager;
             _logger = logger;
@@ -29,10 +30,13 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnGet()
         {
             var user = await _userManager.GetUserAsync(User);
+            ItemsInCart = await CountItemsInCart(user);
+
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
+
 
             if (!await _userManager.GetTwoFactorEnabledAsync(user))
             {

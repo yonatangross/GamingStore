@@ -11,7 +11,6 @@ namespace GamingStore.ViewModels.Orders
 
         public Address ShippingAddress { get; set; }
 
+        public string OrderId { get; set; }
     }
-
-
 }

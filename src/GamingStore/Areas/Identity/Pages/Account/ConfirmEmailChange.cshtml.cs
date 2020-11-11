@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GamingStore.Data;
 using GamingStore.Models;
+using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,12 +15,13 @@ using Microsoft.AspNetCore.WebUtilities;
 namespace GamingStore.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class ConfirmEmailChangeModel : PageModel
+    public class ConfirmEmailChangeModel : ViewPageModel
     {
         private readonly UserManager<Customer> _userManager;
         private readonly SignInManager<Customer> _signInManager;
 
-        public ConfirmEmailChangeModel(UserManager<Customer> userManager, SignInManager<Customer> signInManager)
+        public ConfirmEmailChangeModel(UserManager<Customer> userManager, SignInManager<Customer> signInManager, StoreContext context)
+            : base(context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -35,6 +38,8 @@ namespace GamingStore.Areas.Identity.Pages.Account
             }
 
             var user = await _userManager.FindByIdAsync(userId);
+            ItemsInCart = await CountItemsInCart(user);
+
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{userId}'.");

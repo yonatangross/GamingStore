@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GamingStore.Data;
 using GamingStore.Models;
+using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,13 +12,14 @@ using Microsoft.Extensions.Logging;
 
 namespace GamingStore.Areas.Identity.Pages.Account.Manage
 {
-    public class ResetAuthenticatorModel : PageModel
+    public class ResetAuthenticatorModel : ViewPageModel
     {
         private readonly UserManager<Customer> _userManager;
         private readonly SignInManager<Customer> _signInManager;
         private readonly ILogger<ResetAuthenticatorModel> _logger;
 
-        public ResetAuthenticatorModel(UserManager<Customer> userManager, SignInManager<Customer> signInManager, ILogger<ResetAuthenticatorModel> logger)
+        public ResetAuthenticatorModel(UserManager<Customer> userManager, SignInManager<Customer> signInManager, ILogger<ResetAuthenticatorModel> logger, StoreContext context)
+            : base(context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -29,6 +32,7 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnGet()
         {
             Customer user = await _userManager.GetUserAsync(User);
+            ItemsInCart = await CountItemsInCart(user);
 
             if (user == null)
             {

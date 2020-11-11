@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using GamingStore.Data;
 using GamingStore.Models;
+using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 namespace GamingStore.Areas.Identity.Pages.Account.Manage
 {
-    public class ChangePasswordModel : PageModel
+    public class ChangePasswordModel : ViewPageModel
     {
         private readonly UserManager<Customer> _userManager;
         private readonly SignInManager<Customer> _signInManager;
         private readonly ILogger<ChangePasswordModel> _logger;
 
-        public ChangePasswordModel(
-            UserManager<Customer> userManager,
-            SignInManager<Customer> signInManager,
-            ILogger<ChangePasswordModel> logger)
+        public ChangePasswordModel(UserManager<Customer> userManager, SignInManager<Customer> signInManager, ILogger<ChangePasswordModel> logger, StoreContext context)
+            : base(context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -58,6 +58,8 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
+
+            ItemsInCart = await CountItemsInCart(user);
 
             var hasPassword = await _userManager.HasPasswordAsync(user);
             if (!hasPassword)

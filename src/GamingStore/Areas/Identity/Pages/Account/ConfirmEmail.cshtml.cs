@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GamingStore.Data;
 using GamingStore.Models;
+using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +15,12 @@ using Microsoft.AspNetCore.WebUtilities;
 namespace GamingStore.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class ConfirmEmailModel : PageModel
+    public class ConfirmEmailModel : ViewPageModel
     {
         private readonly UserManager<Customer> _userManager;
 
-        public ConfirmEmailModel(UserManager<Customer> userManager)
+        public ConfirmEmailModel(UserManager<Customer> userManager, StoreContext context) 
+            : base(context)
         {
             _userManager = userManager;
         }
@@ -33,6 +36,8 @@ namespace GamingStore.Areas.Identity.Pages.Account
             }
 
             var user = await _userManager.FindByIdAsync(userId);
+            ItemsInCart = await CountItemsInCart(user);
+
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{userId}'.");

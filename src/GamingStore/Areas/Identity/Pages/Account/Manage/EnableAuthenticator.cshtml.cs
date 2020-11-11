@@ -6,7 +6,9 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Linq;
 using System.Threading.Tasks;
+using GamingStore.Data;
 using GamingStore.Models;
+using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,7 +16,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GamingStore.Areas.Identity.Pages.Account.Manage
 {
-    public class EnableAuthenticatorModel : PageModel
+    public class EnableAuthenticatorModel : ViewPageModel
     {
         private readonly UserManager<Customer> _userManager;
         private readonly ILogger<EnableAuthenticatorModel> _logger;
@@ -22,10 +24,8 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
 
         private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
-        public EnableAuthenticatorModel(
-            UserManager<Customer> userManager,
-            ILogger<EnableAuthenticatorModel> logger,
-            UrlEncoder urlEncoder)
+        public EnableAuthenticatorModel(UserManager<Customer> userManager, ILogger<EnableAuthenticatorModel> logger, UrlEncoder urlEncoder, StoreContext context)
+            : base(context)
         {
             _userManager = userManager;
             _logger = logger;
@@ -36,13 +36,13 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
 
         public string AuthenticatorUri { get; set; }
 
-        [TempData]
+        [TempData] 
         public string[] RecoveryCodes { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
 
-        [BindProperty]
+        [BindProperty] 
         public InputModel Input { get; set; }
 
         public class InputModel
@@ -57,6 +57,8 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(User);
+            ItemsInCart = await CountItemsInCart(user);
+
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -70,6 +72,7 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnPostAsync()
         {
             var user = await _userManager.GetUserAsync(User);
+
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -78,6 +81,7 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
             if (!ModelState.IsValid)
             {
                 await LoadSharedKeyAndQrCodeUriAsync(user);
+
                 return Page();
             }
 
@@ -91,6 +95,7 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
             {
                 ModelState.AddModelError("Input.Code", "Verification code is invalid.");
                 await LoadSharedKeyAndQrCodeUriAsync(user);
+
                 return Page();
             }
 
@@ -104,6 +109,7 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
             {
                 var recoveryCodes = await _userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
                 RecoveryCodes = recoveryCodes.ToArray();
+
                 return RedirectToPage("./ShowRecoveryCodes");
             }
             else
@@ -116,6 +122,7 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
         {
             // Load the authenticator key & QR code URI to display on the form
             var unformattedKey = await _userManager.GetAuthenticatorKeyAsync(user);
+
             if (string.IsNullOrEmpty(unformattedKey))
             {
                 await _userManager.ResetAuthenticatorKeyAsync(user);
@@ -132,11 +139,13 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
         {
             var result = new StringBuilder();
             int currentPosition = 0;
+
             while (currentPosition + 4 < unformattedKey.Length)
             {
                 result.Append(unformattedKey.Substring(currentPosition, 4)).Append(" ");
                 currentPosition += 4;
             }
+
             if (currentPosition < unformattedKey.Length)
             {
                 result.Append(unformattedKey.Substring(currentPosition));

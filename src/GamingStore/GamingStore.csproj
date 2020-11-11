@@ -38,6 +38,7 @@
     <PackageReference Include="Microsoft.ML.Recommender" Version="0.17.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="NLog" Version="4.7.5" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\images\items\CloudStingerWiredStereoGamingHeadset.jpg" />
