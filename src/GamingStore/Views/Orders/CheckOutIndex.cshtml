@@ -1,9 +1,114 @@
-﻿@model GamingStore.ViewModels.Orders.CreateOrderViewModel
+﻿@using GamingStore.Contracts
+@model GamingStore.ViewModels.Orders.CreateOrderViewModel
 
 @{
     ViewData["Title"] = "Check Out";
     Layout = "~/Views/Shared/_NewLayout.cshtml";
 }
+<style type="text/css">
+    .tg {
+        border-collapse: collapse;
+        border-color: #aaa;
+        border-spacing: 0;
+        border-style: solid;
+        border-width: 1px;
+    }
+
+        .tg td {
+            background-color: #fff;
+            border-color: #aaa;
+            border-style: solid;
+            border-width: 0px;
+            color: #333;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            overflow: hidden;
+            padding: 10px 15px;
+            word-break: normal;
+        }
+
+        .tg th {
+            background-color: #f38630;
+            border-color: #aaa;
+            border-style: solid;
+            border-width: 0px;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 20px;
+            word-break: normal;
+        }
+
+        .tg .tg-zv4m {
+            border-color: #ffffff;
+            text-align: left;
+            vertical-align: top
+        }
+
+        .tg .tg-0vh3 {
+            border-color: #ffffff;
+            color: #343434;
+            font-weight: bold;
+            position: -webkit-sticky;
+            position: sticky;
+            text-align: left;
+            top: -1px;
+            vertical-align: top;
+            will-change: transform
+        }
+
+        .tg .tg-4pr7 {
+            border-color: #ffffff;
+            color: #343434;
+            text-align: left;
+            vertical-align: top
+        }
+
+        .tg .tg-0pky {
+            border-color: inherit;
+            text-align: left;
+            vertical-align: top
+        }
+
+    .tg-sort-header::-moz-selection {
+        background: 0 0
+    }
+
+    .tg-sort-header::selection {
+        background: 0 0
+    }
+
+    .tg-sort-header {
+        cursor: pointer
+    }
+
+        .tg-sort-header:after {
+            content: '';
+            float: right;
+            margin-top: 7px;
+            border-width: 0 5px 5px;
+            border-style: solid;
+            border-color: #404040 transparent;
+            visibility: hidden
+        }
+
+        .tg-sort-header:hover:after {
+            visibility: visible
+        }
+
+    .tg-sort-asc:after, .tg-sort-asc:hover:after, .tg-sort-desc:after {
+        visibility: visible;
+        opacity: .4
+    }
+
+    .tg-sort-desc:after {
+        border-bottom: none;
+        border-width: 5px 5px 0
+    }
+</style>
+
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/cart_styles.css">
     <link rel="stylesheet" type="text/css" href="~/css/check_out.css">
@@ -148,6 +253,27 @@
                         </p>
                     </span>
                     <input type="submit" value="Place Order" class="btn btn-primary btn-lg btn-block">
+                </div>
+                <div class="container" style="margin-top: 8%">
+                    <table id="tg-hZj8X" class="tg">
+                        <thead>
+                            <tr>
+                                <th class="tg-0vh3">Currency</th>
+                                <th class="tg-0vh3">Exchange</th>
+                                <th class="tg-0vh3">Total Order</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (CurrencyInfo currency in Model.Currencies)
+                            {
+                                <tr>
+                                    <td class="tg-4pr7">@Html.DisplayFor(m => currency.Currency)</td>
+                                    <td class="tg-4pr7">@Html.DisplayFor(m => currency.Value)</td>
+                                    <td class="tg-4pr7">@currency.Symbol @Html.DisplayFor(m => currency.Total)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
