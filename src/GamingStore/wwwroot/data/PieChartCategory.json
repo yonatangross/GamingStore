@@ -1,34 +1,34 @@
 [
   {
     "Name": "GamingHeadsets",
-    "Value": 393.55000000000007
-  },
-  {
-    "Name": "Keyboards",
-    "Value": 876.53
+    "Value": 863.4599999999999
   },
   {
     "Name": "MousePads",
-    "Value": 910.0
+    "Value": 1040.0
   },
   {
     "Name": "Mouses",
-    "Value": 928.66
-  },
-  {
-    "Name": "GPUs",
-    "Value": 10176.0
-  },
-  {
-    "Name": "Monitors",
-    "Value": 10497.219999999998
+    "Value": 1142.18
   },
   {
     "Name": "GamingChairs",
-    "Value": 17066.99
+    "Value": 1273.96
+  },
+  {
+    "Name": "Keyboards",
+    "Value": 3909.2200000000003
+  },
+  {
+    "Name": "Monitors",
+    "Value": 9068.050000000001
+  },
+  {
+    "Name": "GPUs",
+    "Value": 12533.889999999998
   },
   {
     "Name": "CPUs",
-    "Value": 35659.62
+    "Value": 15880.650000000001
   }
 ]
