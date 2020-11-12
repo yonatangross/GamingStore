@@ -115,11 +115,6 @@ p a:hover {
 		opacity: 0.2;
 	}
 
-::selection {
-}
-
-p::selection {
-}
 
 h1 {
 	font-size: 48px;
