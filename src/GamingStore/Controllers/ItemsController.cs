@@ -347,34 +347,36 @@ namespace GamingStore.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> AddToCart(int id, int quantity = 1)
+        public async Task<IActionResult> AddToCart(int itemId, int quantity = 1)
         {
             try
             {
+                if(quantity==0)
+                    return RedirectToAction(nameof(Index));
                 Customer customer = await GetCurrentUserAsync();
 
-                if (customer == null)
+                if (customer == null) // Not Log In
                 {
                     return NotFound();
                 }
 
-                Cart cart = await Context.Carts.FirstOrDefaultAsync(c => c.CustomerId == customer.Id);
+                Cart cart = await Context.Carts.FirstOrDefaultAsync(c => c.CustomerId == customer.Id && c.ItemId==itemId);
 
-                if (cart == null || cart.ItemId != id)
+                if (cart == null)
                 {
                     cart = new Cart()
                     {
-                        ItemId = id,
-                        Quantity = quantity,
-                        CustomerId = customer.Id
+                        CustomerId = customer.Id,
+                        ItemId = itemId,
+                        Quantity = quantity
                     };
 
-                    Context.Carts.Add(cart);
+                    await Context.Carts.AddAsync(cart);
                     await Context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
 
-                cart.Quantity++;
+                cart.Quantity = cart.Quantity + quantity;
                 Context.Update(cart);
                 await Context.SaveChangesAsync();
             }

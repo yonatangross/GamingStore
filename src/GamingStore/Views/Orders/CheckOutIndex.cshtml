@@ -6,146 +6,6 @@
     Layout = "~/Views/Shared/_NewLayout.cshtml";
 }
 
-<style>
-
-    .tg {
-        border-collapse: collapse;
-        border-color: #aaa;
-        border-spacing: 0;
-        border-style: solid;
-        border-width: 1px;
-    }
-
-        .tg td {
-            background-color: #fff;
-            border-color: #aaa;
-            border-style: solid;
-            border-width: 0px;
-            color: #333;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            overflow: hidden;
-            padding: 10px 15px;
-            word-break: normal;
-        }
-
-        .tg th {
-            background-color: #ececec;
-            border-color: #aaa;
-            border-style: solid;
-            border-width: 0px;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            font-weight: normal;
-            overflow: hidden;
-            padding: 10px 20px;
-            word-break: normal;
-        }
-
-        .tg .tg-zv4m {
-            border-color: #ffffff;
-            text-align: left;
-            vertical-align: top
-        }
-
-        .tg .tg-0vh3 {
-            border-color: #ffffff;
-            color: #343434;
-            font-weight: bold;
-            position: -webkit-sticky;
-            position: sticky;
-            text-align: left;
-            top: -1px;
-            vertical-align: top;
-            will-change: transform
-        }
-
-        .tg .tg-4pr7 {
-            border-color: #ffffff;
-            color: #343434;
-            text-align: left;
-            vertical-align: top
-        }
-
-        .tg .tg-0pky {
-            border-color: inherit;
-            text-align: left;
-            vertical-align: top
-        }
-
-    .tg-sort-header::-moz-selection {
-        background: 0 0
-    }
-
-    .tg-sort-header::selection {
-        background: 0 0
-    }
-
-    .tg-sort-header {
-        cursor: pointer
-    }
-
-        .tg-sort-header:after {
-            content: '';
-            float: right;
-            margin-top: 7px;
-            border-width: 0 5px 5px;
-            border-style: solid;
-            border-color: #404040 transparent;
-            visibility: hidden
-        }
-
-        .tg-sort-header:hover:after {
-            visibility: visible
-        }
-
-    .tg-sort-asc:after, .tg-sort-asc:hover:after, .tg-sort-desc:after {
-        visibility: visible;
-        opacity: .4
-    }
-
-    .tg-sort-desc:after {
-        border-bottom: none;
-        border-width: 5px 5px 0
-    }
-
-    .collapsible {
-        background-color: #9d9d9d;
-        color: white;
-        cursor: pointer;
-        padding: 18px;
-        width: 100%;
-        border: none;
-        text-align: left;
-        outline: none;
-        font-size: 15px;
-    }
-
-        .active, .collapsible:hover {
-            background-color: #555;
-        }
-
-    .content {
-        padding: 0 5px;
-        display: none;
-        overflow: hidden;
-        background-color: #f1f1f1;
-    }
-
-    .collapsible:after {
-        content: '\02795'; /* Unicode character for "plus" sign (+) */
-        font-size: 13px;
-        color: white;
-        float: right;
-        margin-left: 5px;
-    }
-
-    .active:after {
-        content: "\2796"; /* Unicode character for "minus" sign (-) */
-    }
-</style>
-
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/cart_styles.css">
     <link rel="stylesheet" type="text/css" href="~/css/check_out.css">
@@ -270,8 +130,11 @@
                         <p>
                             @foreach (Cart cart in Model.Cart)
                             {
+                                var total = cart.Item.Price * cart.Quantity;
+                                total = Math.Round((total + Math.Abs(0.2 - 0.3 + 0.1)) * 100) / 100;
                                 <span>@cart.Quantity x @cart.Item.Title.Substring(0, Math.Min(cart.Item.Title.Length, 27))</span>
-                                <span class="price">@Html.DisplayFor(m => cart.Item.Price)</span>
+                                <span class="price">$@Html.DisplayFor(m=>total)
+                                </span>
                                 <br>
                             }
                         </p>
@@ -292,7 +155,7 @@
                     <input type="submit" value="Place Order" class="btn btn-primary btn-lg btn-block">
                 </div>
                 <div class="container" style="margin-top: 8%">
-                    <button type="button" class="collapsible">USD Exchange Rates</button>
+                    <button type="button" class="collapsible" style="border-radius: .3rem" >USD Exchange Rates</button>
                     <div class="content">
                         <table id="tg-hZj8X" class="tg">
                             <thead>

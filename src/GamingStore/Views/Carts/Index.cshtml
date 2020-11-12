@@ -39,7 +39,11 @@
                                                 </div>
                                                 <div class="cart_item_total cart_info_col">
                                                     <div class="cart_item_title">Total</div>
-                                                    <div class="cart_item_text">@Html.DisplayFor(m => itemCart.Item.Price)</div>
+                                                    @{
+                                                        var total = @itemCart.Item.Price * @itemCart.Quantity;
+                                                        total = Math.Round((total + Math.Abs(0.2 - 0.3 + 0.1)) * 100) / 100;
+                                                    }
+                                                    <div class="cart_item_text"> $@total</div>
                                                 </div>
                                             </div>
                                         </li>

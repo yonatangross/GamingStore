@@ -256,7 +256,11 @@ namespace GamingStore.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            Store store = await Context.Stores.FindAsync(id);
+            Store store = await Context.Stores.Include(s => s.Orders).FirstOrDefaultAsync(s => s.Id == id);
+            if (store.Orders.Count > 0)
+            {
+                return RedirectToAction("ListStores", "Administration");
+            }
             Context.Stores.Remove(store);
             await Context.SaveChangesAsync();
 

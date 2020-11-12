@@ -10,27 +10,30 @@
 
 <table class="table">
     <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Orders.First().Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Orders.First().Customer.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Orders.First().OrderDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Orders.First().State)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Orders.First().Store)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Orders.First().Payment.Total)
-        </th>
-        <th></th>
-    </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Orders.First().Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Orders.First().Customer.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Orders.First().OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Orders.First().State)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Orders.First().Store)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Orders.First().Payment.Total)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Orders.First().StoreId)
+            </th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
     @foreach (var order in Model.Orders)
@@ -53,6 +56,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => order.Payment.Total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.StoreId)
             </td>
             <td>
                 <a asp-action="Edit" asp-controller="Orders" asp-route-id="@order.Id">Edit</a>
