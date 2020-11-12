@@ -95,7 +95,7 @@
                                 <div id="flash_message">
                                     <flash dismissable="true" />
                                 </div>
-                                <input type="submit" id="contact_submit" value="Send Message" name="submit" class="button contact_submit_button" >
+                                <input type="submit" id="contact_submit" value="Send Message" name="submit" class="button contact_submit_button">
                             </div>
                         }
                     </div>
@@ -104,10 +104,19 @@
         </div>
     </div>
 </body>
-<script src="js/home.js"></script>
-<script>
-    var canvas = document.getElementById("myCanvas");
-    var ctx = canvas.getContext("2d");
-    ctx.font = "40px Arial";
-    ctx.fillText("Get in Touch", 10, 50);
-</script>
+
+@section scripts{
+    <script src="js/home.js"></script>
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        ctx.font = "40px Arial";
+        ctx.fillText("Get in Touch", 10, 50);
+    </script>
+    <script>
+        setTimeout(function () {
+            $('.alert').fadeOut('slow');
+        }, 2000); // <-- time in milliseconds
+    </script>
+    <script src="/lib/jquery/dist/jquery.js"></script> <!-- Set this path correctly -->
+}
