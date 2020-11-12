@@ -251,7 +251,7 @@ namespace GamingStore.Controllers
         }
 
         // POST: Stores/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)

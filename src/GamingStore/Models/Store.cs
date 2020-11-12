@@ -28,7 +28,8 @@ namespace GamingStore.Models
         [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"[a-zA-Z]{2,}$")]
         public string Name { get; set; }
 
-        [Required] public Address Address { get; set; }
+        [Required] 
+        public Address Address { get; set; }
 
         [DisplayName("Phone Number")]
         [Required, DataType(DataType.PhoneNumber), StringLength(50), Phone]
