@@ -20,6 +20,7 @@ using GamingStore.ViewModels.Home;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Vereyon.Web;
 
 namespace GamingStore.Controllers
 {
@@ -27,11 +28,13 @@ namespace GamingStore.Controllers
     public class HomeController : BaseController
     {
         private readonly IEmailSender _emailSender;
+        private readonly IFlashMessage _flashMessage;
 
-        public HomeController(IEmailSender emailSender, UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager)
+        public HomeController(IEmailSender emailSender, UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager,IFlashMessage flashMessage)
             : base(userManager, context, roleManager, signInManager)
         {
             _emailSender = emailSender;
+            _flashMessage = flashMessage;
         }
 
         public async Task<IActionResult> Index()
@@ -116,6 +119,8 @@ namespace GamingStore.Controllers
 
             //start email Thread
             await Task.Run(() => { _emailSender.SendEmailAsync(toAddress, subject, message.ToString()); }).ConfigureAwait(false);
+
+            _flashMessage.Confirmation($"Message submitted.");
             return RedirectToAction(nameof(ContactUs));
         }
     }

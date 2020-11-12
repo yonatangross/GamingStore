@@ -1,6 +1,6 @@
 ﻿@model GamingStore.ViewModels.Home.ContactViewModel
 
-
+@addTagHelper *, Vereyon.Web.FlashMessage
 @{
     ViewData["Title"] = "Customer Service";
 }
@@ -92,7 +92,10 @@
                                 @Html.ValidationMessageFor(m => m.Message)
                             </div>
                             <div>
-                                <input type="submit" value="Send Message" name="submit" class="button contact_submit_button">
+                                <div id="flash_message">
+                                    <flash dismissable="true" />
+                                </div>
+                                <input type="submit" id="contact_submit" value="Send Message" name="submit" class="button contact_submit_button" >
                             </div>
                         }
                     </div>
@@ -101,7 +104,7 @@
         </div>
     </div>
 </body>
-
+<script src="js/home.js"></script>
 <script>
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");

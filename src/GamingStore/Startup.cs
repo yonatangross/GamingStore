@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLog;
+using Vereyon.Web;
 
 namespace GamingStore
 {
@@ -61,7 +62,7 @@ namespace GamingStore
             });
 
 
-
+            services.AddFlashMessage();
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageOptions>(Configuration);
         }
