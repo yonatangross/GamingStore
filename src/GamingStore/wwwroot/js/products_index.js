@@ -14,6 +14,4 @@
     button.classList.add('clicked');
   }
 
-
-
 });
