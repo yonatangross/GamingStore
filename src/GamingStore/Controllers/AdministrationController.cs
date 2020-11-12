@@ -20,7 +20,7 @@ namespace GamingStore.Controllers
     [Authorize(Roles = "Admin")]
     public class AdministrationController : BaseController
     {
-        public AdministrationController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager) 
+        public AdministrationController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager)
             : base(userManager, context, roleManager, signInManager)
         {
         }
@@ -189,6 +189,10 @@ namespace GamingStore.Controllers
                     });
                 }
             }
+
+            var groupByCheck = from order in orders group order by order.OrderDate.Date.ToString("Y") into newGroup orderby newGroup.Key select newGroup;
+            var serializedGroupBy = JsonConvert.SerializeObject(groupByCheck, Formatting.Indented);
+
 
             var serializeObject = JsonConvert.SerializeObject(orderMonthlyList, Formatting.Indented);
 
@@ -445,10 +449,10 @@ namespace GamingStore.Controllers
                     continue;
                 }
 
-                return RedirectToAction("EditRole", new {Id = roleId});
+                return RedirectToAction("EditRole", new { Id = roleId });
             }
 
-            return RedirectToAction("EditRole", new {Id = roleId});
+            return RedirectToAction("EditRole", new { Id = roleId });
         }
 
         [HttpPost]
