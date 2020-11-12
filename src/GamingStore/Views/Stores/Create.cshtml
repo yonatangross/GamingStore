@@ -4,20 +4,18 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
 <h3>Create Store</h3>
-
 <hr />
 <div class="row">
     @using (Html.BeginForm("Create", "Stores", FormMethod.Post, new { @class = "col-10" }))
     {
         @Html.HiddenFor(m => m.Store.Id)
-        @Html.HiddenFor(m=>m.Store.Address.FullName)
         <div class="form-group row">
             @Html.LabelFor(m => m.Store.Name, new { @class = "col-sm-2 col-form-label" })
             <div class="col-sm-5">
                 <div class="form-check">
                     @Html.TextBoxFor(s => s.Store.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Store.Name)
                 </div>
             </div>
         </div>
@@ -26,7 +24,17 @@
                 @Html.LabelFor(m => m.Store.Address.Address1, new {@class = "col-sm-2 col-form-label"})
                 <div class="col-sm-5">
                     <div class="form-check">
-                        @Html.TextBoxFor(s => s.Store.Address.Address1, new {@class = "form-control"})
+                        @Html.TextBoxFor(s => s.Store.Address.Address1, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Store.Address.Address1)
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Store.Address.FullName, new {@class = "col-sm-2 col-form-label"})
+                <div class="col-sm-5">
+                    <div class="form-check">
+                        @Html.TextBoxFor(s => s.Store.Address.FullName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Store.Address.FullName)
                     </div>
                 </div>
             </div>
@@ -34,7 +42,8 @@
                 @Html.LabelFor(m => m.Store.Address.City, new {@class = "col-sm-2 col-form-label"})
                 <div class="col-sm-5">
                     <div class="form-check">
-                        @Html.TextBoxFor(s => s.Store.Address.City, new {@class = "form-control"})
+                        @Html.TextBoxFor(s => s.Store.Address.City, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Store.Address.City)
                     </div>
                 </div>
             </div>
@@ -42,7 +51,8 @@
                 @Html.LabelFor(m => m.Store.Address.PostalCode, new {@class = "col-sm-2 col-form-label"})
                 <div class="col-sm-5">
                     <div class="form-check">
-                        @Html.TextBoxFor(s => s.Store.Address.PostalCode, new {@class = "form-control"})
+                        @Html.TextBoxFor(s => s.Store.Address.PostalCode, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Store.Address.PostalCode)
                     </div>
                 </div>
             </div>
@@ -61,6 +71,7 @@
             <div class="col-sm-5">
                 <div class="form-check">
                     @Html.TextBoxFor(s => s.Store.PhoneNumber, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Store.PhoneNumber)
                 </div>
             </div>
         </div>
@@ -69,6 +80,7 @@
             <div class="col-sm-5">
                 <div class="form-check">
                     @Html.TextBoxFor(s => s.Store.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Store.Email)
                 </div>
             </div>
         </div>

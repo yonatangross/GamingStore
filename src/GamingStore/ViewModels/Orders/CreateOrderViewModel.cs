@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using GamingStore.Contracts;
 using GamingStore.Models;
+using GamingStore.Services.Currency;
 
 namespace GamingStore.ViewModels.Orders
 {
@@ -32,5 +33,7 @@ namespace GamingStore.ViewModels.Orders
 
         [Required]
         public Payment Payment { get; set; }
+
+        public List<CurrencyInfo> Currencies { get; set; }
     }
 }

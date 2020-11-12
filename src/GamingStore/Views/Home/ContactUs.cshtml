@@ -52,39 +52,41 @@
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
                     <div class="contact_form_container">
-                        <div class="contact_form_title">Get in Touch</div>
+
+                        <canvas id="myCanvas" width="300" height="100"></canvas>
+                        <div class="contact_form_title"></div>
 
                         @using (Html.BeginForm("ConfirmContactUs", "Home", FormMethod.Post))
                         {
-                    <div class="contact_form_inputs d-flex flex-md-row flex-column justify-content-between">
-                        @{
-                            if (!string.IsNullOrWhiteSpace(Model?.Name))
-                            {
-                                @Html.TextBoxFor(m => m.Name, new { @placeholder = "Your name", @class = "input_field", disabled = "disabled" })
-                                @Html.HiddenFor(m => m.Name)
-                            }
-                            else
-                            {
-                                @Html.TextBoxFor(m => m.Name, new { @placeholder = "Your name", @class = "input_field" })
-                            }
+                            <div class="contact_form_inputs d-flex flex-md-row flex-column justify-content-between">
+                                @{
+                                    if (!string.IsNullOrWhiteSpace(Model?.Name))
+                                    {
+                                        @Html.TextBoxFor(m => m.Name, new { @placeholder = "Your name", @class = "input_field", disabled = "disabled" })
+                                        @Html.HiddenFor(m => m.Name)
+                                    }
+                                    else
+                                    {
+                                        @Html.TextBoxFor(m => m.Name, new { @placeholder = "Your name", @class = "input_field" })
+                                    }
 
-                            if (!string.IsNullOrWhiteSpace(Model?.Email))
-                            {
-                                @Html.TextBoxFor(m => m.Email, new { @placeholder = "Your email", @type = "email", @class = "input_field", disabled = "disabled" })
-                                @Html.HiddenFor(m => m.Email)
-                            }
-                            else
-                            {
-                                @Html.TextBoxFor(m => m.Email, new { @placeholder = "Your email", @type = "email", @class = "input_field" })
-                            }
+                                    if (!string.IsNullOrWhiteSpace(Model?.Email))
+                                    {
+                                        @Html.TextBoxFor(m => m.Email, new { @placeholder = "Your email", @type = "email", @class = "input_field", disabled = "disabled" })
+                                        @Html.HiddenFor(m => m.Email)
+                                    }
+                                    else
+                                    {
+                                        @Html.TextBoxFor(m => m.Email, new { @placeholder = "Your email", @type = "email", @class = "input_field" })
+                                    }
 
-                            @Html.ValidationMessageFor(m => m.Name)
-                            @Html.ValidationMessageFor(m => m.Email)
-                        }
+                                    @Html.ValidationMessageFor(m => m.Name)
+                                    @Html.ValidationMessageFor(m => m.Email)
+                                }
 
-                        @Html.TextBoxFor(m => m.PhoneNumber, new { @placeholder = "Your phone number", @class = "input_field" })
-                        @Html.ValidationMessageFor(m => m.PhoneNumber)
-                    </div>
+                                @Html.TextBoxFor(m => m.PhoneNumber, new { @placeholder = "Your phone number", @class = "input_field" })
+                                @Html.ValidationMessageFor(m => m.PhoneNumber)
+                            </div>
                             <div>
                                 @Html.TextAreaFor(m => m.Message, new { @placeholder = "Message (Must contains 5 letters and above)", @class = "text_field", @rows = "4" })
                                 @Html.ValidationMessageFor(m => m.Message)
@@ -99,3 +101,10 @@
         </div>
     </div>
 </body>
+
+<script>
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    ctx.font = "40px Arial";
+    ctx.fillText("Get in Touch", 10, 50);
+</script>

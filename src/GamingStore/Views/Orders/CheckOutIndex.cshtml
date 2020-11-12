@@ -1,9 +1,152 @@
-﻿@model GamingStore.ViewModels.Orders.CreateOrderViewModel
+﻿@using GamingStore.Contracts
+@model GamingStore.ViewModels.Orders.CreateOrderViewModel
 
 @{
     ViewData["Title"] = "Check Out";
     Layout = "~/Views/Shared/_NewLayout.cshtml";
 }
+
+<style>
+    
+    .tg {
+        border-collapse: collapse;
+        border-color: #aaa;
+        border-spacing: 0;
+        border-style: solid;
+        border-width: 1px;
+    }
+
+    .tg td {
+        background-color: #fff;
+        border-color: #aaa;
+        border-style: solid;
+        border-width: 0px;
+        color: #333;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        overflow: hidden;
+        padding: 10px 15px;
+        word-break: normal;
+    }
+
+    .tg th {
+        background-color: #ececec;
+        border-color: #aaa;
+        border-style: solid;
+        border-width: 0px;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: normal;
+        overflow: hidden;
+        padding: 10px 20px;
+        word-break: normal;
+    }
+
+    .tg .tg-zv4m {
+        border-color: #ffffff;
+        text-align: left;
+        vertical-align: top
+    }
+
+    .tg .tg-0vh3 {
+        border-color: #ffffff;
+        color: #343434;
+        font-weight: bold;
+        position: -webkit-sticky;
+        position: sticky;
+        text-align: left;
+        top: -1px;
+        vertical-align: top;
+        will-change: transform
+    }
+
+    .tg .tg-4pr7 {
+        border-color: #ffffff;
+        color: #343434;
+        text-align: left;
+        vertical-align: top
+    }
+
+    .tg .tg-0pky {
+        border-color: inherit;
+        text-align: left;
+        vertical-align: top
+    }
+
+    .tg-sort-header::-moz-selection {
+        background: 0 0
+    }
+
+    .tg-sort-header::selection {
+        background: 0 0
+    }
+
+    .tg-sort-header {
+        cursor: pointer
+    }
+
+    .tg-sort-header:after {
+        content: '';
+        float: right;
+        margin-top: 7px;
+        border-width: 0 5px 5px;
+        border-style: solid;
+        border-color: #404040 transparent;
+        visibility: hidden
+    }
+
+    .tg-sort-header:hover:after {
+        visibility: visible
+    }
+
+    .tg-sort-asc:after, .tg-sort-asc:hover:after, .tg-sort-desc:after {
+        visibility: visible;
+        opacity: .4
+    }
+
+    .tg-sort-desc:after {
+        border-bottom: none;
+        border-width: 5px 5px 0
+    }
+
+    .collapsible {
+        background-color: #9d9d9d;
+        color: white;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+    }
+
+    .active, .collapsible:hover {
+        background-color: #555;
+    }
+
+    .content {
+        padding: 0 5px;
+        display: none;
+        overflow: hidden;
+        background-color: #f1f1f1;
+    }
+
+    .collapsible:after {
+        content: '\02795'; /* Unicode character for "plus" sign (+) */
+        font-size: 13px;
+        color: white;
+        float: right;
+        margin-left: 5px;
+    }
+
+    .active:after {
+        content: "\2796"; /* Unicode character for "minus" sign (-) */
+    }
+
+</style>
+
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/cart_styles.css">
     <link rel="stylesheet" type="text/css" href="~/css/check_out.css">
@@ -149,6 +292,47 @@
                     </span>
                     <input type="submit" value="Place Order" class="btn btn-primary btn-lg btn-block">
                 </div>
+                <div class="container" style="margin-top: 8%">
+                    <button type="button" class="collapsible">USD Exchange Rates</button>
+                    <div class="content">
+                        <table id="tg-hZj8X" class="tg">
+                            <thead>
+                                <tr>
+                                    <th class="tg-0vh3">Currency</th>
+                                    <th class="tg-0vh3">Exchange</th>
+                                    <th class="tg-0vh3">Total Order</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @{
+                                    double currencyValueIls = Model.Currencies[0].Value;
+                                    double currencyValueEur = Model.Currencies[1].Value;
+                                    double currencyValueGbp = Model.Currencies[2].Value;
+                                    <input type="hidden" id="currency_value_ils" value="@currencyValueIls" />
+                                    <input type="hidden" id="currency_value_eur" value="@currencyValueEur" />
+                                    <input type="hidden" id="currency_value_gbp" value="@currencyValueGbp" />
+                                }
+
+                                @for (var index = 0; index < Model.Currencies.Count; index++)
+                                {
+                                    CurrencyInfo currency = Model.Currencies[index];
+                                    string itemCostCurrency = $"item_cost_currency_{index}";
+                                    string itemTotalCurrency = $"item_total_currency_{index}";
+                                    <input type="hidden" id="@itemCostCurrency" value="@currency.Total" />
+
+                                    <tr>
+                                        <td class="tg-4pr7">@Html.DisplayFor(m => currency.Currency)</td>
+                                        <td class="tg-4pr7">@Html.DisplayFor(m => currency.Value)</td>
+                                        <td class="tg-4pr7">
+                                            @currency.Symbol <span id="@itemTotalCurrency">@Html.DisplayFor(m => currency.Total)</span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     }
@@ -158,19 +342,51 @@
             $(function () {
                 $("input:radio").on("change", function () {
                     var ic = parseFloat($('#items_cost').val());
+                    var icc0 = parseFloat($('#item_cost_currency_0').val());
+                    var icc1 = parseFloat($('#item_cost_currency_1').val());
+                    var icc2 = parseFloat($('#item_cost_currency_2').val());
+                    var ils_value = parseFloat($('#currency_value_ils').val());
+                    var eur_value = parseFloat($('#currency_value_eur').val());
+                    var gbp_value = parseFloat($('#currency_value_gbp').val());
 
                     if ($(this).val() == "0") {
                         $('#shipping_amount').text("0.00");
                         $('#total_amount').text('$' + ic.toFixed(2));
+                        $('#item_total_currency_0').text(icc0.toFixed(2));
+                        $('#item_total_currency_1').text(icc1.toFixed(2));
+                        $('#item_total_currency_2').text(icc2.toFixed(2));
                     } else if ($(this).val() == "10") {
                         $('#shipping_amount').text("10.00");
                         $('#total_amount').text('$' + (ic + 10).toFixed(2));
+                        $('#item_total_currency_0').text((icc0 + 10 * ils_value).toFixed(2));
+                        $('#item_total_currency_1').text((icc1 + 10 * eur_value).toFixed(2));
+                        $('#item_total_currency_2').text((icc2 + 10 * gbp_value).toFixed(2));
                     } else if ($(this).val() == "45") {
                         $('#shipping_amount').text("45.00");
                         $('#total_amount').text('$' + (ic + 45).toFixed(2));
+                        $('#item_total_currency_0').text((icc0 + 45 * ils_value).toFixed(2));
+                        $('#item_total_currency_1').text((icc1 + 45 * eur_value).toFixed(2));
+                        $('#item_total_currency_2').text((icc2 + 45 * gbp_value).toFixed(2));
                     }
                 });
             });
+        </script>
+        
+        <script>
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+
+            for (i = 0; i < coll.length; i++) {
+                coll[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var content = this.nextElementSibling;
+                    if (content.style.display === "block") {
+                        content.style.display = "none";
+                    } else {
+                        content.style.display = "block";
+                    }
+                });
+            }
         </script>
     }
 </body>

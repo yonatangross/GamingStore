@@ -190,8 +190,8 @@ namespace GamingStore.Controllers
                 }
             }
 
-            var groupByCheck = from order in orders group order by order.OrderDate.Date.ToString("Y") into newGroup orderby newGroup.Key select newGroup;
-            var serializedGroupBy = JsonConvert.SerializeObject(groupByCheck, Formatting.Indented);
+            //var groupByCheck = from order in orders group order by order.OrderDate.Date.ToString("Y") into newGroup orderby newGroup.Key select newGroup;
+            //var serializedGroupBy = JsonConvert.SerializeObject(groupByCheck, Formatting.Indented);
 
 
             var serializeObject = JsonConvert.SerializeObject(orderMonthlyList, Formatting.Indented);

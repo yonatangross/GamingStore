@@ -7,9 +7,10 @@ namespace GamingStore.Contracts
 {
     public class Address
     {
-        [Display(Name = "Full Name")]
+        [Required]
+        [Display(Name = "Address name")]
         [DataType(DataType.Text)]
-        public string? FullName { get; set; }
+        public string? FullName { get; set; } 
 
         [Required]
         [DataType(DataType.Text)]
