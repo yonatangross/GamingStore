@@ -32,8 +32,9 @@
                     <div class="product_name">@Model.Item.Title</div>
                     <div class="product_text"><p>@Model.Item.Description</p></div>
                     <div class="order_info d-flex flex-row">
-                        @using (Html.BeginForm("AddToCart", "Items", FormMethod.Post, new { @id = "add-to-cart-form", role = "form" }))
+                        @using (Html.BeginForm("AddToCart", "Items", FormMethod.Post, new {role = "form" }))
                         {
+                            @Html.Hidden("itemId", Model.Item.Id)
                             <div class="clearfix" style="z-index: 1000;">
 
                                 <!-- Product Quantity -->

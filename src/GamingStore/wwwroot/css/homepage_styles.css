@@ -276,12 +276,13 @@ Main Navigation
 }
 
 .new_arrivals_title {
-	position: absolute;
-	left: 0;
+    left: 0;
 	top: -7px;
 	font-size: 24px;
 	font-weight: 500;
 	margin-bottom: -29px;
+    padding-bottom: 8px;
+    padding-left: 8px;
 }
 
 .bestsellers_panel {

@@ -202,11 +202,12 @@
                                         <div class="buttons d-flex flex-row">
                                             <div class="cart">
                                                 <i class="fa fa-shopping-cart" style="padding-right: 8%" ;></i>
-                                                <a asp-action="AddToCart" asp-route-id="@item.Id" style="width: 70%">
-                                                    <button class="btn btn-success cart-button btn-block">
-                                                        <span>Add to Cart</span>
-                                                    </button>
-                                                </a>
+                                                
+                                                @using (Html.BeginForm("AddToCart", "Items", FormMethod.Post, null))
+                                                {
+                                                    @Html.Hidden("itemId", item.Id)
+                                                    <input type="submit" value="Add to Cart" class="btn btn-success cart-button btn-block" style="width: 90%" />
+                                                }
                                             </div>
                                         </div>
                                     </div>
