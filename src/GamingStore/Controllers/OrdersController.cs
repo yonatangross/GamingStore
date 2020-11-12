@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Models;
 using GamingStore.Models.Relationships;
+using GamingStore.Services.Currency;
 using GamingStore.ViewModels;
 using GamingStore.ViewModels.Orders;
 using Microsoft.AspNetCore.Authorization;
@@ -17,7 +18,7 @@ namespace GamingStore.Controllers
 {
     public class OrdersController : BaseController
     {
-        public OrdersController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager) 
+        public OrdersController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager)
             : base(userManager, context, roleManager, signInManager)
         {
         }
@@ -45,14 +46,26 @@ namespace GamingStore.Controllers
                 Customer customer = await GetCurrentUserAsync();
                 List<Cart> itemsInCart = await GetItemsInCart(customer);
                 const int defaultPaymentCost = 10;
+
                 double itemsCost =
                     itemsInCart.Aggregate<Cart, double>(0,
                         (current, cart) => current + cart.Item.Price * cart.Quantity);
+
                 double totalCost = itemsCost + defaultPaymentCost;
 
                 if (customer.Address == null)
                 {
                     customer.Address = new Address();
+                }
+
+                List<CurrencyInfo> currencies = await CurrencyConvert.GetExchangeRate(new List<string>
+                {
+                    "EUR", "GBP", "ILS"
+                });
+
+                foreach (CurrencyInfo currency in currencies)
+                {
+                    currency.Total = totalCost * currency.Value;
                 }
 
                 var viewModel = new CreateOrderViewModel
@@ -67,7 +80,7 @@ namespace GamingStore.Controllers
                         Total = totalCost
                     },
                     ItemsInCart = await CountItemsInCart(),
-                    
+                    Currencies = currencies
                 };
 
                 return View(viewModel);
@@ -77,7 +90,7 @@ namespace GamingStore.Controllers
                 // ignored
             }
 
-            return View(new CreateOrderViewModel(){ItemsInCart =await  CountItemsInCart()});
+            return View(new CreateOrderViewModel() { ItemsInCart = await CountItemsInCart() });
         }
 
         private async Task<List<Cart>> GetItemsInCart(Customer customer)
@@ -150,7 +163,7 @@ namespace GamingStore.Controllers
             Context.Carts.RemoveRange(carts);
             await Context.SaveChangesAsync();
 
-            return RedirectToAction("ThankYouIndex", new {id = order.Id, items});
+            return RedirectToAction("ThankYouIndex", new { id = order.Id, items });
         }
 
         public async Task<IActionResult> ThankYouIndex(string id, int items)
