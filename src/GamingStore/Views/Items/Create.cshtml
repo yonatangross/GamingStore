@@ -1,13 +1,13 @@
-﻿@model GamingStore.ViewModels.Items.CreateEditItemViewModel
+﻿@using GamingStore.Contracts
+@model GamingStore.ViewModels.Items.CreateEditItemViewModel
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Create Item</h1>
 
-<h4>Item</h4>
 <hr />
 <div class="column">
     <form asp-action="Create" enctype="multipart/form-data" class="row">
@@ -15,7 +15,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Item.Title" class="control-label"></label>
-                <input asp-for="Item.Title" class="form-control" required/>
+                <input asp-for="Item.Title" class="form-control" required />
                 <span asp-validation-for="Item.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -33,9 +33,16 @@
                 <input asp-for="Item.Price" class="form-control" required />
                 <span asp-validation-for="Item.Price" class="text-danger"></span>
             </div>
-            <div class="form-group" style="padding-bottom:7%">
+
+            <div class="form-group">
                 <label asp-for="Item.Category" class="control-label"></label>
-                <input asp-for="Item.Category" class="form-control" id="tags" required />
+                <select class="form-control" asp-for="Item.Category" style="margin-left: auto;">
+                    @for (int i = 0; i < Enum.GetNames(typeof(Category)).Length; i++)
+                    {
+                        var category = (Category)i;
+                        <option class="form-control">@Html.DisplayFor(c => category)</option>
+                    }
+                </select>
                 <span asp-validation-for="Item.Category" class="text-danger"></span>
             </div>
         </div>
@@ -73,33 +80,33 @@
                 <label class="form-check-label">Publish On Twitter</label>
             </div>
             <div class="input-group d-flex justify-content-center" style="margin-top: 10%;">
-                <input type="submit" value="Create Item" class="btn btn-primary"/>
+                <input type="submit" value="Create Item" class="btn btn-primary" />
             </div>
         </div>
     </form>
 </div>
 
 @*@section scripts{
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        //todo: switch with category dropdown and remove afterwards.
-        //todo: remove old jQuery with our jQuery lib.
-        $(function () {
-            var myArray = [];
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            //todo: switch with category dropdown and remove afterwards.
+            //todo: remove old jQuery with our jQuery lib.
+            $(function () {
+                var myArray = [];
 
-            @{
-                foreach (var d in Model.Categories)
-                {
-                    @:myArray.push("@d");
+                @{
+                    foreach (var d in Model.Categories)
+                    {
+                        @:myArray.push("@d");
+                    }
                 }
-            }
 
-            var availableTags = myArray;
-            $("#tags").autocomplete({
-                source: availableTags
+                var availableTags = myArray;
+                $("#tags").autocomplete({
+                    source: availableTags
+                });
             });
-        });
-    </script>
-}*@
+        </script>
+    }*@
 

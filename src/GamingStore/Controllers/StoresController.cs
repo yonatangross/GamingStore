@@ -162,7 +162,6 @@ namespace GamingStore.Controllers
                 Store = store,
                 ItemsInCart = await CountItemsInCart()
             };
-            store.Address.FullName = store.Name;
 
             if (!ModelState.IsValid)
             {
@@ -252,7 +251,7 @@ namespace GamingStore.Controllers
         }
 
         // POST: Stores/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
