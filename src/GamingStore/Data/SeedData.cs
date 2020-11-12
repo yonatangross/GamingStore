@@ -20,12 +20,9 @@ namespace GamingStore.Data
             await using var context = new StoreContext(serviceProvider.GetRequiredService<DbContextOptions<StoreContext>>());
             var userManager = serviceProvider.GetService<UserManager<Customer>>();
             var roleManager = serviceProvider.GetService<RoleManager<IdentityRole>>();
-
             await CreateRolesAndUsers(context, userManager, roleManager, adminPassword);
-
             SeedDatabase(context);
 
-            
         }
 
         private static async Task CreateRolesAndUsers(StoreContext context, UserManager<Customer> userManager, RoleManager<IdentityRole> roleManager, string adminPassword)
@@ -33,7 +30,6 @@ namespace GamingStore.Data
             const string admin = "Admin";
             const string storeManager = "StoreManager";
             const string customer = "Customer";
-
             bool roleExists = await roleManager.RoleExistsAsync(admin);
 
             if (!roleExists)
@@ -899,8 +895,8 @@ namespace GamingStore.Data
             try
             {
                 IEnumerable<Order> orders = GenerateOrders(customers, items.ToList(), stores, out var payments);
-
                 List<Order> orderList = orders.ToList();
+
                 foreach (Order order in orderList)
                 {
                     context.Orders.Add(order);
@@ -958,7 +954,6 @@ namespace GamingStore.Data
                     {
                         continue;
                     }
-
                     const float itemsNumberMultiplier = 0.3f;
 
                     store.StoreItems.Add(new StoreItem
