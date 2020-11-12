@@ -183,6 +183,7 @@
                             </ul>
                         </div>
                     </div>
+
                     @*<div class="product_grid">*@
                     <div class="product_grid">
                         @{
@@ -190,7 +191,6 @@
                             {
                                 <!-- Product Item -->
                                 <div class="product_item">
-
                                     <div class="product_image ">
                                         <a href="/Items/Details?id=@item.Id">
                                             <img src="/@item.ImageUrl/1.jpg" alt="">
@@ -203,8 +203,13 @@
                                         </div>
                                         <div class="buttons d-flex flex-row">
                                             <div class="cart">
-                                                <i class="fa fa-shopping-cart"></i>
-                                            </div> <button class="btn btn-success cart-button btn-block"><span class="dot">1</span>Add to cart </button>
+                                                <i class="fa fa-shopping-cart" style="padding-right: 8%" ;></i>
+                                                <a asp-action="AddToCart" asp-route-id="@item.Id" style="width: 70%">
+                                                    <button class="btn btn-success cart-button btn-block">
+                                                        <span>Add to Cart</span>
+                                                    </button>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
