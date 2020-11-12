@@ -9,6 +9,7 @@ using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Vereyon.Web;
 
 namespace GamingStore.Areas.Identity.Pages.Account.Manage
 {
@@ -16,12 +17,14 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<Customer> _userManager;
         private readonly SignInManager<Customer> _signInManager;
+        private readonly IFlashMessage _flushMessage;
 
-        public IndexModel(UserManager<Customer> userManager, SignInManager<Customer> signInManager, StoreContext context) 
+        public IndexModel(UserManager<Customer> userManager, SignInManager<Customer> signInManager, StoreContext context, IFlashMessage flushMessage) 
             : base(context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _flushMessage = flushMessage;
         }
 
         public string Username { get; set; }
@@ -34,11 +37,12 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
+            [Required, DataType(DataType.Text), StringLength(50)/*, RegularExpression(@"^[A-Z]+[a-zA-Z]*$")*/]
             [Display(Name = "First Name")]
             public string FirstName { get; set; }
 
             [Display(Name = "Phone number")]
+            [Required]
             public string PhoneNumber { get; set; }
         }
 
@@ -94,6 +98,8 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
+            _flushMessage.Confirmation("Saved");
+
             return RedirectToPage();
         }
     }

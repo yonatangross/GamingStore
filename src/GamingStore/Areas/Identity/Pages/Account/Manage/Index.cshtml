@@ -1,5 +1,7 @@
 ﻿@page
 @model IndexModel
+@addTagHelper *, Vereyon.Web.FlashMessage
+
 @{
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
@@ -14,7 +16,13 @@
             <div class="form-group">
                 @*Todo: add the option to change userName*@
                 <label asp-for="Username"></label>
-                <input asp-for="Username" class="form-control" disabled/>
+                <input asp-for="Username" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                @*bug: Render user's parameters *@
+                <label asp-for="Input.FirstName"></label>
+                <input asp-for="Input.FirstName" class="form-control" />
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 @*bug: Render user's parameters *@
@@ -25,6 +33,10 @@
             @*todo: add editing for user's personal data*@
             <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
         </form>
+
+        <div id="flash_message">
+            <flash dismissable="true" />
+        </div>
     </div>
 </div>
 
