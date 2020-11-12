@@ -120,7 +120,7 @@ namespace GamingStore.Controllers
             //start email Thread
             await Task.Run(() => { _emailSender.SendEmailAsync(toAddress, subject, message.ToString()); }).ConfigureAwait(false);
 
-            _flashMessage.Confirmation($"Message submitted.");
+            _flashMessage.Confirmation("Message Sent");
             return RedirectToAction(nameof(ContactUs));
         }
     }
