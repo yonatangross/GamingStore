@@ -1,30 +1,34 @@
 [
   {
-    "Name": "Babbleset",
-    "Value": 2357.35
-  },
-  {
-    "Name": "Quire",
-    "Value": 3129.25
-  },
-  {
     "Name": "Wikizz",
-    "Value": 4683.48
-  },
-  {
-    "Name": "Warehouse",
-    "Value": 5098.66
-  },
-  {
-    "Name": "Gabspot",
-    "Value": 5786.41
+    "Value": 877.1100000000001
   },
   {
     "Name": "Fliptune",
-    "Value": 7136.2300000000005
+    "Value": 2133.1
+  },
+  {
+    "Name": "Skajo",
+    "Value": 2506.61
+  },
+  {
+    "Name": "Warehouse",
+    "Value": 2599.11
+  },
+  {
+    "Name": "Babbleset",
+    "Value": 3860.6
+  },
+  {
+    "Name": "Gabspot",
+    "Value": 6454.529999999999
+  },
+  {
+    "Name": "Quire",
+    "Value": 13095.13
   },
   {
     "Name": "Topiclounge",
-    "Value": 17520.03
+    "Value": 22750.699999999997
   }
 ]
