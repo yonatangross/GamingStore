@@ -25,7 +25,7 @@ namespace GamingStore.Data
 
             SeedDatabase(context);
 
-            
+
         }
 
         private static async Task CreateRolesAndUsers(StoreContext context, UserManager<Customer> userManager, RoleManager<IdentityRole> roleManager, string adminPassword)
@@ -669,7 +669,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Asus Gaming Monitor Full HD 1920 x 1080",
-                    Manufacturer = "Asus", 
+                    Manufacturer = "Asus",
                     Price = 344.99,
                     Category = Category.Monitors,
                     ImageUrl = "images/items/ASUSTUFGamingVG279QM27FullHD1920x10801ms",
@@ -975,50 +975,72 @@ namespace GamingStore.Data
 
         private static IEnumerable<Order> GenerateOrders(IEnumerable<Customer> customersList,
             IReadOnlyCollection<Item> items,
-            IReadOnlyCollection<Store> storesList, out List<Payment> payments)
+            IReadOnlyCollection<Store> storesList, out List<Payment> paymentsList)
         {
-            payments = new List<Payment>();
-            var list = new List<Order>();
+            paymentsList = new List<Payment>();
+            var orderList = new List<Order>();
             var rand = new Random();
             var shopOpeningDate = new DateTime(2018, 1, 1);
             int range = (DateTime.Today - shopOpeningDate).Days;
 
-            foreach (Customer customer in customersList)
+            try
             {
-                int numOfOrdersForCustomer = rand.Next(minValue: 0, maxValue: 5);
-
-                for (var orderNumber = 0; orderNumber < numOfOrdersForCustomer; orderNumber++)
+                foreach (Customer customer in customersList)
                 {
-                    const int minItems = 1;
-                    const int maxItems = 5;
-                    int numItemsOrdered = rand.Next(minItems, maxItems);
-                    Store store = GenerateRelatedStore(customer, storesList);
+                    int numOfOrdersForCustomer = rand.Next(minValue: 0, maxValue: 5);
 
-                    var order = new Order
+                    for (var orderNumber = 0; orderNumber < numOfOrdersForCustomer; orderNumber++)
                     {
-                        CustomerId = customer.Id,
-                        OrderDate = shopOpeningDate.AddDays(rand.Next(range)),
-                        State = OrderState.Fulfilled,
-                        StoreId = store.Id,
-                    };
+                        const int minItems = 1;
+                        const int maxItems = 5;
+                        int numItemsOrdered = rand.Next(minItems, maxItems);
+                        Store store = GenerateRelatedStore(customer, storesList);
 
-                    order.OrderItems = GenerateOrderItems(order.Id, items, numItemsOrdered, out var payment);
-                    order.Payment = payment;
-                    order.PaymentId = payment.Id;
-                    payments.Add(payment);
-                    list.Add(order);
+                        var order = new Order
+                        {
+                            CustomerId = customer.Id,
+                            OrderDate = shopOpeningDate.AddDays(rand.Next(range)),
+                            State = OrderState.Fulfilled,
+                            StoreId = store.Id,
+                        };
+
+                        order.OrderItems = GenerateOrderItems(order.Id, items, numItemsOrdered, out var payment);
+                        order.Payment = payment;
+                        order.PaymentId = payment.Id;
+                        paymentsList.Add(payment);
+                        orderList.Add(order);
+                    }
                 }
-            }
 
-            return list;
+                return orderList;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
-        private static Store GenerateRelatedStore(Customer customer, IEnumerable<Store> storesList)
+        private static Store GenerateRelatedStore(Customer customer, IEnumerable<Store> stores)
         {
-            List<Store> storesInCustomerCity = storesList.Where(store => store.Address.City == customer.Address.City).ToList();
-            var rand = new Random();
+            try
+            {
+                List<Store> storeList = stores.ToList();
+                List<Store> storesInCustomerCity = storeList.Where(store => store.Address.City == customer.Address.City).ToList();
+                var rand = new Random();
 
-            return storesInCustomerCity[rand.Next(storesInCustomerCity.Count)];
+                bool relatedStores = storesInCustomerCity.Count != 0;
+                var randRelatedStoreIndex = rand.Next(relatedStores ? storesInCustomerCity.Count : storeList.Count);
+
+                var generatedRelatedStore = relatedStores ? storesInCustomerCity[randRelatedStoreIndex]: storeList[randRelatedStoreIndex];
+
+                return generatedRelatedStore;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         private static ICollection<OrderItem> GenerateOrderItems(string orderId, IEnumerable<Item> items, int numItemsOrdered, out Payment payment)
@@ -1027,32 +1049,40 @@ namespace GamingStore.Data
             var rand = new Random();
             var orderItems = new List<OrderItem>();
 
-            for (var orderItemIndex = 0; orderItemIndex < numItemsOrdered; orderItemIndex++)
+            try
             {
-                int curIndex = rand.Next(itemsList.Count);
-                Item curItem = itemsList[curIndex];
-                itemsList.Remove(curItem);
-
-                var orderItem = new OrderItem()
+                for (var orderItemIndex = 0; orderItemIndex < numItemsOrdered; orderItemIndex++)
                 {
-                    OrderId = orderId,
-                    ItemId = curItem.Id,
-                    Item = curItem,
-                    ItemsCount = rand.Next(1, 3)
+                    int curIndex = rand.Next(itemsList.Count);
+                    Item curItem = itemsList[curIndex];
+                    itemsList.Remove(curItem);
+
+                    var orderItem = new OrderItem()
+                    {
+                        OrderId = orderId,
+                        ItemId = curItem.Id,
+                        Item = curItem,
+                        ItemsCount = rand.Next(1, 3)
+                    };
+
+                    orderItems.Add(orderItem);
+                }
+
+                payment = new Payment
+                {
+                    ItemsCost = CalculateOrderSum(orderItems),
+                    PaymentMethod = (PaymentMethod)rand.Next(0, 3),
+                    ShippingCost = 0,
+                    Paid = true
                 };
 
-                orderItems.Add(orderItem);
+                return orderItems;
             }
-
-            payment = new Payment
+            catch (Exception e)
             {
-                ItemsCost = CalculateOrderSum(orderItems),
-                PaymentMethod = (PaymentMethod)rand.Next(0, 3),
-                ShippingCost = 0,
-                Paid = true
-            };
-
-            return orderItems;
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         private static double CalculateOrderSum(IEnumerable<OrderItem> orderItems)
