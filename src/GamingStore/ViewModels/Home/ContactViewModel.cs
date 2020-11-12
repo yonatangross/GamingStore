@@ -21,7 +21,9 @@ namespace GamingStore.ViewModels.Home
         [EmailAddress]
         public string Email { get; set; }
 
-        [Phone]
+        [DataType(DataType.PhoneNumber)]
+        [Range(0000000000, 9999999999, ErrorMessage = "Phone number is not valid")]
+        [StringLength(10, MinimumLength = 10)]
         public string PhoneNumber { get; set; }
 
         [Required]
