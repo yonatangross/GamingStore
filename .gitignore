@@ -342,3 +342,4 @@ healthchecksdb
 
 # Migrations folder and content
 Migrations/
+/.DS_Store
