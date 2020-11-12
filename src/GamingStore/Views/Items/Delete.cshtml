@@ -44,9 +44,9 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="@Model.Item.Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+    @using (Html.BeginForm("Delete", "Items", FormMethod.Post, null))
+    {
+        @Html.Hidden("id", Model.Item.Id)
+        <input type="submit" value="Delete" class="btn btn-danger" />
+    }
 </div>
