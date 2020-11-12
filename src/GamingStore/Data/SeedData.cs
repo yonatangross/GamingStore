@@ -28,7 +28,6 @@ namespace GamingStore.Data
         private static async Task CreateRolesAndUsers(StoreContext context, UserManager<Customer> userManager, RoleManager<IdentityRole> roleManager, string adminPassword)
         {
             const string admin = "Admin";
-            const string storeManager = "StoreManager";
             const string customer = "Customer";
             bool roleExists = await roleManager.RoleExistsAsync(admin);
 
@@ -40,14 +39,6 @@ namespace GamingStore.Data
 
                 //Here we create a Admin super users who will maintain the website                   
                 await AddAdmins(userManager, adminPassword);
-            }
-
-            // creating Creating Manager role     
-            roleExists = await roleManager.RoleExistsAsync(storeManager);
-            if (!roleExists)
-            {
-                var role = new IdentityRole { Name = storeManager };
-                await roleManager.CreateAsync(role);
             }
 
             // creating Creating Employee role     
