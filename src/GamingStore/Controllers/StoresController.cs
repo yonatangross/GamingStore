@@ -162,6 +162,7 @@ namespace GamingStore.Controllers
                 Store = store,
                 ItemsInCart = await CountItemsInCart()
             };
+            store.Address.FullName = store.Name;
 
             if (!ModelState.IsValid)
             {
