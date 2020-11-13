@@ -148,137 +148,67 @@
                             <div class="table-stats order-table ov-h">
                                 <table class="table ">
                                     <thead>
-                                    <tr>
-                                        <th class ="serial">#
-                                            @Html.DisplayNameFor(model => model.Orders.First().Id)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Orders.First().Customer.UserName)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Orders.First().OrderDate)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Orders.First().State)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Orders.First().Store)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Orders.First().Payment.Total)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Orders.First().StoreId)
-                                        </th>
-                                    </tr>
+                                        <tr>
+                                            <th class="serial">
+                                                #
+                                            </th>
+                                            <th >
+                                                #@Html.DisplayNameFor(model => model.Orders.First().Id)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Orders.First().Customer.UserName)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Orders.First().OrderDate)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Orders.First().State)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Orders.First().Store)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Orders.First().Payment.Total)
+                                            </th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach (var order in Model.Orders)
+                                    @{ int count = 0;}
+                                    @foreach (var order in Model.Orders.TakeLast(10))
                                     {
+                                        count++;
                                         <tr>
                                             <td class="serial">
-                                                @Html.DisplayFor(modelItem => order.Id)
+                                                @count.
+                                            </td>
+                                            <td class="serial">
+                                                #@Html.DisplayFor(modelItem => order.Id)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => order.Customer.UserName)
+                                                <span class="name"> @Html.DisplayFor(modelItem => order.Customer.Email)</span>
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => order.OrderDate)
+                                                <span class="order_date"> @Html.DisplayFor(modelItem => order.OrderDate)</span>
+
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => order.State)
+                                                <span class="order_state"> @Html.DisplayFor(modelItem => order.State)</span>
+
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => order.Store)
+                                                <span class="store_name"> @Html.DisplayFor(modelItem => order.Store.Name)</span>
+
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => order.Payment.Total)
+                                                <span class="payment_total"> @Html.DisplayFor(modelItem => order.Payment.Total)</span>
                                             </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => order.StoreId)
-                                            </td>
-                                            <td>
-                                                <a asp-action="Edit" asp-controller="Orders" asp-route-id="@order.Id">Edit</a>
-                                                <a asp-action="Delete" asp-controller="Orders" asp-route-id="@order.Id">Delete</a>
-                                                <a asp-action="Details" asp-controller="Orders" asp-route-id="@order.Id">Details</a>
-                                            </td>
+                                            @*<td>
+            <a asp-action="Edit" asp-controller="Orders" asp-route-id="@order.Id">Edit</a>
+            <a asp-action="Delete" asp-controller="Orders" asp-route-id="@order.Id">Delete</a>
+            <a asp-action="Details" asp-controller="Orders" asp-route-id="@order.Id">Details</a>
+        </td>*@
                                         </tr>
                                     }
-                                    <tr>
-                                        <td class="serial">1.</td>
-                                        <td class="avatar">
-                                            <div class="round-img">
-                                                <a href="#"><img class="rounded-circle" src="images/avatar/1.jpg" alt=""></a>
-                                            </div>
-                                        </td>
-                                        <td> #5469 </td>
-                                        <td> <span class="name">Louis Stanley</span> </td>
-                                        <td> <span class="product">iMax</span> </td>
-                                        <td><span class="count">231</span></td>
-                                        <td>
-                                            <span class="badge badge-complete">Complete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="serial">2.</td>
-                                        <td class="avatar">
-                                            <div class="round-img">
-                                                <a href="#"><img class="rounded-circle" src="images/avatar/2.jpg" alt=""></a>
-                                            </div>
-                                        </td>
-                                        <td> #5468 </td>
-                                        <td> <span class="name">Gregory Dixon</span> </td>
-                                        <td> <span class="product">iPad</span> </td>
-                                        <td><span class="count">250</span></td>
-                                        <td>
-                                            <span class="badge badge-complete">Complete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="serial">3.</td>
-                                        <td class="avatar">
-                                            <div class="round-img">
-                                                <a href="#"><img class="rounded-circle" src="images/avatar/3.jpg" alt=""></a>
-                                            </div>
-                                        </td>
-                                        <td> #5467 </td>
-                                        <td> <span class="name">Catherine Dixon</span> </td>
-                                        <td> <span class="product">SSD</span> </td>
-                                        <td><span class="count">250</span></td>
-                                        <td>
-                                            <span class="badge badge-complete">Complete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="serial">4.</td>
-                                        <td class="avatar">
-                                            <div class="round-img">
-                                                <a href="#"><img class="rounded-circle" src="images/avatar/4.jpg" alt=""></a>
-                                            </div>
-                                        </td>
-                                        <td> #5466 </td>
-                                        <td> <span class="name">Mary Silva</span> </td>
-                                        <td> <span class="product">Magic Mouse</span> </td>
-                                        <td><span class="count">250</span></td>
-                                        <td>
-                                            <span class="badge badge-pending">Pending</span>
-                                        </td>
-                                    </tr>
-                                    <tr class=" pb-0">
-                                        <td class="serial">5.</td>
-                                        <td class="avatar pb-0">
-                                            <div class="round-img">
-                                                <a href="#"><img class="rounded-circle" src="images/avatar/6.jpg" alt=""></a>
-                                            </div>
-                                        </td>
-                                        <td> #5465 </td>
-                                        <td> <span class="name">Johnny Stephens</span> </td>
-                                        <td> <span class="product">Monitor</span> </td>
-                                        <td><span class="count">250</span></td>
-                                        <td>
-                                            <span class="badge badge-complete">Complete</span>
-                                        </td>
-                                    </tr>
                                     </tbody>
                                 </table>
 
