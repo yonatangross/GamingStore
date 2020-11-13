@@ -257,7 +257,7 @@
                    priceMax = filter.PriceMax,
                    keywords = filter.Keywords,
                    pageNumber = (Model.PaginatedItems.PageIndex - 1),
-                   sortBy = filter.SortBy
+                   sortBy = prevSelectedSortingOrder
                },
                         new { @class = "paging btn btn-primary" + " " + prevDisabled })
                     @Html.ActionLink("Next", "Index", "Items", new
@@ -268,7 +268,7 @@
                    priceMax = filter.PriceMax,
                    keywords = filter.Keywords,
                    pageNumber = (Model.PaginatedItems.PageIndex + 1),
-                   sortBy = filter.SortBy
+                   sortBy = prevSelectedSortingOrder
                },
                         new { @class = "paging btn btn-primary" + " " + @nextDisabled })
                 </div>
