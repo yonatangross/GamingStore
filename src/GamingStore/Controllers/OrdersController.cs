@@ -41,7 +41,10 @@ namespace GamingStore.Controllers
                 double itemsCost =
                     itemsInCart.Aggregate<Cart, double>(0,
                         (current, cart) => current + cart.Item.Price * cart.Quantity);
-
+                if (itemsCost == 0)
+                {
+                    return RedirectToAction("Index", "Carts");
+                }
                 double totalCost = itemsCost + defaultPaymentCost;
 
                 if (customer.Address == null)
