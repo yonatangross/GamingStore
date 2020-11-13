@@ -47,7 +47,8 @@ namespace GamingStore.Models
 
         [Required]
         public string ImageUrl { get; set; }
-        
+
+        public bool Active { get; set; } = true;
         public ICollection<StoreItem> StoreItems { get; set; } // many to many relationship
         
         public ICollection<OrderItem> OrderItems { get; set; } // many to many relationship
