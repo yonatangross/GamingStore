@@ -1,4 +1,5 @@
 ﻿@model GamingStore.ViewModels.Administration.ListItemsViewModel
+@addTagHelper *, Vereyon.Web.FlashMessage
 
 @{
     ViewData["Title"] = "Admin Items";
@@ -6,37 +7,39 @@
 }
 
 <h1>Index</h1>
-
+<div id="flash_message">
+    <flash dismissable="true" />
+</div>
 <p>
     <a asp-action="Create" asp-controller="Items">Create a New Item</a>
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Items.First().Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Items.First().Manufacturer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Items.First().Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Items.First().Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Items.First().PropertiesList)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Items.First().Active)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Items.First().Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Items.First().Manufacturer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Items.First().Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Items.First().Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Items.First().PropertiesList)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Items.First().Active)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (Item item in Model.Items)
-        {
+    @foreach (Item item in Model.Items)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
@@ -62,7 +65,16 @@
                 <a asp-action="Details" asp-controller="Items" asp-route-id="@item.Id">Details</a>
             </td>
         </tr>
-        }
+    }
     </tbody>
 </table>
+@section scripts{
+    <script>
+        setTimeout(function () {
+                $('.alert').fadeOut('slow');
+            },
+            2000); // <-- time in milliseconds
+    </script>
+    <script src="/lib/jquery/dist/jquery.js"></script>
+}
 

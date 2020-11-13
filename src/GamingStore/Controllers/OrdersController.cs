@@ -333,12 +333,14 @@ namespace GamingStore.Controllers
         // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> RefundConfirmed(string id)
         {
             Order order = await Context.Orders.FindAsync(id);
+
             Context.Orders.Remove(order);
             await Context.SaveChangesAsync();
 
+            
             return RedirectToAction("ListOrders", "Administration");
         }
     }

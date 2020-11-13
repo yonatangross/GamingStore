@@ -1,37 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using GamingStore.Contracts;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Extensions;
 using GamingStore.Models;
-using GamingStore.Services;
 using GamingStore.Services.Twitter;
-using GamingStore.ViewModels;
 using GamingStore.ViewModels.Items;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Vereyon.Web;
 
 namespace GamingStore.Controllers
 {
     public class ItemsController : BaseController
     {
         private readonly IHostingEnvironment _hostingEnvironment; //todo: fix obsolete
+        private readonly IFlashMessage _flashMessage;
 
-        public ItemsController(IHostingEnvironment hostingEnvironment,UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager)
+        public ItemsController(IHostingEnvironment hostingEnvironment,UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager, IFlashMessage flashMessage)
             : base(userManager, context, roleManager, signInManager)
         {
             _hostingEnvironment = hostingEnvironment;
+            _flashMessage = flashMessage;
         }
 
         // GET: Items
@@ -153,40 +149,8 @@ namespace GamingStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateEditItemViewModel model)
         {
-            var directoryName = model.Item.Title.Trim().Replace(" ", string.Empty);
-            var uploadFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images", "items", directoryName);
             model.Item.Manufacturer = model.Item.Manufacturer.Trim().FirstCharToUpper();
-            
-            // do other validations on your model as needed
-            if (model.File1 != null)
-            {
-                Directory.CreateDirectory(uploadFolder);
-                const string uniqueFileName = "1.jpg";
-                var filePath = Path.Combine(uploadFolder, uniqueFileName);
-                var fileStream = new FileStream(filePath, FileMode.Create);
-                await model.File1.CopyToAsync(fileStream);
-                fileStream.Close();
-
-                model.Item.ImageUrl = $"images/items/{directoryName}";
-            }
-
-            if (model.File2 != null)
-            {
-                const string uniqueFileName = "2.jpg";
-                var filePath = Path.Combine(uploadFolder, uniqueFileName);
-                var fileStream = new FileStream(filePath, FileMode.Create);
-                await model.File2.CopyToAsync(fileStream);
-                fileStream.Close();
-            }
-
-            if (model.File3 != null)
-            {
-                const string uniqueFileName = "3.jpg";
-                var filePath = Path.Combine(uploadFolder, uniqueFileName);
-                var fileStream = new FileStream(filePath, FileMode.Create);
-                await model.File3.CopyToAsync(fileStream);
-                fileStream.Close();
-            }
+            string uploadFolder = await UploadImages(model);
 
             await Context.Items.AddAsync(model.Item);
             await Context.SaveChangesAsync();
@@ -202,6 +166,40 @@ namespace GamingStore.Controllers
             #endregion
 
             return RedirectToAction("ListItems", "Administration");
+        }
+
+        private async Task<string> UploadImages(CreateEditItemViewModel model)
+        {
+            string directoryName = model.Item.Title.Trim().Replace(" ", string.Empty);
+            string uploadFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images", "items", directoryName);
+
+            if (model.File1 != null)
+            {
+                await CopyImage(model, uploadFolder, 1);
+                model.Item.ImageUrl = $"images/items/{directoryName}";
+            }
+
+            if (model.File2 != null)
+            {
+                await CopyImage(model, uploadFolder, 1);
+            }
+
+            if (model.File3 != null)
+            {
+                await CopyImage(model, uploadFolder, 1);
+            }
+
+            return uploadFolder;
+        }
+
+        private static async Task CopyImage(CreateEditItemViewModel model, string uploadFolder, int  imageNumber)
+        {
+            Directory.CreateDirectory(uploadFolder);
+            string uniqueFileName = $"{imageNumber}.jpg";
+            string filePath = Path.Combine(uploadFolder, uniqueFileName);
+            var fileStream = new FileStream(filePath, FileMode.Create);
+            await model.File1.CopyToAsync(fileStream);
+            fileStream.Close();
         }
 
         private void PublishTweet( Item item, string itemImagesPath)
@@ -269,39 +267,32 @@ namespace GamingStore.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(CreateEditItemViewModel model)
         {
-            if (ModelState.IsValid)
+            Item itemOnDb = await Context.Items.FirstOrDefaultAsync(i => i.Id == model.Item.Id);
+
+            if (itemOnDb == null)
             {
-                try
-                {
-                    var itemOnDb = await Context.Items.FirstOrDefaultAsync(i => i.Id == model.Item.Id);
-                    itemOnDb.Title = model.Item.Title;
-                    itemOnDb.Description = model.Item.Description;
-                    itemOnDb.Manufacturer = model.Item.Manufacturer.Trim().FirstCharToUpper();
-                    itemOnDb.Price = model.Item.Price;
-                    itemOnDb.Category = model.Item.Category;
+                _flashMessage.Danger("Item could not be found on DB");
 
-                    Context.Update(itemOnDb);
-                    await Context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ItemExists(model.Item.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("ListItems", "Administration");
             }
 
-            var allCategories = Context.Items.Select(i => i.Category).Distinct().ToArray();
-            model.Categories = allCategories;
+            itemOnDb.Title = model.Item.Title;
+            itemOnDb.Description = model.Item.Description;
+            itemOnDb.Manufacturer = model.Item.Manufacturer.Trim().FirstCharToUpper();
+            itemOnDb.Price = model.Item.Price;
+            itemOnDb.Category = model.Item.Category;
 
-            return View(model);
+            await UploadImages(model);
+
+            Context.Update(itemOnDb);
+            await Context.SaveChangesAsync();
+            _flashMessage.Confirmation("Item information has been updated");
+
+            return RedirectToAction("ListItems", "Administration");
+            //var allCategories = Context.Items.Select(i => i.Category).Distinct().ToArray();
+            //model.Categories = allCategories;
+
+            //return View(model);
         }
 
         // GET: Items/Delete/5

@@ -1,89 +1,112 @@
-﻿@model GamingStore.ViewModels.Items.CreateEditItemViewModel
+﻿@using GamingStore.Contracts
+@model GamingStore.ViewModels.Items.CreateEditItemViewModel
+@addTagHelper *, Vereyon.Web.FlashMessage
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Item";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Edit</h1>
-<h4>Item</h4>
+<h1>Edit item @Model.Item.Id</h1>
+
 <hr />
 <div class="column">
-    @using (Html.BeginForm("Edit", "Items", FormMethod.Post, new{ @class = "row" }))
-    {
+    <form asp-action="Edit" enctype="multipart/form-data" class="row">
+        @Html.HiddenFor(m => m.Item.Id)
         <div class="col-5">
-
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                @Html.HiddenFor(m => m.Item.Id)
+                <label asp-for="Item.Title" class="control-label"></label>
+                <input asp-for="Item.Title" class="form-control" required/>
+                <span asp-validation-for="Item.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.Item.Title)
-                @Html.TextBoxFor(m => m.Item.Title, null, new { @class = "form-control" })
+                <label asp-for="Item.Description" class="control-label"></label>
+                <input asp-for="Item.Description" class="form-control" required/>
+                <span asp-validation-for="Item.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.Item.Description)
-                @Html.TextBoxFor(m => m.Item.Description, null, new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Item.Manufacturer)
-                @Html.TextBoxFor(m => m.Item.Manufacturer, null, new { @class = "form-control" })
+                <label asp-for="Item.Manufacturer" class="control-label"></label>
+                <input asp-for="Item.Manufacturer" class="form-control" required/>
+                <span asp-validation-for="Item.Manufacturer" class="text-danger"></span>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Item.Price)
-                @Html.TextBoxFor(m => m.Item.Price, null, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Item.Price, null, new
+                {
+                    @class = "form-control"
+                })
+                <span asp-validation-for="Item.Price" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                @Html.LabelFor(m => m.Item.Category)
-                @Html.DropDownListFor(m => m.Item.Category, new SelectList(Model.Categories), null, new { @class = "form-control", @style = "margin-left: auto;" })
-            </div>
-            <div class="form-group row">
-                @Html.LabelFor(m => m.Item.Active, new { @class = "col-sm-2 col-form-label" })
-                <div class="col-sm-5">
-                    <div class="form-check">
-                        @Html.CheckBoxFor(m => m.Item.Active, new { @class = "form-check-input", style = "margin: auto; position: inherit;" })
-                    </div>
-                </div>
+                <label asp-for="Item.Category" class="control-label"></label>
+                <select class="form-control" asp-for="Item.Category" style="margin-left: auto;">
+                    @for (var i = 0; i < Enum.GetNames(typeof(Category)).Length; i++)
+                    {
+                        var category = (Category) i;
+                        <option class="form-control">@Html.DisplayFor(c => category)</option>
+                    }
+                </select>
+                <span asp-validation-for="Item.Category" class="text-danger"></span>
             </div>
         </div>
-
-        // Aviv Change Here //
-
         <div class="form-group col-5" style="padding-bottom: 3%">
-            <label class="control-label">Images</label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroupFileAddon01">Image</span>
-                </div>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="file1" id="file1" aria-describedby="inputGroupFileAddon01" required>
-                    <label class="custom-file-label" for="file1">Choose Primary Image</label>
-                </div>
+        <label class="control-label">Images</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Image</span>
             </div>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroupFileAddon02">Image</span>
-                </div>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="file2" id="file2" aria-describedby="inputGroupFileAddon01" required>
-                    <label class="custom-file-label" for="file2">Choose 2nd Image</label>
-                </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" name="file1" id="file1" aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="file1">Choose Primary Image</label>
+            </div>
+        </div>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon02">Image</span>
+            </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" name="file2" id="file2" aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="file2">Choose 2nd Image</label>
             </div>
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroupFileAddon03">Image</span>
                 </div>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="file3" id="file3" aria-describedby="inputGroupFileAddon01" required>
+                    <input type="file" class="custom-file-input" name="file3" id="file3" aria-describedby="inputGroupFileAddon01">
                     <label class="custom-file-label" for="file3">Choose 3rd Image</label>
                 </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="input-group d-flex justify-content-center" style="margin-top: 10%;">
+                <input type="submit" value="Save Changes" class="btn btn-primary"/>
             </div>
         </div>
+    </form>
+</div>
 
-    }
-</div>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@*@section scripts{
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            //todo: switch with category dropdown and remove afterwards.
+            //todo: remove old jQuery with our jQuery lib.
+            $(function () {
+                var myArray = [];
+
+                @{
+                    foreach (var d in Model.Categories)
+                    {
+                        @:myArray.push("@d");
+                    }
+                }
+
+                var availableTags = myArray;
+                $("#tags").autocomplete({
+                    source: availableTags
+                });
+            });
+        </script>
+    }*@
+
