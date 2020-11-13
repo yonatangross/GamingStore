@@ -1,5 +1,6 @@
 ﻿@using System.Linq
 @model GamingStore.ViewModels.Administration.ListOrdersViewModel
+@addTagHelper *, Vereyon.Web.FlashMessage
 
 @{
     ViewData["Title"] = "Admin Items";
@@ -7,7 +8,9 @@
 }
 
 <h1>Orders</h1>
-
+<div id="flash_message">
+    <flash dismissable="true" />
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -36,36 +39,44 @@
         </tr>
     </thead>
     <tbody>
-    @foreach (var order in Model.Orders)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => order.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => order.Customer.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => order.OrderDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => order.State)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => order.Store)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => order.Payment.Total)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => order.StoreId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-controller="Orders" asp-route-id="@order.Id">Edit</a>
-                <a asp-action="Delete" asp-controller="Orders" asp-route-id="@order.Id">Delete</a>
-                <a asp-action="Details" asp-controller="Orders" asp-route-id="@order.Id">Details</a>
-            </td>
-        </tr>
-    }
+        @foreach (Order order in Model.Orders)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => order.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => order.Customer.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => order.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => order.State)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => order.Store)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => order.Payment.Total)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => order.StoreId)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-controller="Orders" asp-route-id="@order.Id">Edit</a>
+                    <a asp-action="Details" asp-controller="Orders" asp-route-id="@order.Id">Details</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+@section scripts{
+    <script>
+        setTimeout(function () {
+            $('.alert').fadeOut('slow');
+        },
+            2000); // <-- time in milliseconds
+    </script>
+    <script src="/lib/jquery/dist/jquery.js"></script>
+}
