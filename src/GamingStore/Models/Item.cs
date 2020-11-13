@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Threading;
 using GamingStore.Contracts;
 using GamingStore.Models.Relationships;
 
 namespace GamingStore.Models
 {
-    public class Item
+    public class Item 
     {
         public static int ItemCounter;
 
@@ -40,7 +41,7 @@ namespace GamingStore.Models
         
         [Required]
         [DataType(DataType.Text)] 
-        public Category Category { get; set; }
+        public string Category { get; set; }
         
         public Dictionary<string, string> PropertiesList { get; set; }
 

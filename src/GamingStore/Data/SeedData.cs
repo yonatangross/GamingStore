@@ -121,7 +121,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Cloud Stinger Wired Stereo Gaming Headset", Manufacturer = "HyperX", Price = 29.78,
-                    Category = Category.GamingHeadsets,
+                    Category = "GamingHeadsets",
                     PropertiesList =
                         new Dictionary<string, string>()
                         {
@@ -135,7 +135,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "G432 Wired 7.1 Surround Sound Gaming Headset", Manufacturer = "Logitech", Price = 39.95,
-                    Category = Category.GamingHeadsets, PropertiesList =
+                    Category = "GamingHeadsets", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Built-In Microphone", "Yes"},
@@ -148,7 +148,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Milano Gaming Chair - Green", Manufacturer = "Arozzi", Price = 227,
-                    Category = Category.GamingChairs, PropertiesList =
+                    Category = "GamingChairs", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Office Chair Style", "Gaming chair"},
@@ -162,7 +162,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Milano Gaming Chair - Red", Manufacturer = "Arozzi", Price = 219.99,
-                    Category = Category.GamingChairs, PropertiesList =
+                    Category = "GamingChairs", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Office Chair Style", "Gaming chair"},
@@ -176,7 +176,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Logitech G440 Hard Gaming", Manufacturer = "Logitech", Price = 130,
-                    Category = Category.MousePads, PropertiesList =
+                    Category = "MousePads", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"length", "280mm"},
@@ -189,7 +189,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "NVIDIA GeForce RTX 3080", Manufacturer = "NVIDIA", Price = 719,
-                    Category = Category.GPUs,
+                    Category = "GPUs",
                     PropertiesList =
                         new Dictionary<string, string>()
                         {
@@ -202,7 +202,7 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = "NVIDIA GeForce RTX 3090", Manufacturer = "NVIDIA", Price = 1500, Category =Category.GPUs,
+                    Title = "NVIDIA GeForce RTX 3090", Manufacturer = "NVIDIA", Price = 1500, Category ="GPUs",
                     PropertiesList =
                         new Dictionary<string, string>()
                         {
@@ -216,7 +216,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "GeForce RTX 2080 SUPER BLACK GAMING", Manufacturer = "EVGA", Price = 430,
-                    Category = Category.GPUs,
+                    Category = "GPUs",
                     PropertiesList =
                         new Dictionary<string, string>()
                         {
@@ -230,7 +230,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Intel Core i9-10900KA Comet Lake Box", Manufacturer = "Intel", Price = 2420,
-                    Category = Category.CPUs, PropertiesList =
+                    Category = "CPUs", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Cores", "10"},
@@ -244,7 +244,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Intel Core i9-10850KA Comet Lake Box", Manufacturer = "Intel", Price = 2020,
-                    Category = Category.CPUs, PropertiesList =
+                    Category = "CPUs", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Cores", "10"},
@@ -258,7 +258,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Gaming Headset white combat camouflage", Manufacturer = "Dragon", Price = 499,
-                    Category = Category.GamingHeadsets, PropertiesList =
+                    Category = "GamingHeadsets", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Sound Mode", "Stereo"},
@@ -271,7 +271,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Sceptre 24' Curved 75Hz Gaming LED Monitor", Manufacturer = "Sceptre", Price = 129,
-                    Category = Category.Monitors, PropertiesList =
+                    Category = "Monitors", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Display Size", "24 Inches"},
@@ -285,7 +285,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "AMD Ryzen 9 3900X 12-core, 24-thread processor", Manufacturer = "AMD", Price = 429,
-                    Category = Category.CPUs, PropertiesList =
+                    Category = "CPUs", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Processor Speed", "4.6 GHz"},
@@ -297,7 +297,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Acer Predator XB271HU 27' WQHD Monitor", Manufacturer = "Acer", Price = 510.9,
-                    Category = Category.Monitors, PropertiesList =
+                    Category = "Monitors", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Size", "27'"},
@@ -314,7 +314,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Asus VG278QR 27” Gaming Monitor", Manufacturer = "Asus", Price = 336.9,
-                    Category = Category.Monitors, PropertiesList =
+                    Category = "Monitors", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Size", "27'"},
@@ -330,7 +330,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "LG 27GL83A-B 27 Inch Ultragear QHD IPS 1ms", Manufacturer = "LG", Price = 379.99,
-                    Category = Category.Monitors, PropertiesList =
+                    Category = "Monitors", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Size", "27'"},
@@ -344,7 +344,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Logitech G PRO Mechanical Gaming Keyboard", Manufacturer = "Logitech", Price = 118.99,
-                    Category = Category.Keyboards, PropertiesList =
+                    Category = "Keyboards", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"LIGHTSPEED Wireless", "No"},
@@ -358,7 +358,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Corsair Strafe RGB MK.2 Mechanical Gaming Keyboard", Manufacturer = "Corsair", Price = 127.71,
-                    Category = Category.Keyboards, PropertiesList =
+                    Category = "Keyboards", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Connections", "USB"}
@@ -369,7 +369,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Mouse M325 Lemon", Manufacturer = "Logitech", Price = 29.95,
-                    Category = Category.Mouses, PropertiesList =
+                    Category = "Mouses", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Mouse Shape", "Right-Handed"},
@@ -383,7 +383,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "M325 Mouse Watermelon", Manufacturer = "Logitech", Price = 20.58,
-                    Category = Category.Mouses, PropertiesList =
+                    Category = "Mouses", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Mouse Shape", "Right-Handed"},
@@ -397,7 +397,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "M525 Mouse", Manufacturer = "Logitech", Price = 20.58,
-                    Category = Category.Mouses, PropertiesList =
+                    Category = "Mouses", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Mouse Shape", "Right-Handed"},
@@ -411,7 +411,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Basilisk Essentiy", Manufacturer = "Razer", Price = 45.55,
-                    Category = Category.Mouses, PropertiesList =
+                    Category = "Mouses", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Mouse Shape", "Right-Handed"},
@@ -425,7 +425,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "DeathAdder v2 Ergonomic", Manufacturer = "Razer", Price = 69.99,
-                    Category = Category.Mouses, PropertiesList =
+                    Category = "Mouses", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Mouse Shape", "Right-Handed"},
@@ -440,7 +440,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "AMD Ryzen 5 3600XT 6-core, 12-threads unlocked", Manufacturer = "AMD", Price = 233.30,
-                    Category = Category.CPUs, PropertiesList =
+                    Category = "CPUs", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Processor Speed", "4.5 GHz"},
@@ -454,7 +454,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Intel Core i5-8400 Desktop Processor 6 Cores", Manufacturer = "Intel", Price = 205,
-                    Category = Category.CPUs, PropertiesList =
+                    Category = "CPUs", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Processor Speed", "2.8 GHz"},
@@ -468,7 +468,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Intel Core i3-9100F Desktop Processor 4 Core", Manufacturer = "Intel", Price = 91.95,
-                    Category = Category.CPUs, PropertiesList =
+                    Category = "CPUs", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Processor Speed", "3.6 GHz"},
@@ -483,7 +483,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Intel Core i3-10100 Desktop Processor 4 Cores", Manufacturer = "Intel", Price = 149.69,
-                    Category = Category.CPUs, PropertiesList =
+                    Category = "CPUs", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Processor Speed", "4.3 GHz"},
@@ -498,7 +498,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Intel Core i3-8100 Desktop Processor 4", Manufacturer = "Intel", Price = 123.80,
-                    Category = Category.CPUs, PropertiesList =
+                    Category = "CPUs", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Processor Speed", "3.6 GHz"},
@@ -512,7 +512,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "AMD Ryzen 3 3200G 4-Core", Manufacturer = "AMD", Price = 130,
-                    Category = Category.CPUs, PropertiesList =
+                    Category = "CPUs", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Processor Speed", "4.0 GHz"},
@@ -526,7 +526,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Intel Core i7-9700 Desktop Processor 8 Cores", Manufacturer = "Intel", Price = 292.60,
-                    Category = Category.CPUs, PropertiesList =
+                    Category = "CPUs", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Processor Speed", "3.0 GHz"},
@@ -540,7 +540,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "AMD Ryzen 7 3700X 8-Core", Manufacturer = "AMD", Price = 304.99,
-                    Category = Category.CPUs, PropertiesList =
+                    Category = "CPUs", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Processor Speed", "4.4 GHz"},
@@ -554,7 +554,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Intel Core i5-9400 Desktop Processor 6 Cores", Manufacturer = "Intel", Price = 164.70,
-                    Category = Category.CPUs, PropertiesList =
+                    Category = "CPUs", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Processor Speed", "2.9 GHz"},
@@ -569,7 +569,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Intel Core i9-9900K Desktop Processor 8 Cores", Manufacturer = "Intel", Price = 399.99,
-                    Category = Category.CPUs, PropertiesList =
+                    Category = "CPUs", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Processor Speed", "5.0 GHz"},
@@ -584,7 +584,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "AOC C24G1A 24 Curved Frameless Gaming Monitor, FHD 1920x1080", Manufacturer = "AOC", Price = 399.99,
-                    Category = Category.Monitors, PropertiesList =
+                    Category = "Monitors", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Display Size", "24 Inches"},
@@ -601,7 +601,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Hbada Gaming Chair Racing", Manufacturer = "Hbada", Price = 159.99,
-                    Category = Category.GamingChairs, PropertiesList =
+                    Category = "GamingChairs", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Chair Style", "Gaming chair"},
@@ -618,7 +618,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "PHILIPS RGB Wired Gaming Mouse", Manufacturer = "PHILIPS", Price = 29.99,
-                    Category = Category.Mouses, PropertiesList =
+                    Category = "Mouses", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Mouse Shape", "Right-Handed"},
@@ -635,7 +635,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Corsair Harpoon PRO", Manufacturer = "Corsair", Price = 49.99,
-                    Category = Category.Mouses, PropertiesList =
+                    Category = "Mouses", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Mouse Shape", "Right-Handed"},
@@ -653,7 +653,7 @@ namespace GamingStore.Data
                     Title = "AORUS Gaming Monitor 240Hz 1080P Adaptive Sync",
                     Manufacturer = "AORUS",
                     Price = 429.99,
-                    Category = Category.Monitors,
+                    Category = "Monitors",
                     ImageUrl = "images/items/AORUSFI25F24.5240Hz1080PAdaptiveSyncGami",
                     Description="FHD WITH 240HZ Supports Adaptive-Sync (FreeSync Premium) Technology 24.5” FHD panel (1920 x 1080 resolution)"
                 },
@@ -662,7 +662,7 @@ namespace GamingStore.Data
                     Title = "Asus Gaming Monitor Full HD 1920 x 1080",
                     Manufacturer = "Asus",
                     Price = 344.99,
-                    Category = Category.Monitors,
+                    Category = "Monitors",
                     ImageUrl = "images/items/ASUSTUFGamingVG279QM27FullHD1920x10801ms",
                     Description="1 ms 280Hz (Overclocking)"
                 },
@@ -671,7 +671,7 @@ namespace GamingStore.Data
                     Title = "Acer Gaming Monitor 27 inch QHD 2560 x 1440",
                     Manufacturer = "Acer",
                     Price = 211.99,
-                    Category = Category.Monitors,
+                    Category = "Monitors",
                     ImageUrl = "images/items/AcerKA272UbiipxUM.HX2AA.00427QHD2560x144",
                     Description="DisplayPort AMD RADEON FreeSync Technology Gaming Monitor"
                 },
@@ -680,7 +680,7 @@ namespace GamingStore.Data
                     Title = "MSI Gaming Monitor 3440 x 1440 UWHD 144Hz",
                     Manufacturer = "MSI",
                     Price = 689.99,
-                    Category = Category.Monitors,
+                    Category = "Monitors",
                     ImageUrl = "images/items/MSIOptixMPG341CQR343440x1440UWHD144Hz1ms",
                     Description="1ms 2xHDMI DisplayPort USB Type-C AMD FreeSync HDR"
                 },
@@ -689,7 +689,7 @@ namespace GamingStore.Data
                     Title = "Samsung Gaming Monitor 3840 x 1080 1ms 144Hz",
                     Manufacturer = "Samsung",
                     Price = 789.99,
-                    Category = Category.Monitors,
+                    Category = "Monitors",
                     ImageUrl = "images/items/SamsungCHG90SeriesC49HG90493840x10801ms1",
                     Description="2x HDMI DisplayPort Mini-DisplayPort HDR AMD FreeSync USB"
                 },
@@ -698,7 +698,7 @@ namespace GamingStore.Data
                     Title = "MSI GeForce GTX 1660 Ti",
                     Manufacturer = "MSI",
                     Price = 242.99,
-                    Category = Category.GPUs,
+                    Category = "GPUs",
                     ImageUrl = "images/items/MSIGeForceGTX1660TiDirectX12GTX1660TIVEN",
                     Description="DirectX 12 GTX 1660 TI VENTUS XS 6G OC 6GB 192-Bit GDDR6"
 
@@ -708,7 +708,7 @@ namespace GamingStore.Data
                     Title = "GIGABYTE Radeon RX 5700 ",
                     Manufacturer = "GIGABYTE",
                     Price = 368.99,
-                    Category = Category.GPUs,
+                    Category = "GPUs",
                     ImageUrl = "images/items/GIGABYTERadeonRX5700XTDirectX12GV-R57XTG",
                     Description="Powered by AMD Radeon 8GB 256-Bit GDDR6"
                 },
@@ -717,7 +717,7 @@ namespace GamingStore.Data
                     Title = "MSI GeForce GTX 1050 Ti",
                     Manufacturer = "MSI",
                     Price = 138.65,
-                    Category = Category.GPUs,
+                    Category = "GPUs",
                     ImageUrl = "images/items/MSIGeForceGTX1050TiDirectX12GTX1050TiGAM",
                     Description="GAMING X 4G 4GB 128-Bit GDDR5"
                 },
@@ -726,7 +726,7 @@ namespace GamingStore.Data
                     Title = "Intel Core i9-10900K",
                     Manufacturer = "Intel",
                     Price = 484.87,
-                    Category = Category.CPUs,
+                    Category = "CPUs",
                     ImageUrl = "images/items/IntelCorei9-10900K10-Core3.7GHzLGA120012",
                     Description="10th Gen Intel Core Desktop Processor"
                 },
@@ -735,7 +735,7 @@ namespace GamingStore.Data
                     Title = "Corsair Gaming Mouse M65 RGB ELITE",
                     Manufacturer = "Corsair",
                     Price = 54.89,
-                    Category = Category.Mouses,
+                    Category = "Mouses",
                     ImageUrl = "images/items/CorsairM65RGBELITETunableFPSGamingMouse,",
                     Description="gaming mouse takes your FPS gameplay to the next level"
                 },
@@ -744,7 +744,7 @@ namespace GamingStore.Data
                     Title = "Glorious Glossy Black Gaming Mouse",
                     Manufacturer = "Glorious ",
                     Price = 36.99,
-                    Category = Category.Mouses,
+                    Category = "Mouses",
                     ImageUrl = "images/items/GloriousModelOMinusGOM-GBLACKGlossyBlack",
                     Description="58mm width at grip, 63mm with at back, 58mm at front, 120mm long"
                 },
@@ -754,7 +754,7 @@ namespace GamingStore.Data
                     Title = "Corsair Gaming Headset HS70",
                     Manufacturer = "Corsair",
                     Price = 45.55 ,
-                    Category = Category.GamingHeadsets,
+                    Category = "GamingHeadsets",
                     ImageUrl = "images/items/CorsairHS70PROWIRELESSUSBConnectorCircum",
                     Description="Play with the freedom of up to 40ft of wireless range and up to 16 hours of battery life"
                 },
@@ -764,7 +764,7 @@ namespace GamingStore.Data
                     Title = "Mad Catz Gaming Headset 7.1",
                     Manufacturer = "Mad Catz",
                     Price =41.45 ,
-                    Category = Category.GamingHeadsets,
+                    Category = "GamingHeadsets",
                     ImageUrl = "images/items/MadCatzF.R.E.Q.4USBConnectorCircumauralG",
                     Description="Fully immerse yourself in your game with dynamic, full-range sound pumped from super-sized 50mm neodymium drivers. Its 7.1 virtual sound lets you hear directional movement to gain a competitive edge, and its noise-canceling mic delivers crystal-clear audio without annoying background noise. This USB gaming headset also features brilliant RGB lighting, ergonomic comfort, and easy-access inline control for volume adjustment and mic mute."
                 },
@@ -774,7 +774,7 @@ namespace GamingStore.Data
                     Title ="Corsair Gaming Headset",
                     Manufacturer = "Corsair",
                     Price =49.55 ,
-                    Category = Category.GamingHeadsets,
+                    Category = "GamingHeadsets",
                     ImageUrl = "images/items/CorsairGamingVOIDPRORGBWirelessPremiumGa",
                     Description="Maximum audio performance with DTS Headphone: X 7.1 Surround for "
                 },
@@ -784,7 +784,7 @@ namespace GamingStore.Data
                     Title = "Logitech Gaming Headset ",
                     Manufacturer = "Logitech",
                     Price = 39.89,
-                    Category = Category.GamingHeadsets,
+                    Category = "GamingHeadsets",
                     ImageUrl = "images/items/Logitech981-000681G4337.1WiredGamingHead",
                     Description="Extremely lightweight for maximum comfort"
                 },
@@ -794,7 +794,7 @@ namespace GamingStore.Data
                     Title = "Razer Gaming Keyboard",
                     Manufacturer = "Razer",
                     Price =220.45 ,
-                    Category = Category.Keyboards,
+                    Category = "Keyboards",
                     ImageUrl = "images/items/RazerHuntsmanEliteOpto-MechanicalSwitch",
                     Description="The New Razer Opto-Mechanical Switch - Actuation at the speed of light"
                 },
@@ -804,7 +804,7 @@ namespace GamingStore.Data
                     Title = "Razer Pokemon Pikachu Edition Gaming Keyboard",
                     Manufacturer = "Razer",
                     Price =199.99,
-                    Category = Category.Keyboards,
+                    Category = "Keyboards",
                     ImageUrl = "images/items/RazerPokemonPikachuEditionGamingKeyboard",
                     Description="This is the special Pokemon Pikachu Edition China Exclusive by Razer."
                 },
@@ -814,7 +814,7 @@ namespace GamingStore.Data
                     Title = "Razer Overwatch Razer BlackWidow Chroma Mechanical Gaming Keyboard",
                     Manufacturer = "Razer",
                     Price = 239.99,
-                    Category = Category.Keyboards,
+                    Category = "Keyboards",
                     ImageUrl = "images/items/RazerOverwatchRazerBlackWidowChromaMecha",
                     Description="Chroma customizable backlighting - With 16.8 Million color options,Exclusive Overwatch design"
                 },
@@ -824,7 +824,7 @@ namespace GamingStore.Data
                     Title = "Razer Ornata Expert",
                     Manufacturer = "Razer ",
                     Price =119.99 ,
-                    Category = Category.Keyboards,
+                    Category = "Keyboards",
                     ImageUrl = "images/items/RazerOrnataExpert-RevolutionaryMecha-Mem",
                     Description="Designed from the ground up, the all-new Razer Mecha-Membrane combines the soft cushioned touch of a membrane rubber dome with the crisp tactile click of a mechanical switch"
                 },
@@ -834,7 +834,7 @@ namespace GamingStore.Data
                     Title = "Razer BlackWidow X Tournament Edition Chroma",
                     Manufacturer = "Razer ",
                     Price =229.99 ,
-                    Category = Category.Keyboards,
+                    Category = "Keyboards",
                     ImageUrl = "images/items/RazerBlackWidowXTournamentEditionChroma-",
                     Description="Express your individuality and get the leg-up in games with Chroma backlighting and over 16.8 million color options"
                 },
@@ -842,7 +842,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "KLIM Puma - USB Gamer Headset with Mic", Manufacturer = "KLIM Puma", Price = 44.99,
-                    Category = Category.GamingHeadsets, PropertiesList =
+                    Category = "GamingHeadsets", PropertiesList =
                         new Dictionary<string, string>()
                         {
                             {"Sound Mode", "Stereo"},

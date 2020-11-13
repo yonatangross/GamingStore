@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using GamingStore.Contracts;
 using Microsoft.AspNetCore.Mvc;
@@ -31,52 +32,57 @@ namespace GamingStore.Controllers
         }
 
         // GET: Items
-        public async Task<IActionResult> Index(string category, string manufacturer, int? priceMin, int? priceMax, string keywords, SortByFilter sortBy = SortByFilter.NewestArrivals)
+        public async Task<IActionResult> Index(string category, string manufacturer, int? priceMin, int? priceMax, string keywords,int? pageNumber ,SortByFilter sortBy = SortByFilter.NewestArrivals)
         {
-            List<Item> items = await Context.Items.ToListAsync();
+            IQueryable<Item> items = from i in Context.Items select i;
 
-            List<Category> categories = items.Select(i => i.Category).Distinct().ToList();
+            List<string> categories = items.Select(i => i.Category).Distinct().ToList();
 
             if (!string.IsNullOrWhiteSpace(category) && category != "All Categories")
             {
-                items = items.Where(item => item.Category.ToString() == category).ToList();
+                items = items.Where(item => item.Category == category);
+
             }
 
             if (!string.IsNullOrWhiteSpace(manufacturer))
             {
-                items = items.Where(item => item.Manufacturer == manufacturer).ToList();
+                items = items.Where(item => item.Manufacturer == manufacturer);
             }
 
             if (priceMin > 0)
             {
-                items = items.Where(item => item.Price >= priceMin).ToList();
+                items = items.Where(item => item.Price >= priceMin);
             }
 
             if (priceMax > 0)
             {
-                items = items.Where(item => item.Price <= priceMax).ToList();
+                items = items.Where(item => item.Price <= priceMax);
             }
 
             if (!string.IsNullOrWhiteSpace(keywords))
             {
                 items = items.Where(item =>
                     item.Title.ToLower().Contains(keywords.ToLower()) ||
-                    item.Manufacturer.ToLower().Contains(keywords.ToLower())).ToList();
+                    item.Manufacturer.ToLower().Contains(keywords.ToLower()));
             }
 
             items = sortBy switch
             {
-                SortByFilter.NewestArrivals => items.OrderByDescending(i => i.Id).ToList(),
-                SortByFilter.PriceLowToHigh => items.OrderBy(i => i.Price).ToList(),
-                SortByFilter.PriceHighToLow => items.OrderByDescending(i => i.Price).ToList(),
+                SortByFilter.NewestArrivals => items.OrderByDescending(i => i.Id),
+                SortByFilter.PriceLowToHigh => items.OrderBy(i => i.Price),
+                SortByFilter.PriceHighToLow => items.OrderByDescending(i => i.Price),
                 _ => throw new ArgumentOutOfRangeException(nameof(sortBy), sortBy, null)
             };
             var manufactures = items.Select(i => i.Manufacturer).Distinct().ToList();
+
+            int pageSize = 8;
+            PaginatedList<Item> paginatedList = await PaginatedList<Item>.CreateAsync(items.AsNoTracking(), pageNumber ?? 1, pageSize);
             var viewModel = new GetItemsViewModel()
             {
                 Categories = categories,
                 Manufactures = manufactures,
                 Items = items.ToArray(),
+                PaginatedItems = paginatedList,
                 ItemsFilter = new ItemsFilter()
                 {
                     Category = category,
@@ -89,6 +95,7 @@ namespace GamingStore.Controllers
                 ItemsInCart = await CountItemsInCart()
             };
 
+     
             return View(viewModel);
         }
 
@@ -133,7 +140,7 @@ namespace GamingStore.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create()
         {
-            Category[] allCategories = Context.Items.Select(item => item.Category).Distinct().ToArray();
+            string[] allCategories = Context.Items.Select(item => item.Category).Distinct().ToArray();
 
             return View(new CreateEditItemViewModel
             {
@@ -234,7 +241,7 @@ namespace GamingStore.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
-            Category[] allCategories = Context.Items.Select(i => i.Category).Distinct().ToArray();
+            string[] allCategories = Context.Items.Select(i => i.Category).Distinct().ToArray();
 
             if (id == null)
             {

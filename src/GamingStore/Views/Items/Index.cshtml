@@ -17,11 +17,11 @@
                 <div class="shop_sidebar" style="margin-left: 15%">
                     <div class="sidebar_section">
                         @{
-                            string selectedCategory = Model.ItemsFilter.Category;
-                            string selectedManufacturer = Model.ItemsFilter.Manufacturer;
-                            var selectedSort = Model.ItemsFilter.SortBy;
+                            string prevSelectedCategory = Model.ItemsFilter.Category;
+                            string prevSelectedManufacturer = Model.ItemsFilter.Manufacturer;
+                            var prevSelectedSortingOrder = Model.ItemsFilter.SortBy;
 
-                            var filterCategory = new ItemsFilter()
+                            var filter = new ItemsFilter()
                             {
                                 Manufacturer = Model.ItemsFilter.Manufacturer,
                                 Category = Model.ItemsFilter.Category,
@@ -31,45 +31,42 @@
                                 Keywords = Model.ItemsFilter.Keywords
                             };
 
-                            var filterManufacture = new ItemsFilter()
-                            {
-                                Manufacturer = Model.ItemsFilter.Manufacturer,
-                                Category = Model.ItemsFilter.Category,
-                                PriceMin = Model.ItemsFilter.PriceMin,
-                                PriceMax = Model.ItemsFilter.PriceMax,
-                                SortBy = Model.ItemsFilter.SortBy,
-                                Keywords = Model.ItemsFilter.Keywords
-                            };
-
-                            var filterSort = new ItemsFilter()
-                            {
-                                Manufacturer = Model.ItemsFilter.Manufacturer,
-                                Category = Model.ItemsFilter.Category,
-                                PriceMin = Model.ItemsFilter.PriceMin,
-                                PriceMax = Model.ItemsFilter.PriceMax,
-                                SortBy = Model.ItemsFilter.SortBy,
-                                Keywords = Model.ItemsFilter.Keywords
-                            };
                         }
                         <div class="sidebar_title">Categories</div>
                         <ul class="sidebar_categories">
-                            @foreach (Category category in Model.Categories)
+                            @foreach (string category in Model.Categories)
                             {
                                 <li>
                                     <span>
                                         @{
-                                            filterCategory.Category = category.ToString();
-                                            filterCategory.Manufacturer = null;
+                                            filter.Category = category;
+                                            filter.Manufacturer = null;
                                         }
-                                        @if (selectedCategory == category.ToString())
+                                        @if (prevSelectedCategory == category)
                                         {
                                             <strong>
-                                                @Html.ActionLink(category.GetDisplayName(), "Index", "Items", filterCategory)
+                                                @Html.ActionLink(category, "Index", "Items", new
+                                           {
+                                               category = prevSelectedCategory,
+                                               manufacturer = filter.Manufacturer,
+                                               priceMin = filter.PriceMin,
+                                               priceMax = filter.PriceMax,
+                                               keywords = filter.Keywords,
+                                               sortBy = prevSelectedSortingOrder
+                                           })
                                             </strong>
                                         }
                                         else
                                         {
-                                            @Html.ActionLink(category.GetDisplayName(), "Index", "Items", filterCategory)
+                                            @Html.ActionLink(category, "Index", "Items", new
+                                       {
+                                           category = category,
+                                           manufacturer = filter.Manufacturer,
+                                           priceMin = filter.PriceMin,
+                                           priceMax = filter.PriceMax,
+                                           keywords = filter.Keywords,
+                                           sortBy = prevSelectedSortingOrder
+                                       })
                                         }
                                     </span>
                                 </li>
@@ -91,11 +88,11 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">$</div>
                                     </div>
-                                    @Html.TextBox("PriceMin", null, new { maxlength = "9", placeholder = "Min", @class = "form-control form-control-sm col-3" })
+                                    @Html.TextBox("PriceMin", filter.PriceMin, new { maxlength = "9", placeholder = "Min", @class = "form-control form-control-sm col-3" })
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">$</div>
                                     </div>
-                                    @Html.TextBox("PriceMax", null, new { maxlength = "9", placeholder = "Max", @class = "form-control form-control-sm col-3" })
+                                    @Html.TextBox("PriceMax", filter.PriceMax, new { maxlength = "9", placeholder = "Max", @class = "form-control form-control-sm col-3" })
                                     @Html.Hidden("Category")
                                     @Html.Hidden("Manufacturer")
                                     <input type="submit" value="Go" class="btn btn-light btn-sm" />
@@ -114,17 +111,33 @@
                                         <li>
                                             <span>
                                                 @{
-                                                    filterManufacture.Manufacturer = manufacture;
+                                                    filter.Manufacturer = manufacture;
                                                 }
-                                                @if (selectedManufacturer == manufacture)
+                                                @if (prevSelectedManufacturer == manufacture)
                                                 {
                                                     <strong>
-                                                        @Html.ActionLink(manufacture, "Index", "Items", filterManufacture)
+                                                        @Html.ActionLink(manufacture, "Index", "Items", new
+                                                   {
+                                                       category = prevSelectedCategory,
+                                                       manufacturer = prevSelectedManufacturer,
+                                                       priceMin = filter.PriceMin,
+                                                       priceMax = filter.PriceMax,
+                                                       keywords = filter.Keywords,
+                                                       sortBy = prevSelectedSortingOrder
+                                                   })
                                                     </strong>
                                                 }
                                                 else
                                                 {
-                                                    @Html.ActionLink(manufacture, "Index", "Items", filterManufacture)
+                                                    @Html.ActionLink(manufacture, "Index", "Items", new
+                                               {
+                                                   category = prevSelectedCategory,
+                                                   manufacturer = manufacture,
+                                                   priceMin = filter.PriceMin,
+                                                   priceMax = filter.PriceMax,
+                                                   keywords = filter.Keywords,
+                                                   sortBy = prevSelectedSortingOrder
+                                               })
                                                 }
                                             </span>
                                         </li>
@@ -147,8 +160,9 @@
                                 <li>
                                     @for (int sortByIndex = 0; sortByIndex < Enum.GetNames(typeof(SortByFilter)).Length; sortByIndex++)
                                     {
+                                        // show the sort order if chosen previously.
                                         var sortBy = (SortByFilter)sortByIndex;
-                                        @if (selectedSort == sortBy)
+                                        @if (prevSelectedSortingOrder == sortBy)
                                         {
                                             <span class="sorting_text">
                                                 @sortBy.GetDisplayName()<i class="fas fa-chevron-down"></i>
@@ -159,20 +173,36 @@
                                         @for (int sortByIndex = 0; sortByIndex < Enum.GetNames(typeof(SortByFilter)).Length; sortByIndex++)
                                         {
                                             var sortBy = (SortByFilter)sortByIndex;
-                                            filterSort.SortBy = sortBy;
+                                            filter.SortBy = sortBy;
 
-                                            @if (selectedSort == sortBy)
+                                            @if (prevSelectedSortingOrder == sortBy)
                                             {
                                                 <li>
                                                     <strong>
-                                                        @Html.ActionLink(sortBy.GetDisplayName(), "Index", "Items", filterSort, new { style = "color: rgba(0,0,0,0.5)" })
+                                                        @Html.ActionLink(sortBy.GetDisplayName(), "Index", "Items", new
+                                                   {
+                                                       category = prevSelectedCategory,
+                                                       manufacturer = prevSelectedManufacturer,
+                                                       priceMin = filter.PriceMin,
+                                                       priceMax = filter.PriceMax,
+                                                       keywords = filter.Keywords,
+                                                       sortBy = prevSelectedSortingOrder
+                                                   }, new { style = "color: rgba(0,0,0,0.5)" })
                                                     </strong>
                                                 </li>
                                             }
                                             else
                                             {
                                                 <li>
-                                                    @Html.ActionLink(sortBy.GetDisplayName(), "Index", "Items", filterSort, new { style = "color: rgba(0,0,0,0.5)" })
+                                                    @Html.ActionLink(sortBy.GetDisplayName(), "Index", "Items", new
+                                               {
+                                                   category = prevSelectedCategory,
+                                                   manufacturer = prevSelectedManufacturer,
+                                                   priceMin = filter.PriceMin,
+                                                   priceMax = filter.PriceMax,
+                                                   keywords = filter.Keywords,
+                                                   sortBy = filter.SortBy
+                                               }, new { style = "color: rgba(0,0,0,0.5)" })
                                                 </li>
                                             }
                                         }
@@ -182,10 +212,9 @@
                         </div>
                     </div>
 
-                    @*<div class="product_grid">*@
                     <div class="product_grid">
                         @{
-                            foreach (var item in Model.Items)
+                            foreach (var item in Model.PaginatedItems)
                             {
                                 <!-- Product Item -->
                                 <div class="product_item">
@@ -202,7 +231,7 @@
                                         <div class="buttons d-flex flex-row">
                                             <div class="cart">
                                                 <i class="fa fa-shopping-cart" style="padding-right: 8%" ;></i>
-                                                
+
                                                 @using (Html.BeginForm("AddToCart", "Items", FormMethod.Post, null))
                                                 {
                                                     @Html.Hidden("itemId", item.Id)
@@ -215,6 +244,33 @@
                             }
                         }
                     </div>
+                    @{
+                        var prevDisabled = !Model.PaginatedItems.HasPreviousPage ? "disabled" : "";
+                        var nextDisabled = !Model.PaginatedItems.HasNextPage ? "disabled" : "";
+                    }
+
+                    @Html.ActionLink("Previous", "Index", "Items", new
+               {
+                   category = prevSelectedCategory,
+                   manufacturer = prevSelectedManufacturer,
+                   priceMin = filter.PriceMin,
+                   priceMax = filter.PriceMax,
+                   keywords = filter.Keywords,
+                   pageNumber = (Model.PaginatedItems.PageIndex - 1),
+                   sortBy = filter.SortBy
+               },
+                        new { @class = "paging btn btn-primary" + " " + prevDisabled })
+                    @Html.ActionLink("Next", "Index", "Items", new
+               {
+                   category = prevSelectedCategory,
+                   manufacturer = prevSelectedManufacturer,
+                   priceMin = filter.PriceMin,
+                   priceMax = filter.PriceMax,
+                   keywords = filter.Keywords,
+                   pageNumber = (Model.PaginatedItems.PageIndex + 1),
+                   sortBy = filter.SortBy
+               },
+                        new { @class = "paging btn btn-primary" + " " + @nextDisabled })
                 </div>
             </div>
         </div>
