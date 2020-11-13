@@ -1,102 +1,82 @@
 [
   {
-    "Date": "November 2020",
-    "Value": 16284.41
+    "Date": "January 2018",
+    "Value": 2992.86
   },
   {
-    "Date": "September 2020",
-    "Value": 5747.9
-  },
-  {
-    "Date": "August 2020",
-    "Value": 1629.15
-  },
-  {
-    "Date": "July 2020",
-    "Value": 1607.0
-  },
-  {
-    "Date": "June 2020",
-    "Value": 12746.009999999998
-  },
-  {
-    "Date": "May 2020",
-    "Value": 1446.5
-  },
-  {
-    "Date": "April 2020",
-    "Value": 260.0
-  },
-  {
-    "Date": "March 2020",
-    "Value": 247.6
-  },
-  {
-    "Date": "February 2020",
-    "Value": 2420.0
-  },
-  {
-    "Date": "January 2020",
-    "Value": 8862.919999999998
-  },
-  {
-    "Date": "December 2019",
-    "Value": 825.64
-  },
-  {
-    "Date": "November 2019",
-    "Value": 399.99
-  },
-  {
-    "Date": "October 2019",
-    "Value": 549.46
-  },
-  {
-    "Date": "August 2019",
-    "Value": 399.99
-  },
-  {
-    "Date": "May 2019",
-    "Value": 1801.4
-  },
-  {
-    "Date": "February 2019",
-    "Value": 4761.59
-  },
-  {
-    "Date": "January 2019",
-    "Value": 416.79999999999995
-  },
-  {
-    "Date": "December 2018",
-    "Value": 1707.72
-  },
-  {
-    "Date": "October 2018",
-    "Value": 1385.94
-  },
-  {
-    "Date": "August 2018",
-    "Value": 637.0
-  },
-  {
-    "Date": "July 2018",
-    "Value": 3299.9500000000003
-  },
-  {
-    "Date": "June 2018",
-    "Value": 1447.66
-  },
-  {
-    "Date": "May 2018",
-    "Value": 336.9
-  },
-  {
-    "Date": "April 2018",
-    "Value": 5107.08
+    "Date": "February 2018",
+    "Value": 4726.21
   },
   {
     "Date": "March 2018",
-    "Value": 2179.96
+    "Value": 1005.12
+  },
+  {
+    "Date": "April 2018",
+    "Value": 519.78
+  },
+  {
+    "Date": "May 2018",
+    "Value": 6360.93
+  },
+  {
+    "Date": "June 2018",
+    "Value": 991.9300000000001
+  },
+  {
+    "Date": "September 2018",
+    "Value": 1029.37
+  },
+  {
+    "Date": "October 2018",
+    "Value": 380.88
+  },
+  {
+    "Date": "December 2018",
+    "Value": 2654.6800000000003
+  },
+  {
+    "Date": "March 2019",
+    "Value": 1471.17
+  },
+  {
+    "Date": "July 2019",
+    "Value": 3713.46
+  },
+  {
+    "Date": "August 2019",
+    "Value": 1171.57
+  },
+  {
+    "Date": "October 2019",
+    "Value": 3778.99
+  },
+  {
+    "Date": "December 2019",
+    "Value": 2426.87
+  },
+  {
+    "Date": "January 2020",
+    "Value": 3641.47
+  },
+  {
+    "Date": "April 2020",
+    "Value": 1089.69
+  },
+  {
+    "Date": "May 2020",
+    "Value": 6255.56
+  },
+  {
+    "Date": "June 2020",
+    "Value": 1590.22
+  },
+  {
+    "Date": "August 2020",
+    "Value": 816.09
+  },
+  {
+    "Date": "October 2020",
+    "Value": 825.25
   }
 ]
