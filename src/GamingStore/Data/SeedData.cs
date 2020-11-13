@@ -853,6 +853,186 @@ namespace GamingStore.Data
                     Description = "7.1 Surround Sound Audio - Integrated Vibrations - Perfect for PC and PS4 Gaming - New 2020 Version - Black"
 
                 },
+                new Item
+                {
+                    Title = "GeForce RTX 3090 DirectX 12 RTX",
+                    Manufacturer = "MSI",
+                    Price =459.99 ,
+                    Category = "GPUs",
+                    ImageUrl = "images/items/MSIGeForceRTX3090DirectX12RTX3090VENTUS3",
+                    Description="DirectX 12 RTX 3090 VENTUS 3X 24G OC 24GB 384-Bit GDDR6X PCI Express 4.0 HDCP Ready SLI Support Video Card"
+                },
+
+
+                new Item
+                {
+                    Title = "Logitech Black Blueto Gaming Mouse",
+                    Manufacturer = "Logitech",
+                    Price =83.99 ,
+                    Category = "Mouses",
+                    ImageUrl = "images/items/LogitechMXAnywhere3910-005987BlackBlueto",
+                    Description="USB-C quick charging - up to 70 days of power per full charge; up to 3 hours of power with one-minute charge"
+                },
+                new Item
+                {
+                    Title = "Razer DeathAdder RZ01 Gaming Mouse",
+                    Manufacturer = "Razer",
+                    Price =25.99,
+                    Category = "Mouses",
+                    ImageUrl = "images/items/RAZERDeathAdderRZ01-00151400-R3U1BlackWi",
+                    Description="Black Wired Optical Precision Gaming Mouse - 3.5G Infrared Sensor"
+                },
+                new Item
+                {
+                    Title = "Creative Gaming Headset EV03",
+                    Manufacturer = "Creative",
+                    Price =99.99 ,
+                    Category = "Headset",
+                    ImageUrl = "images/items/CreativeSoundBlasterEVO3.5mmUSBConnector",
+                    Description="Meet the Sound Blaster EVO, a headset that's amazing for audio"
+                },
+                new Item
+                {
+                    Title = "Asus Gaming Headset H5",
+                    Manufacturer = "Asus",
+                    Price =115.65,
+                    Category = "Headset",
+                    ImageUrl = "images/items/ASUSTUFGamingH53.5mmUSBConnectorCircumau",
+                    Description="USB 2.0 or 3.5mm connector gaming headset with Onboard 7.1 Virtual Surround Sound"
+                },
+                new Item
+                {
+                    Title = "Creative Gaming Headset HS-720",
+                    Manufacturer = "Creative",
+                    Price =46.99 ,
+                    Category = "Headset",
+                    ImageUrl = "images/items/CreativeChatMaxHS-72051EF0410AA004USBCon",
+                    Description="USB Connector USB Headset for Online Chats and PC Gaming"
+                },
+                new Item
+                {
+                    Title = "Logitech Gaming Headset H820e ",
+                    Manufacturer = "Logitech",
+                    Price =209.99 ,
+                    Category = "Headset",
+                    ImageUrl = "images/items/LogitechH820eUSBConnectorSupra-auralWire",
+                    Description="USB Connector Supra-aural Wireless Headset"
+                },
+                new Item
+                {
+                    Title = "Logitech Gaming Headset G533",
+                    Manufacturer = "Logitech",
+                    Price =59.99,
+                    Category = "Headset",
+                    ImageUrl = "images/items/LogitechG533WirelessDTS7.1SurroundSoundG",
+                    Description="Wireless DTS 7.1 Surround Sound"
+                },
+                new Item
+                {
+                    Title = "Razer Battlefield 4 BlackWidow Gaming Keyboard",
+                    Manufacturer = "Razer",
+                    Price =699.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/RazerBattlefield4BlackWidowUltimateMecha",
+                    Description="Never miss a key in the dark with backlit keys that give you the tactical edge, allowing you to launch assaults and flank your foes even under low light conditions."
+                },
+                new Item
+                {
+                    Title = "Logitech Gaming Keyboard G613",
+                    Manufacturer = "Logitech",
+                    Price =109.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/LogitechG613WirelessMechanicalGamingKeyb",
+                    Description="Six programmable G-keys - Put custom macro sequences and in-app commands at your fingertips. Customize G-key profiles individually for each app"
+                },
+                
+                new Item
+                {
+                    Title = "Corsair K55 Gaming Keyboard ",
+                    Manufacturer = "Corsair",
+                    Price = 24.99,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/CorsairGamingK55RGBKeyboard,BacklitRGBLE",
+                    Description="6 programmable macro keys enable powerful actions, key remaps and combos"
+                },
+                new Item
+                {
+                    Title = "Razer Blackwidow Ultimate 2016 Gaming Keyboard",
+                    Manufacturer = "Razer",
+                    Price =389.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/RazerBlackwidowUltimate2016MechanicalGam",
+                    Description="Individually backlit keys with Dynamic lighting effects"
+                },
+                new Item
+                {
+                    Title = "Logitech G903 Lightspeed Gaming Mouse ",
+                    Manufacturer = "Logitech ",
+                    Price =204.99 ,
+                    Category = "Mouses",
+                    ImageUrl = "images/items/LogitechG903LIGHTSPEEDWirelessGamingMous",
+                    Description="Wireless Gaming Mouse with HERO 16K Sensor, 140+ Hour with Rechargeable Battery, LIGHTSYNC RGB, POWERPLAY"
+                },
+                new Item
+                {
+                    Title = "Logitech Lightspeed G604 Gaming Mouse",
+                    Manufacturer = "Logitech",
+                    Price =189.99 ,
+                    Category = "Mouses",
+                    ImageUrl = "images/items/LogitechG604LIGHTSPEEDWirelessGamingMous",
+                    Description="15 Programmable Controls, Dual Wireless Connectivity Modes, and HERO 16K Sensor"
+                },
+                //new Item
+                //{
+                //    Title = "",
+                //    Manufacturer = "",
+                //    Price = ,
+                //    Category = "",
+                //    ImageUrl = "images/items/",
+                //    Description=""
+                //},
+                //new Item
+                //{
+                //    Title = "",
+                //    Manufacturer = "",
+                //    Price = ,
+                //    Category = "",
+                //    ImageUrl = "",
+                //    Description=""
+                //},
+                //new Item
+                //{
+                //    Title = "",
+                //    Manufacturer = "",
+                //    Price = ,
+                //    Category = "",
+                //    ImageUrl = "",
+                //    Description=""
+                //},
+                //new Item
+                //{
+                //    Title = "",
+                //    Manufacturer = "",
+                //    Price = ,
+                //    Category = "",
+                //    ImageUrl = "",
+                //    Description=""
+                //},
+                //new Item
+                //{
+                //    Title = "",
+                //    Manufacturer = "",
+                //    Price = ,
+                //    Category = "",
+                //    ImageUrl = "",
+                //    Description=""
+                //},
+
+
+
+
+
+
             };
             foreach (var item in items)
             {
