@@ -51,9 +51,34 @@ namespace GamingStore.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var revenue =await CalcRevenue();
+            var ordersNumber = await Context.Orders.CountAsync();
+            var itemsNumber = await Context.Items.CountAsync();
+            var clientsNumber = await Context.Customers.CountAsync();
+
+
+            var viewModel = new IndexViewModel()
+            {
+                Customers = Context.Customers,
+                Items = Context.Items,
+                Stores = Context.Stores,
+                ItemsInCart = await CountItemsInCart(),
+                WidgetsValues = new Dictionary<string, double>()
+                {
+                    {"Revenue",revenue},{"Orders",ordersNumber},{"Items",itemsNumber},{"Clients",clientsNumber}
+                }
+            };
+
+            return View(viewModel);
+        }
+
+        private async Task<double> CalcRevenue()
+        {
+            var orders = await Context.Orders.Include(o => o.Payment).ToListAsync();
+
+            return orders.Sum(order => order.Payment.Total);
         }
 
 
@@ -166,13 +191,13 @@ namespace GamingStore.Controllers
             orders.Sort((x, y) => x.OrderDate.CompareTo(y.OrderDate));
 
             var groupByCheck = from order in orders
-                group order by order.OrderDate.Date.ToString("Y")
+                               group order by order.OrderDate.Date.ToString("Y")
                 into dateGroup
-                select new BarChartFormat()
-                {
-                    Date=dateGroup.Key,
-                    Value =dateGroup.Sum(o=>o.Payment.ItemsCost)
-                };
+                               select new BarChartFormat()
+                               {
+                                   Date = dateGroup.Key,
+                                   Value = dateGroup.Sum(o => o.Payment.ItemsCost)
+                               };
 
             var serializedGroupBy = JsonConvert.SerializeObject(groupByCheck, Formatting.Indented);
 
