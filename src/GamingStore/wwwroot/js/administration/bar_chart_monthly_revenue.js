@@ -1,6 +1,6 @@
-﻿const width = 800;
+﻿const width = 1400;
 const height = 700;
-const margin = { top: 20, right: 100, bottom: 100, left: 100 };
+const margin = { top: 20, right: 150, bottom: 100, left: 140 };
 const graphWidth = width - margin.left - margin.right;
 const graphHeight = height - margin.top - margin.bottom;
 
@@ -51,7 +51,7 @@ d3.json("/data/BarChartData.json").then(data => {
         .attr("fill", "white")
         .attr("text-anchor", "end")
         .attr("font-family", "sans-serif")
-        .attr("font-size", 10)
+        .attr("font-size", 13)
         .attr("x", d => x(d.Value))
         .attr("y", (d) => y(d.Date))
         .attr("dy", "1.30em")
@@ -73,11 +73,11 @@ d3.json("/data/BarChartData.json").then(data => {
     gXAxis.call(xAxis);
     gYAxis.call(yAxis);
     gXAxis.selectAll("text")
-        .attr("transform", "translate(-10,10)rotate(-45)")
+        .attr("transform", "translate(-20,20)rotate(-45)")
         .style("text-anchor", "end")
-        .style("font-size", 15);
+        .style("font-size", 20);
 
     gYAxis.selectAll("text")
-        .style("font-size", 10).style("text-anchor", "start").style("font-weight", "bold")
-        .attr('transform', () => { return 'translate(-80,0)' });
+        .style("font-size", 15).style("text-anchor", "start").style("font-weight", "bold")
+        .attr('transform', () => { return 'translate(-110,0)' });
 });
