@@ -1059,12 +1059,16 @@ namespace GamingStore.Data
                     orderItems.Add(orderItem);
                 }
 
+                var orderSum = CalculateOrderSum(orderItems);
+                var shippingCost = 0;
+
                 payment = new Payment
                 {
-                    ItemsCost = CalculateOrderSum(orderItems),
+                    ItemsCost = orderSum,
                     PaymentMethod = (PaymentMethod)rand.Next(0, 3),
-                    ShippingCost = 0,
-                    Paid = true
+                    ShippingCost = shippingCost,
+                    Paid = true,
+                    Total = orderSum+ shippingCost
                 };
 
                 return orderItems;
