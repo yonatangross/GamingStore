@@ -28,7 +28,7 @@
             @Html.LabelFor(m => m.Order.State, new { @class = "col-sm-2 col-form-label" })
             <div class="col-sm-5">
                 <div class="form-check">
-                    @Html.DropDownListFor(m => m.Order.State, new SelectList(Enum.GetNames(typeof(OrderState))), null, new { @class = "form-control", style = "margin: auto;" })
+                    @Html.DropDownListFor(m => m.Order.State, new SelectList(Enum.GetNames(typeof(OrderState))), null, new { @class = "form-control custom-select", style = "margin: auto;" })
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
             @Html.LabelFor(m => m.Order.Payment.PaymentMethod, new { @class = "col-sm-2 col-form-label" })
             <div class="col-sm-5">
                 <div class="form-check">
-                    @Html.DropDownListFor(m => m.Order.Payment.PaymentMethod, new SelectList(Enum.GetNames(typeof(PaymentMethod))), null, new { @class = "form-control", style = "margin: auto;" })
+                    @Html.DropDownListFor(m => m.Order.Payment.PaymentMethod, new SelectList(Enum.GetNames(typeof(PaymentMethod))), null, new { @class = "form-control custom-select", style = "margin: auto;" })
                 </div>
             </div>
         </div>
@@ -51,7 +51,10 @@
         <div class="form-group row">
             @Html.LabelFor(m => m.Order.Payment.ItemsCost, new { @class = "col-sm-2 col-form-label" })
             <div class="col-sm-5">
-                <div class="form-check">
+                <div class="input-group-prepend form-check">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">$</div>
+                    </div>
                     @Html.TextBoxFor(m => m.Order.Payment.ItemsCost, new { @class = "form-control" })
                 </div>
             </div>
@@ -59,7 +62,10 @@
         <div class="form-group row">
             @Html.LabelFor(m => m.Order.Payment.ShippingCost, new { @class = "col-sm-2 col-form-label" })
             <div class="col-sm-5">
-                <div class="form-check">
+                <div class="input-group-prepend form-check">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">$</div>
+                    </div>
                     @Html.TextBoxFor(m => m.Order.Payment.ShippingCost, new { @class = "form-control" })
                 </div>
             </div>
@@ -67,16 +73,37 @@
         <div class="form-group row">
             @Html.LabelFor(m => m.Order.Payment.Total, new { @class = "col-sm-2 col-form-label" })
             <div class="col-sm-5">
-                <div class="form-check">
+                <div class="input-group-prepend form-check">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">$</div>
+                    </div>
                     @Html.TextBoxFor(m => m.Order.Payment.Total, new { @class = "form-control" })
                 </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Order.Payment.RefundAmount, new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-5">
+                <div class="input-group-prepend form-check">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">$</div>
+                    </div>
+                    @Html.TextBoxFor(m => m.Order.Payment.RefundAmount, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Order.Payment.Notes, "Refund Reason", new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-5">
+                <div class="form-check">
+                @Html.TextBoxFor(m => m.Order.Payment.Notes, new { @class = "form-control" })
+                    </div>
             </div>
         </div>
         <div style="margin-top: 8%">
             <input type="submit" value="Save" class="btn btn-primary" style="margin-right: 8%" />
         </div>
     }
-
 </div>
 
 

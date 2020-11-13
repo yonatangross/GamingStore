@@ -34,6 +34,11 @@ namespace GamingStore.Models
         [Required]
         public PaymentMethod PaymentMethod { get; set; }
 
+        [Display(Name = "Refund Amount")]
+        public double RefundAmount { get; set; }
+
+        public string Notes { get; set; }
+
         public bool Paid { get; set; } = true;
     }
 }

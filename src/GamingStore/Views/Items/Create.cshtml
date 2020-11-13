@@ -29,18 +29,21 @@
                 <span asp-validation-for="Item.Manufacturer" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Item.Price" class="control-label"></label>
-                <input asp-for="Item.Price" class="form-control" required />
+                @Html.LabelFor(m => m.Item.Price)
+                <div class="input-group-prepend">
+                    <div class="input-group-text">$</div>
+                    @Html.TextBoxFor(m => m.Item.Price, null, new { @class = "form-control" })
+                </div>
                 <span asp-validation-for="Item.Price" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Item.Category" class="control-label"></label>
-                <select class="form-control" asp-for="Item.Category" style="margin-left: auto;">
+                <select class="form-control custom-select" asp-for="Item.Category" style="margin-left: auto;">
                     @for (int i = 0; i < Enum.GetNames(typeof(Category)).Length; i++)
                     {
                         var category = (Category)i;
-                        <option class="form-control">@Html.DisplayFor(c => category)</option>
+                    <option class="form-control">@Html.DisplayFor(c => category)</option>
                     }
                 </select>
                 <span asp-validation-for="Item.Category" class="text-danger"></span>
