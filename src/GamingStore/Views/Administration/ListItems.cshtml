@@ -28,34 +28,40 @@
             <th>
                 @Html.DisplayNameFor(model => model.Items.First().PropertiesList)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items.First().Active)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (Item item in Model.Items)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Manufacturer)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PropertiesList)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-controller="Items" asp-route-id="@item.Id">Edit</a>
-                    <a asp-action="Delete" asp-controller="Items" asp-route-id="@item.Id">Delete</a>
-                    <a asp-action="Details" asp-controller="Items" asp-route-id="@item.Id">Details</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Manufacturer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PropertiesList)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-controller="Items" asp-route-id="@item.Id">Edit</a>
+                <a asp-action="Delete" asp-controller="Items" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Details" asp-controller="Items" asp-route-id="@item.Id">Details</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
