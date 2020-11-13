@@ -912,7 +912,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Logitech Gaming Headset H820e ",
-                    Manufacturer = "Logitech ",
+                    Manufacturer = "Logitech",
                     Price =209.99 ,
                     Category = "Headset",
                     ImageUrl = "images/items/LogitechH820eUSBConnectorSupra-auralWire",
@@ -939,21 +939,13 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Logitech Gaming Keyboard G613",
-                    Manufacturer = "Logitech ",
+                    Manufacturer = "Logitech",
                     Price =109.99 ,
                     Category = "Keyboards",
                     ImageUrl = "images/items/LogitechG613WirelessMechanicalGamingKeyb",
                     Description="Six programmable G-keys - Put custom macro sequences and in-app commands at your fingertips. Customize G-key profiles individually for each app"
                 },
-                new Item
-                {
-                    Title = "XPG SUMMONER RGB Gaming Keyboard",
-                    Manufacturer = "XPG ",
-                    Price =144.99 ,
-                    Category = "Keyboards",
-                    ImageUrl = "images/items/XPGSUMMONERRGBKeyboardSeriesMechanicalC",
-                    Description="Mechanical CHERRY BLUE MX Backlight Key Switch"
-                },
+                
                 new Item
                 {
                     Title = "Corsair K55 Gaming Keyboard ",
@@ -984,57 +976,57 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Logitech Lightspeed G604 Gaming Mouse",
-                    Manufacturer = "Logitech ",
+                    Manufacturer = "Logitech",
                     Price =189.99 ,
                     Category = "Mouses",
                     ImageUrl = "images/items/LogitechG604LIGHTSPEEDWirelessGamingMous",
                     Description="15 Programmable Controls, Dual Wireless Connectivity Modes, and HERO 16K Sensor"
                 },
-                new Item
-                {
-                    Title = "",
-                    Manufacturer = "",
-                    Price = ,
-                    Category = "",
-                    ImageUrl = "images/items/",
-                    Description=""
-                },
-                new Item
-                {
-                    Title = "",
-                    Manufacturer = "",
-                    Price = ,
-                    Category = "",
-                    ImageUrl = "",
-                    Description=""
-                },
-                new Item
-                {
-                    Title = "",
-                    Manufacturer = "",
-                    Price = ,
-                    Category = "",
-                    ImageUrl = "",
-                    Description=""
-                },
-                new Item
-                {
-                    Title = "",
-                    Manufacturer = "",
-                    Price = ,
-                    Category = "",
-                    ImageUrl = "",
-                    Description=""
-                },
-                new Item
-                {
-                    Title = "",
-                    Manufacturer = "",
-                    Price = ,
-                    Category = "",
-                    ImageUrl = "",
-                    Description=""
-                },
+                //new Item
+                //{
+                //    Title = "",
+                //    Manufacturer = "",
+                //    Price = ,
+                //    Category = "",
+                //    ImageUrl = "images/items/",
+                //    Description=""
+                //},
+                //new Item
+                //{
+                //    Title = "",
+                //    Manufacturer = "",
+                //    Price = ,
+                //    Category = "",
+                //    ImageUrl = "",
+                //    Description=""
+                //},
+                //new Item
+                //{
+                //    Title = "",
+                //    Manufacturer = "",
+                //    Price = ,
+                //    Category = "",
+                //    ImageUrl = "",
+                //    Description=""
+                //},
+                //new Item
+                //{
+                //    Title = "",
+                //    Manufacturer = "",
+                //    Price = ,
+                //    Category = "",
+                //    ImageUrl = "",
+                //    Description=""
+                //},
+                //new Item
+                //{
+                //    Title = "",
+                //    Manufacturer = "",
+                //    Price = ,
+                //    Category = "",
+                //    ImageUrl = "",
+                //    Description=""
+                //},
 
 
 
