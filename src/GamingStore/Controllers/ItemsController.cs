@@ -26,7 +26,7 @@ namespace GamingStore.Controllers
         private readonly IFlashMessage _flashMessage;
         private readonly ILoggerManager _logger;
 
-        public ItemsController(IHostingEnvironment hostingEnvironment,UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager, IFlashMessage flashMessage, ILoggerManager logger)
+        public ItemsController(IHostingEnvironment hostingEnvironment, UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager, IFlashMessage flashMessage, ILoggerManager logger)
             : base(userManager, context, roleManager, signInManager)
         {
             _hostingEnvironment = hostingEnvironment;
@@ -35,9 +35,10 @@ namespace GamingStore.Controllers
         }
 
         // GET: Items
-        public async Task<IActionResult> Index(string category, string manufacturer, int? priceMin, int? priceMax, string keywords,int? pageNumber ,SortByFilter sortBy = SortByFilter.NewestArrivals)
+        public async Task<IActionResult> Index(string category, string manufacturer, int? priceMin, int? priceMax, string keywords, int? pageNumber, SortByFilter sortBy = SortByFilter.NewestArrivals)
         {
-            IQueryable<Item> items = from i in Context.Items select i;
+
+            IQueryable<Item> items = Context.Items.Where(i => i.Active);
 
             List<string> categories = items.Select(i => i.Category).Distinct().ToList();
 
@@ -98,7 +99,7 @@ namespace GamingStore.Controllers
                 ItemsInCart = await CountItemsInCart()
             };
 
-     
+
             return View(viewModel);
         }
 
@@ -128,7 +129,7 @@ namespace GamingStore.Controllers
             var userIntId = GetCurrentUserAsync().Result.CustomerNumber;
             var relatedItem = new RelatedItem(userIntId, item.Id);
             var relatedItems = Context.RelatedItems.Any(ri => ri.ItemId == item.Id && ri.CustomerNumber == user.CustomerNumber);
-            
+
             if (!relatedItems)
             {
                 await Context.RelatedItems.AddAsync(relatedItem);
@@ -171,8 +172,8 @@ namespace GamingStore.Controllers
 
                 if (model.PublishItemFlag)
                 {
-              
-                    PublishTweet( model.Item, uploadFolder);
+
+                    PublishTweet(model.Item, uploadFolder);
                 }
 
                 #endregion
@@ -212,7 +213,7 @@ namespace GamingStore.Controllers
             return uploadFolder;
         }
 
-        private static async Task CopyImage(CreateEditItemViewModel model, string uploadFolder, int  imageNumber)
+        private static async Task CopyImage(CreateEditItemViewModel model, string uploadFolder, int imageNumber)
         {
             Directory.CreateDirectory(uploadFolder);
             string uniqueFileName = $"{imageNumber}.jpg";
@@ -222,7 +223,7 @@ namespace GamingStore.Controllers
             fileStream.Close();
         }
 
-        private void PublishTweet( Item item, string itemImagesPath)
+        private void PublishTweet(Item item, string itemImagesPath)
         {
             //todo: twitter async
             string ConsumerKey = "CVXDTooXKg62g4qq6Ww0QujEV",
@@ -235,7 +236,7 @@ namespace GamingStore.Controllers
             var fullImageUrl = itemImagesPath + "\\1.jpg";
             //var fullImageUrl = "C:\\Users\\Yonatan\\Source\\Repos\\yonatangross\\GamingStore\\src\\GamingStore\\wwwroot\\images\\user.png";
 
-            var tweet ="Gaming Store now sells "+ item.Title+ " only on "+item.Price+"$";
+            var tweet = "Gaming Store now sells " + item.Title + " only on " + item.Price + "$";
             try
             {
 
@@ -303,6 +304,7 @@ namespace GamingStore.Controllers
                 itemOnDb.Manufacturer = model.Item.Manufacturer.Trim().FirstCharToUpper();
                 itemOnDb.Price = model.Item.Price;
                 itemOnDb.Category = model.Item.Category;
+                itemOnDb.Active = model.Item.Active;
 
                 await UploadImages(model);
 
@@ -323,43 +325,6 @@ namespace GamingStore.Controllers
             //return View(model);
         }
 
-        // GET: Items/Delete/5
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var item = await Context.Items.FirstOrDefaultAsync(m => m.Id == id);
-            var viewModel = new ItemViewModel()
-            {
-                Item = item,
-                ItemsInCart = await CountItemsInCart()
-            };
-            if (item == null)
-            {
-                return NotFound();
-            }
-
-            return View(viewModel);
-        }
-
-        // POST: Items/Delete/5
-        [HttpPost]
-        [ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            Item item = await Context.Items.FindAsync(id);
-            Context.Items.Remove(item);
-            await Context.SaveChangesAsync();
-
-            return RedirectToAction(nameof(Index));
-        }
-
         private bool ItemExists(int id)
         {
             return Context.Items.Any(e => e.Id == id);
@@ -370,7 +335,7 @@ namespace GamingStore.Controllers
         {
             try
             {
-                if(quantity==0)
+                if (quantity == 0)
                     return RedirectToAction(nameof(Index));
                 Customer customer = await GetCurrentUserAsync();
 
@@ -379,7 +344,7 @@ namespace GamingStore.Controllers
                     return NotFound();
                 }
 
-                Cart cart = await Context.Carts.FirstOrDefaultAsync(c => c.CustomerId == customer.Id && c.ItemId==itemId);
+                Cart cart = await Context.Carts.FirstOrDefaultAsync(c => c.CustomerId == customer.Id && c.ItemId == itemId);
 
                 if (cart == null)
                 {
