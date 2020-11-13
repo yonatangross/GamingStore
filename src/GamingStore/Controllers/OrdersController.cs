@@ -13,6 +13,7 @@ using GamingStore.ViewModels;
 using GamingStore.ViewModels.Orders;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Vereyon.Web;
 
 namespace GamingStore.Controllers
 {
@@ -50,7 +51,10 @@ namespace GamingStore.Controllers
                 double itemsCost =
                     itemsInCart.Aggregate<Cart, double>(0,
                         (current, cart) => current + cart.Item.Price * cart.Quantity);
-
+                if (itemsCost == 0)
+                {
+                    return RedirectToAction("Index", "Carts");
+                }
                 double totalCost = itemsCost + defaultPaymentCost;
 
                 if (customer.Address == null)
