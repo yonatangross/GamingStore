@@ -159,21 +159,31 @@ namespace GamingStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateEditItemViewModel model)
         {
-            model.Item.Manufacturer = model.Item.Manufacturer.Trim().FirstCharToUpper();
-            string uploadFolder = await UploadImages(model);
-
-            await Context.Items.AddAsync(model.Item);
-            await Context.SaveChangesAsync();
-
-            #region TwitterPost
-
-            if (model.PublishItemFlag)
+            try
             {
-              
-                PublishTweet( model.Item, uploadFolder);
-            }
+                model.Item.Manufacturer = model.Item.Manufacturer.Trim().FirstCharToUpper();
+                string uploadFolder = await UploadImages(model);
 
-            #endregion
+                await Context.Items.AddAsync(model.Item);
+                await Context.SaveChangesAsync();
+
+                #region TwitterPost
+
+                if (model.PublishItemFlag)
+                {
+              
+                    PublishTweet( model.Item, uploadFolder);
+                }
+
+                #endregion
+
+                _flashMessage.Confirmation($"Product '{model.Item.Title}' created with price of ${model.Item.Price}");
+            }
+            catch (Exception e)
+            {
+                _flashMessage.Danger("Product could not be created");
+                _logger.LogError($"Product# '{model.Item.Title}' could not be created, ex: {e}");
+            }
 
             return RedirectToAction("ListItems", "Administration");
         }
