@@ -20,8 +20,7 @@ namespace GamingStore.Controllers
     [Authorize(Roles = "Admin")]
     public class AdministrationController : BaseController
     {
-        public AdministrationController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager)
-            : base(userManager, context, roleManager, signInManager)
+        public AdministrationController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager) : base(userManager, context, roleManager, signInManager)
         {
         }
 
@@ -53,22 +52,23 @@ namespace GamingStore.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var revenue =await CalcRevenue();
+            var revenue = await CalcRevenue();
             var ordersNumber = await Context.Orders.CountAsync();
             var itemsNumber = await Context.Items.CountAsync();
             var clientsNumber = await Context.Customers.CountAsync();
 
+            revenue = Math.Round(revenue, 2);
 
             var viewModel = new IndexViewModel()
             {
                 Customers = Context.Customers,
                 Items = Context.Items,
                 Stores = Context.Stores,
-                Orders = Context.Orders.Include(o=>o.Customer).Include(o=>o.Store),
+                Orders = Context.Orders.Include(o => o.Customer).Include(o => o.Store),
                 ItemsInCart = await CountItemsInCart(),
                 WidgetsValues = new Dictionary<string, double>()
                 {
-                    {"Revenue",revenue},{"Orders",ordersNumber},{"Items",itemsNumber},{"Clients",clientsNumber}
+                    {"Revenue", revenue}, {"Orders", ordersNumber}, {"Items", itemsNumber}, {"Clients", clientsNumber}
                 }
             };
 
@@ -159,8 +159,7 @@ namespace GamingStore.Controllers
                     var itemsCost = orderItem.ItemsCount * orderItem.Item.Price;
                     if (purchaseByCategoryList.Any(d => d.Name == categoryName))
                     {
-                        PieChartFormat pieChartFormat =
-                            purchaseByCategoryList.FirstOrDefault(d => d.Name == categoryName);
+                        PieChartFormat pieChartFormat = purchaseByCategoryList.FirstOrDefault(d => d.Name == categoryName);
                         if (pieChartFormat != null)
                         {
                             pieChartFormat.Value += itemsCost;
@@ -192,13 +191,13 @@ namespace GamingStore.Controllers
             orders.Sort((x, y) => x.OrderDate.CompareTo(y.OrderDate));
 
             var groupByCheck = from order in orders
-                               group order by order.OrderDate.Date.ToString("Y")
+                group order by order.OrderDate.Date.ToString("Y")
                 into dateGroup
-                               select new BarChartFormat()
-                               {
-                                   Date = dateGroup.Key,
-                                   Value = dateGroup.Sum(o => o.Payment.ItemsCost)
-                               };
+                select new BarChartFormat()
+                {
+                    Date = dateGroup.Key,
+                    Value = dateGroup.Sum(o => o.Payment.ItemsCost)
+                };
 
             var serializedGroupBy = JsonConvert.SerializeObject(groupByCheck, Formatting.Indented);
 
@@ -336,15 +335,13 @@ namespace GamingStore.Controllers
         [HttpGet]
         public async Task<IActionResult> ListOrders()
         {
-            List<Order> orders = await Context.Orders.Include(order => order.Customer).Include(order => order.Payment)
-                .ToListAsync();
+            List<Order> orders = await Context.Orders.Include(order => order.Customer).Include(order => order.Payment).ToListAsync();
 
             var viewModel = new ListOrdersViewModel()
             {
                 Orders = orders,
                 ItemsInCart = await CountItemsInCart()
             };
-
 
 
             return View(viewModel);
@@ -455,10 +452,10 @@ namespace GamingStore.Controllers
                     continue;
                 }
 
-                return RedirectToAction("EditRole", new { Id = roleId });
+                return RedirectToAction("EditRole", new {Id = roleId});
             }
 
-            return RedirectToAction("EditRole", new { Id = roleId });
+            return RedirectToAction("EditRole", new {Id = roleId});
         }
 
         [HttpPost]

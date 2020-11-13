@@ -1,7 +1,7 @@
 ﻿var format = d3.format(",.2r");
 var formatPrec = d3.format(".0%");
 d3.json("/data/PieChart.json").then(data => {
-    const size = 300;
+    const size = 900;
     const fourth = size / 4;
     const half = size / 2;
     const labelOffset = fourth * 1.2;
@@ -13,7 +13,7 @@ d3.json("/data/PieChart.json").then(data => {
         .attr('viewBox', `0 0 ${size} ${size}`);
 
     const plotArea = chart.append('g')
-        .attr('transform', `translate(${half}, ${half - 45})`);
+        .attr('transform', `translate(${half}, ${half})`);
 
     const color = d3.scaleOrdinal()
         .domain(data.reverse().map(d => d.name))
@@ -27,7 +27,7 @@ d3.json("/data/PieChart.json").then(data => {
 
     const arc = d3.arc()
         .innerRadius(0)
-        .outerRadius(fourth);
+        .outerRadius(half);
 
     const arcLabel = d3.arc()
         .innerRadius(labelOffset+5)
@@ -47,7 +47,7 @@ d3.json("/data/PieChart.json").then(data => {
         .append('text')
         .style('text-anchor', 'middle')
         .style('alignment-baseline', 'middle')
-        .style('font-size', '5px')
+        .style('font-size', '8px')
         .attr('transform', d => `translate(${arcLabel.centroid(d)})`);
 
     labels.append('tspan')
