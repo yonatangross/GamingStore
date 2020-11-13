@@ -11,6 +11,7 @@ using GamingStore.Models.Relationships;
 using GamingStore.Services.Currency;
 using GamingStore.ViewModels;
 using GamingStore.ViewModels.Orders;
+using LoggerService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Vereyon.Web;
@@ -19,25 +20,14 @@ namespace GamingStore.Controllers
 {
     public class OrdersController : BaseController
     {
-        public OrdersController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager)
+        private readonly IFlashMessage _flashMessage;
+        private readonly ILoggerManager _logger;
+
+        public OrdersController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager, IFlashMessage flashMessage, ILoggerManager logger)
             : base(userManager, context, roleManager, signInManager)
         {
-        }
-
-        // GET: Orders
-        public async Task<IActionResult> Index()
-        {
-            var storeContext = Context.Orders.Include(o => o.Customer).Include(o => o.Store);
-            List<Order> listStoreContext = await storeContext.ToListAsync();
-
-
-            var orderIndexViewModel = new OrderIndexViewModel()
-            {
-                OrderList = listStoreContext,
-                ItemsInCart = await CountItemsInCart()
-            };
-
-            return View(orderIndexViewModel);
+            _flashMessage = flashMessage;
+            _logger = logger;
         }
 
         public async Task<IActionResult> CheckOutIndex()
@@ -263,89 +253,32 @@ namespace GamingStore.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(Order order)
         {
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    Order orderOnDb = await Context.Orders.Include(o => o.Payment)
-                        .FirstOrDefaultAsync(o => o.Id == order.Id);
-                    orderOnDb.Payment.Paid = order.Payment.Paid;
-                    orderOnDb.Payment.PaymentMethod = order.Payment.PaymentMethod;
-                    orderOnDb.Payment.ShippingCost = order.Payment.ShippingCost;
-                    orderOnDb.Payment.ItemsCost = order.Payment.ItemsCost;
-                    orderOnDb.Payment.Total = order.Payment.Total;
-                    orderOnDb.State = order.State;
+                Order orderOnDb = await Context.Orders.Include(o => o.Payment).FirstOrDefaultAsync(o => o.Id == order.Id);
+                orderOnDb.Payment.Paid = order.Payment.Paid;
+                orderOnDb.Payment.PaymentMethod = order.Payment.PaymentMethod;
+                orderOnDb.Payment.ShippingCost = order.Payment.ShippingCost;
+                orderOnDb.Payment.ItemsCost = order.Payment.ItemsCost;
+                orderOnDb.Payment.Total = order.Payment.Total;
+                orderOnDb.State = order.State;
 
-                    Context.Update(orderOnDb);
-                    await Context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!await OrderExists(order.Id))
-                    {
-                        return NotFound();
-                    }
-
-                    throw;
-                }
-
-                return RedirectToAction("ListOrders", "Administration");
+                Context.Update(orderOnDb);
+                await Context.SaveChangesAsync();
+                _flashMessage.Confirmation("Order has been updated");
+            }
+            catch (Exception e)
+            {
+                _flashMessage.Danger("Order could not be updated");
+                _logger.LogError($"Product# '{order.Id}' could not be updated, ex: {e}");
             }
 
-            var viewModel = new EditOrdersViewModel
-            {
-                Customers = await Context.Customers.Where(customer => !string.IsNullOrWhiteSpace(customer.UserName))
-                    .Distinct().ToListAsync(),
-                Order = order,
-                ItemsInCart = await CountItemsInCart(),
-
-            };
-
-            return View(viewModel);
+            return RedirectToAction("ListOrders", "Administration");
         }
 
         private async Task<bool> OrderExists(string id)
         {
             return await Context.Orders.AnyAsync(e => e.Id == id);
-        }
-
-        // GET: Orders/Delete/5
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Delete(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Order order = await Context.Orders.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (order == null)
-            {
-                return NotFound();
-            }
-
-            var viewModel = new OrderDeleteViewModel()
-            {
-                Order = order,
-                ItemsInCart = await CountItemsInCart(),
-            };
-
-            return View(viewModel);
-        }
-
-        // POST: Orders/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> RefundConfirmed(string id)
-        {
-            Order order = await Context.Orders.FindAsync(id);
-
-            Context.Orders.Remove(order);
-            await Context.SaveChangesAsync();
-
-            
-            return RedirectToAction("ListOrders", "Administration");
         }
     }
 }

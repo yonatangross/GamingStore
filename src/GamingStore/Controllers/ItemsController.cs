@@ -12,6 +12,7 @@ using GamingStore.Extensions;
 using GamingStore.Models;
 using GamingStore.Services.Twitter;
 using GamingStore.ViewModels.Items;
+using LoggerService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -23,12 +24,14 @@ namespace GamingStore.Controllers
     {
         private readonly IHostingEnvironment _hostingEnvironment; //todo: fix obsolete
         private readonly IFlashMessage _flashMessage;
+        private readonly ILoggerManager _logger;
 
-        public ItemsController(IHostingEnvironment hostingEnvironment,UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager, IFlashMessage flashMessage)
+        public ItemsController(IHostingEnvironment hostingEnvironment,UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager, IFlashMessage flashMessage, ILoggerManager logger)
             : base(userManager, context, roleManager, signInManager)
         {
             _hostingEnvironment = hostingEnvironment;
             _flashMessage = flashMessage;
+            _logger = logger;
         }
 
         // GET: Items
@@ -156,21 +159,31 @@ namespace GamingStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateEditItemViewModel model)
         {
-            model.Item.Manufacturer = model.Item.Manufacturer.Trim().FirstCharToUpper();
-            string uploadFolder = await UploadImages(model);
-
-            await Context.Items.AddAsync(model.Item);
-            await Context.SaveChangesAsync();
-
-            #region TwitterPost
-
-            if (model.PublishItemFlag)
+            try
             {
-              
-                PublishTweet( model.Item, uploadFolder);
-            }
+                model.Item.Manufacturer = model.Item.Manufacturer.Trim().FirstCharToUpper();
+                string uploadFolder = await UploadImages(model);
 
-            #endregion
+                await Context.Items.AddAsync(model.Item);
+                await Context.SaveChangesAsync();
+
+                #region TwitterPost
+
+                if (model.PublishItemFlag)
+                {
+              
+                    PublishTweet( model.Item, uploadFolder);
+                }
+
+                #endregion
+
+                _flashMessage.Confirmation($"Product '{model.Item.Title}' created with price of ${model.Item.Price}");
+            }
+            catch (Exception e)
+            {
+                _flashMessage.Danger("Product could not be created");
+                _logger.LogError($"Product# '{model.Item.Title}' could not be created, ex: {e}");
+            }
 
             return RedirectToAction("ListItems", "Administration");
         }
@@ -283,17 +296,25 @@ namespace GamingStore.Controllers
                 return RedirectToAction("ListItems", "Administration");
             }
 
-            itemOnDb.Title = model.Item.Title;
-            itemOnDb.Description = model.Item.Description;
-            itemOnDb.Manufacturer = model.Item.Manufacturer.Trim().FirstCharToUpper();
-            itemOnDb.Price = model.Item.Price;
-            itemOnDb.Category = model.Item.Category;
+            try
+            {
+                itemOnDb.Title = model.Item.Title;
+                itemOnDb.Description = model.Item.Description;
+                itemOnDb.Manufacturer = model.Item.Manufacturer.Trim().FirstCharToUpper();
+                itemOnDb.Price = model.Item.Price;
+                itemOnDb.Category = model.Item.Category;
 
-            await UploadImages(model);
+                await UploadImages(model);
 
-            Context.Update(itemOnDb);
-            await Context.SaveChangesAsync();
-            _flashMessage.Confirmation("Item information has been updated");
+                Context.Update(itemOnDb);
+                await Context.SaveChangesAsync();
+                _flashMessage.Confirmation("Item information has been updated");
+            }
+            catch (Exception e)
+            {
+                _flashMessage.Danger("Product could not be updated");
+                _logger.LogError($"Product# '{model.Item.Id}' could not be updated, ex: {e}");
+            }
 
             return RedirectToAction("ListItems", "Administration");
             //var allCategories = Context.Items.Select(i => i.Category).Distinct().ToArray();
