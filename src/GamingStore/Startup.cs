@@ -61,7 +61,7 @@ namespace GamingStore
                 options.ClientSecret = googleAuthNSection["ClientSecret"];
             });
 
-
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddFlashMessage();
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageOptions>(Configuration);

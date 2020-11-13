@@ -71,6 +71,10 @@ input[type=text].input-validation-error {
     border: 2px solid #dc3545
 }
 
+input[type=text].valid {
+    border: 2px solid #2aca2a
+}
+
 .field-validation-error {
     display: none;
 }
@@ -213,3 +217,4 @@ input[type=text].input-validation-error {
 .active:after {
     content: "\2796"; /* Unicode character for "minus" sign (-) */
 }
+
