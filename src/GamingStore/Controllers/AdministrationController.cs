@@ -64,6 +64,7 @@ namespace GamingStore.Controllers
                 Customers = Context.Customers,
                 Items = Context.Items,
                 Stores = Context.Stores,
+                Orders = Context.Orders,
                 ItemsInCart = await CountItemsInCart(),
                 WidgetsValues = new Dictionary<string, double>()
                 {
