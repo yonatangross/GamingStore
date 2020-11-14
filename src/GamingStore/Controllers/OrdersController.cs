@@ -253,6 +253,12 @@ namespace GamingStore.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(Order order)
         {
+            if (!await OrderExists(order.Id))
+            {
+                _flashMessage.Danger("You cannot edit product that is no longer exists");
+                return RedirectToAction("ListOrders", "Administration");
+            }
+
             try
             {
                 Order orderOnDb = await Context.Orders.Include(o => o.Payment).FirstOrDefaultAsync(o => o.Id == order.Id);
@@ -261,6 +267,8 @@ namespace GamingStore.Controllers
                 orderOnDb.Payment.ShippingCost = order.Payment.ShippingCost;
                 orderOnDb.Payment.ItemsCost = order.Payment.ItemsCost;
                 orderOnDb.Payment.Total = order.Payment.Total;
+                orderOnDb.Payment.RefundAmount = order.Payment.RefundAmount;
+                orderOnDb.Payment.Notes = order.Payment.Notes;
                 orderOnDb.State = order.State;
 
                 Context.Update(orderOnDb);

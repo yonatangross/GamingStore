@@ -2439,4 +2439,12 @@ footer.site-footer {
   .right-panel .menutoggle {
     width: 20px; } }
 
+input[type=text].input-validation-error {
+  border: 2px solid #dc3545
+}
+
+.field-validation-error {
+  display: none;
+}
+
 /*# sourceMappingURL=style.css.map */
