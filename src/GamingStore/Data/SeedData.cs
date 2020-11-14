@@ -64,11 +64,11 @@ namespace GamingStore.Data
                     UserName = "yonatan2gross@gmail.com",
                     Email = "yonatan2gross@gmail.com",
                     FirstName = "Yonatan",
-                    LastName = "Gross",
+                    LastName = "Gross"
                 },
                 new Customer
                 {
-                    UserName = "matan180 bU1806@gmail.com",
+                    UserName = "matan18061806@gmail.com",
                     Email = "matan18061806@gmail.com",
                     FirstName = "Matan",
                     LastName = "Hassin"
