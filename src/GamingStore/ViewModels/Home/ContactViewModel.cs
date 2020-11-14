@@ -21,14 +21,14 @@ namespace GamingStore.ViewModels.Home
         [EmailAddress]
         public string Email { get; set; }
 
-        [DataType(DataType.PhoneNumber)]
+        
+        [DataType(DataType.PhoneNumber), StringLength(10)]
         [Range(0000000000, 9999999999, ErrorMessage = "Phone number is not valid")]
-        [StringLength(10, MinimumLength = 10)]
         public string PhoneNumber { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [StringLength(50, MinimumLength = 2)]
+        [StringLength(50, MinimumLength = 5, ErrorMessage = "The message length is too short")]
         public string Message { get; set; }
     }
 }

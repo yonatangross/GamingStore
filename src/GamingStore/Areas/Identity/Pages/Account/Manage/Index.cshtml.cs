@@ -42,7 +42,7 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
             public string FirstName { get; set; }
 
             [Display(Name = "Phone number")]
-            [Required]
+            [Required, DataType(DataType.PhoneNumber), StringLength(10), Phone]
             public string PhoneNumber { get; set; }
         }
 

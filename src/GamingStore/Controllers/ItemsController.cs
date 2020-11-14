@@ -33,11 +33,11 @@ namespace GamingStore.Controllers
             _flashMessage = flashMessage;
             _logger = logger;
         }
-
+        
         // GET: Items
         public async Task<IActionResult> Index(string category, string manufacturer, int? priceMin, int? priceMax, string keywords, int? pageNumber, SortByFilter sortBy = SortByFilter.NewestArrivals)
         {
-
+            const int pageSize = 16;
             IQueryable<Item> items = Context.Items.Where(i => i.Active);
 
             List<string> categories = items.Select(i => i.Category).Distinct().ToList();
@@ -79,7 +79,7 @@ namespace GamingStore.Controllers
             };
             var manufactures = items.Select(i => i.Manufacturer).Distinct().ToList();
 
-            int pageSize = 8;
+            
             PaginatedList<Item> paginatedList = await PaginatedList<Item>.CreateAsync(items.AsNoTracking(), pageNumber ?? 1, pageSize);
             var viewModel = new GetItemsViewModel()
             {
