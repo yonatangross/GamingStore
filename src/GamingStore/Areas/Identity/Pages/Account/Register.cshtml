@@ -46,19 +46,19 @@
                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                     </div>
                     <button type="submit" class="btn btn-success  mb-3 mt-3">Register</button>
-                    <hr />
-                    <div class="social-login-content">
-                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                            <div class="social-button">
-                                <button type="submit" name="provider" value="Facebook" class="btn btn-primary mb-3 mt-3"><i class="fa fa-facebook fa-2x"></i> Register with facebook</button>
-                                <button type="submit" name="provider" value="Google" class="btn btn-danger mb-3 mt-3 "><i class="fa fa-google fa-2x"></i> Register with Google</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="register-link m-t-15 text-center">
-                        <p>Already have an account? <a asp-page="./Login">Sign in</a></p>
-                    </div>
                 </form>
+                <hr />
+                <div class="social-login-content">
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <div class="social-button">
+                            <button type="submit" name="provider" value="Facebook" class="btn btn-primary mb-3 mt-3"><i class="fa fa-facebook fa-2x"></i> Register with facebook</button>
+                            <button type="submit" name="provider" value="Google" class="btn btn-danger mb-3 mt-3 "><i class="fa fa-google fa-2x"></i> Register with Google</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="register-link m-t-15 text-center">
+                    <p>Already have an account? <a asp-page="./Login">Sign in</a></p>
+                </div>
             </div>
         </div>
     </div>

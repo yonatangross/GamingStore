@@ -40,18 +40,19 @@
                     <button type="submit" class="btn btn-success  mb-3 mt-3">Sign In</button>
                     </div>
                     <hr />
-                    <div class="social-login-content">
-                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                            <div class="social-button">
-                                <button type="submit" name="provider" value="Facebook" class="btn btn-primary mb-3 mt-3"><i class="fa fa-facebook fa-2x"></i> Sign in with facebook</button>
-                                <button type="submit" name="provider" value="Google" class="btn btn-danger mb-3 mt-3 "><i class="fa fa-google fa-2x"></i> Sign in with Google</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="register-link m-t-15 text-center">
-                        <p>Don't have an account? <a asp-page="./Register">Sign up Here</a></p>
-                    </div>
+                    
                 </form>
+                <div class="social-login-content">
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <div class="social-button">
+                            <button type="submit" name="provider" value="Facebook" class="btn btn-primary mb-3 mt-3"><i class="fa fa-facebook fa-2x"></i> Sign in with facebook</button>
+                            <button type="submit" name="provider" value="Google" class="btn btn-danger mb-3 mt-3 "><i class="fa fa-google fa-2x"></i> Sign in with Google</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="register-link m-t-15 text-center">
+                    <p>Don't have an account? <a asp-page="./Register">Sign up Here</a></p>
+                </div>
             </div>
         </div>
     </div>

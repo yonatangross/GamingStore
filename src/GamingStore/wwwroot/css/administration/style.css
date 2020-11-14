@@ -2242,8 +2242,9 @@ footer.site-footer {
         font-size: 14px; }
         aside.left-panel.open-menu .navbar .navbar-nav li > a .menu-icon {
           width: 55px;
-          font-size: inherit;
+          font-size: 20px;
           text-align: left; }
+  
       aside.left-panel.open-menu .navbar .navbar-nav li.menu-item-has-children.show .sub-menu {
         position: static !important;
         margin-left: 45px; }
