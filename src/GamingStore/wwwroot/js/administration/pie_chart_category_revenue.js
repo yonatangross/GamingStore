@@ -4,7 +4,7 @@ d3.json("/data/RevenueByCategoryPieChartData.json").then(data => {
     const size = 500;
     const fourth = size / 4;
     const half = size / 2;
-    const labelOffset = fourth * 1.5;
+    const labelOffset = fourth * 1.42;
     const total = data.reduce((acc, cur) => acc + cur.Value, 0);
     const container = d3.select(".piechart");
 
@@ -18,7 +18,7 @@ d3.json("/data/RevenueByCategoryPieChartData.json").then(data => {
 
     const color = d3.scaleOrdinal()
         .domain(data.reverse().map(d => d.name))
-        .range(d3.schemeSet1);
+        .range(d3.schemeBlues[9].reverse());
 
     const pie = d3.pie()
         .sort(null)

@@ -27,7 +27,6 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
             _flushMessage = flushMessage;
         }
 
-        public string Username { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -37,23 +36,19 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required, DataType(DataType.Text), StringLength(50)/*, RegularExpression(@"^[A-Z]+[a-zA-Z]*$")*/]
-            [Display(Name = "First Name")]
-            public string FirstName { get; set; }
-
             [Display(Name = "Phone number")]
             [Required, DataType(DataType.PhoneNumber), StringLength(10), Phone]
             public string PhoneNumber { get; set; }
+
+            public string Username { get; set; }
         }
 
         private async Task LoadAsync(Customer user)
         {
-            var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = user.PhoneNumber,
+                Username = user.UserName
             };
         }
 
