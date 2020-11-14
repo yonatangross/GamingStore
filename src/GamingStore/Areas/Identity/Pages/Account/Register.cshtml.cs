@@ -45,11 +45,13 @@ namespace GamingStore.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"[a-zA-Z]{2,}$")]
             [Display(Name = "First Name")]
+            [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"[a-zA-Z]{2,}$")]
+
             public string FirstName { get; set; }
 
             [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"[a-zA-Z]{2,}$")]
+
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
@@ -89,6 +91,7 @@ namespace GamingStore.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "Customer");
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

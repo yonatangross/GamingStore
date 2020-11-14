@@ -16,6 +16,10 @@ namespace GamingStore.Data
 {
     public class SeedData
     {
+        private static readonly string DirectoryPath =
+            AppContext.BaseDirectory.Substring(0,
+                AppContext.BaseDirectory.IndexOf("bin", StringComparison.Ordinal));
+
         public static async Task Initialize(IServiceProvider serviceProvider, string adminPassword)
         {
             await using var context = new StoreContext(serviceProvider.GetRequiredService<DbContextOptions<StoreContext>>());
@@ -52,8 +56,29 @@ namespace GamingStore.Data
             {
                 var role = new IdentityRole { Name = customer };
                 await roleManager.CreateAsync(role);
+
+                //Here we create a mock customers super users who will maintain the website                   
+                await AddCustomers(userManager, "default123");
             }
             await context.SaveChangesAsync();
+        }
+
+        private static async Task AddCustomers(UserManager<Customer> userManager, string usersPassword)
+        {
+            string dataCustomers = await System.IO.File.ReadAllTextAsync($@"{DirectoryPath}\Data\Mock_Data\CustomersMin.json");
+            List<Customer> customers = JsonConvert.DeserializeObject<List<Customer>>(dataCustomers);
+            
+
+            foreach (Customer customer in customers)
+            {
+                IdentityResult result = await userManager.CreateAsync(customer, usersPassword);
+
+                //Add default User to Role Admin    
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(customer, "Customer");
+                }
+            }
         }
 
         private static async Task AddAdmins(UserManager<Customer> userManager, string adminPassword)
@@ -1447,6 +1472,62 @@ namespace GamingStore.Data
                     ImageUrl = "images/items/logitechg512carbonrgbmechanicalgamingkey",
                     Description="USB: Plug in your mouse, flash drive or phone with convenience via the integrated USB passthrough port"
                 },
+                new Item
+                {
+                    Title = "Logitech G512 N-Key RGB Mechanical Gaming Keyboard",
+                    Manufacturer = "Logitech",
+                    Price =359.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/LogitechG512N-KeyRolloverErgonomicDesign",
+                    Description="Sync With Keyboard Light Effect and Gaming Sound Effect Through Logitech Gaming Software"
+                },
+                new Item
+                {
+                    Title = "Logitech K845 Wired Mechanical Gaming Keyboard",
+                    Manufacturer = "Logitech",
+                    Price =359.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/LogitechK845WiredTTCMechanicalGamingKeyb",
+                    Description="104 Keys White Backlit And TTC Mechanical Switch For Windows/MAC/Android/IOS - Black"
+                },
+                new Item
+                {
+                    Title = "Logitech G213 Prodigy Gaming Keyboard",
+                    Manufacturer = "Logitech",
+                    Price =25.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/LogitechG213ProdigyGamingKeyboardwith16",
+                    Description="Brilliant Color Spectrum Illumination lets you easily personalize up to 5 lighting zones from over 16.8 million colors to match your style and gaming gear"
+                },
+                new Item
+                {
+                    Title = "Logitech G610 Orion Brown Mechanical Gaming Keyboard",
+                    Manufacturer = "Logitech",
+                    Price =429.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/LogitechG610OrionBrown,MechanicalGamingK",
+                    Description="Performance-driven gaming keyboard: Full-size keyboard delivering a pure, fluid gaming experience"
+                },
+                new Item
+                {
+                    Title = "Logitech G610 Orion Red Mechanical Gaming Keyboard",
+                    Manufacturer = "Logitech",
+                    Price =229.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/LogitechG610OrionRed,MechanicalGamingKey",
+                    Description="Customizable Lighting: Personalize individual key lighting brightness to keep track of spells and other commands"
+                },
+
+                new Item
+                {
+                    Title = "Corsair K63 Mechanical Gaming Keyboard",
+                    Manufacturer = "Corsair",
+                    Price =129.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/CorsairGamingK63CompactMechanicalKeyboar",
+                    Description="Dedicated volume and multimedia controls: Control to adjust audio on-the-fly without interrupting your game"
+                },
+
             };
             foreach (var item in items)
             {
