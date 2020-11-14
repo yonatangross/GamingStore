@@ -265,6 +265,36 @@ namespace GamingStore.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> EditRole(EditRoleViewModel model)
+        {
+            IdentityRole role = await RoleManager.FindByIdAsync(model.Id);
+
+            if (role == null)
+            {
+                return Error(model.Id, "role");
+            }
+
+            role.Name = model.RoleName;
+
+            // Update the Role using UpdateAsync
+            IdentityResult result = await RoleManager.UpdateAsync(role);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("ListRoles");
+            }
+
+            foreach (IdentityError error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            model.ItemsInCart = await CountItemsInCart();
+
+            return View(model);
+        }
+
         public JsonResult ListUsersBySearch(string searchUserString)
         {
             var users = UserManager.Users;
@@ -331,35 +361,7 @@ namespace GamingStore.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> EditRole(EditRoleViewModel model)
-        {
-            IdentityRole role = await RoleManager.FindByIdAsync(model.Id);
-
-            if (role == null)
-            {
-                return Error(model.Id, "role");
-            }
-
-            role.Name = model.RoleName;
-
-            // Update the Role using UpdateAsync
-            IdentityResult result = await RoleManager.UpdateAsync(role);
-
-            if (result.Succeeded)
-            {
-                return RedirectToAction("ListRoles");
-            }
-
-            foreach (IdentityError error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
-
-            model.ItemsInCart = await CountItemsInCart();
-
-            return View(model);
-        }
+      
 
         [HttpGet]
         public async Task<IActionResult> EditUsersInRole(string roleId)
@@ -375,7 +377,8 @@ namespace GamingStore.Controllers
 
             var viewModel = new ListUserRoleViewModel()
             {
-                ItemsInCart = await CountItemsInCart()
+                ItemsInCart = await CountItemsInCart(),
+                List = new List<UserRoleViewModel>()
             };
 
             foreach (Customer user in UserManager.Users)
