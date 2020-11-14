@@ -10,16 +10,23 @@ using GamingStore.Models;
 using GamingStore.Models.Relationships;
 using GamingStore.ViewModels;
 using GamingStore.ViewModels.Stores;
+using LoggerService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Vereyon.Web;
 
 namespace GamingStore.Controllers
 {
     public class StoresController : BaseController
     {
-        public StoresController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager)
+        private readonly IFlashMessage _flashMessage;
+        private readonly ILoggerManager _logger;
+
+        public StoresController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager,IFlashMessage flashMessage, ILoggerManager logger)
             : base(userManager, context, roleManager, signInManager)
         {
+            _flashMessage = flashMessage;
+            _logger = logger;
         }
 
         // GET: Stores
@@ -205,24 +212,21 @@ namespace GamingStore.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(Store store)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(new StoreDetailsViewModel {Store = store, ItemsInCart = await CountItemsInCart()});
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(new StoreDetailsViewModel {Store = store, ItemsInCart = await CountItemsInCart()});
+            //}
 
             try
             {
                 Context.Update(store);
                 await Context.SaveChangesAsync();
+                _flashMessage.Confirmation("Item information has been updated");
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception e)
             {
-                if (!StoreExists(store.Id))
-                {
-                    return NotFound();
-                }
-
-                throw;
+                _flashMessage.Danger("Store could not be updated");
+                _logger.LogError($"Store# '{store.Id}' could not be updated, ex: {e}");
             }
 
             return RedirectToAction("ListStores", "Administration");
