@@ -1445,6 +1445,33 @@ namespace GamingStore.Data
                     ImageUrl = "images/items/LogitechG910OrionSparkRGBMechanicalGamin",
                     Description="World's fastest RGB mechanical gaming keyboard: Exclusive Romer-G Mechanical Switches with up to 25 percent faster actuation"
                 },
+                new Item
+                {
+                    Title = "Logitech G915 Lightspeed Wireless RGB Mechanical Gaming Keyboard",
+                    Manufacturer = "Logitech",
+                    Price =439.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/LogitechG915LightspeedWirelessRGBMechani",
+                    Description="LIGHTSYNC technology provides next-gen RGB lighting that synchronizes lighting with any content. Personalize each key or create custom animations from ~16.8M colors with Logitech G HUB software."
+                },
+                new Item
+                {
+                    Title = "Logitech G910 ORION SPECTRUM RGB Mechanical Gaming Keyboard",
+                    Manufacturer = "Logitech",
+                    Price =169.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/Logitech-G910ORIONSPECTRUMRGBMECHANICALG",
+                    Description="Personalize each key or create custom animations."
+                },
+                new Item
+                {
+                    Title = "Logitech G512 Carborn RGB Mechanical Gaming Keyboard",
+                    Manufacturer = "Logitech",
+                    Price =359.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/logitechg512carbonrgbmechanicalgamingkey",
+                    Description="USB: Plug in your mouse, flash drive or phone with convenience via the integrated USB passthrough port"
+                },
             };
             foreach (var item in items)
             {
