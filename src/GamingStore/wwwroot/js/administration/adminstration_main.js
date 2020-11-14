@@ -1,37 +1,17 @@
-$.noConflict();
 
-jQuery(document).ready(function ($) {
-
-    "use strict";
+$(document).ready(function () {
 
     [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
         new SelectFx(el);
     });
 
-    jQuery('.selectpicker').selectpicker;
+    $('.selectpicker').selectpicker;
 
-
-
-
-    $('.search-trigger').on('click', function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        $('.search-trigger').parent('.header-left').addClass('open');
-    });
-
-    $('.search-close').on('click', function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        $('.search-trigger').parent('.header-left').removeClass('open');
-    });
+ 
 
     $('.equal-height').matchHeight({
         property: 'max-height'
     });
-
-    // var chartsheight = $('.flotRealtime2').height();
-    // $('.traffic-chart').css('height', chartsheight-122);
-
 
     // Counter Number
     $('.count').each(function () {

@@ -16,7 +16,7 @@ const gXAxis = graph.append("g")
     .attr("transform", `translate(0, ${graphHeight})`);
 const gYAxis = graph.append("g");
 
-d3.json("/data/BarChartData.json").then(data => {
+d3.json("/data/MonthlyRevenueBarChartData.json").then(data => {
     const x = d3.scaleLinear()
         .domain([0, d3.max(data, d => d.Value)])
         .range([0, graphWidth - margin.left - margin.right]);
