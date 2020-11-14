@@ -13,7 +13,7 @@ namespace GamingStore.ProductParser
     {
         static void Main(string[] args)
         {
-            var asin = "N82E16824281059";
+            var asin = "N82E16823126397";
             var filesDirectory = @"\\Mac\Home\Desktop\Project\GamingStore\src\GamingStore\wwwroot\images\items";
 
             var webDriver = new ChromeDriver();

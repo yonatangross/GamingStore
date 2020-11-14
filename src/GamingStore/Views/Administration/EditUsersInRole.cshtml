@@ -15,18 +15,16 @@
             @for (var i = 0; i < Model.List.Count; i++)
             {
                 <div class="form-check m-1">
-                    <input type="hidden" asp-for="@Model.List[i].UserId" />
-                    <input type="hidden" asp-for="@Model.List[i].UserName" />
-                    <input asp-for="@Model.List[i].IsSelected" class="form-check-input" />
-                    <label class="form-check-label" asp-for="@Model.List[i].IsSelected">
-                        @Model.List[i].Email
-                    </label>
+                    <input type="hidden" asp-for="@Model.List[i].UserId"/>
+                    <input type="hidden" asp-for="@Model.List[i].UserName"/>
+                    <input asp-for="@Model.List[i].IsSelected" class="form-check-input"/>
+                    <label class="form-check-label" asp-for="@Model.List[i].IsSelected">@Model.List[i].Email</label>
                 </div>
             }
         </div>
         <div class="card-footer">
             <input type="submit" value="Update" class="btn btn-primary"
-                   style="width: auto" />
+                   style="width: auto"  />
             <a asp-action="EditRole" asp-route-id="@roleId"
                class="btn btn-primary" style="width: auto">
                 Cancel

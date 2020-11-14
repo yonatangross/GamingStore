@@ -1375,7 +1375,51 @@ namespace GamingStore.Data
                     ImageUrl = "images/items/ASUSROGStrixXG17AHP17.3FullHD1920x10803m",
                     Description="Full HD 1920 x 1080 3 ms 240Hz ,USB Type-C, Micro HDMI Built-in Speakers Portable IPS Gaming Monitor"
                 },
-
+                new Item
+                {
+                    Title = "Logitech G513 Mechanical Gaming Keyboard",
+                    Manufacturer = "Logitech",
+                    Price =129.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/LogitechG513RGBBacklitMechanicalGamingKe",
+                    Description="High performance RGB keyboard with customizable full spectrum color lighting per key plus LIGHTSYNC game-driven lighting colors and effects"
+                },
+                new Item
+                {
+                    Title = "Logitech G915 Mechanical Gaming Keyboard",
+                    Manufacturer = "Logitech",
+                    Price =359.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/LogitechG915LightspeedWirelessRGBMechani",
+                    Description="IGHTSPEED wireless delivers pro-grade performance with flexibility and freedom from cords. Creates a clean aesthetic for battlestations."
+                },
+                new Item
+                {
+                    Title = "Logitech G915 Clicky Switch  Mechanical Gaming Keyboard",
+                    Manufacturer = "Logitech ",
+                    Price =239.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/Logitech920-009529G915TenkeylessLIGHTSPE",
+                    Description="LIGHTSPEED wireless delivers pro-grade performance with flexibility and freedom from cords. Creates a clean aesthetic for battlestations. Delivers 40 hours on a single full charge."
+                },
+                new Item
+                {
+                    Title = "Logitech G413 Mechanical Gaming Keyboard",
+                    Manufacturer = "Logitech",
+                    Price =179.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/LogitechG413BacklitMechanicalGamingKeybo",
+                    Description="Additional USB cable connects the USB pass-through port to its own input for 100% power throughout and data speed. Plug in a device to charge or plug in a mouse to charge your adversaries"
+                },
+                new Item
+                {
+                    Title = "Logitech G910 Mechanical Gaming Keyboard",
+                    Manufacturer = "Logitech",
+                    Price =539.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/LogitechG910OrionSparkRGBMechanicalGamin",
+                    Description="World's fastest RGB mechanical gaming keyboard: Exclusive Romer-G Mechanical Switches with up to 25 percent faster actuation"
+                },
             };
             foreach (var item in items)
             {
