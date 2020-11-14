@@ -147,7 +147,7 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = "Milano Gaming Chair - Green", Manufacturer = "Arozzi", Price = 227,
+                    Title = "Milano Gaming Chair Green", Manufacturer = "Arozzi", Price = 227,
                     Category = "GamingChairs", PropertiesList =
                         new Dictionary<string, string>()
                         {
@@ -161,7 +161,7 @@ namespace GamingStore.Data
                 },
                 new Item
                 {
-                    Title = "Milano Gaming Chair - Red", Manufacturer = "Arozzi", Price = 219.99,
+                    Title = "Milano Gaming Chair Red", Manufacturer = "Arozzi", Price = 219.99,
                     Category = "GamingChairs", PropertiesList =
                         new Dictionary<string, string>()
                         {
