@@ -31,6 +31,7 @@
                                         @class = "form-control",
                                         @disabled = "disabled"
                                     })
+                                    @Html.ValidationMessageFor(m => m.Order.Customer)
                                 </div>
                             </div>
 
@@ -47,6 +48,7 @@
                                         @class = "form-control custom-select",
                                         style = "margin: auto;"
                                     })
+                                    @Html.ValidationMessageFor(m => m.Order.State)
                                 </div>
                             </div>
                         </div>
@@ -62,6 +64,7 @@
                                         @class = "form-control custom-select",
                                         style = "margin: auto;"
                                     })
+                                    @Html.ValidationMessageFor(m => m.Order.Payment.PaymentMethod)
                                 </div>
                             </div>
                         </div>
@@ -77,6 +80,7 @@
                                         @class = "form-check-input",
                                         style = "margin: auto; position: inherit;"
                                     })
+                                    @Html.ValidationMessageFor(m => m.Order.Payment.Paid)
                                 </div>
                             </div>
                         </div>
@@ -94,6 +98,7 @@
                                     {
                                         @class = "form-control"
                                     })
+                                    @Html.ValidationMessageFor(m => m.Order.Payment.ItemsCost)
                                 </div>
                             </div>
                         </div>
@@ -111,6 +116,7 @@
                                     {
                                         @class = "form-control"
                                     })
+                                    @Html.ValidationMessageFor(m => m.Order.Payment.ShippingCost)
                                 </div>
                             </div>
                         </div>
@@ -128,6 +134,7 @@
                                     {
                                         @class = "form-control"
                                     })
+                                    @Html.ValidationMessageFor(m => m.Order.Payment.Total)
                                 </div>
                             </div>
                         </div>
@@ -145,6 +152,7 @@
                                     {
                                         @class = "form-control"
                                     })
+                                    @Html.ValidationMessageFor(m => m.Order.Payment.RefundAmount)
                                 </div>
                             </div>
                         </div>
@@ -155,10 +163,11 @@
                             })
                             <div class="col">
                                 <div class="form-check">
-                                    @Html.TextBoxFor(m => m.Order.Payment.Notes, new
+                                    @Html.TextAreaFor(m => m.Order.Payment.Notes, new
                                     {
                                         @class = "form-control"
                                     })
+                                    @Html.ValidationMessageFor(m => m.Order.Payment.Notes)
                                 </div>
                             </div>
                         </div>

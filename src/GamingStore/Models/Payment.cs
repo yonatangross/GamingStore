@@ -19,15 +19,19 @@ namespace GamingStore.Models
         public string OrderForeignKey { get; set; }
 
         [Required]
+        [Range(0, 99999)]
         [Display(Name = "Items Cost")]
         [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         public double ItemsCost { get; set; }
 
+        [Required]
+        [Range(0, 99999)]
         [Display(Name = "Shipping Cost")]
         [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         public int ShippingCost { get; set; } = 0;
 
         [Required]
+        [Range(0, 99999)]
         [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         public double Total { get; set; }
         
@@ -35,6 +39,7 @@ namespace GamingStore.Models
         [Display(Name="Payment Method")]
         public PaymentMethod PaymentMethod { get; set; }
 
+        [Range(0, 99999)]
         [Display(Name = "Refund Amount")]
         public double RefundAmount { get; set; }
 
