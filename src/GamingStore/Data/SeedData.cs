@@ -946,7 +946,7 @@ namespace GamingStore.Data
                     ImageUrl = "images/items/LogitechG613WirelessMechanicalGamingKeyb",
                     Description="Six programmable G-keys - Put custom macro sequences and in-app commands at your fingertips. Customize G-key profiles individually for each app"
                 },
-                
+
                 new Item
                 {
                     Title = "Corsair K55 Gaming Keyboard ",
@@ -1249,6 +1249,133 @@ namespace GamingStore.Data
                     ImageUrl = "images/items/RAZERMambaTournamentEditionChromaGamingM",
                     Description="Nine independently programmable buttons with tilt-click scroll"
                 },
+                new Item
+                {
+                    Title = "GIGABYTE G27QC 27' 165Hz 1440P Curved Gaming Monitor",
+                    Manufacturer = "GIGABYTE",
+                    Price =349.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/GIGABYTEG27QC27165Hz1440PCurvedGamingMon",
+                    Description="Super fast 1ms response time for the most smooth gaming experience ever!"
+                },
+                new Item
+                {
+                    Title = "Acer Nitro XZ322Q Pbmiiphx 31.5' Gaming Monitor",
+                    Manufacturer = "Acer",
+                    Price =369.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/AcerNitroXZ322QPbmiiphx31.5FULLHD165Hz1m",
+                    Description="FULL HD 165Hz 1ms FreeSync 1500R HDMI DP Build-in-Speaker HDR400 Curved Gaming Monitor"
+                },
+                new Item
+                {
+                    Title = "ViewSonic ELITE XG270Q 27' Gaming Monitor",
+                    Manufacturer = "ViewSonic",
+                    Price =439.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/ViewSonicELITEXG270Q271ms1440p165HzG-SYN",
+                    Description="NVIDIA G-SYNC: Experience uninterrupted gaming with synchronized frame rates, variable overdrive, and ultra-low motion blur"
+                },
+                new Item
+                {
+                    Title = "ViewSonic VX3268-PC-MHD 32' 1080p Curved Gaming Monitor",
+                    Manufacturer = "ViewSonic",
+                    Price =259.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/ViewSonicVX3268-PC-MHD321080pCurved165Hz",
+                    Description=" FreeSync Premium Eye Care HDMI and Display Port 165Hz 1ms"
+                },
+                new Item
+                {
+                    Title = "ViewSonic XG2560 Gaming Monitor",
+                    Manufacturer = "ViewSonic",
+                    Price =444.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/ViewSonicXG256025(Actualsize24.5)FullHD1",
+                    Description="Full HD 1920 x 1080 240Hz 1ms HDMI DisplayPort USB 3.0 Hub Built-in Speakers NVIDIA G-Sync Technology Anti-Glare Backlit LED Esports Gaming Monitor"
+                },
+                new Item
+                {
+                    Title = "ViewSonic VX2458-MHD 24' Gaming Monitor ",
+                    Manufacturer = "ViewSonic",
+                    Price =145.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/ViewSonicVX2458-MHD24FullHD1920x10801ms1",
+                    Description="Full HD 1920 x 1080 1ms 144Hz 2 x HDMI DisplayPort FreeSync Built-in Speakers Anti-Glare LED Backlit LCD Gaming Monitor"
+                },
+                new Item
+                {
+                    Title = "ViewSonic VX3211-4K-MHD 32' Gaming Monitor",
+                    Manufacturer = "ViewSonic",
+                    Price =299.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/ViewSonicVX3211-4K-MHD32UltraHD3840x2160",
+                    Description="Ultra HD 3840 x 2160 4K 2xHDMI DisplayPort Built-in Speakers AMD FreeSync Technology Blue Light Filter Flicker-Free HDR10 Compatible Backlit LED Gaming Monitor"
+                },
+                new Item
+                {
+                    Title = "ViewSonic XG2405 24' Gaming Monitor",
+                    Manufacturer = "ViewSonic",
+                    Price =289.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/ViewSonicXG240524(23.8Viewable)FullHD192",
+                    Description="Full HD 1920 x 1080 1ms (GTG) 144Hz HDMI, DisplayPort IPS AMD FreeSync Built-in Speakers Gaming"
+                },
+                new Item
+                {
+                    Title = "ViewSonic XG2760 27' Gaming Monitor",
+                    Manufacturer = "ViewSonic",
+                    Price = 699.99,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/ViewSonicXG276027QuadHD2560x14402KFastAc",
+                    Description="Quad HD 2560 x 1440 2K Fast Action 165Hz 1ms HDMI DisplayPort NVIDIA G-Sync USB Hub Backlit LED Anti-Glare Gaming Monitor"
+                },
+                new Item
+                {
+                    Title = "ViewSonic Curved 32' 144Hz Gaming Monitor ",
+                    Manufacturer = "ViewSonic",
+                    Price =239.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/ViewSonicVX3268-2KPC-MHD32QHD1440pCurved",
+                    Description="Equipped with ViewSonic exclusive ViewMode presets, which offer optimized screen performance for different home entertainment applications"
+                },
+                new Item
+                {
+                    Title = "ViewSonic LED Curved 27' Gaming Monitor",
+                    Manufacturer = "ViewSonic",
+                    Price =349.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/ViewSonicXG270QC27WQHD2560x14402K165Hz1m",
+                    Description="WQHD 2560 x 1440 2K 165Hz 1ms 2xHDMI DisplayPort AMD FreeSync Built-in Speakers USB 3.2 Hub Anti-Glare Backlit LED Curved Gaming Monitor"
+                },
+                new Item
+                {
+                    Title = "ViewSonic VX2252MH 22' Gaming Monitor",
+                    Manufacturer = "ViewSonic",
+                    Price =209.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/ViewSonicVX2252MH22FullHD1920x10802ms(GT",
+                    Description="Full HD 1920 x 1080 2ms HDMI VGA DVI-D Built-in Speakers Anti-Glare Backlit LED Gaming Monitor"
+                },
+                new Item
+                {
+                    Title = "Asus ROG Strix XG43VQ 43' Gaming Monitor",
+                    Manufacturer = "Asus",
+                    Price =709.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/ASUSROGStrixXG43VQ433840x12001msMPRT120H",
+                    Description="3840 x 1200 1ms 120 Hz HDMI, DisplayPort Built-in Speakers 1800R Curved Gaming Monitor with FreeSync 2 HDR, DisplayHDR 400, DCI-P3 90%, Shadow Boost"
+                },
+                new Item
+                {
+                    Title = "Asus ROG Strix XG17AHP 17.3' Gaming Monitor",
+                    Manufacturer = "Asus",
+                    Price =679.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/ASUSROGStrixXG17AHP17.3FullHD1920x10803m",
+                    Description="Full HD 1920 x 1080 3 ms 240Hz ,USB Type-C, Micro HDMI Built-in Speakers Portable IPS Gaming Monitor"
+                },
+
             };
             foreach (var item in items)
             {

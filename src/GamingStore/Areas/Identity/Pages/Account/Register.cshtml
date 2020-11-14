@@ -2,63 +2,70 @@
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
+    Layout = "_NewLoginLayout";
+
 }
+<head>
+    <title>@ViewData["Title"]</title>
+</head>
 
 
-<div class="row">
-    <div class="col-md-12">
-        <h1 class="text-center">@ViewData["Title"]</h1>
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+<div class="d-flex align-content-center flex-wrap">
+    <div class="container">
+        <div class="login-content">
+            <div class="login-logo">
+                <a asp-action="Index" asp-controller="Home">
+                    <img class="align-content" src="/images/logo.png" alt="">
+                </a>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.FirstName"></label>
-                <input asp-for="Input.FirstName" class="form-control" />
-                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.LastName"></label>
-                <input asp-for="Input.LastName" class="form-control" />
-                <span asp-validation-for="Input.LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="d-flex justify-content-around">
-                <button type="submit" class="btn btn-primary">Register</button>
-            </div>
-            <hr />
-            <div>
-                <section>
-                    <h6 class="text-secondary text-center">Or use another service to register</h6>
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div class="d-flex justify-content-around">
-                            <p>
-                                <button type="submit" class="fa fa-facebook" name="provider" value="Facebook" title="Log in using your Facebook account" style="padding: 10px; text-align: center; text-decoration: none; background: #3B5998; color: white;"></button>
-                                <button type="submit" class="fa fa-google" name="provider" value="Google" title="Log in using your Google account" style="padding: 10px; text-align: center; text-decoration: none; background: #dd4b39; color: white;"></button>
-                            </p>
+            <div class="login-form">
+                <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    <div class="form-group">
+                        <label asp-for="Input.Email"></label>
+                        <input type="email" asp-for="Input.Email" class="form-control" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.FirstName"></label>
+                        <input asp-for="Input.FirstName" class="form-control" />
+                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.LastName"></label>
+                        <input asp-for="Input.LastName" class="form-control" />
+                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Password"></label>
+                        <input type="password" asp-for="Input.Password" class="form-control" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.ConfirmPassword"></label>
+                        <input type="password" asp-for="Input.ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success  mb-3 mt-3">Register</button>
+                </form>
+                <hr />
+                <div class="social-login-content">
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <div class="social-button">
+                            <button type="submit" name="provider" value="Facebook" class="btn btn-primary mb-3 mt-3"><i class="fa fa-facebook fa-2x"></i> Register with facebook</button>
+                            <button type="submit" name="provider" value="Google" class="btn btn-danger mb-3 mt-3 "><i class="fa fa-google fa-2x"></i> Register with Google</button>
                         </div>
                     </form>
-                </section>
+                </div>
+                <div class="register-link m-t-15 text-center">
+                    <p>Already have an account? <a asp-page="./Login">Sign in</a></p>
+                </div>
             </div>
-
-        </form>
+        </div>
     </div>
-
 </div>
 
 @section Scripts {
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <partial name="_ValidationScriptsPartial" />
 }

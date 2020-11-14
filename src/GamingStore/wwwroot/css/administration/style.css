@@ -1680,22 +1680,27 @@ header .form-inline {
       font-size: 14px; }
 
 .login-logo {
-  text-align: center;
-  margin-bottom: 15px; }
+    margin: 30px;
+    text-align: center;
+   }
   .login-logo span {
     color: #ffffff;
     font-size: 24px; }
 
 .login-content {
-  max-width: 540px;
-  margin: 8vh auto; }
+    padding-top: 10px;
+    background-color: #ffffff;
+    max-width: 540px;
+    margin: 8vh auto;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+}
 
 .login-form {
   background: #ffffff;
-  padding: 30px 30px 20px;
+  padding: 20px 30px 20px;
   border-radius: 2px; }
 
-.login-form h4 {
+.login-form h5 {
   color: #878787;
   text-align: center;
   margin-bottom: 50px; }
@@ -1720,28 +1725,11 @@ header .form-inline {
 .login-form label a {
   color: #ff2e44; }
 
-.social-login-content {
-  margin: 0px -30px;
-  border-top: 1px solid #e7e7e7;
-  border-bottom: 1px solid #e7e7e7;
-  padding: 30px 0px;
-  background: #fcfcfc; }
 
-.social-button {
-  padding: 0 30px; }
-  .social-button .facebook {
-    background: #3b5998;
-    color: #fff; }
-    .social-button .facebook:hover {
-      background: #344e86; }
-  .social-button .twitter {
-    background: #00aced;
-    color: #fff; }
-    .social-button .twitter:hover {
-      background: #0099d4; }
 
 .social-button i {
-  padding: 19px; }
+    padding-right: 15px;
+  }
 
 .register-link a {
   color: #ff2e44; }
@@ -2254,8 +2242,9 @@ footer.site-footer {
         font-size: 14px; }
         aside.left-panel.open-menu .navbar .navbar-nav li > a .menu-icon {
           width: 55px;
-          font-size: inherit;
+          font-size: 20px;
           text-align: left; }
+  
       aside.left-panel.open-menu .navbar .navbar-nav li.menu-item-has-children.show .sub-menu {
         position: static !important;
         margin-left: 45px; }
