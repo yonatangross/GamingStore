@@ -3,6 +3,7 @@
     "FirstName": "Jerry",
     "LastName": "Pryce",
     "Email": "JerryPryce@gmail.com",
+    "UserName": "JerryPryce@gmail.com",
     "PhoneNumber": "4352930673",
     "Address": {
       "Address1": "Begin 6",
@@ -14,6 +15,7 @@
     "FirstName": "Hester",
     "LastName": "Siviter",
     "Email": "HesterSiviter@gmail.com",
+    "UserName": "HesterSiviter@gmail.com",
     "PhoneNumber": "6819938941",
     "Address": {
       "Address1": "Ibn Gabirol 35",
@@ -25,6 +27,7 @@
     "FirstName": "Albert",
     "LastName": "Palmby",
     "Email": "AlbertPalmby@gmail.com",
+    "UserName": "AlbertPalmby@gmail.com",
     "PhoneNumber": "4504888174",
     "Address": {
       "Address1": "Jabotinsky 19",
@@ -36,6 +39,7 @@
     "FirstName": "Elliott",
     "LastName": "Krzyzanowski",
     "Email": "ElliottKrzyzanowski@gmail.com",
+    "UserName": "ElliottKrzyzanowski@gmail.com",
     "PhoneNumber": "1312956128",
     "Address": {
       "Address1": "Balfour 2",
@@ -47,6 +51,7 @@
     "FirstName": "Joel",
     "LastName": "Shepperd",
     "Email": "JoelShepperd@gmail.com",
+    "UserName": "JoelShepperd@gmail.com",
     "PhoneNumber": "8276949838",
     "Address": {
       "Address1": "Ibn Gabirol 4",
@@ -58,6 +63,7 @@
     "FirstName": "Elva",
     "LastName": "Tomala",
     "Email": "ElvaTomala@gmail.com",
+    "UserName": "ElvaTomala@gmail.com",
     "PhoneNumber": "3161921312",
     "Address": {
       "Address1": "Herzl 54",
@@ -69,6 +75,7 @@
     "FirstName": "Iver",
     "LastName": "Hawse",
     "Email": "IverHawse@gmail.com",
+    "UserName": "IverHawse@gmail.com",
     "PhoneNumber": "2531079586",
     "Address": {
       "Address1": "Herzl 19",
@@ -80,6 +87,7 @@
     "FirstName": "Esra",
     "LastName": "Horwell",
     "Email": "EsraHorwell@gmail.com",
+    "UserName": "EsraHorwell@gmail.com",
     "PhoneNumber": "1826198723",
     "Address": {
       "Address1": "Ben Yehuda 83",
@@ -91,6 +99,7 @@
     "FirstName": "Basile",
     "LastName": "Blade",
     "Email": "BasileBlade@gmail.com",
+    "UserName": "BasileBlade@gmail.com",
     "PhoneNumber": "4462903784",
     "Address": {
       "Address1": "Jabotinsky 35",
@@ -102,6 +111,7 @@
     "FirstName": "Siouxie",
     "LastName": "Deppe",
     "Email": "SiouxieDeppe@gmail.com",
+    "UserName": "SiouxieDeppe@gmail.com",
     "PhoneNumber": "8264922649",
     "Address": {
       "Address1": "Ben Gurion 64",
@@ -113,6 +123,7 @@
     "FirstName": "Imelda",
     "LastName": "Tieraney",
     "Email": "ImeldaTieraney@gmail.com",
+    "UserName": "ImeldaTieraney@gmail.com",
     "PhoneNumber": "7091408847",
     "Address": {
       "Address1": "Hannah Szenes 55",
@@ -124,6 +135,7 @@
     "FirstName": "Callie",
     "LastName": "Lanktree",
     "Email": "CallieLanktree@gmail.com",
+    "UserName": "CallieLanktree@gmail.com",
     "PhoneNumber": "4003525951",
     "Address": {
       "Address1": "Bialik 7",
@@ -135,6 +147,7 @@
     "FirstName": "Ellie",
     "LastName": "Januszewicz",
     "Email": "EllieJanuszewicz@gmail.com",
+    "UserName": "EllieJanuszewicz@gmail.com",
     "PhoneNumber": "5967215271",
     "Address": {
       "Address1": "Arlozoroff 63",
@@ -146,6 +159,7 @@
     "FirstName": "Susanetta",
     "LastName": "Bulstrode",
     "Email": "SusanettaBulstrode@gmail.com",
+    "UserName": "SusanettaBulstrode@gmail.com",
     "PhoneNumber": "8706069203",
     "Address": {
       "Address1": "Dizengoff 6",
@@ -157,6 +171,7 @@
     "FirstName": "Remy",
     "LastName": "Wenger",
     "Email": "RemyWenger@gmail.com",
+    "UserName": "RemyWenger@gmail.com",
     "PhoneNumber": "3173910583",
     "Address": {
       "Address1": "Dizengoff 85",
@@ -168,6 +183,7 @@
     "FirstName": "Nedda",
     "LastName": "Northbridge",
     "Email": "NeddaNorthbridge@gmail.com",
+    "UserName": "NeddaNorthbridge@gmail.com",
     "PhoneNumber": "3664029524",
     "Address": {
       "Address1": "Hannah Szenes 99",
@@ -179,6 +195,7 @@
     "FirstName": "Heinrik",
     "LastName": "Petworth",
     "Email": "HeinrikPetworth@gmail.com",
+    "UserName": "HeinrikPetworth@gmail.com",
     "PhoneNumber": "4445080500",
     "Address": {
       "Address1": "Begin 61",
@@ -190,6 +207,7 @@
     "FirstName": "Wendeline",
     "LastName": "Matthew",
     "Email": "WendelineMatthew@gmail.com",
+    "UserName": "WendelineMatthew@gmail.com",
     "PhoneNumber": "7564912554",
     "Address": {
       "Address1": "Weizmann 20",
@@ -201,6 +219,7 @@
     "FirstName": "Renell",
     "LastName": "Schermick",
     "Email": "RenellSchermick@gmail.com",
+    "UserName": "RenellSchermick@gmail.com",
     "PhoneNumber": "8651101417",
     "Address": {
       "Address1": "Arlozoroff 95",
@@ -212,6 +231,7 @@
     "FirstName": "Benjamin",
     "LastName": "OCleary",
     "Email": "BenjaminOCleary@gmail.com",
+    "UserName": "BenjaminOCleary@gmail.com",
     "PhoneNumber": "6746412363",
     "Address": {
       "Address1": "Balfour 2",

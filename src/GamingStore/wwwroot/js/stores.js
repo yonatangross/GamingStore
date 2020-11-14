@@ -5,7 +5,7 @@ const icons = {
     regularStore: {
         icon: iconBase + "red-pushpin.png",
     },
-    warehouseStore: {
+    websiteStore: {
         icon: iconBase + "ylw-pushpin.png",
     }
 };
@@ -32,7 +32,7 @@ function initMap() {
 
 
 function getStoreAddress(store, storeIndex) {
-    let [address, name, isWarehouse] = store;
+    let [address, name, isWebsite] = store;
     console.log(`store: ${name} index:${storeIndex}`);
     geocoder.geocode({ address: address },
         (results, status) => {
@@ -43,7 +43,7 @@ function getStoreAddress(store, storeIndex) {
                         map,
                         title: name,
                         icon: {
-                            url: isWarehouse === "true" ? icons.warehouseStore.icon : icons.regularStore.icon,
+                            url: isWebsite === "true" ? icons.websiteStore.icon : icons.regularStore.icon,
                             scaledSize: new google.maps.Size(40, 40)
                         }
                     }

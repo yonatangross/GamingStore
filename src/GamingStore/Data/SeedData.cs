@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using static GamingStore.Contracts.PaymentMethod;
 
 namespace GamingStore.Data
 {
@@ -1455,7 +1456,7 @@ namespace GamingStore.Data
 
             try
             {
-                IEnumerable<Order> orders = GenerateOrders(customers, items.ToList(), stores, out var payments);
+                IEnumerable<Order> orders = GenerateOrders(customers, items.ToList(), stores, out List<Payment> payments);
 
                 List<Order> orderList = orders.ToList();
                 foreach (Order order in orderList)
@@ -1530,9 +1531,7 @@ namespace GamingStore.Data
             }
         }
 
-        private static IEnumerable<Order> GenerateOrders(IEnumerable<Customer> customersList,
-            IReadOnlyCollection<Item> items,
-            IReadOnlyCollection<Store> storesList, out List<Payment> paymentsList)
+        private static IEnumerable<Order> GenerateOrders(IEnumerable<Customer> customersList, IReadOnlyCollection<Item> items, IReadOnlyCollection<Store> storesList, out List<Payment> paymentsList)
         {
             paymentsList = new List<Payment>();
             var orderList = new List<Order>();
@@ -1559,11 +1558,13 @@ namespace GamingStore.Data
                             OrderDate = shopOpeningDate.AddDays(rand.Next(range)),
                             State = OrderState.Fulfilled,
                             StoreId = store.Id,
+                            Store = store
                         };
 
-                        order.OrderItems = GenerateOrderItems(order.Id, items, numItemsOrdered, out var payment);
+                        order.OrderItems = GenerateOrderItems(order.Id, items, numItemsOrdered, store, out Payment payment, out ShippingMethod shippingMethod);
                         order.Payment = payment;
                         order.PaymentId = payment.Id;
+                        order.ShippingMethod = shippingMethod;
                         paymentsList.Add(payment);
                         orderList.Add(order);
                     }
@@ -1600,7 +1601,7 @@ namespace GamingStore.Data
             }
         }
 
-        private static ICollection<OrderItem> GenerateOrderItems(string orderId, IEnumerable<Item> items, int numItemsOrdered, out Payment payment)
+        private static ICollection<OrderItem> GenerateOrderItems(string orderId, IEnumerable<Item> items, int numItemsOrdered, Store store, out Payment payment, out ShippingMethod shippingMethod)
         {
             var itemsList = new List<Item>(items); // copy list in order to alter it.
             var rand = new Random();
@@ -1625,13 +1626,35 @@ namespace GamingStore.Data
                     orderItems.Add(orderItem);
                 }
 
-                var orderSum = CalculateOrderSum(orderItems);
-                var shippingCost = 0;
+                double orderSum = CalculateOrderSum(orderItems);
+                PaymentMethod paymentMethod;
+
+                if (store.Name == "Website")
+                {
+                    paymentMethod = (PaymentMethod) rand.Next(1, 2);
+                }
+                else
+                {
+                    paymentMethod = (PaymentMethod) rand.Next(0, 2);
+                }
+
+                var r = new Random();
+                var priceArray = new[] { 0, 10, 45 };
+                int randomIndex = r.Next(priceArray.Length);
+                int shippingCost = priceArray[randomIndex];
+
+                shippingMethod = shippingCost switch
+                {
+                    0 => ShippingMethod.Pickup,
+                    10 => ShippingMethod.Standard,
+                    45 => ShippingMethod.Express,
+                    _ => ShippingMethod.Other
+                };
 
                 payment = new Payment
                 {
                     ItemsCost = orderSum,
-                    PaymentMethod = (PaymentMethod)rand.Next(0, 3),
+                    PaymentMethod = paymentMethod,
                     ShippingCost = shippingCost,
                     Paid = true,
                     Total = orderSum+ shippingCost
