@@ -4,16 +4,17 @@ d3.json("/data/PieChartCategory.json").then(data => {
     const size = 500;
     const fourth = size / 4;
     const half = size / 2;
-    const labelOffset = fourth * 1.62;
+    const labelOffset = fourth * 1.5;
     const total = data.reduce((acc, cur) => acc + cur.Value, 0);
     const container = d3.select(".piechart");
 
     const chart = container.append('svg')
-        .style('width', '100%')
+        .attr("width", $(".col-lg-4").width())
+        .attr("height", $(".col-lg-4").height())
         .attr('viewBox', `0 0 ${size} ${size}`);
 
     const plotArea = chart.append('g')
-        .attr('transform', `translate(${half}, ${half-60})`);
+        .attr('transform', `translate(${half}, ${half})`);
 
     const color = d3.scaleOrdinal()
         .domain(data.reverse().map(d => d.name))
@@ -27,7 +28,7 @@ d3.json("/data/PieChartCategory.json").then(data => {
 
     const arc = d3.arc()
         .innerRadius(0)
-        .outerRadius(half-90);
+        .outerRadius(half);
 
     const arcLabel = d3.arc()
         .innerRadius(labelOffset+5)
