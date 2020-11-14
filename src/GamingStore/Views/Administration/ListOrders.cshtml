@@ -14,11 +14,6 @@
                 <strong class="card-title">Orders</strong>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <strong class="card-title">Products</strong>
-                    </div>
-                </div>
                 <div class="col">
                     <div class="d-flex justify-content-center" id="flash_message"> <flash dismissable="true" /></div>
                 </div>
@@ -49,6 +44,7 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Orders.First().Payment.Total)
                         </th>
+                        <th width="8%"></th>
                     </tr>
                     </thead>
                     <tbody>

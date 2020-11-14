@@ -16,6 +16,10 @@ namespace GamingStore.Data
 {
     public class SeedData
     {
+        private static readonly string DirectoryPath =
+            AppContext.BaseDirectory.Substring(0,
+                AppContext.BaseDirectory.IndexOf("bin", StringComparison.Ordinal));
+
         public static async Task Initialize(IServiceProvider serviceProvider, string adminPassword)
         {
             await using var context = new StoreContext(serviceProvider.GetRequiredService<DbContextOptions<StoreContext>>());
@@ -52,8 +56,29 @@ namespace GamingStore.Data
             {
                 var role = new IdentityRole { Name = customer };
                 await roleManager.CreateAsync(role);
+
+                //Here we create a mock customers super users who will maintain the website                   
+                await AddCustomers(userManager, "default123");
             }
             await context.SaveChangesAsync();
+        }
+
+        private static async Task AddCustomers(UserManager<Customer> userManager, string usersPassword)
+        {
+            string dataCustomers = await System.IO.File.ReadAllTextAsync($@"{DirectoryPath}\Data\Mock_Data\CustomersMin.json");
+            List<Customer> customers = JsonConvert.DeserializeObject<List<Customer>>(dataCustomers);
+            
+
+            foreach (Customer customer in customers)
+            {
+                IdentityResult result = await userManager.CreateAsync(customer, usersPassword);
+
+                //Add default User to Role Admin    
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(customer, "Customer");
+                }
+            }
         }
 
         private static async Task AddAdmins(UserManager<Customer> userManager, string adminPassword)

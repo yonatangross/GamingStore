@@ -48,10 +48,10 @@ namespace GamingStore.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
+            [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"[a-zA-Z]{2,}$")]
             [Display(Name = "First Name")]
             public string FirstName { get; set; }
-            [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
+            [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"[a-zA-Z]{2,}$")]
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
             [Required]
@@ -131,13 +131,16 @@ namespace GamingStore.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new Customer { UserName = Input.Email, Email = Input.Email ,FirstName = Input.FirstName,LastName = Input.LastName};
+                await _userManager.AddToRoleAsync(user, "Customer");
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
+                    
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
+
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
 
                         var userId = await _userManager.GetUserIdAsync(user);
