@@ -7,70 +7,82 @@
     Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
 }
 
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <strong class="card-title">Orders</strong>
-                    </div>
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Orders.First().Id)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Orders.First().Customer.UserName)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Orders.First().OrderDate)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Orders.First().State)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Orders.First().Store)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Orders.First().Payment.Total)
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (Order order in Model.Orders)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => order.Id)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => order.Customer.UserName)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => order.OrderDate)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => order.State)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => order.Store)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => order.Payment.Total)
-                                        </td>
-                                        <td>
-                                            <a class="badge" style="background: #fb9678; color: white; padding: 10px; text-transform: uppercase; font-weight: normal;" asp-action="Edit" asp-controller="Orders" asp-route-id="@order.Id">Edit</a>
-                                            <a class="badge" style="background: #00c292; color: white; padding: 10px; text-transform: uppercase; font-weight: normal;" asp-action="Details" asp-controller="Orders" asp-route-id="@order.Id">Details</a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title">Orders</strong>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Orders.First().Id)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Orders.First().Customer.UserName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Orders.First().OrderDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Orders.First().Store)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Orders.First().Payment.PaymentMethod)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Orders.First().Payment.Paid)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Orders.First().State)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Orders.First().Payment.Total)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Order order in Model.Orders)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => order.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => order.Customer.UserName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => order.OrderDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => order.Store.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => order.Payment.PaymentMethod)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => order.Payment.Paid)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => order.State)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => order.Payment.Total)
+                                </td>
+                                <td>
+                                    <a class="badge" style="background: #fb9678; color: white; padding: 10px; text-transform: uppercase; font-weight: normal;" asp-action="Edit" asp-controller="Orders" asp-route-id="@order.Id">Edit</a>
+                                    <a class="badge" style="background: #00c292; color: white; padding: 10px; text-transform: uppercase; font-weight: normal;" asp-action="Details" asp-controller="Orders" asp-route-id="@order.Id">Details</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
+    </div>
+</div>
 
 <div id="flash_message">
     <flash dismissable="true" />
