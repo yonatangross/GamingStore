@@ -45,7 +45,7 @@
     void StoreTemplate(Store store)
     {
         <li class="list-group-item list-group-item-action" id="store_@store.Id" data-toggle="list" role="tab" aria-controls="store_@store.Id">
-            @{ var isWarehouse = store.Name == "Warehouse" ? true : false; }
+            @{ var isWebsite = store.Name == "Website" ? true : false; }
             <div class="store_title">
                 <h4>
                     @{
@@ -58,7 +58,7 @@
                 @{
                     var address = store.Address.ToString();
                     <script>
-            storesObject.push(["@address", "@storeName", "@isWarehouse".toLowerCase()]);
+            storesObject.push(["@address", "@storeName", "@isWebsite".toLowerCase()]);
                     </script>
                 }
                 @Html.DisplayFor(modelItem => address)

@@ -5,171 +5,167 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
 }
-<div class="content">
-    <div class="animated fadeIn">
-        <div class="row">
-            <div class="col-lg-5">
-                <div class="card">
-                    <div class="card-header">
-                        <strong>Edit Order# @Model.Order.Id</strong>
-                    </div>
-                    <div class="card-body card-block">
-                        <div class="row">
-                            @using (Html.BeginForm("Edit", "Orders", FormMethod.Post, new { @class = "col-10" }))
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <strong>Edit Order# @Model.Order.Id</strong>
+            </div>
+            <div class="card-body card-block">
+                <div class="col">
+                    @using (Html.BeginForm("Edit", "Orders", FormMethod.Post, new { @class = "col" }))
+                    {
+                        @Html.HiddenFor(m => m.Order.Id)
+                        @Html.HiddenFor(m => m.Order.CustomerId)
+                        @Html.HiddenFor(m => m.Order.PaymentId)
+
+                        <div class="form-group row">
+                            @Html.LabelFor(m => m.Order.Customer, new
                             {
-                                @Html.HiddenFor(m => m.Order.Id)
-                                @Html.HiddenFor(m => m.Order.CustomerId)
-                                @Html.HiddenFor(m => m.Order.PaymentId)
+                                @class = "col-sm-5 col-form-label"
+                            })
+                            <div class="col">
+                                <div class="form-check">
+                                    @Html.TextBox("Customer", Model?.Order?.Customer?.UserName, new
+                                    {
+                                        @class = "form-control",
+                                        @disabled = "disabled"
+                                    })
+                                </div>
+                            </div>
 
-                                <div class="form-group row">
-                                    @Html.LabelFor(m => m.Order.Customer, new
-                                    {
-                                        @class = "col-sm-2 col-form-label"
-                                    })
-                                    <div class="col-sm-5">
-                                        <div class="form-check">
-                                            @Html.TextBox("Customer", Model?.Order?.Customer?.UserName, new
-                                            {
-                                                @class = "form-control",
-                                                @disabled = "disabled"
-                                            })
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="form-group row">
-                                    @Html.LabelFor(m => m.Order.State, new
-                                    {
-                                        @class = "col-sm-2 col-form-label"
-                                    })
-                                    <div class="col-sm-5">
-                                        <div class="form-check">
-                                            @Html.DropDownListFor(m => m.Order.State, new SelectList(Enum.GetNames(typeof(OrderState))), null, new
-                                            {
-                                                @class = "form-control custom-select",
-                                                style = "margin: auto;"
-                                            })
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    @Html.LabelFor(m => m.Order.Payment.PaymentMethod, new
-                                    {
-                                        @class = "col-sm-2 col-form-label"
-                                    })
-                                    <div class="col-sm-5">
-                                        <div class="form-check">
-                                            @Html.DropDownListFor(m => m.Order.Payment.PaymentMethod, new SelectList(Enum.GetNames(typeof(PaymentMethod))), null, new
-                                            {
-                                                @class = "form-control custom-select",
-                                                style = "margin: auto;"
-                                            })
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    @Html.LabelFor(m => m.Order.Payment.Paid, new
-                                    {
-                                        @class = "col-sm-2 col-form-label"
-                                    })
-                                    <div class="col-sm-5">
-                                        <div class="form-check">
-                                            @Html.CheckBoxFor(m => m.Order.Payment.Paid, new
-                                            {
-                                                @class = "form-check-input",
-                                                style = "margin: auto; position: inherit;"
-                                            })
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    @Html.LabelFor(m => m.Order.Payment.ItemsCost, new
-                                    {
-                                        @class = "col-sm-2 col-form-label"
-                                    })
-                                    <div class="col-sm-5">
-                                        <div class="input-group-prepend form-check">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">$</div>
-                                            </div>
-                                            @Html.TextBoxFor(m => m.Order.Payment.ItemsCost, new
-                                            {
-                                                @class = "form-control"
-                                            })
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    @Html.LabelFor(m => m.Order.Payment.ShippingCost, new
-                                    {
-                                        @class = "col-sm-2 col-form-label"
-                                    })
-                                    <div class="col-sm-5">
-                                        <div class="input-group-prepend form-check">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">$</div>
-                                            </div>
-                                            @Html.TextBoxFor(m => m.Order.Payment.ShippingCost, new
-                                            {
-                                                @class = "form-control"
-                                            })
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    @Html.LabelFor(m => m.Order.Payment.Total, new
-                                    {
-                                        @class = "col-sm-2 col-form-label"
-                                    })
-                                    <div class="col-sm-5">
-                                        <div class="input-group-prepend form-check">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">$</div>
-                                            </div>
-                                            @Html.TextBoxFor(m => m.Order.Payment.Total, new
-                                            {
-                                                @class = "form-control"
-                                            })
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    @Html.LabelFor(m => m.Order.Payment.RefundAmount, new
-                                    {
-                                        @class = "col-sm-2 col-form-label"
-                                    })
-                                    <div class="col-sm-5">
-                                        <div class="input-group-prepend form-check">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">$</div>
-                                            </div>
-                                            @Html.TextBoxFor(m => m.Order.Payment.RefundAmount, new
-                                            {
-                                                @class = "form-control"
-                                            })
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    @Html.LabelFor(m => m.Order.Payment.Notes, "Refund Reason", new
-                                    {
-                                        @class = "col-sm-2 col-form-label"
-                                    })
-                                    <div class="col-sm-5">
-                                        <div class="form-check">
-                                            @Html.TextBoxFor(m => m.Order.Payment.Notes, new
-                                            {
-                                                @class = "form-control"
-                                            })
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="margin-top: 8%">
-                                    <input type="submit" value="Save" class="btn btn-submit" style="margin-right: 8%" />
-                                </div>
-                            }
                         </div>
-                    </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(m => m.Order.State, new
+                            {
+                                @class = "col-sm-5 col-form-label"
+                            })
+                            <div class="col">
+                                <div class="form-check">
+                                    @Html.DropDownListFor(m => m.Order.State, new SelectList(Enum.GetNames(typeof(OrderState))), null, new
+                                    {
+                                        @class = "form-control custom-select",
+                                        style = "margin: auto;"
+                                    })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(m => m.Order.Payment.PaymentMethod, new
+                            {
+                                @class = "col-sm-5 col-form-label"
+                            })
+                            <div class="col">
+                                <div class="form-check">
+                                    @Html.DropDownListFor(m => m.Order.Payment.PaymentMethod, new SelectList(Enum.GetNames(typeof(PaymentMethod))), null, new
+                                    {
+                                        @class = "form-control custom-select",
+                                        style = "margin: auto;"
+                                    })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(m => m.Order.Payment.Paid, new
+                            {
+                                @class = "col-sm-5 col-form-label"
+                            })
+                            <div class="col">
+                                <div class="form-check">
+                                    @Html.CheckBoxFor(m => m.Order.Payment.Paid, new
+                                    {
+                                        @class = "form-check-input",
+                                        style = "margin: auto; position: inherit;"
+                                    })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(m => m.Order.Payment.ItemsCost, new
+                            {
+                                @class = "col-sm-5 col-form-label"
+                            })
+                            <div class="col">
+                                <div class="input-group-prepend form-check">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.Order.Payment.ItemsCost, new
+                                    {
+                                        @class = "form-control"
+                                    })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(m => m.Order.Payment.ShippingCost, new
+                            {
+                                @class = "col-sm-5 col-form-label"
+                            })
+                            <div class="col">
+                                <div class="input-group-prepend form-check">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.Order.Payment.ShippingCost, new
+                                    {
+                                        @class = "form-control"
+                                    })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(m => m.Order.Payment.Total, new
+                            {
+                                @class = "col-sm-5 col-form-label"
+                            })
+                            <div class="col">
+                                <div class="input-group-prepend form-check">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.Order.Payment.Total, new
+                                    {
+                                        @class = "form-control"
+                                    })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(m => m.Order.Payment.RefundAmount, new
+                            {
+                                @class = "col-sm-5 col-form-label"
+                            })
+                            <div class="col">
+                                <div class="input-group-prepend form-check">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.Order.Payment.RefundAmount, new
+                                    {
+                                        @class = "form-control"
+                                    })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(m => m.Order.Payment.Notes, "Refund Reason", new
+                            {
+                                @class = "col-sm-5 col-form-label"
+                            })
+                            <div class="col">
+                                <div class="form-check">
+                                    @Html.TextBoxFor(m => m.Order.Payment.Notes, new
+                                    {
+                                        @class = "form-control"
+                                    })
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 8%">
+                            <input type="submit" value="Save" class="btn btn-submit" style="margin-right: 8%" />
+                        </div>
+                    }
                 </div>
             </div>
         </div>

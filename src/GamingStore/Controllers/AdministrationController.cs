@@ -349,14 +349,13 @@ namespace GamingStore.Controllers
         [HttpGet]
         public async Task<IActionResult> ListOrders()
         {
-            List<Order> orders = await Context.Orders.Include(order => order.Customer).Include(order => order.Payment).ToListAsync();
+            List<Order> orders = await Context.Orders.Include(order => order.Customer).Include(order => order.Payment).Include(order => order.Store).ToListAsync();
 
             var viewModel = new ListOrdersViewModel()
             {
                 Orders = orders,
                 ItemsInCart = await CountItemsInCart()
             };
-
 
             return View(viewModel);
         }

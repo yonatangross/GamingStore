@@ -32,6 +32,7 @@ namespace GamingStore.Models
         public double Total { get; set; }
         
         [Required]
+        [Display(Name="Payment Method")]
         public PaymentMethod PaymentMethod { get; set; }
 
         [Display(Name = "Refund Amount")]
