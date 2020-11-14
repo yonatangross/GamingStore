@@ -31,7 +31,7 @@ namespace GamingStore.Models
         [Required] 
         public Address Address { get; set; }
 
-        [DisplayName("Phone Number")]
+        [DisplayName("Phone")]
         [Required, DataType(DataType.PhoneNumber), StringLength(50), Phone]
         public string PhoneNumber { get; set; }
 
