@@ -1,6 +1,6 @@
 ﻿var format = d3.format(",.2r");
 var formatPrec = d3.format(".0%");
-d3.json("/data/PieChart.json").then(data => {
+d3.json("/data/StoresRevenuePieChart.json").then(data => {
     const size = 900;
     const fourth = size / 4;
     const half = size / 2;

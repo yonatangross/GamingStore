@@ -62,7 +62,7 @@
     <ProjectReference Include="..\LoggerService\LoggerService.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Content Update="wwwroot\data\BarChartData.json">
+    <Content Update="wwwroot\data\MonthlyRevenueBarChartData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
