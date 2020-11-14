@@ -1329,6 +1329,51 @@ namespace GamingStore.Data
                     ImageUrl = "images/items/ViewSonicXG276027QuadHD2560x14402KFastAc",
                     Description="Quad HD 2560 x 1440 2K Fast Action 165Hz 1ms HDMI DisplayPort NVIDIA G-Sync USB Hub Backlit LED Anti-Glare Gaming Monitor"
                 },
+                new Item
+                {
+                    Title = "ViewSonic Curved 32' 144Hz Gaming Monitor ",
+                    Manufacturer = "ViewSonic",
+                    Price =239.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/ViewSonicVX3268-2KPC-MHD32QHD1440pCurved",
+                    Description="Equipped with ViewSonic exclusive ViewMode presets, which offer optimized screen performance for different home entertainment applications"
+                },
+                new Item
+                {
+                    Title = "ViewSonic LED Curved 27' Gaming Monitor",
+                    Manufacturer = "ViewSonic",
+                    Price =349.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/ViewSonicXG270QC27WQHD2560x14402K165Hz1m",
+                    Description="WQHD 2560 x 1440 2K 165Hz 1ms 2xHDMI DisplayPort AMD FreeSync Built-in Speakers USB 3.2 Hub Anti-Glare Backlit LED Curved Gaming Monitor"
+                },
+                new Item
+                {
+                    Title = "ViewSonic VX2252MH 22' Gaming Monitor",
+                    Manufacturer = "ViewSonic",
+                    Price =209.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/ViewSonicVX2252MH22FullHD1920x10802ms(GT",
+                    Description="Full HD 1920 x 1080 2ms HDMI VGA DVI-D Built-in Speakers Anti-Glare Backlit LED Gaming Monitor"
+                },
+                new Item
+                {
+                    Title = "Asus ROG Strix XG43VQ 43' Gaming Monitor",
+                    Manufacturer = "Asus",
+                    Price =709.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/ASUSROGStrixXG43VQ433840x12001msMPRT120H",
+                    Description="3840 x 1200 1ms 120 Hz HDMI, DisplayPort Built-in Speakers 1800R Curved Gaming Monitor with FreeSync 2 HDR, DisplayHDR 400, DCI-P3 90%, Shadow Boost"
+                },
+                new Item
+                {
+                    Title = "Asus ROG Strix XG17AHP 17.3' Gaming Monitor",
+                    Manufacturer = "Asus",
+                    Price =679.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/ASUSROGStrixXG17AHP17.3FullHD1920x10803m",
+                    Description="Full HD 1920 x 1080 3 ms 240Hz ,USB Type-C, Micro HDMI Built-in Speakers Portable IPS Gaming Monitor"
+                },
 
             };
             foreach (var item in items)
