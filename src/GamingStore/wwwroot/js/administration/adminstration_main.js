@@ -1,18 +1,6 @@
 
 $(document).ready(function () {
 
-    [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
-        new SelectFx(el);
-    });
-
-    $('.selectpicker').selectpicker;
-
- 
-
-    $('.equal-height').matchHeight({
-        property: 'max-height'
-    });
-
     // Counter Number
     $('.count').each(function () {
         $(this).prop('Counter', 0).animate({
