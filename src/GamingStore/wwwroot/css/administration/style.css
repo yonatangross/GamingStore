@@ -19,10 +19,7 @@ Googel Fonts  */
 
 */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
-@font-face {
-    font-family: Icomoon;
-    src: url(/fonts/icomoon/icomoon.woff);
-}
+
 .bg-flat-color-1 {
   background: #00c292; }
 
@@ -2248,7 +2245,6 @@ footer.site-footer {
           width: 55px;
           font-size: 20px;
           text-align: left;
-          font-family: Icomoon;
         }
   
   

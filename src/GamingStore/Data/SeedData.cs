@@ -19,46 +19,47 @@ namespace GamingStore.Data
         private static readonly string DirectoryPath =
             AppContext.BaseDirectory.Substring(0,
                 AppContext.BaseDirectory.IndexOf("bin", StringComparison.Ordinal));
+        private static UserManager<Customer> _userManager;
+
+        private static RoleManager<IdentityRole> _roleManager;
 
         public static async Task Initialize(IServiceProvider serviceProvider, string adminPassword)
         {
             await using var context = new StoreContext(serviceProvider.GetRequiredService<DbContextOptions<StoreContext>>());
-            var userManager = serviceProvider.GetService<UserManager<Customer>>();
-            var roleManager = serviceProvider.GetService<RoleManager<IdentityRole>>();
+            _userManager = serviceProvider.GetService<UserManager<Customer>>();
+            _roleManager = serviceProvider.GetService<RoleManager<IdentityRole>>();
 
-            await CreateRolesAndUsers(context, userManager, roleManager, adminPassword);
+            await CreateRolesAndUsers(context,  adminPassword);
 
             SeedDatabase(context);
-
-
         }
 
-        private static async Task CreateRolesAndUsers(StoreContext context, UserManager<Customer> userManager, RoleManager<IdentityRole> roleManager, string adminPassword)
+        private static async Task CreateRolesAndUsers(StoreContext context, string adminPassword)
         {
             const string admin = "Admin";
             const string customer = "Customer";
 
-            bool roleExists = await roleManager.RoleExistsAsync(admin);
+            bool roleExists = await _roleManager.RoleExistsAsync(admin);
 
             if (!roleExists)
             {
                 // first we create Admin roll    
                 var role = new IdentityRole { Name = admin };
-                await roleManager.CreateAsync(role);
+                await _roleManager.CreateAsync(role);
 
                 //Here we create a Admin super users who will maintain the website                   
-                await AddAdmins(userManager, adminPassword);
+                await AddAdmins(_userManager, adminPassword);
             }
 
             // creating Creating Employee role     
-            roleExists = await roleManager.RoleExistsAsync(customer);
+            roleExists = await _roleManager.RoleExistsAsync(customer);
             if (!roleExists)
             {
                 var role = new IdentityRole { Name = customer };
-                await roleManager.CreateAsync(role);
+                await _roleManager.CreateAsync(role);
 
                 //Here we create a mock customers super users who will maintain the website                   
-                await AddCustomers(userManager, "default123");
+                await AddCustomers(_userManager, "default123");
             }
             await context.SaveChangesAsync();
         }
@@ -1483,21 +1484,13 @@ namespace GamingStore.Data
             context.SaveChanges();
             #endregion
 
-            #region CustomersSeed
-            string dataCustomers = System.IO.File.ReadAllText($@"{directoryPath}\Data\Mock_Data\CustomersMin.json");
-            var customers = JsonConvert.DeserializeObject<List<Customer>>(dataCustomers);
-            context.Customers.AddRange(customers);
-            context.Customers.AsNoTracking();
-            context.SaveChanges();
-            #endregion
-
             #region StoresSeed
             string dataStores = System.IO.File.ReadAllText(directoryPath + @"\Data\Mock_Data\Stores.json");
             List<Store> stores = JsonConvert.DeserializeObject<List<Store>>(dataStores);
 
             if (context.Items.Any() && context.Customers.Any())
             {
-                GenerateStoreItems(stores, items, customers);
+                GenerateStoreItems(stores, items, context.Customers.ToList());
             }
 
             context.Stores.AddRange(stores);
@@ -1508,7 +1501,7 @@ namespace GamingStore.Data
 
             try
             {
-                IEnumerable<Order> orders = GenerateOrders(customers, items.ToList(), stores, out List<Payment> payments);
+                IEnumerable<Order> orders = GenerateOrders(context.Customers.AsEnumerable(), items.ToList(), stores, out List<Payment> payments);
 
                 List<Order> orderList = orders.ToList();
                 foreach (Order order in orderList)
@@ -1554,7 +1547,7 @@ namespace GamingStore.Data
             #endregion
         }
 
-        private static void GenerateStoreItems(IEnumerable<Store> stores, Item[] items, IReadOnlyCollection<Customer> customersList)
+        private static void GenerateStoreItems(IEnumerable<Store> stores, Item[] items, List<Customer> customersList)
         {
             var random = new Random();
 
@@ -1590,10 +1583,26 @@ namespace GamingStore.Data
             var rand = new Random();
             var shopOpeningDate = new DateTime(2018, 1, 1);
             int range = (DateTime.Today - shopOpeningDate).Days;
+           
+            List<Customer> regCustomers= new List<Customer>();
+
+            foreach (var customer in customersList)
+            {
+                var userRoles = _userManager.GetRolesAsync(customer).Result;
+                var customerRole =  _roleManager.FindByNameAsync("Customer").Result;
+
+                foreach (var role in userRoles)
+                {
+                    if (customerRole.Name == role)
+                    {
+                        regCustomers.Add(customer);
+                    }
+                }
+            }
 
             try
             {
-                foreach (Customer customer in customersList)
+                foreach (Customer customer in regCustomers)
                 {
                     int numOfOrdersForCustomer = rand.Next(minValue: 0, maxValue: 5);
 
