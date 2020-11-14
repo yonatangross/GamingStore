@@ -13,6 +13,7 @@ namespace GamingStore.Contracts
 
         [Required]
         [DataType(DataType.CreditCard)]
+        [Display(Name = "Credit Card Number")]
         [Range(100000000000, 9999999999999999999, ErrorMessage = "Credit card number is not valid")]
         public string Number { get; set; }
 
