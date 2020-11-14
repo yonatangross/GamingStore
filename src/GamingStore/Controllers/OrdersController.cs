@@ -38,9 +38,8 @@ namespace GamingStore.Controllers
                 List<Cart> itemsInCart = await GetItemsInCart(customer);
                 const int defaultPaymentCost = 10;
 
-                double itemsCost =
-                    itemsInCart.Aggregate<Cart, double>(0,
-                        (current, cart) => current + cart.Item.Price * cart.Quantity);
+                double itemsCost = itemsInCart.Aggregate<Cart, double>(0, (current, cart) => current + cart.Item.Price * cart.Quantity);
+
                 if (itemsCost == 0)
                 {
                     return RedirectToAction("Index", "Carts");
@@ -120,6 +119,7 @@ namespace GamingStore.Controllers
             order.PaymentId = order.Payment.Id;
             order.Payment.ItemsCost = itemsInCart.Aggregate<Cart, double>(0, (current, cart) => current + cart.Item.Price * cart.Quantity);
             order.Payment.Total = order.Payment.ItemsCost + order.Payment.ShippingCost;
+            order.Store = await Context.Stores.FirstOrDefaultAsync(s => s.Name == "Website");
             order.ShippingMethod = order.Payment.ShippingCost switch
             {
                 0 => ShippingMethod.Pickup,
