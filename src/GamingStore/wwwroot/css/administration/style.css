@@ -880,7 +880,9 @@ aside.left-panel {
 .right-panel .navbar-header {
   width: 100%;
   background-color: #fff;
-  padding: 0 1.25em 0 0; }
+  padding: 0 1.25em 0 0;
+    max-height: 50px;
+}
   .right-panel .navbar-header > a {
     display: inline-block; }
 .right-panel .navbar-brand {
@@ -1160,37 +1162,6 @@ header .form-inline {
 #menuToggle2 {
   padding-left: 25px; }
 
-#language-select {
-  color: #f1f2f7;
-  float: right;
-  margin: 7px 20px 0 0;
-  max-width: 80px; }
-  #language-select:focus, #language-select:visited {
-    border: none;
-    outline: 0; }
-  #language-select .flag-icon {
-    line-height: 55px; }
-  #language-select .dropdown-toggle::after {
-    display: none; }
-  #language-select .dropdown-menu {
-    background: #fff;
-    border: none;
-    border-radius: 0;
-    left: -8px !important;
-    min-width: inherit;
-    padding: 0 5px;
-    top: 81px !important; }
-    #language-select .dropdown-menu .dropdown-item {
-      line-height: 1.5;
-      margin-right: 0;
-      max-width: 25px;
-      padding: 0; }
-      #language-select .dropdown-menu .dropdown-item:hover {
-        background: #fff; }
-      #language-select .dropdown-menu .dropdown-item .flag-icon {
-        line-height: 1.5;
-        margin-right: 0;
-        width: 25px; }
 
 .notification-show + .dropdown-menu,
 .message-show + .dropdown-menu,
@@ -1424,24 +1395,7 @@ header .form-inline {
 #area_chart {
   max-height: 280px; }
 
-#flotLine5 {
-  height: 50px; }
 
-#flotPie1 {
-  height: 90px; }
-  #flotPie1 .pieLabel {
-    display: none; }
-  #flotPie1 .legend tr {
-    padding-bottom: 5px; }
-  #flotPie1 .legendColorBox {
-    float: left;
-    margin: 2px 5px 0 0; }
-    #flotPie1 .legendColorBox > div {
-      border: none !important; }
-  #flotPie1 .legendLabel {
-    color: #868e96;
-    font-family: 'Open Sans';
-    font-size: 12px; }
 
 /* Stats Table */
 .table-stats table {
@@ -2443,6 +2397,7 @@ footer.site-footer {
   .right-panel .menutoggle {
     float: right; }
   .right-panel .navbar-header {
+    max-height: 40px;
     padding: 0; }
   .right-panel header.header {
     position: static; }
@@ -2494,16 +2449,5 @@ footer.site-footer {
     padding-bottom: 5px; }
   .right-panel .menutoggle {
     width: 20px; } }
-#cellPaiChart {
-  height: 160px; }
-  #cellPaiChart .pieLabel {
-    top: 50px !important; }
-    #cellPaiChart .pieLabel div {
-      font-size: 16px !important; }
-  #cellPaiChart #pieLabel1 {
-    left: 20px !important; }
-  #cellPaiChart #pieLabel0 {
-    left: inherit !important;
-    right: 20px !important; }
 
 /*# sourceMappingURL=style.css.map */
