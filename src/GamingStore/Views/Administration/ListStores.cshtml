@@ -1,5 +1,5 @@
 ﻿@model GamingStore.ViewModels.Administration.ListStoresViewModel
-
+@addTagHelper *, Vereyon.Web.FlashMessage
 @{
     ViewData["Title"] = "Admin Stores";
     Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
@@ -10,12 +10,21 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Orders</strong>
+                        <div class="row">
+                            <div class="col">
+                                <strong class="card-title">Stores</strong>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex justify-content-center" id="flash_message"> <flash dismissable="true" /></div>
+                            </div>
+                            <div class="col">
+                                <div class="float-right">
+                                    <a class="badge" style="background: lightskyblue; color: white; padding: 10px; text-transform: uppercase; font-weight: normal;" asp-action="Create" asp-controller="Stores">Create a New Item</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
-                        <p>
-                            <a asp-action="Create" asp-controller="Stores">Create a New Store</a>
-                        </p>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -117,3 +126,12 @@
         </div>
     </div>
 </div>
+@section scripts{
+    <script>
+        setTimeout(function () {
+            $('.alert').fadeOut('slow');
+        },
+            2000); // <-- time in milliseconds
+    </script>
+    <script src="/lib/jquery/dist/jquery.js"></script>
+}
