@@ -44,11 +44,19 @@
                 <select class="form-control custom-select" asp-for="Item.Category" style="margin-left: auto;">
                     @for (var i = 0; i < Enum.GetNames(typeof(Category)).Length; i++)
                     {
-                        var category = (Category) i;
-                    <option class="form-control">@Html.DisplayFor(c => category)</option>
+                        var category = (Category)i;
+                        <option class="form-control">@Html.DisplayFor(c => category)</option>
                     }
                 </select>
                 <span asp-validation-for="Item.Category" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Item.Active, new { @class = "col-sm-2 col-form-label" })
+                <div class="col-sm-5">
+                    <div class="form-check">
+                        @Html.CheckBoxFor(m => m.Item.Active, new { @class = "form-check-input", style = "margin: auto; position: inherit;" })
+                    </div>
+                </div>
             </div>
         </div>
         <div class="form-group col-5" style="padding-bottom: 3%">
@@ -83,30 +91,8 @@
                     <input type="submit" value="Save Changes" class="btn btn-primary" />
                 </div>
             </div>
+        </div>
     </form>
 </div>
 
-@*@section scripts{
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script>
-            //todo: switch with category dropdown and remove afterwards.
-            //todo: remove old jQuery with our jQuery lib.
-            $(function () {
-                var myArray = [];
-
-                @{
-                    foreach (var d in Model.Categories)
-                    {
-                        @:myArray.push("@d");
-                    }
-                }
-
-                var availableTags = myArray;
-                $("#tags").autocomplete({
-                    source: availableTags
-                });
-            });
-        </script>
-    }*@
 
