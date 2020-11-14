@@ -50,14 +50,14 @@ d3.json("/data/MonthlyRevenueBarChartData.json").then(data => {
         .attr("fill", "white")
         .attr("text-anchor", "end")
         .attr("font-family", "sans-serif")
-        .attr("font-size", 11)
+        .attr("font-size", 12)
         .attr("x", d => x(d.Value))
         .attr("y", (d) => y(d.Date))
-        .attr("dy", "1.30em")
         .attr("dx", -4)
         .text(d => format(d.Value)+" $" )
         .call(text => text.filter(d => d.Value > 0) // short bars for values 
-            .attr("dx", +4)
+            .attr("dx", +3)
+            .attr("dy", "0.8em")
             .attr("fill", "black")
             .attr("text-anchor", "start"));
 
