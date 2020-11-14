@@ -6,10 +6,7 @@
 <link rel="stylesheet" href="~/css/administration/bar_chart_monthly_revenue.css" />
 <link rel="stylesheet" href="~/css/administration/pie_chart_category_revenue.css" />
 
-<!-- Content -->
-<div class="content">
     <!-- Animated -->
-    <div class="animated fadeIn">
         <!-- Widgets  -->
         <div class="row">
             <div class="col-lg-3 col-md-6">
@@ -130,7 +127,7 @@
                                                     #@Html.DisplayNameFor(model => model.Orders.First().Id)
                                                 </th>
                                                 <th>
-                                                    @Html.DisplayNameFor(model => model.Orders.First().Customer.UserName)
+                                                    User Email
                                                 </th>
                                                 <th>
                                                     @Html.DisplayNameFor(model => model.Orders.First().OrderDate)
@@ -147,7 +144,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @{ int count = 0;}
+                                            @{ var count = 0;}
                                             @foreach (var order in Model.Orders.TakeLast(10))
                                             {
                                                 count++;
@@ -194,10 +191,7 @@
             </div>
         </div>
         <!-- /.orders -->
-    </div>
     <!-- .animated -->
-</div>
-<!-- /.content -->
 <div class="clearfix"></div>
 
 @section Scripts{

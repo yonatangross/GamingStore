@@ -30,8 +30,8 @@
     <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
 
-    <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet"/>
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
 
     <!--old-->
     @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
@@ -40,34 +40,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
 
     <!--end old-->
-
-    <style>
-        #weatherWidget .currentDesc { color: #ffffff !important; }
-
-        .traffic-chart { min-height: 335px; }
-
-        #flotPie1 { height: 150px; }
-
-        #flotPie1 td { padding: 3px; }
-
-        #flotPie1 table {
-            top: 20px !important;
-            right: -10px !important;
-        }
-
-        .chart-container {
-            min-width: 270px;
-            text-align: left;
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-
-        #flotLine5 { height: 105px; }
-
-        #flotBarChart { height: 150px; }
-
-        #cellPaiChart { height: 160px; }
-    </style>
+  
 </head>
 
 <body>
@@ -136,21 +109,25 @@
         <!-- /#header -->
         <!-- Content -->
         <main role="main">
-            @RenderBody()
+            <div class="content">
+                <div class="animated fadeIn">
+                    @RenderBody()
+                </div>
+            </div>
         </main>
         <!-- /.content -->
         <div class="clearfix"></div>
         <!-- Footer -->
     </div>
     <!-- /#right-panel -->
-<!-- Scripts -->
+    <!-- Scripts -->
     <script src="/lib/jquery/dist/jquery.min.js"></script>
     <script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-<!-- D3 js-->    
-<script src="https://d3js.org/d3.v6.min.js"></script>
-<script src="https://d3js.org/d3-format.v2.min.js"></script>
-<script src="https://d3js.org/d3-path.v2.min.js"></script>
-<script src="https://d3js.org/d3-shape.v2.min.js"></script>
+    <!-- D3 js-->
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/d3-format.v2.min.js"></script>
+    <script src="https://d3js.org/d3-path.v2.min.js"></script>
+    <script src="https://d3js.org/d3-shape.v2.min.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Threading;
@@ -20,7 +21,7 @@ namespace GamingStore.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Id { get; set; }
 
-        [Required] 
+        [Required, DisplayName("Customer Id")] 
         public string CustomerId { get; set; }
         
         public Customer Customer { get; set; }
@@ -30,7 +31,7 @@ namespace GamingStore.Models
         
         public Store Store { get; set; }
 
-        [Required]
+        [Required,DisplayName("Order Date")]
         public DateTime OrderDate { get; set; }
 
         [Required]
@@ -38,10 +39,10 @@ namespace GamingStore.Models
 
         [NotMapped]
         public CreditCard CreditCard { get; set; }
-
+        [DisplayName("Shipping Address")]
         public Address ShippingAddress { get; set; }
 
-        [Required]
+        [Required,DisplayName("Shipping Method")]
         public ShippingMethod ShippingMethod { get; set; }
 
         [Required] 
