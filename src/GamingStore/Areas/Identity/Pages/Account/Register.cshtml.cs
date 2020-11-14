@@ -45,11 +45,13 @@ namespace GamingStore.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"[a-zA-Z]{2,}$")]
             [Display(Name = "First Name")]
+            [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"[a-zA-Z]{2,}$")]
+
             public string FirstName { get; set; }
 
             [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"[a-zA-Z]{2,}$")]
+
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
 

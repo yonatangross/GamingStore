@@ -48,10 +48,10 @@ namespace GamingStore.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
+            [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"[a-zA-Z]{2,}$")]
             [Display(Name = "First Name")]
             public string FirstName { get; set; }
-            [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
+            [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"[a-zA-Z]{2,}$")]
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
             [Required]
