@@ -1,14 +1,13 @@
-﻿const width = 1400;
-const height = 700;
-const margin = { top: 20, right: 150, bottom: 100, left: 140 };
-const graphWidth = width - margin.left - margin.right;
+﻿const width = $(".col-lg-8").width();
+const height = 500;
+const margin = { top: width*0.02, right: width*0.03 ,bottom: width*0.075, left: width*0.1 };
+const graphWidth = width -  margin.right;
 const graphHeight = height - margin.top - margin.bottom;
 
 var format = d3.format(",.2r");
 const svg = d3.select(".barchart")
     .append("svg")
-    .attr("width", width)
-    .attr("height", height);
+    .attr("viewBox", [0, 0, width, height]);
 const graph = svg.append("g")
     .attr("width", graphWidth)
     .attr("height", graphHeight)
@@ -20,7 +19,7 @@ const gYAxis = graph.append("g");
 d3.json("/data/BarChartData.json").then(data => {
     const x = d3.scaleLinear()
         .domain([0, d3.max(data, d => d.Value)])
-        .range([0, graphWidth]);
+        .range([0, graphWidth - margin.left - margin.right]);
 
     const y = d3.scaleBand()
         .domain(data.map(item => item.Date))
@@ -33,7 +32,7 @@ d3.json("/data/BarChartData.json").then(data => {
 
     rects.attr("class", "bar-rect")
         .attr("height", y.bandwidth)
-        .attr("width", d =>  x(d.Value)-x(0))
+        .attr("width", d =>  (x(d.Value)-x(0)))
         .attr("x", d => x(0))
         .attr("y", d => y(d.Date));
 
@@ -51,7 +50,7 @@ d3.json("/data/BarChartData.json").then(data => {
         .attr("fill", "white")
         .attr("text-anchor", "end")
         .attr("font-family", "sans-serif")
-        .attr("font-size", 13)
+        .attr("font-size", 11)
         .attr("x", d => x(d.Value))
         .attr("y", (d) => y(d.Date))
         .attr("dy", "1.30em")
@@ -73,11 +72,11 @@ d3.json("/data/BarChartData.json").then(data => {
     gXAxis.call(xAxis);
     gYAxis.call(yAxis);
     gXAxis.selectAll("text")
-        .attr("transform", "translate(-20,20)rotate(-45)")
+        .attr("transform", "rotate(-45)")
         .style("text-anchor", "end")
-        .style("font-size", 20);
+        .style("font-size", 15);
 
     gYAxis.selectAll("text")
-        .style("font-size", 15).style("text-anchor", "start").style("font-weight", "bold")
-        .attr('transform', () => { return 'translate(-110,0)' });
+        .style("font-size", 12).style("text-anchor", "start").style("font-weight", "bold")
+        .attr('transform', () => { return 'translate(-90,0)' });
 });

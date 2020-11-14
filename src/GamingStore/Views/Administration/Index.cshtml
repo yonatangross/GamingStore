@@ -90,17 +90,12 @@
                     <div class="card-body">
                         <h4 class="box-title">Monthly Revenues </h4>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <div class="card-body">
-                                <!-- <canvas id="TrafficChart"></canvas>   -->
-                                <div class="barchart"></div>
-                            </div>
-                        </div>
-                        <div class="card-body"></div>
+                    <div class="card-body graph">
+                        <!-- <canvas id="TrafficChart"></canvas>   -->
+                        <div class="barchart"></div>
                     </div>
-                </div><!-- /# column -->
-            </div>
+                </div>
+            </div><!-- /# column -->
             <div class="col-xl-4">
                 <div class="card br-0">
                     <div class="card-body">
@@ -206,6 +201,7 @@
 <div class="clearfix"></div>
 
 @section Scripts{
+    <script src="lib/jquery/dist/jquery.min.js"></script>
     <script src="/js/administration/bar_chart_monthly_revenue.js"></script>
     <script src="/js/administration/pie_chart_category_revenue.js"></script>
 }

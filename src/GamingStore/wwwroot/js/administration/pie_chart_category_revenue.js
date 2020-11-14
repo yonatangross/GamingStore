@@ -1,7 +1,7 @@
 ﻿var format = d3.format(",.2r");
 var formatPrec = d3.format(".0%");
 d3.json("/data/PieChartCategory.json").then(data => {
-    const size = 600;
+    const size = 500;
     const fourth = size / 4;
     const half = size / 2;
     const labelOffset = fourth * 1.62;
@@ -10,10 +10,10 @@ d3.json("/data/PieChartCategory.json").then(data => {
 
     const chart = container.append('svg')
         .style('width', '100%')
-        .attr('viewBox', `0 0 ${size} ${size-50}`);
+        .attr('viewBox', `0 0 ${size} ${size}`);
 
     const plotArea = chart.append('g')
-        .attr('transform', `translate(${half}, ${half-40})`);
+        .attr('transform', `translate(${half}, ${half-60})`);
 
     const color = d3.scaleOrdinal()
         .domain(data.reverse().map(d => d.name))
