@@ -4,7 +4,6 @@ using GamingStore.Extensions;
 using GamingStore.Models;
 using GamingStore.Services.Email;
 using GamingStore.Services.Email.Interfaces;
-using GamingStore.Services.Twitter;
 using LoggerService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

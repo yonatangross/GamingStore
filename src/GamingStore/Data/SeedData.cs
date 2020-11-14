@@ -68,7 +68,7 @@ namespace GamingStore.Data
                 },
                 new Customer
                 {
-                    UserName = "matan18061806@gmail.com",
+                    UserName = "matan180 bU1806@gmail.com",
                     Email = "matan18061806@gmail.com",
                     FirstName = "Matan",
                     LastName = "Hassin"
@@ -771,7 +771,7 @@ namespace GamingStore.Data
 
                 new Item
                 {
-                    Title ="Corsair Gaming Headset",
+                    Title ="Corsair Premium Gaming Headset",
                     Manufacturer = "Corsair",
                     Price =49.55 ,
                     Category = "GamingHeadsets",
@@ -781,7 +781,7 @@ namespace GamingStore.Data
 
                 new Item
                 {
-                    Title = "Logitech Gaming Headset ",
+                    Title = "Logitech Wired Gaming Headset ",
                     Manufacturer = "Logitech",
                     Price = 39.89,
                     Category = "GamingHeadsets",
@@ -791,7 +791,7 @@ namespace GamingStore.Data
 
                 new Item
                 {
-                    Title = "Razer Gaming Keyboard",
+                    Title = "Razer Huntsman Elite Gaming Keyboard",
                     Manufacturer = "Razer",
                     Price =220.45 ,
                     Category = "Keyboards",
@@ -821,8 +821,8 @@ namespace GamingStore.Data
 
                 new Item
                 {
-                    Title = "Razer Ornata Expert",
-                    Manufacturer = "Razer ",
+                    Title = "Razer Ornata Expert Gaming Keyboard",
+                    Manufacturer = "Razer",
                     Price =119.99 ,
                     Category = "Keyboards",
                     ImageUrl = "images/items/RazerOrnataExpert-RevolutionaryMecha-Mem",
@@ -831,8 +831,8 @@ namespace GamingStore.Data
 
                 new Item
                 {
-                    Title = "Razer BlackWidow X Tournament Edition Chroma",
-                    Manufacturer = "Razer ",
+                    Title = "Razer BlackWidow X Tournament Edition Chroma Gaming Keyboard",
+                    Manufacturer = "Razer",
                     Price =229.99 ,
                     Category = "Keyboards",
                     ImageUrl = "images/items/RazerBlackWidowXTournamentEditionChroma-",
@@ -887,7 +887,7 @@ namespace GamingStore.Data
                     Title = "Creative Gaming Headset EV03",
                     Manufacturer = "Creative",
                     Price =99.99 ,
-                    Category = "Headset",
+                    Category = "GamingHeadsets",
                     ImageUrl = "images/items/CreativeSoundBlasterEVO3.5mmUSBConnector",
                     Description="Meet the Sound Blaster EVO, a headset that's amazing for audio"
                 },
@@ -896,7 +896,7 @@ namespace GamingStore.Data
                     Title = "Asus Gaming Headset H5",
                     Manufacturer = "Asus",
                     Price =115.65,
-                    Category = "Headset",
+                    Category = "GamingHeadsets",
                     ImageUrl = "images/items/ASUSTUFGamingH53.5mmUSBConnectorCircumau",
                     Description="USB 2.0 or 3.5mm connector gaming headset with Onboard 7.1 Virtual Surround Sound"
                 },
@@ -905,7 +905,7 @@ namespace GamingStore.Data
                     Title = "Creative Gaming Headset HS-720",
                     Manufacturer = "Creative",
                     Price =46.99 ,
-                    Category = "Headset",
+                    Category = "GamingHeadsets",
                     ImageUrl = "images/items/CreativeChatMaxHS-72051EF0410AA004USBCon",
                     Description="USB Connector USB Headset for Online Chats and PC Gaming"
                 },
@@ -914,7 +914,7 @@ namespace GamingStore.Data
                     Title = "Logitech Gaming Headset H820e ",
                     Manufacturer = "Logitech",
                     Price =209.99 ,
-                    Category = "Headset",
+                    Category = "GamingHeadsets",
                     ImageUrl = "images/items/LogitechH820eUSBConnectorSupra-auralWire",
                     Description="USB Connector Supra-aural Wireless Headset"
                 },
@@ -923,7 +923,7 @@ namespace GamingStore.Data
                     Title = "Logitech Gaming Headset G533",
                     Manufacturer = "Logitech",
                     Price =59.99,
-                    Category = "Headset",
+                    Category = "GamingHeadsets",
                     ImageUrl = "images/items/LogitechG533WirelessDTS7.1SurroundSoundG",
                     Description="Wireless DTS 7.1 Surround Sound"
                 },
@@ -967,7 +967,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Logitech G903 Lightspeed Gaming Mouse ",
-                    Manufacturer = "Logitech ",
+                    Manufacturer = "Logitech",
                     Price =204.99 ,
                     Category = "Mouses",
                     ImageUrl = "images/items/LogitechG903LIGHTSPEEDWirelessGamingMous",
@@ -982,57 +982,272 @@ namespace GamingStore.Data
                     ImageUrl = "images/items/LogitechG604LIGHTSPEEDWirelessGamingMous",
                     Description="15 Programmable Controls, Dual Wireless Connectivity Modes, and HERO 16K Sensor"
                 },
-                //new Item
-                //{
-                //    Title = "",
-                //    Manufacturer = "",
-                //    Price = ,
-                //    Category = "",
-                //    ImageUrl = "images/items/",
-                //    Description=""
-                //},
-                //new Item
-                //{
-                //    Title = "",
-                //    Manufacturer = "",
-                //    Price = ,
-                //    Category = "",
-                //    ImageUrl = "",
-                //    Description=""
-                //},
-                //new Item
-                //{
-                //    Title = "",
-                //    Manufacturer = "",
-                //    Price = ,
-                //    Category = "",
-                //    ImageUrl = "",
-                //    Description=""
-                //},
-                //new Item
-                //{
-                //    Title = "",
-                //    Manufacturer = "",
-                //    Price = ,
-                //    Category = "",
-                //    ImageUrl = "",
-                //    Description=""
-                //},
-                //new Item
-                //{
-                //    Title = "",
-                //    Manufacturer = "",
-                //    Price = ,
-                //    Category = "",
-                //    ImageUrl = "",
-                //    Description=""
-                //},
-
-
-
-
-
-
+                new Item
+                {
+                    Title ="Asus Gaming Monitor",
+                    Manufacturer = "Asus",
+                    Price = 132.99,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/ASUSVP247QG24(Actualsize23.6)FullHD1920x",
+                    Description="ASUS Eye Care technology lowers blue light and eliminates flickering to reduce eyestrain and ailments"
+                },
+                new Item
+                {
+                    Title = "Samsung T55 Gaming Monitor",
+                    Manufacturer = "Samsung",
+                    Price =199.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/SAMSUNGT55SeriesC32T5532(Actualsize31.5)",
+                    Description="Full HD 1920 x 1080 75 Hz VGA, HDMI, DisplayPort FreeSync (AMD Adaptive Sync) Curved Gaming Monitor"
+                },
+                new Item
+                {
+                    Title = "MSI Optix MAG273R Gaming Monitor",
+                    Manufacturer = "MSI",
+                    Price = 209.99,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/MSIOptixMAG273R27FullHD1920x10801ms144Hz",
+                    Description="27 inch Full HD 1920 x 1080 1 ms 144 Hz HDMI, DisplayPort, USB FreeSync (AMD Adaptive Sync) IPS Gaming Monitor"
+                },
+                new Item
+                {
+                    Title = "MSI Optix MAG240CR Gaming Monitor",
+                    Manufacturer = "MSI",
+                    Price =214.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/MSIOptixMAG240CR24FullHD1920x10801ms(MPR",
+                    Description="24 Full HD DisplayPort FreeSync (AMD Adaptive Sync) Curved Gaming Monitor"
+                },
+                new Item
+                {
+                    Title = "MSI Optix MAG271VCR Gaming Monitor",
+                    Manufacturer = "MSI",
+                    Price =249.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/MSIOptixMAG271VCR27FullHD1920x10801ms(MP",
+                    Description="Wide Color Gamut - Game colors and details will look more realistic and refined, to push game immersion to its limits."
+                },
+                new Item
+                {
+                    Title = "Samsung Odyssey G9 Series C49G97T Gaming Monitor",
+                    Manufacturer = "Samsung",
+                    Price =1199.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/SAMSUNGOdysseyG9SeriesC49G97T49DualQHD51",
+                    Description="Screen resolution of 5120 x 1440 and a refresh rate of 240 Hz 1ms (GTG). Perfect for competitive gaming sessions"
+                },
+                new Item
+                {
+                    Title = "Samsung Odyssey G7 Series C32G75T Gaming Monitor",
+                    Manufacturer = "Samsung",
+                    Price =789.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/SAMSUNGOdysseyG7C32G75T32(ActualSize31.5",
+                    Description="2xDisplayPort, USB G-Sync Compatible Curved Gaming Monitor"
+                },
+                new Item
+                {
+                    Title = "GIGABYTE G34WQC Gaming Monitor",
+                    Manufacturer = "GIGABYTE",
+                    Price =239.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/GIGABYTEG34WQC34144HzCurvedGamingMonitor",
+                    Description="GIGABYTE Gaming monitor features an exclusive stand that's ergonomically designed to offer extensive range of height and tilt adjustments."
+                },
+                new Item
+                {
+                    Title = "GIGABYTE G32QC Gaming Monitor",
+                    Manufacturer = "GIGABYTE",
+                    Price =129.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/GIGABYTEG32QC32165Hz1440PCurvedGamingMon",
+                    Description="Ergonomic Design with Tilt and Height Adjustments"
+                },
+                new Item
+                {
+                    Title = "GIGABYTE G27F Gaming Monitor",
+                    Manufacturer = "GIGABYTE ",
+                    Price =245.99 ,
+                    Category = "Monitor",
+                    ImageUrl = "images/items/GIGABYTEG27F27144Hz1080PGamingMonitor,19",
+                    Description="High resolution and fast refresh rate, giving you the detailed display quality and fluid gaming experience!"
+                },new Item
+                {
+                    Title = "GIGABYTE G27FC Gaming Monitor",
+                    Manufacturer = "GIGABYTE",
+                    Price =245.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/GIGABYTEG27FC27165Hz1080PCurvedGamingMon",
+                    Description="Smooth Gameplay with AMD FreeSync Premium"
+                },
+                new Item
+                {
+                    Title = "LG 32UK550-B Black Gaming Monitor ",
+                    Manufacturer = "LG",
+                    Price =329.99,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/LG32UK550-BBlack324ms(GTG)HDMIWidescreen",
+                    Description="32 Inch 4K UHD"
+                },
+                new Item
+                {
+                    Title = "Acer KG221Q Gaming Monitor",
+                    Manufacturer = "Acer",
+                    Price =99.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/AcerKG221QAbmix22(Actualsize21.5)1ms(GTG",
+                    Description="AMD FreeSync Technology 24', ZeroFrame design, Acer Flicker-less technology and Acer BlueLightShield technology"
+                },
+                new Item
+                {
+                    Title = "LG 24MP59G-P Gaming Monitor",
+                    Manufacturer = "LG",
+                    Price =209.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/LG24MP59G-P24(Actualsize23.8)FullHD1920x",
+                    Description="Full HD 1920 x 1080 5ms 75Hz VGA HDMI AMD FreeSync Flicker Safe Anti-Glare Backlit LED IPS Gaming Monitor"
+                },
+                new Item
+                {
+                    Title = "Asus ROG Gaming Monitor",
+                    Manufacturer = "Asus",
+                    Price =699.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/ASUSROGStrixXG32VQ32(Actualsize31.5)WQHD",
+                    Description="32' (Actual size 31.5') WQHD 2560 x 1440 2K Adaptive/FreeSync 144Hz 4ms Curved Gaming Monitors with Aura RGB Lighting Asus Eye Care with Ultra Low-Blue Light & Flicker-Free"
+                },new Item
+                {
+                    Title = "LG 34UM69G-B Gaming Monitor",
+                    Manufacturer = "LG",
+                    Price =314.99 ,
+                    Category = "Monitors",
+                    ImageUrl = "images/items/LG34UM69G-B34FullHD2560x108075Hz5ms(GTG)",
+                    Description="34' Full HD 2560 x 1080 75Hz 5ms (GTG) DisplayPort USB Type-C AMD FreeSync Built-in Speakers Flicker Safe Ultrawide Backlit LED IPS Gaming Monitor"
+                },
+                new Item
+                {
+                    Title = "Corsair MM200 PRO Gaming Mouse Pad",
+                    Manufacturer = "Corsair",
+                    Price =24.99 ,
+                    Category = "MousePads",
+                    ImageUrl = "images/items/CorsairMM200PROCH-9412660-WWPremiumSpill",
+                    Description="Spill-Proof Cloth Gaming Mouse Pad - Heavy XL, Black"
+                },
+                new Item
+                {
+                    Title = "Corsair MM300 PRO Gaming Mouse Pad",
+                    Manufacturer = "Corsair",
+                    Price = 22.99,
+                    Category = "MousePads",
+                    ImageUrl = "images/items/CorsairMM300PROCH-9413631-WWPremiumSpill",
+                    Description="A spill-proof and stain-resistant coating makes liquids slide right off the surface so your mouse pad is easy to wipe clean even after an accident."
+                },
+                new Item
+                {
+                    Title = "Corsair MM200 Medium Cloth Gaming Mouse Pad",
+                    Manufacturer = "Corsair",
+                    Price =12.99 ,
+                    Category = "MousePads",
+                    ImageUrl = "images/items/CorsairGamingMM200MediumClothGamingMouse",
+                    Description="Anti-skid rubber base helps it stay securely in place"
+                },
+                new Item
+                {
+                    Title = "Corsair MM300 Anti-Fray Gaming Mouse Pad",
+                    Manufacturer = "Corsair",
+                    Price =26.99 ,
+                    Category = "MousePads",
+                    ImageUrl = "images/items/CorsairGamingMM300Anti-FrayClothGamingMo",
+                    Description="Superior control, textile weave for pixel-precise targeting, low friction tracking"
+                },new Item
+                {
+                    Title = "Corsair MM350 Gaming Mouse Pad",
+                    Manufacturer = "Corsair",
+                    Price =29.99 ,
+                    Category = "MousePads",
+                    ImageUrl = "images/items/CorsairMM350PROCH-9413770-WWPremiumSpill",
+                    Description="An anti-skid textured rubber base keeps the mouse pad securely in place even during the most intense gaming sessions"
+                },
+                new Item
+                {
+                    Title = "Asus ROG Sheath Electro Punk with Extra-large Gaming Mouse Pad",
+                    Manufacturer = "Asus",
+                    Price =31.99 ,
+                    Category = "MousePads",
+                    ImageUrl = "images/items/ROGSheathElectroPunkwithExtra-large,Gami",
+                    Description="Ultra-smooth surface for pixel-precise tracking"
+                },
+                new Item
+                {
+                    Title = "Logitech M317c Mouse",
+                    Manufacturer = "Logitech",
+                    Price =89.99 ,
+                    Category = "Mouses",
+                    ImageUrl = "images/items/LogitechM317cCollectionWirelessMouseM317",
+                    Description="Electronics Features: Wireless, softtouch grips, scrolling wheel System Requirements: USB Port Operating System"
+                },
+                new Item
+                {
+                    Title = "Asus UT220 Ergonomic Design Mouse",
+                    Manufacturer = "Asus",
+                    Price =119.99 ,
+                    Category = "Mouses",
+                    ImageUrl = "images/items/AsusUT220ErgonomicDesign,ClassicExterior",
+                    Description=" Classic Exterior Extendable Cable Wired Mouse For Office And Game, High Compatibility Support PC, and Laptop-Black"
+                },
+                new Item
+                {
+                    Title = "MSI CLUTCH GM30 Gaming Mouse ",
+                    Manufacturer = "MSI",
+                    Price = 49.99,
+                    Category = "Mouses",
+                    ImageUrl = "images/items/MSICLUTCHGM306Buttons1xWheelUSB2.0WiredO",
+                    Description="6 Buttons 1 x Wheel USB 2.0 Wired Optical 6200 dpi Gaming Mouse"
+                },new Item
+                {
+                    Title = "Logitech G203 Gaming Mouse",
+                    Manufacturer = "Logitech",
+                    Price =51.99 ,
+                    Category = "Mouses",
+                    ImageUrl = "images/items/LogitechG203LIGHTSYNC910-005791White6But",
+                    Description="LIGHTSYNC 910-005791 White 6 Buttons 1 x Wheel USB Wired 8000 dpi Gaming Mouse"
+                },
+                new Item
+                {
+                    Title = "MSI Clutch GM11 Gaming Mouse",
+                    Manufacturer = "MSI",
+                    Price =48.99 ,
+                    Category = "Mouses",
+                    ImageUrl = "images/items/MSIClutchGM11Black6Buttons1xWheelUSB2.0W",
+                    Description="Black 6 Buttons 1 x Wheel USB 2.0 Wired Optical 5000 dpi Gaming Mouse"
+                },
+                new Item
+                {
+                    Title = "Razer Naga Chroma - Multi-color MMO Gaming Mouse",
+                    Manufacturer = "Razer",
+                    Price = 729.99,
+                    Category = "Mouses",
+                    ImageUrl = "images/items/RazerNagaChroma-Multi-colorMMOGamingMous",
+                    Description="Chroma lighting with 16.8 customizable color options"
+                },
+                new Item
+                {
+                    Title = "Razer Lancehead Wireless Gaming Mouse",
+                    Manufacturer = "Razer",
+                    Price =239.99 ,
+                    Category = "Mouses",
+                    ImageUrl = "images/items/RazerLancehead-ProfessionalGradeChromaAm",
+                    Description="Gaming-grade wireless performance -16000 dpi"
+                },
+                new Item
+                {
+                    Title = "Razer Mamba Tournament Edition Chroma Gaming Mouse",
+                    Manufacturer = "Razer",
+                    Price =259.99 ,
+                    Category = "Mouses",
+                    ImageUrl = "images/items/RAZERMambaTournamentEditionChromaGamingM",
+                    Description="Nine independently programmable buttons with tilt-click scroll"
+                },
             };
             foreach (var item in items)
             {
