@@ -1,8 +1,8 @@
 ﻿rect.bar-rect {
-    fill: #189ad3;
+    fill: #4692C6;
 }
 
-rect.bar-rect:hover {
-    fill: #107dac;
-    transition: all .2s;
-}
+    rect.bar-rect:hover {
+        fill: #6BAED6;
+        transition: all .2s;
+    }
