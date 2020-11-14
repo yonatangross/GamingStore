@@ -1068,7 +1068,7 @@ namespace GamingStore.Data
                     Title = "GIGABYTE G27F Gaming Monitor",
                     Manufacturer = "GIGABYTE ",
                     Price =245.99 ,
-                    Category = "Monitor",
+                    Category = "Monitors",
                     ImageUrl = "images/items/GIGABYTEG27F27144Hz1080PGamingMonitor,19",
                     Description="High resolution and fast refresh rate, giving you the detailed display quality and fluid gaming experience!"
                 },new Item
