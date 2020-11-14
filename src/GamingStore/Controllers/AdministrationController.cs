@@ -381,16 +381,25 @@ namespace GamingStore.Controllers
                 List = new List<UserRoleViewModel>()
             };
 
-            foreach (Customer user in UserManager.Users)
+            foreach (Customer user in UserManager.Users.ToList())
             {
                 var userRoleViewModel = new UserRoleViewModel
                 {
                     UserId = user.Id,
                     UserName = user.Email,
                     Email = user.Email,
-                    IsSelected = await UserManager.IsInRoleAsync(user, role.Name),
                     ItemsInCart = await CountItemsInCart()
                 };
+                if (await UserManager.IsInRoleAsync(user, role.Name))
+                {
+                    userRoleViewModel.IsSelected = true;
+                }
+                else
+                {
+                    userRoleViewModel.IsSelected = false;
+                }
+
+               
 
                 viewModel.List.Add(userRoleViewModel);
             }
@@ -399,7 +408,7 @@ namespace GamingStore.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditUsersInRole(List<UserRoleViewModel> model, string roleId)
+        public async Task<IActionResult> EditUsersInRole(ListUserRoleViewModel model, string roleId)
         {
             IdentityRole role = await RoleManager.FindByIdAsync(roleId);
 
@@ -408,18 +417,18 @@ namespace GamingStore.Controllers
                 return Error(roleId, "role");
             }
 
-            for (var i = 0; i < model.Count; i++)
+            for (var i = 0; i < model.List.Count; i++)
             {
-                Customer user = await UserManager.FindByIdAsync(model[i].UserId);
+                Customer user = await UserManager.FindByIdAsync(model.List[i].UserId);
 
                 IdentityResult result;
 
-                if (model[i].IsSelected && !(await UserManager.IsInRoleAsync(user, role.Name)))
+                if (model.List[i].IsSelected && !(await UserManager.IsInRoleAsync(user, role.Name)))
                 {
                     user.UserName = user.Email;
                     result = await UserManager.AddToRoleAsync(user, role.Name);
                 }
-                else if (!model[i].IsSelected && await UserManager.IsInRoleAsync(user, role.Name))
+                else if (!model.List[i].IsSelected && await UserManager.IsInRoleAsync(user, role.Name))
                 {
                     user.UserName = user.Email;
                     result = await UserManager.RemoveFromRoleAsync(user, role.Name);
@@ -434,7 +443,7 @@ namespace GamingStore.Controllers
                     continue;
                 }
 
-                if (i < (model.Count - 1))
+                if (i < (model.List.Count - 1))
                 {
                     continue;
                 }
