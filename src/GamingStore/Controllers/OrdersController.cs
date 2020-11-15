@@ -122,12 +122,12 @@ namespace GamingStore.Controllers
             //var equalsItems = model.Cart.Where(x => currentItemsInCart.Any(z => x.Id == z.Id));
             var firstNotSecond = currentItemsIdsInCart.Except(model.ItemsIdsInCartList).ToList();
             var secondNotFirst = model.ItemsIdsInCartList.Except(currentItemsIdsInCart).ToList();
-            var isEqual = !firstNotSecond.Any() && !secondNotFirst.Any();
+            bool isEqual = !firstNotSecond.Any() && !secondNotFirst.Any();
 
             if (!isEqual)
             {
                 _flashMessage.Danger("Your cart items are different from your checkout items");
-                RedirectToAction("Index", "Carts");
+                return RedirectToAction("Index", "Carts");
             }
 
             double itemsCost = currentItemsInCart.Aggregate<Cart, double>(0, (current, cart) => current + cart.Item.Price * cart.Quantity);
@@ -157,32 +157,10 @@ namespace GamingStore.Controllers
                 OrderDate = DateTime.Now,
                 ShippingAddress = model.ShippingAddress,
                 CreditCard = model.CreditCard
-        };
-
-            ////handle customer
-            //order.Customer = customer;
-            //order.CustomerId = customer.Id;
-
-
-            ////handle order
-            //order.State = OrderState.New;
-            //order.OrderDate = DateTime.Now;
-            //order.Payment.PaymentMethod = PaymentMethod.CreditCard;
-            //order.Payment.Paid = true;
-            //order.PaymentId = model.Payment.Id;
-            //order.Payment.ItemsCost = itemsInCart.Aggregate<Cart, double>(0, (current, cart) => current + cart.Item.Price * cart.Quantity);
-            //order.Payment.Total = model.Payment.ItemsCost + model.Payment.ShippingCost;
-            //order.Store = await Context.Stores.FirstOrDefaultAsync(s => s.Name == "Website");
-            //order.ShippingMethod = model.Payment.ShippingCost switch
-            //{
-            //    0 => ShippingMethod.Pickup,
-            //    10 => ShippingMethod.Standard,
-            //    45 => ShippingMethod.Express,
-            //    _ => ShippingMethod.Other
-            //};
+            };
 
             //handle order items
-            foreach (var cartItem in currentItemsInCart)
+            foreach (Cart cartItem in currentItemsInCart)
             {
                 order.OrderItems.Add(new OrderItem()
                 {
