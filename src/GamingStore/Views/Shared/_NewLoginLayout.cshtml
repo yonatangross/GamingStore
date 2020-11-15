@@ -17,9 +17,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="~/css/administration/cs-skin-elastic.css">
     <link rel="stylesheet" href="~/css/administration/style.css">
+    <link rel="stylesheet" href="~/css/site.css" />
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
 <body class="bg-light">
+    <div class="top_bar">
+        <div class="container">
+            <div class="row">
+                <div class="col d-flex flex-row">
+                    <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="~/images/mail.png" alt=""></div><a href="mailto:gamingstoreproject@gmail.com">gamingstoreproject@gmail.com</a></div>
+                    <div class="ml-auto">
+                        <partial name="_NewLoginPartial" />
+                        <ul class="navbar-nav flex-grow-1"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="d-flex align-content-center flex-wrap">
         <div class="container">
             <div class="login-content">
