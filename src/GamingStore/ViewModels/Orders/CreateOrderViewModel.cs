@@ -35,5 +35,6 @@ namespace GamingStore.ViewModels.Orders
         public Payment Payment { get; set; }
 
         public List<CurrencyInfo> Currencies { get; set; }
+
     }
 }

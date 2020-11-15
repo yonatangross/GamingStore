@@ -93,34 +93,68 @@ namespace GamingStore.Controllers
         }
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(Order order)
+        public async Task<IActionResult> Create(CreateOrderViewModel model)
         {
-            //handle customer
             Customer customer = await GetCurrentUserAsync();
-            order.Customer = customer;
-            order.CustomerId = customer.Id;
+            List<Cart> currentItemsInCart = await GetItemsInCart(customer);
 
-            List<Cart> itemsInCart = await GetItemsInCart(customer);
+            //var equalsItems = model.Cart.Where(x => currentItemsInCart.Any(z => x.Id == z.Id));
+            var firstNotSecond = currentItemsInCart.Except(model.Cart).ToList();
+            var secondNotFirst = model.Cart.Except(currentItemsInCart).ToList();
+            var isEqual = !firstNotSecond.Any() && !secondNotFirst.Any();
 
-            //handle order
-            order.State = OrderState.New;
-            order.OrderDate = DateTime.Now;
-            order.Payment.PaymentMethod = PaymentMethod.CreditCard;
-            order.Payment.Paid = true;
-            order.PaymentId = order.Payment.Id;
-            order.Payment.ItemsCost = itemsInCart.Aggregate<Cart, double>(0, (current, cart) => current + cart.Item.Price * cart.Quantity);
-            order.Payment.Total = order.Payment.ItemsCost + order.Payment.ShippingCost;
-            order.Store = await Context.Stores.FirstOrDefaultAsync(s => s.Name == "Website");
-            order.ShippingMethod = order.Payment.ShippingCost switch
+            var order = new Order()
             {
-                0 => ShippingMethod.Pickup,
-                10 => ShippingMethod.Standard,
-                45 => ShippingMethod.Express,
-                _ => ShippingMethod.Other
-            };
+                Payment = new Payment
+                {
+                    PaymentMethod = PaymentMethod.CreditCard,
+                    Paid = true,
+                    ShippingCost = model.Payment.ShippingCost,
+                    ItemsCost = currentItemsInCart.Aggregate<Cart, double>(0, (current, cart) => current + cart.Item.Price * cart.Quantity),
+                    Total = model.Payment.ItemsCost + model.Payment.ShippingCost,
+                },
+                PaymentId = model.Payment.Id,
+                Store = await Context.Stores.FirstOrDefaultAsync(s => s.Name == "Website"),
+                StoreId = 0, //website
+                Customer = customer,
+                CustomerId = customer.Id,
+                State = OrderState.New,
+                ShippingMethod = model.Payment.ShippingCost switch
+                {
+                    0 => ShippingMethod.Pickup,
+                    10 => ShippingMethod.Standard,
+                    45 => ShippingMethod.Express,
+                    _ => ShippingMethod.Other
+                },
+                OrderDate = DateTime.Now,
+                ShippingAddress = model.ShippingAddress,
+                CreditCard = model.CreditCard
+        };
+
+            ////handle customer
+            //order.Customer = customer;
+            //order.CustomerId = customer.Id;
+
+
+            ////handle order
+            //order.State = OrderState.New;
+            //order.OrderDate = DateTime.Now;
+            //order.Payment.PaymentMethod = PaymentMethod.CreditCard;
+            //order.Payment.Paid = true;
+            //order.PaymentId = model.Payment.Id;
+            //order.Payment.ItemsCost = itemsInCart.Aggregate<Cart, double>(0, (current, cart) => current + cart.Item.Price * cart.Quantity);
+            //order.Payment.Total = model.Payment.ItemsCost + model.Payment.ShippingCost;
+            //order.Store = await Context.Stores.FirstOrDefaultAsync(s => s.Name == "Website");
+            //order.ShippingMethod = model.Payment.ShippingCost switch
+            //{
+            //    0 => ShippingMethod.Pickup,
+            //    10 => ShippingMethod.Standard,
+            //    45 => ShippingMethod.Express,
+            //    _ => ShippingMethod.Other
+            //};
 
             //handle order items
-            foreach (var cartItem in itemsInCart)
+            foreach (var cartItem in currentItemsInCart)
             {
                 order.OrderItems.Add(new OrderItem()
                 {
