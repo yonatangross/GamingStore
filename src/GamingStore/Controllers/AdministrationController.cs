@@ -461,7 +461,6 @@ namespace GamingStore.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteUser(string id)
         {
-            // Todo: change from deleteUser to disable user.
             Customer user = await UserManager.FindByIdAsync(id);
 
             if (user == null)

@@ -32,8 +32,6 @@ namespace GamingStore.Data
 
             #endregion
 
-            //bug: remove redundant customerId from items table on db.
-
             #region ManyToMany
 
             // OrderItem: Order 1..x-1..x Item
