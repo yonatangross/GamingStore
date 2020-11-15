@@ -230,7 +230,7 @@
                                         <div class="product_name">
                                             <a asp-action="Details" asp-route-id="@item.Id" tabindex="0" style="overflow-wrap: break-word">@item.Title</a>
                                         </div>
-                                        <div class="buttons d-flex flex-row">
+                                        @*<div class="buttons d-flex flex-row">
                                             <div class="cart">
                                                 <i class="fa fa-shopping-cart" style="padding-right: 8%" ;></i>
 
@@ -240,39 +240,43 @@
                                                     <input type="submit" value="Add to Cart" class="btn btn-success cart-button btn-block" style="width: 90%" />
                                                 }
                                             </div>
-                                        </div>
+                                        </div>*@
                                     </div>
                                 </div>
                             }
                         }
                     </div>
-                    @{
-                        var prevDisabled = !Model.PaginatedItems.HasPreviousPage ? "disabled" : "";
-                        var nextDisabled = !Model.PaginatedItems.HasNextPage ? "disabled" : "";
-                    }
+                    
+                    <div class="paging-btns">
+                        @{
+                            var prevDisabled = !Model.PaginatedItems.HasPreviousPage ? "disabled" : "";
+                            var nextDisabled = !Model.PaginatedItems.HasNextPage ? "disabled" : "";
+                        }
 
-                    @Html.ActionLink("Previous", "Index", "Items", new
-               {
-                   category = prevSelectedCategory,
-                   manufacturer = prevSelectedManufacturer,
-                   priceMin = filter.PriceMin,
-                   priceMax = filter.PriceMax,
-                   keywords = filter.Keywords,
-                   pageNumber = (Model.PaginatedItems.PageIndex - 1),
-                   sortBy = prevSelectedSortingOrder
-               },
-                        new { @class = "paging btn btn-primary" + " " + prevDisabled })
-                    @Html.ActionLink("Next", "Index", "Items", new
-               {
-                   category = prevSelectedCategory,
-                   manufacturer = prevSelectedManufacturer,
-                   priceMin = filter.PriceMin,
-                   priceMax = filter.PriceMax,
-                   keywords = filter.Keywords,
-                   pageNumber = (Model.PaginatedItems.PageIndex + 1),
-                   sortBy = prevSelectedSortingOrder
-               },
-                        new { @class = "paging btn btn-primary" + " " + @nextDisabled })
+                        @Html.ActionLink("Previous", "Index", "Items", new
+                        {
+                            category = prevSelectedCategory,
+                            manufacturer = prevSelectedManufacturer,
+                            priceMin = filter.PriceMin,
+                            priceMax = filter.PriceMax,
+                            keywords = filter.Keywords,
+                            pageNumber = (Model.PaginatedItems.PageIndex - 1),
+                            sortBy = prevSelectedSortingOrder
+                        },
+                            new { @class = "paging btn btn-primary" + " " + prevDisabled })
+                        @Html.ActionLink("Next", "Index", "Items", new
+                        {
+                            category = prevSelectedCategory,
+                            manufacturer = prevSelectedManufacturer,
+                            priceMin = filter.PriceMin,
+                            priceMax = filter.PriceMax,
+                            keywords = filter.Keywords,
+                            pageNumber = (Model.PaginatedItems.PageIndex + 1),
+                            sortBy = prevSelectedSortingOrder
+                        },
+                            new { @class = "paging btn btn-primary" + " " + @nextDisabled })
+                    </div>
+                    
                 </div>
             </div>
         </div>

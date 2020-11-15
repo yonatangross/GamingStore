@@ -90,7 +90,7 @@
 .shop_sorting ul li ul li:last-child { border-bottom: none; }
 
 /*********************************
-5.1 Shop Products
+Shop Products
 *********************************/
 
 
@@ -334,9 +334,25 @@
 }
 
 /*********************************
-6. Shop Sidebar
+Paging Buttons
 *********************************/
-
+.paging-btns {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.paging {
+    width: 100px;
+    border-color: #ffffff;
+}
+    .paging.btn.btn-primary.disabled {
+        background-color: #676767;
+        border-color: #ffffff;
+        cursor: not-allowed;
+    }
+/*********************************
+ Shop Sidebar
+*********************************/
 .shop_sidebar {
     width: 100%;
     -webkit-transform: translateX(-37px);
@@ -429,7 +445,7 @@
 
 
 /*********************************
-8. Brands
+Brands
 *********************************/
 
 .brands {

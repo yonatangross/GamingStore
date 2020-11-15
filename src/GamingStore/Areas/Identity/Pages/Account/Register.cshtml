@@ -1,5 +1,6 @@
 ﻿@page
 @model RegisterModel
+@addTagHelper *, Vereyon.Web.FlashMessage
 @{
     ViewData["Title"] = "Register";
     Layout = "_NewLoginLayout";
@@ -15,6 +16,7 @@
         <img class="align-content" src="/images/logo.png" alt="">
     </a>
 </div>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
 <div class="login-form">
     <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
         <div class="form-group">

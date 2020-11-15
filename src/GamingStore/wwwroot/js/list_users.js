@@ -1,8 +1,8 @@
 ﻿
 function toggleConfirmDeleteUserButton(uniqueId, isDeleteClicked) {
-    console.log(
-        `Entered function toggleConfirmDeleteUserButton with uniqueId:${uniqueId}and isDeleteClicked: ${isDeleteClicked
-        }\n`);
+    //console.log(
+    //    `Entered function toggleConfirmDeleteUserButton with uniqueId:${uniqueId}and isDeleteClicked: ${isDeleteClicked
+    //    }\n`);
 
     const deleteSpan = `deleteSpan_${uniqueId}`;
     const confirmDeleteSpan = `confirmDeleteSpan_${uniqueId}`;
@@ -23,7 +23,7 @@ function toggleConfirmDeleteUserButton(uniqueId, isDeleteClicked) {
 }
 
 function confirmDeleteUserAjax(userId, userNum, userEmail) {
-    console.log(`Entered function confirmDeleteUserAjax with:${userId} ${userNum} ${userEmail}\n`);
+    //console.log(`Entered function confirmDeleteUserAjax with:${userId} ${userNum} ${userEmail}\n`);
     $.ajax({
             type: "POST",
             url: "/Administration/DeleteUser",

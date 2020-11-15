@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using GamingStore.Services.Email.Interfaces;
+using Vereyon.Web;
 
 namespace GamingStore.Areas.Identity.Pages.Account
 {
@@ -23,17 +24,20 @@ namespace GamingStore.Areas.Identity.Pages.Account
         private readonly SignInManager<Customer> _signInManager;
         private readonly UserManager<Customer> _userManager;
         private readonly ILogger<RegisterModel> _logger;
+        private readonly IFlashMessage _flushMessage;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<Customer> userManager,
             SignInManager<Customer> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IFlashMessage flushMessage,
+                IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _flushMessage = flushMessage;
             _emailSender = emailSender;
         }
 
@@ -42,6 +46,7 @@ namespace GamingStore.Areas.Identity.Pages.Account
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
+        public string StatusMessage { get; private set; }
 
         public class InputModel
         {
@@ -70,6 +75,8 @@ namespace GamingStore.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+            [TempData]
+        public string StatusMessage { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -114,6 +121,11 @@ namespace GamingStore.Areas.Identity.Pages.Account
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
                     }
+                }
+                else
+                {
+                    StatusMessage = "Username already exists";
+                    return Page();
                 }
 
                 foreach (var error in result.Errors)
