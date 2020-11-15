@@ -236,7 +236,7 @@ Main Navigation
 }
 
 .char_icon {
-	margin-left: 7%; 
+	margin-left: 7%;
 	margin-right: 7%;
 }
 
@@ -257,8 +257,16 @@ Main Navigation
 	margin-top: 3px;
 }
 
-
-
+/*********************************
+ Featured Item Video
+*********************************/
+.featured-item-video {
+	background-color: black;
+	padding: 2%;
+	border-radius: 1%;
+	border-color: yellowgreen;
+	border: 2px solid yellowgreen;
+}
 
 /*********************************
  Best Sellers
@@ -271,9 +279,9 @@ Main Navigation
 	margin-top: -77px;
 }
 
-.best_sellers .ml-item {
-	background-color: white;
-}
+	.best_sellers .ml-item {
+		background-color: white;
+	}
 
 .new_arrivals_title {
 	left: 0;
@@ -555,5 +563,3 @@ Main Navigation
 		display: block;
 		max-width: 100%;
 	}
-
-
