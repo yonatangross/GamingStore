@@ -145,7 +145,7 @@
                                         </thead>
                                         <tbody>
                                             @{ var count = 0;}
-                                            @foreach (var order in Model.Orders.TakeLast(10))
+                                            @foreach (var order in Model.Orders.Take(10))
                                             {
                                                 count++;
                                                 <tr>
