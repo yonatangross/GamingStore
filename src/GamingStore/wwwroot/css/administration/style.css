@@ -2435,4 +2435,30 @@ input[type=text].input-validation-error {
   display: none;
 }
 
+.properties {
+    max-width: 300px;
+}
+.item-titles{
+    max-width: 250px;
+}
+
+.item-manufacturer {
+    max-width: 130px;
+}
+.action-buttons {
+    min-width: 150px;
+}
+
+#right-panel > main > div > div > div > div > div > div.card-header > div > div > div > a {
+    background: #009dff;
+    color: white;
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+
+
+
 /*# sourceMappingURL=style.css.map */
+
