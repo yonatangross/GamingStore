@@ -1,98 +1,94 @@
 [
   {
     "Date": "January 2018",
-    "Value": 4782.57
-  },
-  {
-    "Date": "February 2018",
-    "Value": 2135.06
-  },
-  {
-    "Date": "March 2018",
-    "Value": 6110.92
+    "Value": 2241.55
   },
   {
     "Date": "April 2018",
-    "Value": 1961.94
+    "Value": 727.0500000000001
   },
   {
     "Date": "May 2018",
-    "Value": 218.97
+    "Value": 2709.99
+  },
+  {
+    "Date": "July 2018",
+    "Value": 103.96
   },
   {
     "Date": "August 2018",
-    "Value": 3095.4
+    "Value": 729.73
+  },
+  {
+    "Date": "September 2018",
+    "Value": 802.25
   },
   {
     "Date": "October 2018",
-    "Value": 109.78
+    "Value": 31.99
+  },
+  {
+    "Date": "November 2018",
+    "Value": 570.8
   },
   {
     "Date": "December 2018",
-    "Value": 8366.27
-  },
-  {
-    "Date": "January 2019",
-    "Value": 2696.09
+    "Value": 1948.0500000000002
   },
   {
     "Date": "February 2019",
-    "Value": 2322.96
+    "Value": 1579.97
   },
   {
-    "Date": "March 2019",
-    "Value": 4558.62
+    "Date": "April 2019",
+    "Value": 725.51
   },
   {
-    "Date": "May 2019",
-    "Value": 1872.95
+    "Date": "June 2019",
+    "Value": 1890.8200000000002
+  },
+  {
+    "Date": "July 2019",
+    "Value": 2519.92
   },
   {
     "Date": "August 2019",
-    "Value": 867.94
-  },
-  {
-    "Date": "September 2019",
-    "Value": 1899.8400000000001
+    "Value": 2835.4700000000003
   },
   {
     "Date": "October 2019",
-    "Value": 749.6500000000001
+    "Value": 505.05000000000007
   },
   {
     "Date": "November 2019",
-    "Value": 877.78
+    "Value": 5371.17
   },
   {
     "Date": "December 2019",
-    "Value": 1496.8200000000002
+    "Value": 1439.95
   },
   {
     "Date": "January 2020",
-    "Value": 1796.88
-  },
-  {
-    "Date": "February 2020",
-    "Value": 260.0
+    "Value": 869.97
   },
   {
     "Date": "March 2020",
-    "Value": 74.98
-  },
-  {
-    "Date": "May 2020",
-    "Value": 5139.98
+    "Value": 859.57
   },
   {
     "Date": "July 2020",
-    "Value": 867.98
+    "Value": 1564.34
   },
   {
     "Date": "August 2020",
-    "Value": 2374.12
+    "Value": 907.96
+  },
+  {
+    "Date": "September 2020",
+    "Value": 1094.2800000000002
   },
   {
     "Date": "November 2020",
-    "Value": 97.98
+    "Value": 659.98
   }
 ]
