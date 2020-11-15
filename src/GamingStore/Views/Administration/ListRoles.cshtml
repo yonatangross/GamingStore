@@ -5,35 +5,49 @@
     Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
 }
 
-<h1>All Roles</h1>
-
-@if (Model.Roles.Any())
-{
-
-    foreach (var role in Model.Roles)
-    {
-        <div class="card mb-3">
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card">
             <div class="card-header">
-                Role Id : @role.Id
+                <strong class="card-title">All Roles</strong>
             </div>
             <div class="card-body">
-                <h5 class="card-title">@role.Name</h5>
+                <div class="col">
+                    <div class="d-flex justify-content-center" id="flash_message"> <flash dismissable="true" /></div>
+                    @if (Model.Roles.Any())
+                    {
+
+                        foreach (var role in Model.Roles)
+                        {
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    Role Id : @role.Id
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@role.Name</h5>
+                                </div>
+                                <div class="card-footer">
+                                    <a asp-controller="Administration" asp-action="EditRole"
+                                       asp-route-id="@role.Id" class="btn btn-primary">
+                                        Edit
+                                    </a>
+                                    <a href="#" class="btn btn-danger">Delete</a>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="card">
+                            <div class="card-header">
+                                No roles created yet
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
-            <div class="card-footer">
-                <a asp-controller="Administration" asp-action="EditRole"
-                   asp-route-id="@role.Id" class="btn btn-primary">
-                    Edit
-                </a>
-                <a href="#" class="btn btn-danger">Delete</a>
-            </div>
-        </div>
-    }
-}
-else
-{
-    <div class="card">
-        <div class="card-header">
-            No roles created yet
         </div>
     </div>
-}
+</div>
+
+
