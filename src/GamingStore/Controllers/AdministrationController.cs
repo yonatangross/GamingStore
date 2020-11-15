@@ -14,14 +14,19 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Vereyon.Web;
 
 namespace GamingStore.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class AdministrationController : BaseController
     {
-        public AdministrationController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager) : base(userManager, context, roleManager, signInManager)
+        private readonly IFlashMessage _flashMessage;
+
+        public AdministrationController(UserManager<Customer> userManager, StoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<Customer> signInManager, IFlashMessage flashMessage) 
+            : base(userManager, context, roleManager, signInManager)
         {
+            _flashMessage = flashMessage;
         }
 
         [HttpGet]
@@ -31,7 +36,8 @@ namespace GamingStore.Controllers
 
             if (user == null)
             {
-                return Error(id, "user");
+                _flashMessage.Danger("You can not edit a user that no longer exists");
+                return RedirectToAction("ListUsers");
             }
 
             // GetRolesAsync returns the list of user Roles
@@ -114,7 +120,6 @@ namespace GamingStore.Controllers
             }
 
             purchaseByCategoryList.Sort((a, b) => a.Value.CompareTo(b.Value));
-
             var serializeObject = JsonConvert.SerializeObject(purchaseByCategoryList, Formatting.Indented);
 
             //write string to file
@@ -143,15 +148,6 @@ namespace GamingStore.Controllers
             var fileDir = $@"{Directory.GetCurrentDirectory()}\wwwroot\{barChartDataPath}";
             System.IO.File.WriteAllText(fileDir, serializedGroupBy);
         }
-
-        /*
-        public async Task<IActionResult> GenerateStoreRevenuePieChart()
-        {
-            var orders = await Context.Orders.Include(o => o.Payment).Include(o => o.Store).ToListAsync();
-            createMonthlyPurchasesGraphData(orders);
-
-            return View("Statistics/GenerateStoreRevenuePieChart");
-        }*/
 
         private void createStoresRevenueGraphData(List<Order> orders)
         {
@@ -198,7 +194,8 @@ namespace GamingStore.Controllers
 
             if (user == null)
             {
-                return Error(model.Id, "user");
+                _flashMessage.Danger("You can not edit a user that no longer exists");
+                return RedirectToAction("ListUsers");
             }
 
             user.Email = model.Email;
@@ -208,6 +205,7 @@ namespace GamingStore.Controllers
 
             if (result.Succeeded)
             {
+                _flashMessage.Confirmation("Edit user succeeded");
                 return RedirectToAction("ListUsers");
             }
 
@@ -216,6 +214,7 @@ namespace GamingStore.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
 
+            _flashMessage.Danger("En error while trying to edit a user");
             return View(model);
         }
 
@@ -240,14 +239,14 @@ namespace GamingStore.Controllers
 
             if (role == null)
             {
-                return Error(id, "role");
+                _flashMessage.Danger("You can not edit a role that no longer exists");
+                return RedirectToAction("ListUsers");
             }
 
             var model = new EditRoleViewModel
             {
                 Id = role.Id,
                 RoleName = role.Name,
-                ItemsInCart = await CountItemsInCart()
             };
 
             // Retrieve all the Users
@@ -272,7 +271,8 @@ namespace GamingStore.Controllers
 
             if (role == null)
             {
-                return Error(model.Id, "role");
+                _flashMessage.Danger("You can not edit a role that no longer exists");
+                return RedirectToAction("ListUsers");
             }
 
             role.Name = model.RoleName;
@@ -282,6 +282,7 @@ namespace GamingStore.Controllers
 
             if (result.Succeeded)
             {
+                _flashMessage.Confirmation("Edit user succeeded");
                 return RedirectToAction("ListRoles");
             }
 
@@ -290,14 +291,13 @@ namespace GamingStore.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
 
-            model.ItemsInCart = await CountItemsInCart();
-
+            _flashMessage.Danger("En error while trying to edit a role");
             return View(model);
         }
 
         public JsonResult ListUsersBySearch(string searchUserString)
         {
-            var users = UserManager.Users;
+            IQueryable<Customer> users = UserManager.Users;
 
             if (!string.IsNullOrEmpty(searchUserString))
             {
@@ -310,13 +310,13 @@ namespace GamingStore.Controllers
 
         public async Task<IActionResult> ListUsers()
         {
-            var users = await UserManager.Users.ToListAsync();
+            List<Customer> users = await UserManager.Users.ToListAsync();
 
-            var viewModel = new ListUsersViewModels()
+            var viewModel = new ListUsersViewModels
             {
-                Users = users,
-                ItemsInCart = await CountItemsInCart()
+                Users = users
             };
+
             return View(viewModel);
         }
 
@@ -328,7 +328,6 @@ namespace GamingStore.Controllers
             var viewModel = new ListStoresViewModel()
             {
                 Stores = stores,
-                ItemsInCart = await CountItemsInCart()
             };
 
             return View(viewModel);
@@ -338,11 +337,12 @@ namespace GamingStore.Controllers
         public async Task<IActionResult> ListItems()
         {
             List<Item> items = await Context.Items.ToListAsync();
+            
             var viewModel = new ListItemsViewModel()
             {
-                Items = items,
-                ItemsInCart = await CountItemsInCart()
+                Items = items
             };
+
             return View(viewModel);
         }
 
@@ -365,8 +365,6 @@ namespace GamingStore.Controllers
             return View(viewModel);
         }
 
-      
-
         [HttpGet]
         public async Task<IActionResult> EditUsersInRole(string roleId)
         {
@@ -376,12 +374,12 @@ namespace GamingStore.Controllers
 
             if (role == null)
             {
-                return Error(roleId, "role");
+                _flashMessage.Danger("You can not edit a role that no longer exists");
+                return RedirectToAction("ListUsers");
             }
 
             var viewModel = new ListUserRoleViewModel()
             {
-                ItemsInCart = await CountItemsInCart(),
                 List = new List<UserRoleViewModel>()
             };
 
@@ -392,8 +390,8 @@ namespace GamingStore.Controllers
                     UserId = user.Id,
                     UserName = user.Email,
                     Email = user.Email,
-                    ItemsInCart = await CountItemsInCart()
                 };
+
                 if (await UserManager.IsInRoleAsync(user, role.Name))
                 {
                     userRoleViewModel.IsSelected = true;
@@ -402,8 +400,6 @@ namespace GamingStore.Controllers
                 {
                     userRoleViewModel.IsSelected = false;
                 }
-
-               
 
                 viewModel.List.Add(userRoleViewModel);
             }
@@ -418,7 +414,8 @@ namespace GamingStore.Controllers
 
             if (role == null)
             {
-                return Error(roleId, "role");
+                _flashMessage.Danger("You can not edit a role that no longer exists");
+                return RedirectToAction("ListUsers");
             }
 
             for (var i = 0; i < model.List.Count; i++)
@@ -452,9 +449,11 @@ namespace GamingStore.Controllers
                     continue;
                 }
 
+                _flashMessage.Confirmation("Edit user's role succeeded");
                 return RedirectToAction("EditRole", new {Id = roleId});
             }
 
+            _flashMessage.Confirmation("Edit user's role succeeded");
             return RedirectToAction("EditRole", new {Id = roleId});
         }
 
@@ -466,13 +465,15 @@ namespace GamingStore.Controllers
 
             if (user == null)
             {
-                return Error(id, "user");
+                _flashMessage.Danger("You can not delete a user that no longer exists");
+                return RedirectToAction("ListUsers");
             }
 
             IdentityResult result = await UserManager.DeleteAsync(user);
 
             if (result.Succeeded)
             {
+                _flashMessage.Confirmation("Delete user succeeded");
                 return RedirectToAction("ListUsers");
             }
 
@@ -482,12 +483,6 @@ namespace GamingStore.Controllers
             }
 
             return View("ListUsers");
-        }
-
-        private IActionResult Error(string id, string type)
-        {
-            ViewBag.ErrorMessage = $"{type} with Id = {id} cannot be found";
-            return View("NotFound");
         }
     }
 }

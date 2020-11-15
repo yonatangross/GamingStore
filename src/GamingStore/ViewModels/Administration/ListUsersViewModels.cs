@@ -3,7 +3,7 @@ using GamingStore.Models;
 
 namespace GamingStore.ViewModels.Administration
 {
-    public class ListUsersViewModels: ViewModelBase
+    public class ListUsersViewModels
     {
         public List<Customer> Users { get; set; }
     }

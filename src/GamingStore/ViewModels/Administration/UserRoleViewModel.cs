@@ -1,6 +1,6 @@
 ﻿namespace GamingStore.ViewModels.Administration
 {
-    public class UserRoleViewModel : ViewModelBase
+    public class UserRoleViewModel
     {
         public string UserId { get; set; }
         public string UserName { get; set; }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GamingStore.ViewModels.Administration
 {
-    public class EditRoleViewModel : ViewModelBase
+    public class EditRoleViewModel
     {
         public EditRoleViewModel()
         {
