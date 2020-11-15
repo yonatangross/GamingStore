@@ -20,27 +20,7 @@
                         <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="~/images/mail.png" alt=""></div><a href="mailto:gamingstoreproject@gmail.com">gamingstoreproject@gmail.com</a></div>
                         <div class="ml-auto">
                             <partial name="_NewLoginPartial" />
-                            <ul class="navbar-nav flex-grow-1">
-                                @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                                {
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Manage
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item" asp-controller="Administration"
-                                               asp-action="ListUsers">
-                                                Users
-                                            </a>
-                                            <a class="dropdown-item" asp-controller="Administration"
-                                               asp-action="ListRoles">
-                                                Roles
-                                            </a>
-                                        </div>
-                                    </li>
-                                }
-                            </ul>
+                            <ul class="navbar-nav flex-grow-1"></ul>
                         </div>
                     </div>
                 </div>
