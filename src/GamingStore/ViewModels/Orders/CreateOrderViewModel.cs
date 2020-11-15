@@ -36,5 +36,6 @@ namespace GamingStore.ViewModels.Orders
 
         public List<CurrencyInfo> Currencies { get; set; }
 
+        public List<int> ItemsIdsInCartList { get; set; }
     }
 }

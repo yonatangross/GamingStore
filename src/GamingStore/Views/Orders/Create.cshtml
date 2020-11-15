@@ -15,12 +15,9 @@
 <body>
     @using (Html.BeginForm("Create", "Orders", FormMethod.Post, null))
     {
-        @for (var index = 0; index < Model.Cart.Count; index++)
+        for (var index = 0; index < Model.ItemsIdsInCartList.Count; index++)
         {
-            @Html.HiddenFor(m => m.Cart[index], new
-            {
-                style = "display:none;"
-            })
+            @Html.HiddenFor(m => m.ItemsIdsInCartList[index])
         }
 
         <div class="row">

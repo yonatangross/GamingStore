@@ -67,6 +67,16 @@ namespace GamingStore.Controllers
                     currency.Total = totalCost * currency.Value;
                 }
 
+                var itemsIdsInCartList = new List<int>();
+
+                foreach (Cart itemInCart in itemsInCart)
+                {
+                    for (var i = 1; i <= itemInCart.Quantity; i++)
+                    {
+                        itemsIdsInCartList.Add(itemInCart.ItemId);
+                    }
+                }
+
                 var viewModel = new CreateOrderViewModel
                 {
                     Cart = itemsInCart,
@@ -79,7 +89,8 @@ namespace GamingStore.Controllers
                         Total = totalCost
                     },
                     ItemsInCart = await CountItemsInCart(),
-                    Currencies = currencies
+                    Currencies = currencies,
+                    ItemsIdsInCartList = itemsIdsInCartList
                 };
 
                 return View(viewModel);
@@ -98,10 +109,28 @@ namespace GamingStore.Controllers
             Customer customer = await GetCurrentUserAsync();
             List<Cart> currentItemsInCart = await GetItemsInCart(customer);
 
+            var currentItemsIdsInCart = new List<int>();
+
+            foreach (Cart cart in currentItemsInCart)
+            {
+                for (var i = 0; i < cart.Quantity; i++)
+                {
+                    currentItemsIdsInCart.Add(cart.ItemId);
+                }
+            }
+
             //var equalsItems = model.Cart.Where(x => currentItemsInCart.Any(z => x.Id == z.Id));
-            var firstNotSecond = currentItemsInCart.Except(model.Cart).ToList();
-            var secondNotFirst = model.Cart.Except(currentItemsInCart).ToList();
+            var firstNotSecond = currentItemsIdsInCart.Except(model.ItemsIdsInCartList).ToList();
+            var secondNotFirst = model.ItemsIdsInCartList.Except(currentItemsIdsInCart).ToList();
             var isEqual = !firstNotSecond.Any() && !secondNotFirst.Any();
+
+            if (!isEqual)
+            {
+                _flashMessage.Danger("Your cart items are different from your checkout items");
+                RedirectToAction("Index", "Carts");
+            }
+
+            double itemsCost = currentItemsInCart.Aggregate<Cart, double>(0, (current, cart) => current + cart.Item.Price * cart.Quantity);
 
             var order = new Order()
             {
@@ -110,8 +139,7 @@ namespace GamingStore.Controllers
                     PaymentMethod = PaymentMethod.CreditCard,
                     Paid = true,
                     ShippingCost = model.Payment.ShippingCost,
-                    ItemsCost = currentItemsInCart.Aggregate<Cart, double>(0, (current, cart) => current + cart.Item.Price * cart.Quantity),
-                    Total = model.Payment.ItemsCost + model.Payment.ShippingCost,
+                    ItemsCost = itemsCost
                 },
                 PaymentId = model.Payment.Id,
                 Store = await Context.Stores.FirstOrDefaultAsync(s => s.Name == "Website"),
