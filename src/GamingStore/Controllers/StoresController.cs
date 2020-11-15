@@ -33,9 +33,9 @@ namespace GamingStore.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var stores = await Context.Stores.ToListAsync();
-            var uniqueCities = GetUniqueCities(stores);
-            var openStores = GetOpenStores(stores);
+            List<Store> stores = await Context.Stores.ToListAsync();
+            HashSet<string> uniqueCities = GetUniqueCities(stores);
+            List<Store> openStores = GetOpenStores(stores);
 
 
             var viewModel = new StoresCitiesViewModel
@@ -51,8 +51,8 @@ namespace GamingStore.Controllers
 
         private static List<Store> GetOpenStores(List<Store> stores)
         {
-            // get open stores
-            var openStores = stores.Where(store => store.IsOpen()).ToList();
+            List<Store> openStores = stores.Where(store => store.IsOpen()).ToList(); // get open stores
+
             return openStores;
         }
 
@@ -60,13 +60,12 @@ namespace GamingStore.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(StoresCitiesViewModel received)
         {
-            var stores = await Context.Stores.ToListAsync();
-            var uniqueCities = GetUniqueCities(stores);
+            List<Store> stores = await Context.Stores.ToListAsync();
+            HashSet<string> uniqueCities = GetUniqueCities(stores);
 
             // get open stores
-            var openStores = stores.Where(store => store.IsOpen()).ToList();
-
-
+            List<Store> openStores = stores.Where(store => store.IsOpen()).ToList();
+            
             if (!string.IsNullOrEmpty(received.Name))
             {
                 stores = stores.Where(store => store.Name.ToLower().Contains(received.Name.ToLower())).ToList();
@@ -100,9 +99,13 @@ namespace GamingStore.Controllers
         private static HashSet<string> GetUniqueCities(List<Store> stores)
         {
             // get stores with cities uniquely 
-            HashSet<string> uniqueCities = new HashSet<string>();
-            foreach (var element in stores)
+            var uniqueCities = new HashSet<string>();
+            
+            foreach (Store element in stores)
+            {
                 uniqueCities.Add(element.Address.City);
+            }
+
             return uniqueCities;
         }
 
@@ -155,6 +158,7 @@ namespace GamingStore.Controllers
                     }
                 }
             };
+
             return View(viewModel);
         }
 
@@ -203,6 +207,7 @@ namespace GamingStore.Controllers
                 _flashMessage.Danger("You cannot edit a store that is no longer exists");
                 return RedirectToAction("ListStores", "Administration");
             }
+
             Store store = await Context.Stores.FindAsync(id);
             var viewModel = new StoreDetailsViewModel()
             {
@@ -303,6 +308,7 @@ namespace GamingStore.Controllers
                 _flashMessage.Danger("You can not remove a store contains orders");
                 return RedirectToAction("ListStores", "Administration");
             }
+
             Context.Stores.Remove(store);
             await Context.SaveChangesAsync();
             _flashMessage.Confirmation("Deleted success");

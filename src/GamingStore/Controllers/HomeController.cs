@@ -83,7 +83,6 @@ namespace GamingStore.Controllers
         {
             Customer customer = await GetCurrentUserAsync();
 
-
             if (customer != null)
             {
                 return View(new ContactViewModel
@@ -102,7 +101,7 @@ namespace GamingStore.Controllers
         public async Task<IActionResult> ConfirmContactUs(Mail model)
         {
             Customer customer = await GetCurrentUserAsync();
-            var customerId = customer != null ? customer.Id : "Not Logged In";
+            string customerId = customer != null ? customer.Id : "Not Logged In";
 
             //prepare email
             const string toAddress = "gamingstoreproject+form@gmail.com";
@@ -116,8 +115,8 @@ namespace GamingStore.Controllers
 
             //start email Thread
             await Task.Run(() => { _emailSender.SendEmailAsync(toAddress, subject, message.ToString()); }).ConfigureAwait(false);
-
             _flashMessage.Confirmation("Message Sent");
+
             return RedirectToAction(nameof(ContactUs));
         }
     }

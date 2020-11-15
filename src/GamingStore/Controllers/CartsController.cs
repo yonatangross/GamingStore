@@ -56,9 +56,8 @@ namespace GamingStore.Controllers
                 };
 
                 return View(viewModel);
-
             }
-            catch(Exception e)
+            catch
             {
                 //no items in cart
                 return View(new CartViewModel {ItemsInCart = 0});

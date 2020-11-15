@@ -1,5 +1,6 @@
 ﻿@using GamingStore.Contracts
 @model GamingStore.ViewModels.Orders.CreateOrderViewModel
+@addTagHelper *, Vereyon.Web.FlashMessage
 
 @{
     ViewData["Title"] = "Check Out";
@@ -19,6 +20,10 @@
         {
             @Html.HiddenFor(m => m.ItemsIdsInCartList[index])
         }
+
+        <div class="col">
+            <div class="d-flex justify-content-center" id="flash_message"> <flash dismissable="true" /></div>
+        </div>
 
         <div class="row">
             <div class="col-8">
@@ -258,5 +263,12 @@
                 });
             }
         </script>
+        <script>
+            setTimeout(function () {
+                    $('.alert').fadeOut('slow');
+                },
+                5000); // <-- time in milliseconds
+        </script>
+        <script src="/lib/jquery/dist/jquery.js"></script>
     }
 </body>

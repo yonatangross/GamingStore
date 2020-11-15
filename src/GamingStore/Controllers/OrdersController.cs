@@ -93,15 +93,19 @@ namespace GamingStore.Controllers
                     ItemsIdsInCartList = itemsIdsInCartList
                 };
 
+                _flashMessage.Warning("Please verify your items before placing the order");
+
                 return View(viewModel);
             }
             catch (Exception e)
             {
-                // ignored
-            }
+                _flashMessage.Danger("Your order could not be placed. Please contact support for help");
+                _logger.LogError($"an order could not be created, e: {e}");
 
-            return View(new CreateOrderViewModel() { ItemsInCart = await CountItemsInCart() });
+                return View(new CreateOrderViewModel() { ItemsInCart = await CountItemsInCart() });
+            }
         }
+
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Create(CreateOrderViewModel model)
@@ -119,9 +123,8 @@ namespace GamingStore.Controllers
                 }
             }
 
-            //var equalsItems = model.Cart.Where(x => currentItemsInCart.Any(z => x.Id == z.Id));
-            var firstNotSecond = currentItemsIdsInCart.Except(model.ItemsIdsInCartList).ToList();
-            var secondNotFirst = model.ItemsIdsInCartList.Except(currentItemsIdsInCart).ToList();
+            List<int> firstNotSecond = currentItemsIdsInCart.Except(model.ItemsIdsInCartList).ToList();
+            List<int> secondNotFirst = model.ItemsIdsInCartList.Except(currentItemsIdsInCart).ToList();
             bool isEqual = !firstNotSecond.Any() && !secondNotFirst.Any();
 
             if (!isEqual)

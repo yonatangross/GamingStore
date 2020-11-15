@@ -24,18 +24,19 @@ namespace GamingStore.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> NotFound()
         {
-            var itemNumber = await CountItemsInCart();
+            int itemNumber = await CountItemsInCart();
             var errorViewModel = new ErrorViewModel
             {
                 ItemsInCart = itemNumber
             };
+
             return View(errorViewModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> InternalServer(string code)
         {
-            var itemNumber = await CountItemsInCart();
+            int itemNumber = await CountItemsInCart();
 
             return View(new ErrorViewModel
             {
@@ -43,7 +44,5 @@ namespace GamingStore.Controllers
                 ItemsInCart = itemNumber
             });
         }
-
-      
     }
 }

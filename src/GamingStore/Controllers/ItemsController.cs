@@ -77,8 +77,8 @@ namespace GamingStore.Controllers
                 SortByFilter.PriceHighToLow => items.OrderByDescending(i => i.Price),
                 _ => throw new ArgumentOutOfRangeException(nameof(sortBy), sortBy, null)
             };
-            var manufactures = items.Select(i => i.Manufacturer).Distinct().ToList();
-
+            
+            List<string> manufactures = items.Select(i => i.Manufacturer).Distinct().ToList();
             
             PaginatedList<Item> paginatedList = await PaginatedList<Item>.CreateAsync(items.AsNoTracking(), pageNumber ?? 1, pageSize);
             var viewModel = new GetItemsViewModel()
@@ -98,7 +98,6 @@ namespace GamingStore.Controllers
                 },
                 ItemsInCart = await CountItemsInCart()
             };
-
 
             return View(viewModel);
         }
@@ -126,9 +125,9 @@ namespace GamingStore.Controllers
                 return View(viewModel);
             }
 
-            var userIntId = GetCurrentUserAsync().Result.CustomerNumber;
+            int userIntId = GetCurrentUserAsync().Result.CustomerNumber;
             var relatedItem = new RelatedItem(userIntId, item.Id);
-            var relatedItems = Context.RelatedItems.Any(ri => ri.ItemId == item.Id && ri.CustomerNumber == user.CustomerNumber);
+            bool relatedItems = Context.RelatedItems.Any(ri => ri.ItemId == item.Id && ri.CustomerNumber == user.CustomerNumber);
 
             if (!relatedItems)
             {
@@ -225,17 +224,16 @@ namespace GamingStore.Controllers
 
         private void PublishTweet(Item item, string itemImagesPath)
         {
-            string ConsumerKey = "CVXDTooXKg62g4qq6Ww0QujEV",
-                ConsumerKeySecret = "mz081uiCZwY6rogFahNqfz2DBfA5CaKoLWXjRqhDSvEd1Z1HTf",
-                AccessToken = "1324135248574238726-Kyrpj3MY96pLyHYbdSuXcUN4Claic4",
-                AccessTokenSecret = "vxBHC98lIdimimk79Ok53e8iskW8NN74SpbO5voIa0PrD";
+            const string consumerKey = "CVXDTooXKg62g4qq6Ww0QujEV";
+            const string consumerKeySecret = "mz081uiCZwY6rogFahNqfz2DBfA5CaKoLWXjRqhDSvEd1Z1HTf";
+            const string accessToken = "1324135248574238726-Kyrpj3MY96pLyHYbdSuXcUN4Claic4";
+            const string accessTokenSecret = "vxBHC98lIdimimk79Ok53e8iskW8NN74SpbO5voIa0PrD";
 
-            var twitter = new Twitter(ConsumerKey, ConsumerKeySecret, AccessToken, AccessTokenSecret);
+            var twitter = new Twitter(consumerKey, consumerKeySecret, accessToken, accessTokenSecret);
 
-            var fullImageUrl = itemImagesPath + "\\1.jpg";
-            //var fullImageUrl = "C:\\Users\\Yonatan\\Source\\Repos\\yonatangross\\GamingStore\\src\\GamingStore\\wwwroot\\images\\user.png";
+            string fullImageUrl = $"{itemImagesPath}\\1.jpg";
+            string tweet = $"Gaming Store now sells {item.Title} only on {item.Price}$";
 
-            var tweet = "Gaming Store now sells " + item.Title + " only on " + item.Price + "$";
             try
             {
 
@@ -244,11 +242,9 @@ namespace GamingStore.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                _logger.LogError($"Item could not be published to twitter, ex: {e}");
             }
         }
-
 
         // GET: Items/Edit/5
         [Authorize(Roles = "Admin")]
@@ -261,7 +257,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            var item = await Context.Items.FindAsync(id);
+            Item item = await Context.Items.FindAsync(id);
 
             if (item == null)
             {
@@ -318,15 +314,6 @@ namespace GamingStore.Controllers
             }
 
             return RedirectToAction("ListItems", "Administration");
-            //var allCategories = Context.Items.Select(i => i.Category).Distinct().ToArray();
-            //model.Categories = allCategories;
-
-            //return View(model);
-        }
-
-        private bool ItemExists(int id)
-        {
-            return Context.Items.Any(e => e.Id == id);
         }
 
         [Authorize]
@@ -335,7 +322,10 @@ namespace GamingStore.Controllers
             try
             {
                 if (quantity == 0)
+                {
                     return RedirectToAction(nameof(Index));
+                }
+
                 Customer customer = await GetCurrentUserAsync();
 
                 if (customer == null) // Not Log In
@@ -356,6 +346,7 @@ namespace GamingStore.Controllers
 
                     await Context.Carts.AddAsync(cart);
                     await Context.SaveChangesAsync();
+
                     return RedirectToAction(nameof(Index));
                 }
 
@@ -365,6 +356,7 @@ namespace GamingStore.Controllers
             }
             catch (Exception e)
             {
+                _logger.LogError($"Could not add an item to cart, ex: {e}");
             }
 
             return RedirectToAction(nameof(Index));
