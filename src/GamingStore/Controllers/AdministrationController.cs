@@ -311,10 +311,11 @@ namespace GamingStore.Controllers
         public async Task<IActionResult> ListUsers()
         {
             List<Customer> users = await UserManager.Users.ToListAsync();
-
+            var currentUser = await GetCurrentUserAsync();
             var viewModel = new ListUsersViewModels
             {
-                Users = users
+                Users = users,
+                CurrentUser = currentUser
             };
 
             return View(viewModel);
@@ -466,6 +467,13 @@ namespace GamingStore.Controllers
             if (user == null)
             {
                 _flashMessage.Danger("You can not delete a user that no longer exists");
+                return RedirectToAction("ListUsers");
+            }
+
+            var currentUser = await GetCurrentUserAsync();
+            if (user.Id == currentUser.Id)
+            {
+                _flashMessage.Danger("You can not delete your own user.");
                 return RedirectToAction("ListUsers");
             }
 

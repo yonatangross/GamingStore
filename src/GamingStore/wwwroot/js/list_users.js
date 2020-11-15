@@ -31,8 +31,6 @@ function confirmDeleteUserAjax(userId, userNum, userEmail) {
                 id: userId
             },
             success: function() {
-                $.notify(userEmail + " deleted", { color: "#fff", background: "#D44950", position: "top center" });
-
                 $(`.user${userNum}`).hide("slow", function() { $(`.user${userNum}`).remove(); });
             },
             failure: function(response) {
@@ -46,10 +44,14 @@ function confirmDeleteUserAjax(userId, userNum, userEmail) {
 
 }
 
-$("#searchSubmit").click(function() {
+function searchUsersInit(userId) {
     const searchString = $("#searchUserString").val();
-    searchUsers(searchString);
-});
+    searchUsers(searchString, userId);
+}
+
+//$("#searchSubmit").click(function() {
+    
+//});
 
 
 const card = (id, email, userIndex) => `
@@ -83,9 +85,8 @@ const card = (id, email, userIndex) => `
             </div>
 `;
 
-//todo: fix edituser link after search
 
-function searchUsers(searchUserString) {
+function searchUsers(searchUserString, currentUserId) {
     $.ajax({
             type: "POST",
             url: "/Administration/ListUsersBySearch",
@@ -98,6 +99,8 @@ function searchUsers(searchUserString) {
                 for (let userIndex = 0; userIndex < Object.keys(data).length; userIndex++) {
                     $("#users").append(card(data[userIndex].id, data[userIndex].email, userIndex + 1));
                 }
+                $(`#deleteSpan_${currentUserId}`).remove(); ;
+
                 console.log("success: ");
             },
             complete: function(response) {
