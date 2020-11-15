@@ -1,7 +1,8 @@
 ﻿@model GamingStore.ViewModels.Cart.CartViewModel
-
+@addTagHelper *, Vereyon.Web.FlashMessage
 @{
     ViewData["Title"] = "Index";
+
     Layout = "~/Views/Shared/_NewLayout.cshtml";
 }
 
@@ -15,6 +16,7 @@
             <div class="col-lg-10 offset-lg-1">
                 <div>
                     <div class="cart_title">Shopping Cart</div>
+                    <div class="d-flex justify-content-center" id="flash_message"> <flash dismissable="true" /></div>
                     <div class="cart_items">
                         <ul class="cart_list">
                             @{
@@ -88,3 +90,12 @@
         </div>
     </div>
 </body>
+@section scripts{
+    <script>
+        setTimeout(function () {
+            $('.alert').fadeOut('slow');
+        },
+            4000); // <-- time in milliseconds
+    </script>
+    <script src="/lib/jquery/dist/jquery.js"></script>
+}

@@ -37,22 +37,27 @@ namespace GamingStore.Controllers
             {
                 Customer customer = await GetCurrentUserAsync();
                 List<Cart> itemsInCart = await GetItemsInCart(customer);
+                bool inactiveItemsInCart = itemsInCart.Any(c => !c.Item.Active);
+                
+                if (inactiveItemsInCart)
+                {
+                    _flashMessage.Danger("Some items in cart are no longer available");
+                    return RedirectToAction("Index", "Carts");
+                }
+                
                 const int defaultPaymentCost = 10;
-
                 double itemsCost = itemsInCart.Aggregate<Cart, double>(0, (current, cart) => current + cart.Item.Price * cart.Quantity);
 
                 if (itemsCost == 0)
                 {
+                    _flashMessage.Danger("Your cart does no longer has items, please add items to cart before proceed to checkout");
                     return RedirectToAction("Index", "Carts");
                 }
-                double totalCost = itemsCost + defaultPaymentCost;
+                
+                var totalCost = itemsCost + defaultPaymentCost;
+                customer.Address ??= new Address();
 
-                if (customer.Address == null)
-                {
-                    customer.Address = new Address();
-                }
-
-                List<CurrencyInfo> currencies = await CurrencyConvert.GetExchangeRate(new List<string>
+                var currencies = await CurrencyConvert.GetExchangeRate(new List<string>
                 {
                     "EUR", "GBP", "ILS"
                 });
@@ -164,6 +169,22 @@ namespace GamingStore.Controllers
         public async Task<IActionResult> ThankYouIndex(string id, int items)
         {
             Customer customer = await GetCurrentUserAsync();
+            List<Cart> itemsInCart = await GetItemsInCart(customer);
+            bool inactiveItemsInCart = itemsInCart.Any(c => !c.Item.Active);
+
+            if (inactiveItemsInCart)
+            {
+                _flashMessage.Danger("Some items in cart are no longer available");
+                return RedirectToAction("Index", "Carts");
+            }
+
+            double itemsCost = itemsInCart.Aggregate<Cart, double>(0, (current, cart) => current + cart.Item.Price * cart.Quantity);
+
+            if (itemsCost == 0)
+            {
+                _flashMessage.Danger("Your cart does no longer has items, please add items to cart before proceed to checkout");
+                return RedirectToAction("Index", "Carts");
+            }
             Order order = null;
 
             try

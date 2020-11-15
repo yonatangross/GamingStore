@@ -84,19 +84,21 @@
 
                             @using (Html.BeginForm("Index", "Items", FormMethod.Get, new { @class = "brands_list" }))
                             {
-                                <div class="input-group input-group-sm mb-3">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">$</div>
-                                    </div>
-                                    @Html.TextBox("PriceMin", filter.PriceMin, new { maxlength = "9", placeholder = "Min", @class = "form-control form-control-sm col-3" })
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">$</div>
-                                    </div>
-                                    @Html.TextBox("PriceMax", filter.PriceMax, new { maxlength = "9", placeholder = "Max", @class = "form-control form-control-sm col-3" })
-                                    @Html.Hidden("Category")
-                                    @Html.Hidden("Manufacturer")
-                                    <input type="submit" value="Go" class="btn btn-light btn-sm" />
-                                </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">$</div>
+                            </div>
+                            @Html.TextBox("PriceMin", filter.PriceMin, new { maxlength = "9", placeholder = "Min", @class = "form-control form-control-sm col-3" })
+                            @Html.ValidationMessageFor(m => m.ItemsFilter.PriceMin)
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">$</div>
+                            </div>
+                            @Html.TextBox("PriceMax", filter.PriceMax, new { maxlength = "9", placeholder = "Max", @class = "form-control form-control-sm col-3" })
+                            @Html.ValidationMessageFor(m => m.ItemsFilter.PriceMax)
+                            @Html.Hidden("Category")
+                            @Html.Hidden("Manufacturer")
+                            <input type="submit" value="Go" class="btn btn-light btn-sm" />
+                        </div>
                             }
                         </div>
 
@@ -277,3 +279,6 @@
     </div>
 </div>
 <script type="text/javascript" src="/js/products_index.js"></script>
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

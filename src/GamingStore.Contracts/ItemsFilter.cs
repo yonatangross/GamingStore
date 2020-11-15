@@ -12,8 +12,10 @@ namespace GamingStore.Contracts
 
         public string Manufacturer { get; set; }
 
+        [Range(1, 99999)]
         public int? PriceMin { get; set; }
 
+        [Range(1, 99999)]
         public int? PriceMax { get; set; }
 
         public SortByFilter SortBy { get; set; }
