@@ -2,7 +2,7 @@
 
 namespace GamingStore.ViewModels.Administration
 {
-    public class ListUserRoleViewModel : ViewModelBase
+    public class ListUserRoleViewModel 
     {
         public List<UserRoleViewModel> List { get; set; }
     }
