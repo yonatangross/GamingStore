@@ -2,7 +2,16 @@
 @model ConfirmEmailChangeModel
 @{
     ViewData["Title"] = "Confirm email change";
+    Layout = "_NewLoginLayout";
 }
 
-<h1>@ViewData["Title"]</h1>
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="login-logo">
+    <a asp-action="Index" asp-controller="Home">
+        <img class="align-content" src="/images/logo.png" alt="">
+    </a>
+</div>
+
+<div class="login-form">
+    <h1>@ViewData["Title"]</h1>
+    <partial name="_StatusMessage" model="Model.StatusMessage" />
+</div>
