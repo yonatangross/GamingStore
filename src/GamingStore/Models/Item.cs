@@ -26,7 +26,8 @@ namespace GamingStore.Models
         [Required]
         [DataType(DataType.Text)]
         public string Title { get; set; }
-        
+
+        [Required]
         [DataType(DataType.Text)]
         public string Manufacturer { get; set; }
 

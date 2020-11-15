@@ -148,6 +148,10 @@ namespace GamingStore.Controllers
                         new OpeningHours() {OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Thursday},
                         new OpeningHours() {OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Friday},
                         new OpeningHours() {OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Saturday}
+                    },
+                    Address = new Address()
+                    {
+                        Country = "Israel"
                     }
                 },
                 ItemsInCart = await CountItemsInCart()
@@ -188,7 +192,11 @@ namespace GamingStore.Controllers
             {
                 return NotFound();
             }
-
+            if (!StoreExists(id.Value))
+            {
+                _flashMessage.Danger("You cannot edit a store that is no longer exists");
+                return RedirectToAction("ListStores", "Administration");
+            }
             Store store = await Context.Stores.FindAsync(id);
             var viewModel = new StoreDetailsViewModel()
             {
@@ -212,7 +220,12 @@ namespace GamingStore.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(Store store)
         {
-            //if (!ModelState.IsValid)
+            if (!StoreExists(store.Id))
+            {
+                _flashMessage.Danger("You cannot edit a store that is no longer exists");
+                return RedirectToAction("ListStores", "Administration");
+            }
+                //if (!ModelState.IsValid)
             //{
             //    return View(new StoreDetailsViewModel {Store = store, ItemsInCart = await CountItemsInCart()});
             //}
@@ -240,6 +253,11 @@ namespace GamingStore.Controllers
             {
                 return NotFound();
             }
+            if (!StoreExists(id.Value))
+            {
+                _flashMessage.Danger("You cannot remove a store that is no longer exists");
+                return RedirectToAction("ListStores", "Administration");
+            }
 
             Store store = await Context.Stores.FirstOrDefaultAsync(m => m.Id == id);
             var viewModel = new StoreDetailsViewModel()
@@ -260,13 +278,22 @@ namespace GamingStore.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (!StoreExists(id))
+            {
+                _flashMessage.Danger("You cannot remove a store that is no longer exists");
+                return RedirectToAction("ListStores", "Administration");
+            }
+
             Store store = await Context.Stores.Include(s => s.Orders).FirstOrDefaultAsync(s => s.Id == id);
+
             if (store.Orders.Count > 0)
             {
+                _flashMessage.Danger("You can not remove a store contains orders");
                 return RedirectToAction("ListStores", "Administration");
             }
             Context.Stores.Remove(store);
             await Context.SaveChangesAsync();
+            _flashMessage.Confirmation("Deleted success");
 
             return RedirectToAction("ListStores", "Administration");
         }
