@@ -31,7 +31,7 @@
                     </div>
                     @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                     {
-                        <div class="top_bar_contact_item ">
+                        <div class="top_bar_contact_item">
                             <a asp-controller="Administration" asp-action="Index">Admin CP</a>
                         </div>
                     }
@@ -76,8 +76,8 @@
                                         var allCategories = new List<string> {"All Categories"};
                                         allCategories.AddRange(Enum.GetNames(typeof(Category)));
                                     }
-                                    @Html.DropDownList("Category", new SelectList(allCategories), null, new {@class = "form-control"})
-                                    <input type="image" class="btn-primary btn" src="/images/search.png"/>
+                                    @Html.DropDownList("Category", new SelectList(allCategories), null, new {@class = "category-dropdown form-control"})
+                                    <input type="image" class="search-topbar-button btn-primary btn" src="/images/searchIcon4.png"/>
                                 </div>
                             }
                         </div>
