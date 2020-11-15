@@ -15,6 +15,14 @@
 <body>
     @using (Html.BeginForm("Create", "Orders", FormMethod.Post, null))
     {
+        @for (var index = 0; index < Model.Cart.Count; index++)
+        {
+            @Html.HiddenFor(m => m.Cart[index], new
+            {
+                style = "display:none;"
+            })
+        }
+
         <div class="row">
             <div class="col-8">
                 <div class="container">
@@ -36,7 +44,7 @@
                             <div class="row">
                                 <div class="col-50">
                                     @Html.LabelFor(m => m.ShippingAddress.Country)
-                                    @Html.TextBoxFor(m => m.ShippingAddress.Country, new { @class="form-control", disabled = "disabled" })
+                                    @Html.TextBoxFor(m => m.ShippingAddress.Country, new { @class = "form-control", disabled = "disabled" })
                                     @Html.ValidationMessageFor(m => m.ShippingAddress.Country)
                                 </div>
                                 <div class="col-50">
