@@ -1,8 +1,16 @@
-﻿rect.bar-rect {
+﻿@font-face {
+    font-family: Icomoon;
+    src: url(/fonts/icomoon/icomoon.woff);
+}
+
+
+rect.bar-rect {
     fill: #4692C6;
+    font-family: Icomoon;
 }
 
     rect.bar-rect:hover {
         fill: #6BAED6;
         transition: all .2s;
     }
+

@@ -19,6 +19,7 @@ Googel Fonts  */
 
 */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+
 .bg-flat-color-1 {
   background: #00c292; }
 
@@ -2243,7 +2244,9 @@ footer.site-footer {
         aside.left-panel.open-menu .navbar .navbar-nav li > a .menu-icon {
           width: 55px;
           font-size: 20px;
-          text-align: left; }
+          text-align: left;
+        }
+  
   
       aside.left-panel.open-menu .navbar .navbar-nav li.menu-item-has-children.show .sub-menu {
         position: static !important;

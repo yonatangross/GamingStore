@@ -110,7 +110,9 @@ namespace GamingStore.Areas.Identity.Pages.Account
                 {
                     Input = new InputModel
                     {
-                        Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+                        Email = info.Principal.FindFirstValue(ClaimTypes.Email),
+                        FirstName = info.Principal.FindFirstValue(ClaimTypes.GivenName),
+                        LastName= info.Principal.FindFirstValue(ClaimTypes.Surname)
                     };
                 }
                 return Page();

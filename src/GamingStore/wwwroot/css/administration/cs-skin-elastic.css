@@ -67,7 +67,7 @@ div.cs-skin-elastic {
 	-webkit-transition: none;
 	transition: none;
 	-webkit-animation: expand 0.6s ease-out;
-  	animation: expand 0.6s ease-out;
+	animation: expand 0.6s ease-out;
 }
 
 .cs-skin-elastic .cs-options ul li {
@@ -85,7 +85,7 @@ div.cs-skin-elastic {
 	-webkit-transition: none;
 	transition: none;
 	-webkit-animation: bounce 0.6s ease-out;
-  	animation: bounce 0.6s ease-out;
+	animation: bounce 0.6s ease-out;
 }
 
 /* Optional delays (problematic in IE 11/Win) */
