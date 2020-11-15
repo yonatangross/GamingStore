@@ -8,44 +8,6 @@
     <link rel="stylesheet" type="text/css" href="~/css/contact_styles.css">
 </head>
 <body>
-    <div class="contact_info">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 offset-lg-1">
-                    <div class="d-flex flex-lg-row flex-column justify-content-between">
-
-                        <!-- Contact Item -->
-                        <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
-                            <div class="contact_info_image"><img src="~/images/contact_1.png" alt=""></div>
-                            <div class="contact_info_content">
-                                <div class="contact_info_title">Phone</div>
-                                <div class="contact_info_text">+972 50 665 6474</div>
-                            </div>
-                        </div>
-
-                        <!-- Contact Item -->
-                        <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
-                            <div class="contact_info_image"><img src="~/images/contact_2.png" alt=""></div>
-                            <div class="contact_info_content">
-                                <div class="contact_info_title">Email</div>
-                                <div class="contact_info_text">gamingstore@gmail.com</div>
-                            </div>
-                        </div>
-
-                        <!-- Contact Item -->
-                        <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
-                            <div class="contact_info_image"><img src="~/images/contact_3.png" alt=""></div>
-                            <div class="contact_info_content">
-                                <div class="contact_info_title">Address</div>
-                                <div class="contact_info_text">48 Yirmiyahu Street, Tel Aviv, IL, Israel</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="contact_form">
         <div class="container">
@@ -54,7 +16,6 @@
                     <div class="contact_form_container">
 
                         <canvas id="myCanvas" width="300" height="100"></canvas>
-                        <div class="contact_form_title"></div>
 
                         @using (Html.BeginForm("ConfirmContactUs", "Home", FormMethod.Post))
                         {
@@ -103,6 +64,45 @@
             </div>
         </div>
     </div>
+    <div class="contact_info">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <div class="d-flex flex-lg-row flex-column justify-content-between">
+
+                        <!-- Contact Item -->
+                        <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                            <div class="contact_info_image"><img src="~/images/contact_1.png" alt=""></div>
+                            <div class="contact_info_content">
+                                <div class="contact_info_title">Phone</div>
+                                <div class="contact_info_text">+972 50 665 6474</div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Item -->
+                        <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                            <div class="contact_info_image"><img src="~/images/contact_2.png" alt=""></div>
+                            <div class="contact_info_content">
+                                <div class="contact_info_title">Email</div>
+                                <div class="contact_info_text">gamingstore@gmail.com</div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Item -->
+                        <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                            <div class="contact_info_image"><img src="~/images/contact_3.png" alt=""></div>
+                            <div class="contact_info_content">
+                                <div class="contact_info_title">Address</div>
+                                <div class="contact_info_text">48 Yirmiyahu Street, Tel Aviv, IL, Israel</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 @section scripts{
