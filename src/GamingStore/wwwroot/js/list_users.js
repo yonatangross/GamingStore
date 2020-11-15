@@ -61,7 +61,7 @@ const card = (id, email, userIndex) => `
                     <h5 class="card-title">${email}</h5>
                 </div>
                 <div class="card-footer">
-                    <a href="/Administration/EditUser/${id}" class="btn btn-primary">
+                    <a href="/Administration/EditUser/?id=${id}" class="btn btn-primary">
                         Edit
                     </a>
                     <span id="confirmDeleteSpan_${id}" style="display: none">

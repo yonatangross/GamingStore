@@ -1,86 +1,94 @@
 [
   {
     "Date": "January 2018",
-    "Value": 799.98
+    "Value": 2241.55
   },
   {
     "Date": "April 2018",
-    "Value": 171.45
+    "Value": 727.0500000000001
+  },
+  {
+    "Date": "May 2018",
+    "Value": 2709.99
   },
   {
     "Date": "July 2018",
-    "Value": 1909.94
+    "Value": 103.96
   },
   {
     "Date": "August 2018",
-    "Value": 3966.26
+    "Value": 729.73
+  },
+  {
+    "Date": "September 2018",
+    "Value": 802.25
   },
   {
     "Date": "October 2018",
-    "Value": 889.98
+    "Value": 31.99
   },
   {
     "Date": "November 2018",
-    "Value": 779.98
+    "Value": 570.8
   },
   {
-    "Date": "January 2019",
-    "Value": 3143.35
+    "Date": "December 2018",
+    "Value": 1948.0500000000002
+  },
+  {
+    "Date": "February 2019",
+    "Value": 1579.97
   },
   {
     "Date": "April 2019",
-    "Value": 1002.96
+    "Value": 725.51
+  },
+  {
+    "Date": "June 2019",
+    "Value": 1890.8200000000002
   },
   {
     "Date": "July 2019",
-    "Value": 479.98
+    "Value": 2519.92
   },
   {
     "Date": "August 2019",
-    "Value": 968.96
+    "Value": 2835.4700000000003
   },
   {
     "Date": "October 2019",
-    "Value": 549.54
+    "Value": 505.05000000000007
   },
   {
     "Date": "November 2019",
-    "Value": 12168.3
+    "Value": 5371.17
   },
   {
     "Date": "December 2019",
-    "Value": 3970.8
+    "Value": 1439.95
   },
   {
     "Date": "January 2020",
-    "Value": 2280.52
-  },
-  {
-    "Date": "February 2020",
-    "Value": 1288.04
+    "Value": 869.97
   },
   {
     "Date": "March 2020",
-    "Value": 619.96
+    "Value": 859.57
   },
   {
-    "Date": "April 2020",
-    "Value": 758.61
-  },
-  {
-    "Date": "May 2020",
-    "Value": 2589.64
+    "Date": "July 2020",
+    "Value": 1564.34
   },
   {
     "Date": "August 2020",
-    "Value": 1021.8
+    "Value": 907.96
   },
   {
     "Date": "September 2020",
-    "Value": 1000.5400000000001
+    "Value": 1094.2800000000002
   },
   {
     "Date": "November 2020",
-    "Value": 2233.51
+    "Value": 659.98
   }
 ]
