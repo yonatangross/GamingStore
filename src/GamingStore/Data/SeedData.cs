@@ -1518,7 +1518,6 @@ namespace GamingStore.Data
                     ImageUrl = "images/items/LogitechG610OrionRed,MechanicalGamingKey",
                     Description="Customizable Lighting: Personalize individual key lighting brightness to keep track of spells and other commands"
                 },
-
                 new Item
                 {
                     Title = "Corsair K63 Mechanical Gaming Keyboard",
@@ -1528,6 +1527,99 @@ namespace GamingStore.Data
                     ImageUrl = "images/items/CorsairGamingK63CompactMechanicalKeyboar",
                     Description="Dedicated volume and multimedia controls: Control to adjust audio on-the-fly without interrupting your game"
                 },
+
+                new Item
+                {
+                    Title = "Asus ROG Strix Flare RGB Mechanical Gaming Keyboard",
+                    Manufacturer = "Asus",
+                    Price =229.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/ASUSROGStrixFlareRGBMechanicalGamingKeyb",
+                    Description="Asus Aura Sync RGB lighting features a nearly endless spectrum of colors with the ability to synchronize effects across an ever-expanding ecosystem of Aura Sync enabled products"
+                },
+                new Item
+                {
+                    Title = "Asus ROG Strix Scope RGB Mechanical Gaming Keyboard",
+                    Manufacturer = "Asus",
+                    Price =129.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/ASUSROGStrixScopeTKLWiredMechanicalRGBGa",
+                    Description="Created for FPS Gamers: the tenkeyless form factor provides more room to move the mouse, while the enlarged L-Ctrl key minimizes inadvertent pressing of other keys"
+                },
+                new Item
+                {
+                    Title = "Asus TUF K7 Optical-mech Mechanical Gaming Keyboard",
+                    Manufacturer = "Asus",
+                    Price =229.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/ASUSTUFGamingK7Optical-mechGamingKeyboar",
+                    Description="ASUS Aura Sync RGB lighting features a nearly endless spectrum of colors with the ability to synchronize effects across an ever-expanding ecosystem of Aura Sync enabled products"
+                },
+                new Item
+                {
+                    Title = "Asus ROG Strix Scope TKL Electro Punk Gaming Keyboard",
+                    Manufacturer = "Asus",
+                    Price =129.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/ASUSX803STRIXSCOPETKLEPRDUSROGStrixScope",
+                    Description="Created for FPS Gamers: the tenkeyless form factor provides more room to move the mouse, while the enlarged L-Ctrl key minimizes inadvertent pressing of other keys"
+                },
+                new Item
+                {
+                    Title = "Asus ROG XA02 Mechanical Gaming Keyboard",
+                    Manufacturer = "Asus",
+                    Price =129.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/ASUSXA02ROGSTRIXSCOPEBNUSRGBMechanicalGa",
+                    Description="Created for FPS Gamers: the tenkeyless form factor provides more room to move the mouse, while the enlarged L-Ctrl key minimizes inadvertent pressing of other keys"
+                },
+                new Item
+                {
+                    Title = "Asus ROG Strix Scope Cherry MX Red Switches Mechanical Gaming Keyboard",
+                    Manufacturer = "Asus",
+                    Price =629.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/ASUSROGStrixScopeRGBMechanicalGamingKeyb",
+                    Description="Great for FPS games: Extra-wide, ergonomic Xccurate Ctrl key means fewer missed clicks for greater FPS precision"
+                },
+                new Item
+                {
+                    Title = "Asus STRIX TACTIC PRO Gaming Keyboard",
+                    Manufacturer = "Asus",
+                    Price =229.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/ASUSSTRIXTACTICPROGamingKeyboardwithCher",
+                    Description="Created for FPS Gamers: the tenkeyless form factor provides more room to move the mouse, while the enlarged L-Ctrl key minimizes inadvertent pressing of other keys"
+                },
+                new Item
+                {
+                    Title = "GIGABYTE AORUS K9 Optical RGB Gaming Keyboard",
+                    Manufacturer = "GIGABYTE",
+                    Price =329.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/GIGABYTEAORUSK9OpticalRGBGamingKeyboard-",
+                    Description="Swappable Switches - Custom Gaming Experience.Splash proof."
+                },
+                new Item
+                {
+                    Title = "Razer BlackWidow Tournament Edition Mechanical Gaming Keyboard",
+                    Manufacturer = "Razer",
+                    Price =629.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/RazerBlackWidowTournamentEditionChromaV2",
+                    Description="The new Razer Instant Trigger Technology immediately sends the signal to your system, cancelling any need for a denounce delay - With this, you get industry-leading speed for whatever you're playing"
+                    
+                },
+                new Item
+                {
+                    Title = "Razer RZ03 BlackWidow Ultimate Mass Effect 3 Edition Gaming Keyboard",
+                    Manufacturer = "Razer",
+                    Price =429.99 ,
+                    Category = "Keyboards",
+                    ImageUrl = "images/items/RAZERRZ03-00381800-R3M1BlackWidowUltimat",
+                    Description="Created for FPS Gamers: the tenkeyless form factor provides more room to move the mouse, while the enlarged L-Ctrl key minimizes inadvertent pressing of other keys"
+                },
+
 
             };
             foreach (var item in items)
