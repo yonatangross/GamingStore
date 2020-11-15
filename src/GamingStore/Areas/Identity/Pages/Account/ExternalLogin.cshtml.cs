@@ -133,12 +133,12 @@ namespace GamingStore.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new Customer { UserName = Input.Email, Email = Input.Email ,FirstName = Input.FirstName,LastName = Input.LastName};
-                await _userManager.AddToRoleAsync(user, "Customer");
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
-                    
+                    await _userManager.AddToRoleAsync(user, "Customer");
+
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
