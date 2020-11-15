@@ -83,7 +83,10 @@ Footer
 }
 
 .category-dropdown {
-	border-right: none;
+	border-left: none;
+    border-right: none;
+	padding: 0px;
+	margin: 0px;
 }
 
 	.category-dropdown:hover {
