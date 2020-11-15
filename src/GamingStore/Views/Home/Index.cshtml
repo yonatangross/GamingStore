@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <div class="characteristics">
+    <section class="characteristics">
         <div class="container">
             <div class="row">
                 <!-- Char. Item -->
@@ -61,7 +61,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     @if (Model != null && Model.Items.Any())
     {
         <div class="best_sellers" style="border-radius: 2%; margin-top: auto ;margin-bottom:5%">
@@ -78,7 +78,7 @@
                 </div>
 
 
-                <div class="row" style="padding: 30px 5px 10px 5px;" >
+                <div class="row" style="padding: 30px 5px 10px 5px;">
                     @for (int i = 0; i <= 2; i++)
                     {
                         <div class="col-lg-4 advert_col">
@@ -162,7 +162,7 @@
             </div>
         </div>
     }
-    <div style="background-color: black; padding: 2%; border-radius: 1%; border-color: yellowgreen; border: 2px solid yellowgreen;">
+    <section class="featured-item-video" style="background-color: black; padding: 2%; border-radius: 1%; border-color: yellowgreen; border: 2px solid yellowgreen;">
         <div style="position: absolute; top: 33px; right: 50px; background-image: url('https://svg-clipart.com/clipart/grey/U6U98tr-new-icon-clipart.png'); height: 200px; width: 200px; background-size: contain"></div>
         <div class="col-9">
             <div>
@@ -185,10 +185,10 @@
         <div style="margin: 8%">
             <video src="video/GeForce RTX 3070 Unboxing.mp4" controls="controls" style="width: 885px; border: 2px solid yellowgreen;" height="498"> </video>
         </div>
-    </div>
+    </section>
 
 
-    <div class="best_sellers" style="border-radius: 2%; margin-top: 5% ;margin-bottom:5%">
+    <section class="best_sellers" style="border-radius: 2%; margin-top: 5% ;margin-bottom:5%">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -248,8 +248,9 @@
 
             </div>
         </div>
-    </div>
-
-    <script type="text/javascript" src="/js/home.js"></script>
+    </section>
 
 </body>
+@section Scripts{
+    <script type="text/javascript" src="/js/home.js"></script>
+}
