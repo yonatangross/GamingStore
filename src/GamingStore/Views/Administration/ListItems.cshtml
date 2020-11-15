@@ -19,7 +19,7 @@
                     </div>
                     <div class="col">
                         <div class="float-right">
-                            <a class="badge" style="background: lightskyblue; color: white; padding: 10px; text-transform: uppercase; font-weight: normal;" asp-action="Create" asp-controller="Items">Create a New Item</a>
+                            <a class="badge"  asp-action="Create" asp-controller="Items">Create a New Item</a>
                         </div>
                     </div>
                 </div>
@@ -49,14 +49,14 @@
                             <th width="8%"></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody >
                         @foreach (Item item in Model.Items)
                         {
                             <tr>
-                                <td>
+                                <td class="item-titles">
                                     @Html.DisplayFor(modelItem => item.Title)
                                 </td>
-                                <td>
+                                <td class="item-manufacturer">
                                     @Html.DisplayFor(modelItem => item.Manufacturer)
                                 </td>
                                 <td>
@@ -65,13 +65,13 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Category)
                                 </td>
-                                <td>
+                                <td class="properties">
                                     @Html.DisplayFor(modelItem => item.PropertiesList)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Active)
                                 </td>
-                                <td>
+                                <td class="action-buttons">
                                     <a class="badge" style="background: #fb9678; color: white; padding: 10px; text-transform: uppercase; font-weight: normal;" asp-action="Edit" asp-controller="Items" asp-route-id="@item.Id">Edit</a>
                                     <a class="badge" style="background: #00c292; color: white; padding: 10px; text-transform: uppercase; font-weight: normal;" asp-action="Details" asp-controller="Items" asp-route-id="@item.Id">Details</a>
                                 </td>
