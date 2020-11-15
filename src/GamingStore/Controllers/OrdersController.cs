@@ -139,7 +139,8 @@ namespace GamingStore.Controllers
                     PaymentMethod = PaymentMethod.CreditCard,
                     Paid = true,
                     ShippingCost = model.Payment.ShippingCost,
-                    ItemsCost = itemsCost
+                    ItemsCost = itemsCost,
+                    Total = itemsCost + model.Payment.ShippingCost
                 },
                 PaymentId = model.Payment.Id,
                 Store = await Context.Stores.FirstOrDefaultAsync(s => s.Name == "Website"),
