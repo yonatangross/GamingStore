@@ -67,12 +67,19 @@ namespace GamingStore.Controllers
             CreateMonthlyRevenueBarChartData(await Context.Orders.Include(o => o.Payment).Include(o => o.Store).ToListAsync());
             CreateRevenueByCategoryPieChartData(await Context.Orders.Include(o => o.OrderItems).ThenInclude(oi => oi.Item).ToListAsync());
 
+            List<Order> orders = await Context.Orders
+                .Include(order => order.Customer)
+                .Include(order => order.Payment)
+                .Include(order => order.Store)
+                .OrderByDescending(order => order.OrderDate)
+                .ToListAsync();
+
             var viewModel = new IndexViewModel()
             {
                 Customers = Context.Customers,
                 Items = Context.Items,
                 Stores = Context.Stores,
-                Orders = Context.Orders.Include(o => o.Customer).Include(o => o.Store),
+                Orders = orders,
                 ItemsInCart = await CountItemsInCart(),
                 WidgetsValues = new Dictionary<string, double>()
                 {
