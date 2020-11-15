@@ -93,7 +93,6 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
-            _flushMessage.Confirmation("Saved");
 
             return RedirectToPage();
         }
