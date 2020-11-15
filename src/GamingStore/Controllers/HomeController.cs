@@ -81,8 +81,6 @@ namespace GamingStore.Controllers
 
         public async Task<IActionResult> ContactUs()
         {
-            //todo: change to viewmodel but move first to mail service
-
             Customer customer = await GetCurrentUserAsync();
 
 
@@ -103,7 +101,6 @@ namespace GamingStore.Controllers
         [HttpPost]
         public async Task<IActionResult> ConfirmContactUs(Mail model)
         {
-            //todo: move first to mail service
             Customer customer = await GetCurrentUserAsync();
             var customerId = customer != null ? customer.Id : "Not Logged In";
 

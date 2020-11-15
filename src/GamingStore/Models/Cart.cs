@@ -32,7 +32,7 @@ namespace GamingStore.Models
         [Range(1, 9, ErrorMessage = "only 1-9 items is allowed")]
         public int Quantity { get; set; }
 
-        [NotMapped] //todo: why?
+        [NotMapped] 
         public Item Item { get; set; }
     }
 }

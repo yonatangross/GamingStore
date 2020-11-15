@@ -22,7 +22,7 @@ namespace GamingStore.Controllers
 {
     public class ItemsController : BaseController
     {
-        private readonly IHostingEnvironment _hostingEnvironment; //todo: fix obsolete
+        private readonly IHostingEnvironment _hostingEnvironment; 
         private readonly IFlashMessage _flashMessage;
         private readonly ILoggerManager _logger;
 
@@ -225,7 +225,6 @@ namespace GamingStore.Controllers
 
         private void PublishTweet(Item item, string itemImagesPath)
         {
-            //todo: twitter async
             string ConsumerKey = "CVXDTooXKg62g4qq6Ww0QujEV",
                 ConsumerKeySecret = "mz081uiCZwY6rogFahNqfz2DBfA5CaKoLWXjRqhDSvEd1Z1HTf",
                 AccessToken = "1324135248574238726-Kyrpj3MY96pLyHYbdSuXcUN4Claic4",
