@@ -1,4 +1,5 @@
 ﻿@model GamingStore.ViewModels.Administration.ListUsersViewModels
+@addTagHelper *, Vereyon.Web.FlashMessage
 
 @{
     ViewBag.Title = "All Users";
@@ -6,7 +7,7 @@
 }
 
 <h1>All Users</h1>
-
+<div class="d-flex justify-content-center" id="flash_message"> <flash dismissable="true" /></div>
 <div class="form-inline">
     <p>
         <input class="form-control mr-sm-2" type="text" placeholder="Search User" aria-label="Search" name="searchUserString" id="searchUserString">
@@ -68,4 +69,11 @@
 @section Scripts{
     <script src="~/lib/notifyjs/notify.min.js"></script>
     <script type="text/javascript" src="/js/list_users.js"></script>
+    <script>
+        setTimeout(function () {
+                $('.alert').fadeOut('slow');
+            },
+            4000); // <-- time in milliseconds
+    </script>
+    <script src="/lib/jquery/dist/jquery.js"></script>
 }
