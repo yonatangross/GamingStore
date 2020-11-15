@@ -30,7 +30,8 @@ namespace GamingStore.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> CheckOutIndex()
+        [HttpGet]
+        public async Task<IActionResult> Create()
         {
             try
             {
@@ -84,19 +85,6 @@ namespace GamingStore.Controllers
             }
 
             return View(new CreateOrderViewModel() { ItemsInCart = await CountItemsInCart() });
-        }
-
-        private async Task<List<Cart>> GetItemsInCart(Customer customer)
-        {
-            List<Cart> itemsInCart = await Context.Carts.Where(c => c.CustomerId == customer.Id).ToListAsync();
-
-            foreach (Cart cartItem in itemsInCart)
-            {
-                Item item = Context.Items.First(i => i.Id == cartItem.ItemId);
-                cartItem.Item = item;
-            }
-
-            return itemsInCart;
         }
 
         [HttpPost]
@@ -160,10 +148,22 @@ namespace GamingStore.Controllers
             return RedirectToAction("ThankYouIndex", new { id = order.Id, items });
         }
 
+        private async Task<List<Cart>> GetItemsInCart(Customer customer)
+        {
+            List<Cart> itemsInCart = await Context.Carts.Where(c => c.CustomerId == customer.Id).ToListAsync();
+
+            foreach (Cart cartItem in itemsInCart)
+            {
+                Item item = Context.Items.First(i => i.Id == cartItem.ItemId);
+                cartItem.Item = item;
+            }
+
+            return itemsInCart;
+        }
+
         public async Task<IActionResult> ThankYouIndex(string id, int items)
         {
             Customer customer = await GetCurrentUserAsync();
-            List<Cart> carts = await Context.Carts.Where(c => c.CustomerId == customer.Id).ToListAsync();
             Order order = null;
 
             try
@@ -201,7 +201,9 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            Order order = await Context.Orders.Include(x => x.OrderItems).ThenInclude(y => y.Item)
+            Order order = await Context.Orders
+                .Include(x => x.OrderItems)
+                .ThenInclude(y => y.Item)
                 .FirstOrDefaultAsync(o => o.Id == id);
 
             if (order == null)
