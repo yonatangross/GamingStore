@@ -38,13 +38,13 @@ namespace GamingStore.Controllers
                 Customer customer = await GetCurrentUserAsync();
                 List<Cart> itemsInCart = await GetItemsInCart(customer);
                 bool inactiveItemsInCart = itemsInCart.Any(c => !c.Item.Active);
-                
+
                 if (inactiveItemsInCart)
                 {
                     _flashMessage.Danger("Some items in cart are no longer available");
                     return RedirectToAction("Index", "Carts");
                 }
-                
+
                 const int defaultPaymentCost = 10;
                 double itemsCost = itemsInCart.Aggregate<Cart, double>(0, (current, cart) => current + cart.Item.Price * cart.Quantity);
 
@@ -53,7 +53,7 @@ namespace GamingStore.Controllers
                     _flashMessage.Danger("Your cart does no longer has items, please add items to cart before proceed to checkout");
                     return RedirectToAction("Index", "Carts");
                 }
-                
+
                 var totalCost = itemsCost + defaultPaymentCost;
                 customer.Address ??= new Address();
 
@@ -91,12 +91,10 @@ namespace GamingStore.Controllers
 
             return View(new CreateOrderViewModel() { ItemsInCart = await CountItemsInCart() });
         }
-
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Create(Order order)
         {
-
             //handle customer
             Customer customer = await GetCurrentUserAsync();
             order.Customer = customer;
@@ -138,19 +136,7 @@ namespace GamingStore.Controllers
             Context.Add(order);
             await Context.SaveChangesAsync();
 
-            //clear cart
-            IQueryable<Cart> carts = Context.Carts.Where(c => c.CustomerId == customer.Id);
-            var items = 0;
-
-            foreach (Cart itemInCart in carts)
-            {
-                items += itemInCart.Quantity;
-            }
-
-            Context.Carts.RemoveRange(carts);
-            await Context.SaveChangesAsync();
-
-            return RedirectToAction("ThankYouIndex", new { id = order.Id, items });
+            return RedirectToAction("ThankYouIndex", new { id = order.Id });
         }
 
         private async Task<List<Cart>> GetItemsInCart(Customer customer)
@@ -166,9 +152,10 @@ namespace GamingStore.Controllers
             return itemsInCart;
         }
 
-        public async Task<IActionResult> ThankYouIndex(string id, int items)
+        public async Task<IActionResult> ThankYouIndex(string id)
         {
             Customer customer = await GetCurrentUserAsync();
+
             List<Cart> itemsInCart = await GetItemsInCart(customer);
             bool inactiveItemsInCart = itemsInCart.Any(c => !c.Item.Active);
 
@@ -185,7 +172,9 @@ namespace GamingStore.Controllers
                 _flashMessage.Danger("Your cart does no longer has items, please add items to cart before proceed to checkout");
                 return RedirectToAction("Index", "Carts");
             }
+
             Order order = null;
+            var items = await ClearCartAsync(customer);
 
             try
             {
@@ -211,6 +200,21 @@ namespace GamingStore.Controllers
             };
 
             return View(viewModel);
+        }
+
+        private async Task<int> ClearCartAsync(Customer customer)
+        {
+            IQueryable<Cart> carts = Context.Carts.Where(c => c.CustomerId == customer.Id);
+            var items = 0;
+
+            foreach (Cart itemInCart in carts)
+            {
+                items += itemInCart.Quantity;
+            }
+
+            Context.Carts.RemoveRange(carts);
+            await Context.SaveChangesAsync();
+            return items;
         }
 
 
@@ -290,9 +294,18 @@ namespace GamingStore.Controllers
                 orderOnDb.Payment.ShippingCost = order.Payment.ShippingCost;
                 orderOnDb.Payment.ItemsCost = order.Payment.ItemsCost;
                 orderOnDb.Payment.Total = order.Payment.Total;
-                orderOnDb.Payment.RefundAmount = order.Payment.RefundAmount;
                 orderOnDb.Payment.Notes = order.Payment.Notes;
                 orderOnDb.State = order.State;
+
+                if (order.Payment.RefundAmount > order.Payment.Total)
+                {
+                    orderOnDb.Payment.RefundAmount = order.Payment.Total;
+                }
+                else
+                {
+                    orderOnDb.Payment.RefundAmount = order.Payment.RefundAmount;
+                }
+
 
                 Context.Update(orderOnDb);
                 await Context.SaveChangesAsync();
