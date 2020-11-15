@@ -49,7 +49,7 @@ d3.json("/data/MonthlyRevenueBarChartData.json").then(data => {
         .attr("class", "text-rect")
         .attr("fill", "white")
         .attr("text-anchor", "end")
-        .attr("font-family", "sans-serif")
+        .attr("font-family","Roboto")
         .attr("font-size", 12)
         .attr("x", d => x(d.Value))
         .attr("y", (d) => y(d.Date))
