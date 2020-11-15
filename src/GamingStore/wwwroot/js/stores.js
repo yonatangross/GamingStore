@@ -1,4 +1,3 @@
-
 const iconBase =
     "https://maps.google.com/mapfiles/kml/pushpin/";
 const icons = {
@@ -11,7 +10,6 @@ const icons = {
 };
 
 var storeIndex = 0;
-var delay = 100;
 var map;
 var geocoder;
 
@@ -23,7 +21,6 @@ function initMap() {
         });
      geocoder = new google.maps.Geocoder();
 
-/*todo: change store number*/
     while (storeIndex < storesObject.length) {
         getStoreAddress(storesObject[storeIndex], storeIndex);
         storeIndex++;
@@ -49,8 +46,6 @@ function getStoreAddress(store, storeIndex) {
                     }
                 );
             } else if (status === "OVER_QUERY_LIMIT") {
-                delay += 100;
-                console.log(`OVER_QUERY_LIMIT, delay is increased to ${delay}`);
                 console.log(`store ${storeIndex} failed`);
             }
         });
