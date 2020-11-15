@@ -15,7 +15,7 @@
                 <!-- Char. Item -->
                 <div class="col-lg-3 col-md-6 char_col">
 
-                    <div class="char_item d-flex flex-row align-items-center justify-content-start" style="border-radius: 5%;">
+                    <div class="char_item d-flex flex-row align-items-center justify-content-start" >
                         <div class="char_icon"><img src="~/images/char_1.png" alt=""></div>
                         <div class="char_content">
                             <div class="char_title">Free Delivery</div>
@@ -27,7 +27,7 @@
                 <!-- Char. Item -->
                 <div class="col-lg-3 col-md-6 char_col">
 
-                    <div class="char_item d-flex flex-row align-items-center justify-content-start" style="border-radius: 5%;">
+                    <div class="char_item d-flex flex-row align-items-center justify-content-start" >
                         <div class="char_icon"><img src="~/images/char_2.png" alt=""></div>
                         <div class="char_content">
                             <div class="char_title">Great New Products</div>
@@ -39,7 +39,7 @@
                 <!-- Char. Item -->
                 <div class="col-lg-3 col-md-6 char_col">
 
-                    <div class="char_item d-flex flex-row align-items-center justify-content-start" style="border-radius: 5%;">
+                    <div class="char_item d-flex flex-row align-items-center justify-content-start" >
                         <div class="char_icon"><img src="~/images/char_3.png" alt=""></div>
                         <div class="char_content">
                             <div class="char_title" style="margin: 6px"> Cheapest Online Gaming Store </div>
@@ -51,7 +51,7 @@
                 <!-- Char. Item -->
                 <div class="col-lg-3 col-md-6 char_col">
 
-                    <div class="char_item d-flex flex-row align-items-center justify-content-start" style="border-radius: 5%;">
+                    <div class="char_item d-flex flex-row align-items-center justify-content-start" >
                         <div class="char_icon"><img src="~/images/char_4.png" alt=""></div>
                         <div class="char_content">
                             <div class="char_title">Best Offers Every Day</div>
@@ -64,13 +64,13 @@
     </section>
     @if (Model != null && Model.Items.Any())
     {
-        <div class="best_sellers" style="border-radius: 2%; margin-top: auto ;margin-bottom:5%">
+        <div class="best_sellers" style="margin-top: auto ;margin-bottom:5%">
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <div class="tabbed_container">
                             <div class="tabs clearfix tabs-right">
-                                <div class="new_arrivals_title">Products you may like</div>
+                                <div class="new_arrivals_title"><strong>Products you may like</strong></div>
                                 <div class="tabs_line"></div>
                             </div>
                         </div>
@@ -163,33 +163,29 @@
         </div>
     }
     <section class="featured-item-video" >
-        <div style="position: absolute; top: 33px; right: 50px; background-image: url('https://svg-clipart.com/clipart/grey/U6U98tr-new-icon-clipart.png'); height: 200px; width: 200px; background-size: contain"></div>
-        <div class="col-9">
+        <div class="item-description">
             <div>
-                <h1 class="h1" style="color: yellowgreen"><span><strong>GEFORCE RTX 3070</strong></span></h1>
-                <h2 class="h3" style="color: white"><strong>THE ULTIMATE PLAY</strong></h2>
+                <h1 class="h1" ><span><strong>GEFORCE RTX 3070</strong></span></h1>
+                <h2 class="h3" ><strong>THE ULTIMATE PLAY</strong></h2>
                 <div style="color: white">
-                    <p>The GeForce RTX<sup>™</sup>
+                    <p class="item-text-description">The GeForce RTX<sup>™</sup>
                         3070 is powered by Ampere—NVIDIA’s 2nd gen RTX architecture. Built with enhanced Ray Tracing Cores and Tensor Cores, new streaming multiprocessors, and high-speed G6 memory, it gives you the power you need to rip through the most demanding games.</p>
                 </div>
             </div>
-            <div class="button parbase section">
-                <div>
-                    <a href="/Items/Details?id=5">
-                        <div class="btn">
-                            <span class="fas fa-shopping-cart"></span> SEE BUYING OPTION
-                        </div>
-                    </a>
-                </div>
-            </div>
+           
         </div>
-        <div style="margin: 8%">
-            <video src="video/GeForce RTX 3070 Unboxing.mp4" controls="controls" style="width: 885px; border: 2px solid yellowgreen;" height="498"> </video>
+            <video src="video/GeForce RTX 3070 Unboxing.mp4" controls="controls"
+                   height="498"> </video>
+        
+        <div class="btn btn-primary btn-lg btn-block">
+                <a href="/Items/Details?id=5">
+                        <i class="fas fa-shopping-cart"></i> SEE BUYING OPTION
+                </a>
         </div>
     </section>
 
 
-    <section class="best_sellers" style="border-radius: 2%; margin-top: 5% ;margin-bottom:5%">
+    <section class="best_sellers" style=" margin-top: 5% ;margin-bottom:5%">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -205,7 +201,7 @@
 
                 <div class="col-lg-4 advert_col">
                     <!-- Advert Item -->
-                    <div class="ml-item advert d-flex flex-row align-items-center justify-content-start" style="border-radius: 5%">
+                    <div class="ml-item advert d-flex flex-row align-items-center justify-content-start" >
                         <div class="col-7">
                             <div class="row">
                                 <div class="advert_title" style="margin-left: 10%"><a href="/Items/Details?id=1">New Surround Gaming Headset For Best Experience!</a></div>
@@ -219,7 +215,7 @@
                 </div>
                 <div class="col-lg-4 advert_col">
                     <!-- Advert Item -->
-                    <div class="ml-item advert d-flex flex-row align-items-center justify-content-start" style="border-radius: 5%">
+                    <div class="ml-item advert d-flex flex-row align-items-center justify-content-start" >
                         <div class="col-7">
                             <div class="row">
                                 <div class="advert_title" style="margin-left: 10%"><a href="/Items/Details?id=8">New Powerful CPU Intel Core i9-10900KA</a></div>
@@ -233,7 +229,7 @@
                 </div>
                 <div class="col-lg-4 advert_col">
                     <!-- Advert Item -->
-                    <div class="ml-item advert d-flex flex-row align-items-center justify-content-start" style="border-radius: 5%">
+                    <div class="ml-item advert d-flex flex-row align-items-center justify-content-start" >
                         <div class="col-7">
                             <div class="row">
                                 <div class="advert_title" style="margin-left: 10%"><a href="/Items/Details?id=6">New Powerful GPU Nvidia GeForce RTX3090</a></div>

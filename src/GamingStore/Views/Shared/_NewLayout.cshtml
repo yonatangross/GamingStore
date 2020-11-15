@@ -119,33 +119,9 @@
 
                     <div class="main_nav_content d-flex flex-row">
 
-                        <!-- Categories Menu -->
-
-                        <div class="cat_menu_container">
-                            <div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
-                                <div class="cat_burger">
-                                    <span></span><span></span><span></span>
-                                </div>
-                                <div class="cat_menu_text">categories</div>
-                            </div>
-                            <ul class="cat_menu">
-
-                                @for (int categoryIndex = 0; categoryIndex < Enum.GetNames(typeof(Category)).Length; categoryIndex++)
-                                {
-                                    var category = (Category) categoryIndex;
-                                    /*todo: add links to items specified by the category*/
-                                    <li>
-                                        <a href="/Items?Category=@category">
-                                            @Html.DisplayFor(e => category)<i class="fas fa-chevron-right ml-auto"></i>
-                                        </a>
-                                    </li>
-                                }
-                            </ul>
-                        </div>
-
                         <!-- Main Nav Menu -->
 
-                        <div class="main_nav_menu ml-auto">
+                        <div class="main_nav_menu ">
                             <ul class="standard_dropdown main_nav_dropdown">
                                 <li>
                                     <a asp-area="" asp-controller="Home" asp-action="Index">Home<i class="fas fa-chevron-down"></i></a>
@@ -157,7 +133,7 @@
                                     <a asp-area="" asp-controller="Items" asp-action="Index">Products<i class="fas fa-chevron-down"></i></a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Home" asp-action="ContactUs">Contact<i class="fas fa-chevron-down"></i></a>
+                                    <a asp-area="" asp-controller="Home" asp-action="ContactUs">Support<i class="fas fa-chevron-down"></i></a>
                                 </li>
 
                             </ul>
