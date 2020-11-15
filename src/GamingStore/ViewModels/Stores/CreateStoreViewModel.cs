@@ -2,7 +2,7 @@
 
 namespace GamingStore.ViewModels.Stores
 {
-    public class CreateStoreViewModel : ViewModelBase
+    public class CreateStoreViewModel
     {
         public Store Store { get; set; }
     }

@@ -153,8 +153,7 @@ namespace GamingStore.Controllers
                     {
                         Country = "Israel"
                     }
-                },
-                ItemsInCart = await CountItemsInCart()
+                }
             };
             return View(viewModel);
         }
@@ -165,23 +164,29 @@ namespace GamingStore.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address,PhoneNumber,Email,OpeningHours")]
-            Store store)
+        public async Task<IActionResult> Create([Bind("Id,Name,Address,PhoneNumber,Email,OpeningHours")] Store store)
         {
             var viewModel = new CreateStoreViewModel()
             {
                 Store = store,
-                ItemsInCart = await CountItemsInCart()
             };
+
+            if (store.OpeningHours.Any(openingHour => openingHour.ClosingTime <= openingHour.OpeningTime))
+            {
+                _flashMessage.Danger("Store opening hours invalid. Store cannot be closed before it was opened");
+                return RedirectToAction("ListStores", "Administration");
+            }
 
             if (!ModelState.IsValid)
             {
+                _flashMessage.Danger("Form is not valid");
                 return View(viewModel);
             }
 
             Context.Add(store);
             await Context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            return RedirectToAction("ListStores", "Administration");
         }
 
         // GET: Stores/Edit/5
@@ -192,6 +197,7 @@ namespace GamingStore.Controllers
             {
                 return NotFound();
             }
+
             if (!StoreExists(id.Value))
             {
                 _flashMessage.Danger("You cannot edit a store that is no longer exists");
@@ -225,16 +231,22 @@ namespace GamingStore.Controllers
                 _flashMessage.Danger("You cannot edit a store that is no longer exists");
                 return RedirectToAction("ListStores", "Administration");
             }
-                //if (!ModelState.IsValid)
-            //{
-            //    return View(new StoreDetailsViewModel {Store = store, ItemsInCart = await CountItemsInCart()});
-            //}
+
+            if (store.OpeningHours.Any(openingHour => openingHour.ClosingTime <= openingHour.OpeningTime))
+            {
+                _flashMessage.Danger("Store opening hours invalid. Store cannot be closed before it was opened");
+
+                return RedirectToAction("Edit", "Stores", new
+                {
+                    id = store.Id
+                });
+            }
 
             try
             {
                 Context.Update(store);
                 await Context.SaveChangesAsync();
-                _flashMessage.Confirmation("Item information has been updated");
+                _flashMessage.Confirmation("Store information has been updated");
             }
             catch (Exception e)
             {
