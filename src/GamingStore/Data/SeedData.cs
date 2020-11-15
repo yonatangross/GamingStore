@@ -1619,7 +1619,96 @@ namespace GamingStore.Data
                     ImageUrl = "images/items/RAZERRZ03-00381800-R3M1BlackWidowUltimat",
                     Description="Created for FPS Gamers: the tenkeyless form factor provides more room to move the mouse, while the enlarged L-Ctrl key minimizes inadvertent pressing of other keys"
                 },
-
+                new Item
+                {
+                    Title = "MSI GeForce RTX 2070 SUPER DirectX 12 Video Card",
+                    Manufacturer = "MSI",
+                    Price = 738.65,
+                    Category = "GPUs",
+                    ImageUrl = "images/items/MSIGeForceRTX2070SUPERDirectX12RTX2070Su",
+                    Description="Memory size 8GB 256-Bit GDDR6,Boost Clock 1800 MHz"
+                },
+                new Item
+                {
+                    Title = "MSI Radeon RX 580 DirectX 12 Video Card Video Card",
+                    Manufacturer = "MSI",
+                    Price = 238.65,
+                    Category = "GPUs",
+                    ImageUrl = "images/items/MSIRadeonRX580DirectX12RX580ARMOR8GOC8GB",
+                    Description="8GB 256-Bit GDDR5,Boost Clock 1366 MHz"
+                },
+                new Item
+                {
+                    Title = "MSI GeForce GTX 1660 DirectX 12 Video Card",
+                    Manufacturer = "MSI",
+                    Price = 438.99,
+                    Category = "GPUs",
+                    ImageUrl = "images/items/MSIGeForceGTX1660DirectX12GTX1660VENTUSX",
+                    Description="6GB 192-Bit GDDR5,Boost Clock 1830 MHz"
+                },
+                new Item
+                {
+                    Title = "MSI GeForce GTX 1660 TI ARMOR 6G OC 6GB Video Card",
+                    Manufacturer = "MSI",
+                    Price = 538.65,
+                    Category = "GPUs",
+                    ImageUrl = "images/items/MSIGeForceGTX1660TiDirectX12GTX1660TIARM",
+                    Description="6GB 192-Bit GDDR6,PCI Express 3.0 x16"
+                },  
+                new Item
+                {
+                    Title = "MSI GeForce RTX 2060 TRIO 6GB 192-Bit Video Card",
+                    Manufacturer = "MSI",
+                    Price = 638.65,
+                    Category = "GPUs",
+                    ImageUrl = "images/items/MSIGeForceRTX2060DirectX12RTX2060GAMINGZ",
+                    Description="6GB 192-Bit GDDR6,Boost Clock 1830 MHz"
+                }, 
+                new Item
+                {
+                    Title = "MSI GeForce RTX 2080 Super Gaming Video Card",
+                    Manufacturer = "MSI",
+                    Price = 1108.99,
+                    Category = "GPUs",
+                    ImageUrl = "images/items/MSIGeForceRTX2080SUPERDirectX12RTX2080Su",
+                    Description="8GB 256-Bit GDDR6 PCI Express 3.0 x16 HDCP Ready SLI Support Video Card"
+                }, 
+                new Item
+                {
+                    Title = "MSI GeForce GeForce GTX 1650 DirectX 12 Ready ITX Video Card",
+                    Manufacturer = "MSI",
+                    Price = 238.65,
+                    Category = "GPUs",
+                    ImageUrl = "images/items/MSIGeForceGTX1650DirectX12GTX1650D6AEROI",
+                    Description="4GB 128-Bit GDDR6,Boost Clock 1620 MHz"
+                },  
+                new Item
+                {
+                    Title = "MSI Radeon RX 5600 XT DirectX 12 Video Card",
+                    Manufacturer = "MSI",
+                    Price = 438.65,
+                    Category = "GPUs",
+                    ImageUrl = "images/items/MSIRadeonRX5600XTDirectX12RX5600XTGAMING",
+                    Description="6GB 192-Bit GDDR6,Game Clock 1615 MHz"
+                }, 
+                new Item
+                {
+                    Title = "MSI GeForce RTX 3090 DirectX 12 Video Card",
+                    Manufacturer = "MSI",
+                    Price = 2238.65,
+                    Category = "GPUs",
+                    ImageUrl = "images/items/MSIGeForceRTX3090DirectX12RTX3090GAMINGX",
+                    Description="24GB 384-Bit GDDR6X,Boost Clock 1785 MHz"
+                }, 
+                new Item
+                {
+                    Title = "GIGABYTE GeForce RTX 3080 DirectX 12 Video Card",
+                    Manufacturer = "GIGABYTE",
+                    Price = 738.65,
+                    Category = "GPUs",
+                    ImageUrl = "images/items/GIGABYTEGeForceRTX3080DirectX12GV-N3080G",
+                    Description="10GB 320-Bit GDDR6X,Boost Core Clock 1800 MHz"
+                },
 
             };
             foreach (var item in items)
