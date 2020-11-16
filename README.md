@@ -8,18 +8,12 @@ The application motivation is to create an web application that serves both the 
 ## Screenshots
 | | |
 |:-------------------------:|:-------------------------:|
-| <a  href="https://ibb.co/1JLk1B4"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/VptsRbk/Gaming-Store-Cart.png" alt="Gaming-Store-Cart" ></a>|<a  href="https://ibb.co/Ybn8Zvm"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/Ws8FtSZ/Gaming-Store-Contact-Us.png" alt="Gaming-Store-Contact-Us" ></a>|<a  href="https://ibb.co/4VXw9yY"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/RDsGZnB/Gaming-Store-Control-Panel1.png" alt="Gaming-Store-Control-Panel1" ></a>|
-| <a  href="https://ibb.co/pv1sVb4"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/JRcb6mr/Gaming-Store-Control-Panel2.png" alt="Gaming-Store-Control-Panel2" ></a>
-| <a  href="https://ibb.co/FJ3fDd9"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/6bwpWq2/Gaming-Store-Control-Panel3.png" alt="Gaming-Store-Control-Panel3" ></a>
-| <a  href="https://ibb.co/WWN2kVY"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/TBDg4WF/Gaming-Store-Control-Panel4.png" alt="Gaming-Store-Control-Panel4" ></a>|
-
-| <a  href="https://ibb.co/chkHmgD"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/3m4qJrB/Gaming-Store-Control-Panel5.png" alt="Gaming-Store-Control-Panel5" ></a>
-| <a  href="https://ibb.co/4S8GSk0"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/rpxSp9X/Gaming-Store-Product-Details.png" alt="Gaming-Store-Product-Details" ></a>
-| <a  href="https://ibb.co/fpxv6V0"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/tsJXjwC/Gaming-Store-Products.png" alt="Gaming-Store-Products" ></a>|
-
-| <a  href="https://ibb.co/Db86x4L"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/ky9rRKM/Gaming-Store-Shopping-Cart.png" alt="Gaming-Store-Shopping-Cart" ></a>
-| <a  href="https://ibb.co/QCwkQfy"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/yYjpPXH/Gaming-Store-Stores-List.png" alt="Gaming-Store-Stores-List" ></a>
-||
+| <a  href="https://ibb.co/QCwkQfy"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/yYjpPXH/Gaming-Store-Stores-List.png" alt="Gaming-Store-Stores-List" ></a>|<a  href="https://ibb.co/Ybn8Zvm"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/Ws8FtSZ/Gaming-Store-Contact-Us.png" alt="Gaming-Store-Contact-Us" ></a>|
+|<a  href="https://ibb.co/4VXw9yY"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/RDsGZnB/Gaming-Store-Control-Panel1.png" alt="Gaming-Store-Control-Panel1" ></a>|<a  href="https://ibb.co/pv1sVb4"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/JRcb6mr/Gaming-Store-Control-Panel2.png" alt="Gaming-Store-Control-Panel2" ></a>|
+| <a  href="https://ibb.co/FJ3fDd9"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/6bwpWq2/Gaming-Store-Control-Panel3.png" alt="Gaming-Store-Control-Panel3" ></a>|<a  href="https://ibb.co/WWN2kVY"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/TBDg4WF/Gaming-Store-Control-Panel4.png" alt="Gaming-Store-Control-Panel4" ></a>|
+| <a  href="https://ibb.co/chkHmgD"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/3m4qJrB/Gaming-Store-Control-Panel5.png" alt="Gaming-Store-Control-Panel5" ></a>| <a  href="https://ibb.co/4S8GSk0"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/rpxSp9X/Gaming-Store-Product-Details.png" alt="Gaming-Store-Product-Details" ></a>|
+| <a  href="https://ibb.co/fpxv6V0"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/tsJXjwC/Gaming-Store-Products.png" alt="Gaming-Store-Products" ></a>|<a  href="https://ibb.co/Db86x4L"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/ky9rRKM/Gaming-Store-Shopping-Cart.png" alt="Gaming-Store-Shopping-Cart" ></a>|
+| <a  href="https://ibb.co/QCwkQfy"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/yYjpPXH/Gaming-Store-Stores-List.png" alt="Gaming-Store-Stores-List" ></a>|<a  href="https://ibb.co/1JLk1B4"><img style="max-width:200px; max-height:200px" src="https://i.ibb.co/VptsRbk/Gaming-Store-Cart.png" alt="Gaming-Store-Cart" ></a>|
 
 ## Tech/framework used
 <b>Built with</b>
