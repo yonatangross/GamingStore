@@ -1,6 +1,8 @@
 ## GamingStore
-A project that represents a chain of gaming stores.
-built with ASP.NET Core MVC Web Application
+The Gaming Store project is a website for a gaming store with an online and psychical shops.
+It has an administration control panel for chain store manager & store managers, and a client side for clients to buy in.
+
+The website was built with ASP.NET Core MVC Web Application.
 
 ## Motivation
 The application motivation is to create an web application that serves both the customers and store managers.
