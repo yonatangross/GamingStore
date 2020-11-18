@@ -22,13 +22,16 @@ The application motivation is to create an web application that serves both the 
 - [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-3.1)
 
 ## Features
-1. Tech items recommender with ML.NET based on previous orders and users statistics
-2. UI design using bootstrap, CSS,JS and jQuery
-3. Generated mock data using [Mockaro](https://www.mockaroo.com/)
-4. Implemented graphs using [d3js](https://d3js.org)
-5. Implemented Google Maps and Facebook API 
-6. Implemented Email Service using [MailKit](https://github.com/jstedfast/MailKit)
-7. Using AJAX to display asynchronously
+1. Items recommender with [ML.NET](https://dotnet.microsoft.com/apps/machinelearning-ai/ml-dotnet) based on previous orders and users choices.
+2. UI & UX design for the control panel, user profile and the website using Bootstrap, CSS & SCSS, ,JS, jQuery & D3.js.
+3. Mock quality data for the store, customer and item models using [Mockaro](https://www.mockaroo.com/).
+4. Maps using Google Maps API's(Maps JavaScript API & Geocoding API) for pinpointing stores addresses on a map for customers comfort.
+5. Graphs for store revenues & items statistics using [d3js](https://d3js.org).
+6. Email Service using [MailKit](https://github.com/jstedfast/MailKit) in order to handle user authentication, forget password, account confirmation, contact us and other profile related actions. 
+7. AJAX to asynchronously search and edit users in the control panel.
+8. Publication of new items in Twitter using Twitter API.
+9. Authentication of users with Google & Facebook for easy registration and login.
+10. Supplying 2FA(2 factor authentication) with an authentication for further securing the users account.
  
 ## Installation
 0. Make sure you have secrets.json on your computer in %APPDATA%
