@@ -2450,8 +2450,6 @@ input[type=text].input-validation-error {
 }
 
 #right-panel > main > div > div > div > div > div > div.card-header > div > div > div > a {
-    background: #009dff;
-    color: white;
     padding: 10px;
     text-transform: uppercase;
     font-weight: normal;

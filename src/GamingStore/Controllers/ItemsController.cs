@@ -140,7 +140,7 @@ namespace GamingStore.Controllers
         }
 
         // GET: Items/Create
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Viewer")]
         public async Task<IActionResult> Create()
         {
             string[] allCategories = Context.Items.Select(item => item.Category).Distinct().ToArray();
@@ -155,7 +155,7 @@ namespace GamingStore.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Viewer")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateEditItemViewModel model)
         {
