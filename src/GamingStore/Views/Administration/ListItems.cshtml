@@ -46,7 +46,7 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.Items.First().Active)
                             </th>
-                            <th width="8%"></th>
+                            <th style="text-align: center">Actions</th>
                         </tr>
                     </thead>
                     <tbody >
@@ -71,9 +71,9 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Active)
                                 </td>
-                                <td class="action-buttons">
-                                    <a class="badge" style="background: #fb9678; color: white; padding: 10px; text-transform: uppercase; font-weight: normal;" asp-action="Edit" asp-controller="Items" asp-route-id="@item.Id">Edit</a>
-                                    <a class="badge" style="background: #00c292; color: white; padding: 10px; text-transform: uppercase; font-weight: normal;" asp-action="Details" asp-controller="Items" asp-route-id="@item.Id">Details</a>
+                                <td class="store-actions">
+                                    <a class="btn btn-outline-success action-button"  asp-action="Details" asp-controller="Items" asp-route-id="@item.Id">Details</a>
+                                    <a class="btn btn-outline-primary action-button"  asp-action="Edit" asp-controller="Items" asp-route-id="@item.Id">Edit</a>
                                 </td>
                             </tr>
                         }

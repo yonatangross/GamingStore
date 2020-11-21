@@ -237,6 +237,16 @@ namespace GamingStore.Controllers
                 return RedirectToAction("ListStores", "Administration");
             }
 
+            // GetRolesAsync returns the list of user Roles
+            IList<string> userRoles = await UserManager.GetRolesAsync(await GetCurrentUserAsync());
+
+            if (!userRoles.Any(r => r.Equals("Admin")))
+            {
+                _flashMessage.Danger("Your changes were not saved.\n You are on Viewer Role, you can not edit stores.");
+                return RedirectToAction("ListStores", "Administration");
+            }
+
+
             if (store.OpeningHours.Any(openingHour => openingHour.ClosingTime <= openingHour.OpeningTime))
             {
                 _flashMessage.Danger("Store opening hours invalid. Store cannot be closed before it was opened");
@@ -300,6 +310,16 @@ namespace GamingStore.Controllers
                 _flashMessage.Danger("You cannot remove a store that is no longer exists");
                 return RedirectToAction("ListStores", "Administration");
             }
+
+            // GetRolesAsync returns the list of user Roles
+            IList<string> userRoles = await UserManager.GetRolesAsync(await GetCurrentUserAsync());
+
+            if (!userRoles.Any(r => r.Equals("Admin")))
+            {
+                _flashMessage.Danger("Your changes were not saved.\n You are on Viewer Role, you can not delete stores.");
+                return RedirectToAction("ListStores", "Administration");
+            }
+
 
             Store store = await Context.Stores.Include(s => s.Orders).FirstOrDefaultAsync(s => s.Id == id);
 

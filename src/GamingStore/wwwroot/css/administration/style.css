@@ -2456,9 +2456,17 @@ input[type=text].input-validation-error {
     text-transform: uppercase;
     font-weight: normal;
 }
-
-
-
+.store-actions {
+    display: table-cell;
+    border-top: none;
+}
+.action-button {
+    display: table-caption;
+    margin-top: 10px;
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: normal;
+}
 
 /*# sourceMappingURL=style.css.map */
 
