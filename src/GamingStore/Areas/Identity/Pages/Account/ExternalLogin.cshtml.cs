@@ -137,7 +137,7 @@ namespace GamingStore.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "Customer");
+                    await _userManager.AddToRoleAsync(user, "Viewer");
 
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)

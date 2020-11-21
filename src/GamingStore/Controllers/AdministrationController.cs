@@ -18,7 +18,7 @@ using Vereyon.Web;
 
 namespace GamingStore.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Viewer")]
     public class AdministrationController : BaseController
     {
         private readonly IFlashMessage _flashMessage;
@@ -39,7 +39,7 @@ namespace GamingStore.Controllers
                 _flashMessage.Danger("You can not edit a user that no longer exists");
                 return RedirectToAction("ListUsers");
             }
-
+            
             // GetRolesAsync returns the list of user Roles
             IList<string> userRoles = await UserManager.GetRolesAsync(user);
 
@@ -205,6 +205,15 @@ namespace GamingStore.Controllers
                 return RedirectToAction("ListUsers");
             }
 
+            // GetRolesAsync returns the list of user Roles
+            IList<string> userRoles = await UserManager.GetRolesAsync(user);
+
+            if (!userRoles.Any(r => r.Equals("Admin")))
+            {
+                _flashMessage.Danger("Your changes were not saved.\n You are on Viewer Role, you can not edit users.");
+                return RedirectToAction("ListUsers");
+            }
+
             user.Email = model.Email;
             user.UserName = model.UserName;
             model.ItemsInCart = await CountItemsInCart();
@@ -319,10 +328,13 @@ namespace GamingStore.Controllers
         {
             List<Customer> users = await UserManager.Users.ToListAsync();
             var currentUser = await GetCurrentUserAsync();
+            IList<string> userRoles = await UserManager.GetRolesAsync(currentUser);
+
             var viewModel = new ListUsersViewModels
             {
                 Users = users,
-                CurrentUser = currentUser
+                CurrentUser = currentUser,
+                CurrentUserRoles=userRoles
             };
 
             return View(viewModel);
@@ -477,6 +489,15 @@ namespace GamingStore.Controllers
             }
 
             var currentUser = await GetCurrentUserAsync();
+
+            IList<string> userRoles = await UserManager.GetRolesAsync(currentUser);
+
+            if (!userRoles.Any(r => r.Equals("Admin")))
+            {
+                _flashMessage.Danger("Your changes were not saved.\n You are on Viewer Role, you can not delete users.");
+                return RedirectToAction("ListUsers");
+            }
+
             if (user.Id == currentUser.Id)
             {
                 _flashMessage.Danger("You can not delete your own user.");

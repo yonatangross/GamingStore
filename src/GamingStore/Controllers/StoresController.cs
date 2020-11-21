@@ -134,7 +134,7 @@ namespace GamingStore.Controllers
         }
 
         // GET: Stores/Create
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Viewer")]
         public async Task<IActionResult> Create()
         {
             var viewModel = new CreateStoreViewModel()
@@ -167,7 +167,7 @@ namespace GamingStore.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Viewer")]
         public async Task<IActionResult> Create([Bind("Id,Name,Address,PhoneNumber,Email,OpeningHours")] Store store)
         {
             var viewModel = new CreateStoreViewModel()
@@ -194,7 +194,7 @@ namespace GamingStore.Controllers
         }
 
         // GET: Stores/Edit/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Viewer")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -228,7 +228,7 @@ namespace GamingStore.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Viewer")]
         public async Task<IActionResult> Edit(Store store)
         {
             if (!StoreExists(store.Id))
@@ -263,7 +263,7 @@ namespace GamingStore.Controllers
         }
 
         // GET: Stores/Delete/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Viewer")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -292,7 +292,7 @@ namespace GamingStore.Controllers
         // POST: Stores/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Viewer")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (!StoreExists(id))

@@ -7,5 +7,6 @@ namespace GamingStore.ViewModels.Administration
     {
         public List<Customer> Users { get; set; }
         public Customer CurrentUser { get; set; }
+        public IList<string> CurrentUserRoles { get; set; }
     }
 }

@@ -1,8 +1,8 @@
 ﻿
 function toggleConfirmDeleteUserButton(uniqueId, isDeleteClicked) {
-    //console.log(
-    //    `Entered function toggleConfirmDeleteUserButton with uniqueId:${uniqueId}and isDeleteClicked: ${isDeleteClicked
-    //    }\n`);
+    console.log(
+        `Entered function toggleConfirmDeleteUserButton with uniqueId:${uniqueId}and isDeleteClicked: ${isDeleteClicked
+        }\n`);
 
     const deleteSpan = `deleteSpan_${uniqueId}`;
     const confirmDeleteSpan = `confirmDeleteSpan_${uniqueId}`;
@@ -22,8 +22,9 @@ function toggleConfirmDeleteUserButton(uniqueId, isDeleteClicked) {
     }
 }
 
-function confirmDeleteUserAjax(userId, userNum, userEmail) {
-    //console.log(`Entered function confirmDeleteUserAjax with:${userId} ${userNum} ${userEmail}\n`);
+function confirmDeleteUserAjax(userId, userNum, userEmail, isAdmin) {
+    isAdmin = isAdmin.toLowerCase();
+    console.log(`Entered function confirmDeleteUserAjax with:${userId} ${userNum} ${userEmail} ${isAdmin}\n`);
     $.ajax({
             type: "POST",
             url: "/Administration/DeleteUser",
@@ -31,7 +32,15 @@ function confirmDeleteUserAjax(userId, userNum, userEmail) {
                 id: userId
             },
             success: function() {
-                $(`.user${userNum}`).hide("slow", function() { $(`.user${userNum}`).remove(); });
+                if (isAdmin === "true") {
+                    $(`.user${userNum}`).hide("slow", function() { $(`.user${userNum}`).remove(); });
+                } else {
+                    $(`.user${userNum} .card-footer `).notify(
+                        "Your changes were not saved. You are on Viewer Role, you can not delete users.",
+                        { position: "right middle" }
+                    );
+                    toggleConfirmDeleteUserButton(userId, false);
+                }
             },
             failure: function(response) {
                 alert(response.text);
@@ -50,7 +59,7 @@ function searchUsersInit(userId) {
 }
 
 //$("#searchSubmit").click(function() {
-    
+
 //});
 
 
@@ -99,7 +108,7 @@ function searchUsers(searchUserString, currentUserId) {
                 for (let userIndex = 0; userIndex < Object.keys(data).length; userIndex++) {
                     $("#users").append(card(data[userIndex].id, data[userIndex].email, userIndex + 1));
                 }
-                $(`#deleteSpan_${currentUserId}`).remove(); ;
+                $(`#deleteSpan_${currentUserId}`).remove();;
 
                 console.log("success: ");
             },

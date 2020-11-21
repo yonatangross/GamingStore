@@ -29,7 +29,7 @@
                             <img src="~/images/mail.png" alt="">
                         </div><a href="mailto:gamingstoreproject@gmail.com">gamingstoreproject@gmail.com</a>
                     </div>
-                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Viewer")))
                     {
                         <div class="top_bar_contact_item">
                             <a asp-controller="Administration" asp-action="Index">Admin CP</a>
