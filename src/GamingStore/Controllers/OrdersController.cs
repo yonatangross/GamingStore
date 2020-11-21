@@ -294,7 +294,7 @@ namespace GamingStore.Controllers
 
         // GET: Items/Edit/5
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Viewer")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -321,12 +321,23 @@ namespace GamingStore.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Viewer")]
         public async Task<IActionResult> Edit(Order order)
         {
             if (!await OrderExists(order.Id))
             {
                 _flashMessage.Danger("You cannot edit product that is no longer exists");
+                return RedirectToAction("ListOrders", "Administration");
+            }
+
+
+            var currentUser = await GetCurrentUserAsync();
+
+            IList<string> userRoles = await UserManager.GetRolesAsync(currentUser);
+
+            if (!userRoles.Any(r => r.Equals("Admin")))
+            {
+                _flashMessage.Danger("Your changes were not saved.\n You do not have the right permissions to edit orders.");
                 return RedirectToAction("ListOrders", "Administration");
             }
 
@@ -358,7 +369,7 @@ namespace GamingStore.Controllers
             catch (Exception e)
             {
                 _flashMessage.Danger("Order could not be updated");
-                _logger.LogError($"Product# '{order.Id}' could not be updated, ex: {e}");
+                _logger.LogError($"Order# '{order.Id}' could not be updated, ex: {e}");
             }
 
             return RedirectToAction("ListOrders", "Administration");

@@ -247,7 +247,7 @@ namespace GamingStore.Controllers
         }
 
         // GET: Items/Edit/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Viewer")]
         public async Task<IActionResult> Edit(int? id)
         {
             string[] allCategories = Context.Items.Select(i => i.Category).Distinct().ToArray();
@@ -280,7 +280,7 @@ namespace GamingStore.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Viewer")]
         public async Task<IActionResult> Edit(CreateEditItemViewModel model)
         {
             Item itemOnDb = await Context.Items.FirstOrDefaultAsync(i => i.Id == model.Item.Id);
@@ -289,6 +289,17 @@ namespace GamingStore.Controllers
             {
                 _flashMessage.Danger("Item could not be found on DB");
 
+                return RedirectToAction("ListItems", "Administration");
+            }
+
+
+            var currentUser = await GetCurrentUserAsync();
+
+            IList<string> userRoles = await UserManager.GetRolesAsync(currentUser);
+
+            if (!userRoles.Any(r => r.Equals("Admin")))
+            {
+                _flashMessage.Danger("Your changes were not saved.\n You do not have the right permissions to edit items.");
                 return RedirectToAction("ListItems", "Administration");
             }
 

@@ -2461,11 +2461,13 @@ input[type=text].input-validation-error {
     border-top: none;
 }
 .action-button {
-    display: table-caption;
+    display: block;
+    margin: auto;
     margin-top: 10px;
     padding: 10px;
     text-transform: uppercase;
     font-weight: normal;
+    max-width: 90px;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -242,7 +242,7 @@ namespace GamingStore.Controllers
 
             if (!userRoles.Any(r => r.Equals("Admin")))
             {
-                _flashMessage.Danger("Your changes were not saved.\n You are on Viewer Role, you can not edit stores.");
+                _flashMessage.Danger("Your changes were not saved.\n You do not have the right permissions to edit a stores.");
                 return RedirectToAction("ListStores", "Administration");
             }
 
@@ -316,7 +316,7 @@ namespace GamingStore.Controllers
 
             if (!userRoles.Any(r => r.Equals("Admin")))
             {
-                _flashMessage.Danger("Your changes were not saved.\n You are on Viewer Role, you can not delete stores.");
+                _flashMessage.Danger("Your changes were not saved.\n You do not have the right permissions to delete stores.");
                 return RedirectToAction("ListStores", "Administration");
             }
 

@@ -42,6 +42,11 @@ namespace GamingStore.Controllers
             
             // GetRolesAsync returns the list of user Roles
             IList<string> userRoles = await UserManager.GetRolesAsync(user);
+            if (!userRoles.Any(r => r.Equals("Admin")))
+            {
+                _flashMessage.Danger("Your changes were not saved.\nYou do not have the right permissions to edit a user.");
+                return RedirectToAction("ListUsers");
+            }
 
             var model = new EditUserViewModel
             {
@@ -210,7 +215,7 @@ namespace GamingStore.Controllers
 
             if (!userRoles.Any(r => r.Equals("Admin")))
             {
-                _flashMessage.Danger("Your changes were not saved.\n You are on Viewer Role, you can not edit users.");
+                _flashMessage.Danger("Your changes were not saved.\nYou do not have the right permissions to edit users.");
                 return RedirectToAction("ListUsers");
             }
 
@@ -288,8 +293,18 @@ namespace GamingStore.Controllers
             if (role == null)
             {
                 _flashMessage.Danger("You can not edit a role that no longer exists");
-                return RedirectToAction("ListUsers");
+                return RedirectToAction("ListRoles");
             }
+
+            var currentUser = await GetCurrentUserAsync();
+            IList<string> userRoles = await UserManager.GetRolesAsync(currentUser);
+
+            if (!userRoles.Any(r => r.Equals("Admin")))
+            {
+                _flashMessage.Danger("Your changes were not saved.\n You do not have the right permissions to edit roles.");
+                return RedirectToAction("ListRoles");
+            }
+
 
             role.Name = model.RoleName;
 
@@ -438,6 +453,15 @@ namespace GamingStore.Controllers
                 return RedirectToAction("ListUsers");
             }
 
+            var currentUser = await GetCurrentUserAsync();
+            IList<string> userRoles = await UserManager.GetRolesAsync(currentUser);
+
+            if (!userRoles.Any(r => r.Equals("Admin")))
+            {
+                _flashMessage.Danger("Your changes were not saved.\n You do not have the right permissions to edit user list in a role.");
+                return RedirectToAction("ListUsers");
+            }
+
             for (var i = 0; i < model.List.Count; i++)
             {
                 Customer user = await UserManager.FindByIdAsync(model.List[i].UserId);
@@ -494,7 +518,7 @@ namespace GamingStore.Controllers
 
             if (!userRoles.Any(r => r.Equals("Admin")))
             {
-                _flashMessage.Danger("Your changes were not saved.\n You are on Viewer Role, you can not delete users.");
+                _flashMessage.Danger("Your changes were not saved.\n You do not have the right permissions to delete users.");
                 return RedirectToAction("ListUsers");
             }
 
