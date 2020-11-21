@@ -110,7 +110,7 @@ namespace GamingStore.Controllers
             {
                 foreach (OrderItem orderItem in order.OrderItems)
                 {
-                    var categoryName = orderItem.Item.Category.ToString();
+                    var categoryName = orderItem.Item.Category;
                     var itemsCost = orderItem.ItemsCount * orderItem.Item.Price;
                     if (purchaseByCategoryList.Any(d => d.Name == categoryName))
                     {

@@ -10,7 +10,7 @@
     <div class="col-lg-8">
         <div class="card">
             <div class="card-header">
-                <strong>Create a new product</strong>
+                <strong>Create a new Product</strong>
             </div>
             <div class="card-body card-block">
                 <div class="column">
@@ -44,11 +44,12 @@
                             <div class="form-group">
                                 <label asp-for="Item.Category" class="control-label"></label>
                                 <select class="form-control custom-select" asp-for="Item.Category" style="margin-left: auto;">
-                                    @for (int i = 0; i < Enum.GetNames(typeof(Category)).Length; i++)
-                                    {
-                                        var category = (Category)i;
-                                        <option class="form-control">@Html.DisplayFor(c => category)</option>
-                                    }
+
+                                        @foreach (var category in Model.Categories)
+                                        {
+                                            <option class="form-control">@category</option>
+                                        }
+                                       
                                 </select>
                                 <span asp-validation-for="Item.Category" class="text-danger"></span>
                             </div>

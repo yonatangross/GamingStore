@@ -1,7 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using GamingStore.Contracts
+@using GamingStore.Data
 @inject SignInManager<Customer> SignInManager
 @inject UserManager<Customer> UserManager
+@inject StoreContext StoreContext
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,8 +75,10 @@
                                     @Html.TextBox("Keywords", null, new {@class = "form-control"})
                                     @{
                                         var allCategories = new List<string> {"All Categories"};
-                                        allCategories.AddRange(Enum.GetNames(typeof(Category)));
+                                        allCategories.AddRange(StoreContext.Items.Select(item => item.Category).Distinct());
                                     }
+                                    
+                                  
                                     @Html.DropDownList("Category", new SelectList(allCategories), null, new {@class = "category-dropdown form-control"})
                                     <input type="image" class="search-topbar-button btn-primary btn" src="/images/searchIcon4.png"/>
                                 </div>
@@ -206,12 +209,16 @@
                 <div class="footer_column">
                     <div class="footer_title">Find it Fast</div>
                     <ul class="footer_list">
-                        @for (int categoryIndex = 0; categoryIndex < Enum.GetNames(typeof(Category)).Length; categoryIndex++)
-                        {
-                            var category = (Category) categoryIndex;
-                            <li>
-                                <a href="/Items?Category=@category">@Html.DisplayFor(e => category)</a>
-                            </li>
+                        @{
+                                var categories = new List<string> {"All Categories"};
+                            categories.AddRange(StoreContext.Items.Select(item => item.Category).Distinct());
+                       
+                            foreach (var category in categories)
+                            {
+                                <li>
+                                    <a href="/Items?Category=@category">@Html.DisplayFor(e => category)</a>
+                                </li>  
+                            }
                         }
                     </ul>
                 </div>

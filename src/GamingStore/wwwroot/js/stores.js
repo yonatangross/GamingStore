@@ -30,7 +30,7 @@ function initMap() {
 
 function getStoreAddress(store, storeIndex) {
     let [address, name, isWebsite] = store;
-    console.log(`store: ${name} index:${storeIndex}`);
+    //console.log(`store: ${name} index:${storeIndex}`);
     geocoder.geocode({ address: address },
         (results, status) => {
             if (status === "OK") {
@@ -46,7 +46,7 @@ function getStoreAddress(store, storeIndex) {
                     }
                 );
             } else if (status === "OVER_QUERY_LIMIT") {
-                console.log(`store ${storeIndex} failed`);
+                //console.log(`store ${storeIndex} failed`);
             }
         });
 }

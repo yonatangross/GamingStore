@@ -200,7 +200,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Cloud Stinger Wired Stereo Gaming Headset", Manufacturer = "HyperX", Price = 29.78,
-                    Category = "GamingHeadsets",
+                    Category = "Gaming Headsets",
                     PropertiesList = new Dictionary<string, string>()
                     {
                         {"Sound Mode", "Stereo"},
@@ -213,7 +213,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "G432 Wired 7.1 Surround Sound Gaming Headset", Manufacturer = "Logitech", Price = 39.95,
-                    Category = "GamingHeadsets", PropertiesList = new Dictionary<string, string>()
+                    Category = "Gaming Headsets", PropertiesList = new Dictionary<string, string>()
                     {
                         {"Built-In Microphone", "Yes"},
                         {"Connection Type", "Wired"},
@@ -225,7 +225,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Milano Gaming Chair Green", Manufacturer = "Arozzi", Price = 227,
-                    Category = "GamingChairs", PropertiesList = new Dictionary<string, string>()
+                    Category = "Gaming Chairs", PropertiesList = new Dictionary<string, string>()
                     {
                         {"Office Chair Style", "Gaming chair"},
                         {"Headrest Features", "Padded"},
@@ -238,7 +238,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Milano Gaming Chair Red", Manufacturer = "Arozzi", Price = 219.99,
-                    Category = "GamingChairs", PropertiesList = new Dictionary<string, string>()
+                    Category = "Gaming Chairs", PropertiesList = new Dictionary<string, string>()
                     {
                         {"Office Chair Style", "Gaming chair"},
                         {"Headrest Features", "Padded"},
@@ -251,7 +251,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Logitech G440 Hard Gaming", Manufacturer = "Logitech", Price = 130,
-                    Category = "MousePads", PropertiesList = new Dictionary<string, string>()
+                    Category = "Mouse Pads", PropertiesList = new Dictionary<string, string>()
                     {
                         {"length", "280mm"},
                         {"width", "340mm"},
@@ -327,7 +327,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Gaming Headset white combat camouflage", Manufacturer = "Dragon", Price = 499,
-                    Category = "GamingHeadsets", PropertiesList = new Dictionary<string, string>()
+                    Category = "Gaming Headsets", PropertiesList = new Dictionary<string, string>()
                     {
                         {"Sound Mode", "Stereo"},
                         {"Connection Type", "Wired"},
@@ -646,7 +646,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Hbada Gaming Chair Racing", Manufacturer = "Hbada", Price = 159.99,
-                    Category = "GamingChairs", PropertiesList = new Dictionary<string, string>()
+                    Category = "Gaming Chairs", PropertiesList = new Dictionary<string, string>()
                     {
                         {"Chair Style", "Gaming chair"},
                         {"Headrest Features", "Padded"},
@@ -788,7 +788,7 @@ namespace GamingStore.Data
                     Title = "Corsair Gaming Headset HS70",
                     Manufacturer = "Corsair",
                     Price = 45.55,
-                    Category = "GamingHeadsets",
+                    Category = "Gaming Headsets",
                     ImageUrl = "images/items/CorsairHS70PROWIRELESSUSBConnectorCircum",
                     Description = "Play with the freedom of up to 40ft of wireless range and up to 16 hours of battery life"
                 },
@@ -798,7 +798,7 @@ namespace GamingStore.Data
                     Title = "Mad Catz Gaming Headset 7.1",
                     Manufacturer = "Mad Catz",
                     Price = 41.45,
-                    Category = "GamingHeadsets",
+                    Category = "Gaming Headsets",
                     ImageUrl = "images/items/MadCatzF.R.E.Q.4USBConnectorCircumauralG",
                     Description = "Fully immerse yourself in your game with dynamic, full-range sound pumped from super-sized 50mm neodymium drivers. Its 7.1 virtual sound lets you hear directional movement to gain a competitive edge, and its noise-canceling mic delivers crystal-clear audio without annoying background noise. This USB gaming headset also features brilliant RGB lighting, ergonomic comfort, and easy-access inline control for volume adjustment and mic mute."
                 },
@@ -808,7 +808,7 @@ namespace GamingStore.Data
                     Title = "Corsair Premium Gaming Headset",
                     Manufacturer = "Corsair",
                     Price = 49.55,
-                    Category = "GamingHeadsets",
+                    Category = "Gaming Headsets",
                     ImageUrl = "images/items/CorsairGamingVOIDPRORGBWirelessPremiumGa",
                     Description = "Maximum audio performance with DTS Headphone: X 7.1 Surround for "
                 },
@@ -818,7 +818,7 @@ namespace GamingStore.Data
                     Title = "Logitech Wired Gaming Headset ",
                     Manufacturer = "Logitech",
                     Price = 39.89,
-                    Category = "GamingHeadsets",
+                    Category = "Gaming Headsets",
                     ImageUrl = "images/items/Logitech981-000681G4337.1WiredGamingHead",
                     Description = "Extremely lightweight for maximum comfort"
                 },
@@ -876,7 +876,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "KLIM Puma - USB Gamer Headset with Mic", Manufacturer = "KLIM Puma", Price = 44.99,
-                    Category = "GamingHeadsets", PropertiesList = new Dictionary<string, string>()
+                    Category = "Gaming Headsets", PropertiesList = new Dictionary<string, string>()
                     {
                         {"Sound Mode", "Stereo"},
                         {"Connection Type", "Wired"},
@@ -919,7 +919,7 @@ namespace GamingStore.Data
                     Title = "Creative Gaming Headset EV03",
                     Manufacturer = "Creative",
                     Price = 99.99,
-                    Category = "GamingHeadsets",
+                    Category = "Gaming Headsets",
                     ImageUrl = "images/items/CreativeSoundBlasterEVO3.5mmUSBConnector",
                     Description = "Meet the Sound Blaster EVO, a headset that's amazing for audio"
                 },
@@ -928,7 +928,7 @@ namespace GamingStore.Data
                     Title = "Asus Gaming Headset H5",
                     Manufacturer = "Asus",
                     Price = 115.65,
-                    Category = "GamingHeadsets",
+                    Category = "Gaming Headsets",
                     ImageUrl = "images/items/ASUSTUFGamingH53.5mmUSBConnectorCircumau",
                     Description = "USB 2.0 or 3.5mm connector gaming headset with Onboard 7.1 Virtual Surround Sound"
                 },
@@ -937,7 +937,7 @@ namespace GamingStore.Data
                     Title = "Creative Gaming Headset HS-720",
                     Manufacturer = "Creative",
                     Price = 46.99,
-                    Category = "GamingHeadsets",
+                    Category = "Gaming Headsets",
                     ImageUrl = "images/items/CreativeChatMaxHS-72051EF0410AA004USBCon",
                     Description = "USB Connector USB Headset for Online Chats and PC Gaming"
                 },
@@ -946,7 +946,7 @@ namespace GamingStore.Data
                     Title = "Logitech Gaming Headset H820e ",
                     Manufacturer = "Logitech",
                     Price = 209.99,
-                    Category = "GamingHeadsets",
+                    Category = "Gaming Headsets",
                     ImageUrl = "images/items/LogitechH820eUSBConnectorSupra-auralWire",
                     Description = "USB Connector Supra-aural Wireless Headset"
                 },
@@ -955,7 +955,7 @@ namespace GamingStore.Data
                     Title = "Logitech Gaming Headset G533",
                     Manufacturer = "Logitech",
                     Price = 59.99,
-                    Category = "GamingHeadsets",
+                    Category = "Gaming Headsets",
                     ImageUrl = "images/items/LogitechG533WirelessDTS7.1SurroundSoundG",
                     Description = "Wireless DTS 7.1 Surround Sound"
                 },
@@ -1163,7 +1163,7 @@ namespace GamingStore.Data
                     Title = "Corsair MM200 PRO Gaming Mouse Pad",
                     Manufacturer = "Corsair",
                     Price = 24.99,
-                    Category = "MousePads",
+                    Category = "Mouse Pads",
                     ImageUrl = "images/items/CorsairMM200PROCH-9412660-WWPremiumSpill",
                     Description = "Spill-Proof Cloth Gaming Mouse Pad - Heavy XL, Black"
                 },
@@ -1172,7 +1172,7 @@ namespace GamingStore.Data
                     Title = "Corsair MM300 PRO Gaming Mouse Pad",
                     Manufacturer = "Corsair",
                     Price = 22.99,
-                    Category = "MousePads",
+                    Category = "Mouse Pads",
                     ImageUrl = "images/items/CorsairMM300PROCH-9413631-WWPremiumSpill",
                     Description = "A spill-proof and stain-resistant coating makes liquids slide right off the surface so your mouse pad is easy to wipe clean even after an accident."
                 },
@@ -1181,7 +1181,7 @@ namespace GamingStore.Data
                     Title = "Corsair MM200 Medium Cloth Gaming Mouse Pad",
                     Manufacturer = "Corsair",
                     Price = 12.99,
-                    Category = "MousePads",
+                    Category = "Mouse Pads",
                     ImageUrl = "images/items/CorsairGamingMM200MediumClothGamingMouse",
                     Description = "Anti-skid rubber base helps it stay securely in place"
                 },
@@ -1190,7 +1190,7 @@ namespace GamingStore.Data
                     Title = "Corsair MM300 Anti-Fray Gaming Mouse Pad",
                     Manufacturer = "Corsair",
                     Price = 26.99,
-                    Category = "MousePads",
+                    Category = "Mouse Pads",
                     ImageUrl = "images/items/CorsairGamingMM300Anti-FrayClothGamingMo",
                     Description = "Superior control, textile weave for pixel-precise targeting, low friction tracking"
                 },
@@ -1199,7 +1199,7 @@ namespace GamingStore.Data
                     Title = "Corsair MM350 Gaming Mouse Pad",
                     Manufacturer = "Corsair",
                     Price = 29.99,
-                    Category = "MousePads",
+                    Category = "Mouse Pads",
                     ImageUrl = "images/items/CorsairMM350PROCH-9413770-WWPremiumSpill",
                     Description = "An anti-skid textured rubber base keeps the mouse pad securely in place even during the most intense gaming sessions"
                 },
@@ -1208,7 +1208,7 @@ namespace GamingStore.Data
                     Title = "Asus ROG Sheath Electro Punk with Extra-large Gaming Mouse Pad",
                     Manufacturer = "Asus",
                     Price = 31.99,
-                    Category = "MousePads",
+                    Category = "Mouse Pads",
                     ImageUrl = "images/items/ROGSheathElectroPunkwithExtra-large,Gami",
                     Description = "Ultra-smooth surface for pixel-precise tracking"
                 },

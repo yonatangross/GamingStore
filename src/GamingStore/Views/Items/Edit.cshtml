@@ -47,10 +47,9 @@
                             <div class="form-group">
                                 <label asp-for="Item.Category" class="control-label"></label>
                                 <select class="form-control custom-select" asp-for="Item.Category" style="margin-left: auto;">
-                                    @for (var i = 0; i < Enum.GetNames(typeof(Category)).Length; i++)
+                                    @foreach (var category in Model.Categories)
                                     {
-                                        var category = (Category)i;
-                                        <option class="form-control">@Html.DisplayFor(c => category)</option>
+                                        <option class="form-control">@category</option>
                                     }
                                 </select>
                                 <span asp-validation-for="Item.Category" class="text-danger"></span>
