@@ -65,7 +65,7 @@ Footer
 	background-color: #ffffff;
 	max-width: 38px;
 	max-height: 38px;
-	padding: 0px;
+	padding: 7px;
 	margin: 0px;
 	border: 1px solid #ced4da;
 	border-left: none;
@@ -75,7 +75,7 @@ Footer
 		background-color: #ffffff;
 		max-width: 38px;
 		max-height: 38px;
-		padding: 0px;
+		padding: 7px;
 		margin: 0px;
 		border: 1px solid #ced4da;
 		border-left: none;
@@ -94,7 +94,12 @@ Footer
 		padding: 0px;
 		margin: 0px;
 		border: 1px solid #ced4da;
+        border-left: 0px;
+        border-right: 0px;
 		border-radius: 0px;
+	}
+
+	.category-dropdown:focus {
 	}
 
 body {
