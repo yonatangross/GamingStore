@@ -13,20 +13,24 @@ var storeIndex = 0;
 var map;
 var geocoder;
 
-function initMap() {
+async function  initMap() {
      map = new google.maps.Map(document.getElementById("map"),
         {
             zoom: 15,
             center: { lat: 32.086813, lng: 34.77630 }
         });
-     geocoder = new google.maps.Geocoder();
-
+    geocoder = new google.maps.Geocoder();
     while (storeIndex < storesObject.length) {
+        await sleep(200);
+        //console.log(`loading store ${storeIndex}`);
         getStoreAddress(storesObject[storeIndex], storeIndex);
-        storeIndex++;
+        storeIndex++; 
     };
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 function getStoreAddress(store, storeIndex) {
     let [address, name, isWebsite] = store;
@@ -34,7 +38,7 @@ function getStoreAddress(store, storeIndex) {
     geocoder.geocode({ address: address },
         (results, status) => {
             if (status === "OK") {
-                console.log(`store ${storeIndex} ok`);
+                //console.log(`store ${storeIndex} ok`);
                 new google.maps.Marker({
                         position: results[0].geometry.location,
                         map,
@@ -51,7 +55,9 @@ function getStoreAddress(store, storeIndex) {
         });
 }
 
-
+$(document).ready(function () {
+ 
+});
 
 
 
