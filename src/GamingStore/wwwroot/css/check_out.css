@@ -214,3 +214,8 @@ input[type=text].input-validation-error {
     content: "\2796"; /* Unicode character for "minus" sign (-) */
 }
 
+.demonstration-title {
+    text-align: center;
+    color: red;
+    margin-bottom: 15px;
+}
