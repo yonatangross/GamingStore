@@ -27,12 +27,7 @@ namespace GamingStore.Areas.Identity.Pages.Account
         private readonly IFlashMessage _flushMessage;
         private readonly IEmailSender _emailSender;
 
-        public RegisterModel(
-            UserManager<Customer> userManager,
-            SignInManager<Customer> signInManager,
-            ILogger<RegisterModel> logger,
-            IFlashMessage flushMessage,
-                IEmailSender emailSender)
+        public RegisterModel(UserManager<Customer> userManager, SignInManager<Customer> signInManager, ILogger<RegisterModel> logger, IFlashMessage flushMessage, IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -93,8 +88,12 @@ namespace GamingStore.Areas.Identity.Pages.Account
             {
                 var user = new Customer
                 {
-                    UserName = Input.Email, Email = Input.Email, FirstName = Input.FirstName, LastName = Input.LastName
+                    UserName = Input.Email, 
+                    Email = Input.Email, 
+                    FirstName = Input.FirstName, 
+                    LastName = Input.LastName
                 };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -109,8 +108,14 @@ namespace GamingStore.Areas.Identity.Pages.Account
                         values: new {area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl},
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    try
+                    {
+                        await _emailSender.SendEmailAsync(Input.Email, "Confirm your email", $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    }
+                    catch
+                    {
+                        //ignored
+                    }
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
