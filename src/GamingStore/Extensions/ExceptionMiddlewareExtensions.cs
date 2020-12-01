@@ -25,8 +25,9 @@ namespace GamingStore.Extensions
                     context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                     context.Response.ContentType = "application/json";
                     var exceptionHandlerFeature = context.Features.Get<IExceptionHandlerFeature>();
-
+                    
                     string errorCode = Guid.NewGuid().ToString().Split('-').Last();
+                    logger.LogError($"[{errorCode}] Exception: {exceptionHandlerFeature?.Error}");
                     context.Response.Redirect($"/Errors/InternalServer?code={errorCode}");
                 });
             });
