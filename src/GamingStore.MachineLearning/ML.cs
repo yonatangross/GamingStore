@@ -14,7 +14,6 @@ namespace GamingStore.MachineLearning
     public class ML
     {
         private const string TrainingDataLocation = @"D:\Compare.txt";
-
         public static async Task<Dictionary<int, double>> Run(Request request)
         {
             CreateFile(request.ItemCustomersList);
