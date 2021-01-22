@@ -1,5 +1,5 @@
 ## GamingStore
-The Gaming Store project is a website for a gaming store with an online and psychical shops.
+The Gaming Store project is a website for a gaming store with an online and pyshical shops.
 It has an administration control panel for chain store manager & store managers, and a client side for clients to buy in.
 
 The website was built with ASP.NET Core MVC Web Application.
@@ -9,7 +9,7 @@ The application motivation is to create an web application that serves both the 
 
 ## Tech/framework used
 <b>Built with</b>
-- [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-3.1)
+- [ASP.NET Core 3.1](https://docs.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-3.1)
 
 ## Features
 1. Items recommender with [ML.NET](https://dotnet.microsoft.com/apps/machinelearning-ai/ml-dotnet) based on previous orders and users choices.
