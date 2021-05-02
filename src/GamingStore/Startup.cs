@@ -38,7 +38,7 @@ namespace GamingStore
         {
             services.ConfigureLoggerService();
             services.AddDbContext<StoreContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("AWS")));
+                options.UseSqlServer(Configuration.GetConnectionString("StoreContext")));
 
             // Authorization
             services.AddIdentity<Customer, IdentityRole>(options =>
