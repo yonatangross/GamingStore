@@ -16,9 +16,7 @@ namespace GamingStore.Data
 {
     public class SeedData
     {
-        private static readonly string DirectoryPath =
-            AppContext.BaseDirectory.Substring(0,
-                AppContext.BaseDirectory.IndexOf("bin", StringComparison.Ordinal));
+        private static readonly string DirectoryPath = AppContext.BaseDirectory.Substring(0, AppContext.BaseDirectory.IndexOf("bin", StringComparison.Ordinal));
         private static UserManager<Customer> _userManager;
 
         private static RoleManager<IdentityRole> _roleManager;
