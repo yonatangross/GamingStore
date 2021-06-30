@@ -1,0 +1,213 @@
+﻿@model GamingStore.ViewModels.Stores.StoreDetailsViewModel
+@addTagHelper *, Vereyon.Web.FlashMessage
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+}
+<div class="row">
+    <div class="col-lg-7">
+        <div class="card">
+            <div class="card-header">
+                <strong>Edit Store# @Model.Store.Id</strong>
+            </div>
+            <div class="card-body card-block">
+                <div class="col">
+                    <div class="d-flex justify-content-center" id="flash_message"> <flash dismissable="true" /></div>
+                </div>
+                <div class="row">
+                    @using (Html.BeginForm("Edit", "Stores", FormMethod.Post, new
+                    {
+                        @class = "col-10"
+                    }))
+                    {
+                        @Html.HiddenFor(m => m.Store.Id)
+                        <div class="form-group row">
+                            @Html.LabelFor(m => m.Store.Name, new
+                            {
+                                @class = "col-sm-2 col-form-label"
+                            })
+                            <div class="col-sm-5">
+                                <div class="form-check">
+                                    @Html.TextBoxFor(s => s.Store.Name, new
+                                    {
+                                        @class = "form-control"
+                                    })
+                                    @Html.ValidationMessageFor(m => m.Store.Name)
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group row">
+                                @Html.LabelFor(m => m.Store.Address.Address1, new
+                                {
+                                    @class = "col-sm-2 col-form-label"
+                                })
+                                <div class="col-sm-5">
+                                    <div class="form-check">
+                                        @Html.TextBoxFor(s => s.Store.Address.Address1, new
+                                        {
+                                            @class = "form-control"
+                                        })
+                                        @Html.ValidationMessageFor(m => m.Store.Address.Address1)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(m => m.Store.Address.FullName, new
+                                {
+                                    @class = "col-sm-2 col-form-label"
+                                })
+                                <div class="col-sm-5">
+                                    <div class="form-check">
+                                        @Html.TextBoxFor(s => s.Store.Address.FullName, new
+                                        {
+                                            @class = "form-control"
+                                        })
+                                        @Html.ValidationMessageFor(m => m.Store.Address.FullName)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(m => m.Store.Address.City, new
+                                {
+                                    @class = "col-sm-2 col-form-label"
+                                })
+                                <div class="col-sm-5">
+                                    <div class="form-check">
+                                        @Html.TextBoxFor(s => s.Store.Address.City, new
+                                        {
+                                            @class = "form-control"
+                                        })
+                                        @Html.ValidationMessageFor(m => m.Store.Address.City)
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(m => m.Store.Address.PostalCode, new
+                                {
+                                    @class = "col-sm-2 col-form-label"
+                                })
+                                <div class="col-sm-5">
+                                    <div class="form-check">
+                                        @Html.TextBoxFor(s => s.Store.Address.PostalCode, new
+                                        {
+                                            @class = "form-control"
+                                        })
+                                        @Html.ValidationMessageFor(m => m.Store.Address.PostalCode)
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(m => m.Store.Address.Country, new
+                                {
+                                    @class = "col-sm-2 col-form-label"
+                                })
+                                <div class="col-sm-5">
+                                    <div class="form-check">
+                                        @Html.TextBoxFor(s => s.Store.Address.Country, new
+                                        {
+                                            @class = "form-control",
+                                            @disabled = "disabled"
+                                        })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(m => m.Store.PhoneNumber, new
+                            {
+                                @class = "col-sm-2 col-form-label"
+                            })
+                            <div class="col-sm-5">
+                                <div class="form-check">
+                                    @Html.TextBoxFor(s => s.Store.PhoneNumber, new
+                                    {
+                                        @class = "form-control"
+                                    })
+                                    @Html.ValidationMessageFor(m => m.Store.PhoneNumber)
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(m => m.Store.Email, new
+                            {
+                                @class = "col-sm-2 col-form-label"
+                            })
+                            <div class="col-sm-5">
+                                <div class="form-check">
+                                    @Html.TextBoxFor(s => s.Store.Email, new
+                                    {
+                                        @class = "form-control"
+                                    })
+                                    @Html.ValidationMessageFor(m => m.Store.Email)
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(m => m.Store.Active, new
+                            {
+                                @class = "col-sm-2 col-form-label"
+                            })
+                            <div class="col-sm-5">
+                                <div class="form-check">
+                                    @Html.CheckBoxFor(m => m.Store.Active, new
+                                    {
+                                        @class = "form-check-input",
+                                        style = "margin: auto; position: inherit;"
+                                    })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="store_detail">
+                            <table class="opening_hours">
+
+                                @for (var index = 0; index < Model.Store.OpeningHours.Count; index++)
+                                {
+                                    var day = Model.Store.OpeningHours[index];
+                                    <tr>
+                                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                            <label class="col-2 col-form-label"> @day.DayOfWeek.ToString().Substring(0, 3)</label>
+
+                                            @Html.TextBoxFor(m => m.Store.OpeningHours[index].OpeningTime, new
+                                            {
+                                                @type = "time",
+                                                @class = "form-control"
+                                            })
+                                            @Html.HiddenFor(m => m.Store.OpeningHours[index].DayOfWeek)
+                                            @Html.TextBoxFor(m => m.Store.OpeningHours[index].ClosingTime, new
+                                            {
+                                                @type = "time",
+                                                @class = "form-control"
+                                            })
+                                        </div>
+                                    </tr>
+                                }
+
+                            </table>
+                        </div>
+                        <div style="margin-top: 8%">
+                            <input type="submit" value="Save" class="btn btn-primary" style="margin-right: 8%" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script>
+        setTimeout(function () {
+            $('.alert').fadeOut('slow');
+        },
+            5000); // <-- time in milliseconds
+    </script>
+    <script src="/lib/jquery/dist/jquery.js"></script>
+}

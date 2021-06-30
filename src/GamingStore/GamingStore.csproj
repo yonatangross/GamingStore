@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>3e15871e-3aa1-4c99-826a-3822d8f228b7</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Data\images\**" />
+    <Content Remove="Data\images\**" />
+    <EmbeddedResource Remove="Data\images\**" />
+    <None Remove="Data\images\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\Home\xyz.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="2.9.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.6" />
+    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Validation" Version="3.2.11" />
+    <PackageReference Include="Microsoft.ML" Version="1.5.2" />
+    <PackageReference Include="Microsoft.ML.Recommender" Version="0.17.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="NLog" Version="4.7.5" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
+    <PackageReference Include="Vereyon.Web.FlashMessage" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\images\items\CloudStingerWiredStereoGamingHeadset.jpg" />
+    <None Include="wwwroot\images\items\G432Wired7dot1SurroundSoundGamingHeadset.jpg" />
+    <None Include="wwwroot\images\items\gamingheadsetwhitecombatcamouflage.jpg" />
+    <None Include="wwwroot\images\items\GeForceRTX2080SUPERBLACKGAMING.jpg" />
+    <None Include="wwwroot\images\items\IntelCorei9-10850KACometLakeBox.jpg" />
+    <None Include="wwwroot\images\items\IntelCorei9-10900KACometLakeBox.jpg" />
+    <None Include="wwwroot\images\items\LogitechG440HardGaming.jpg" />
+    <None Include="wwwroot\images\items\MilanoGamingChair-Blue.jpg" />
+    <None Include="wwwroot\images\items\MilanoGamingChair-Green.jpg" />
+    <None Include="wwwroot\images\items\NVIDIAGeForceRTX3080.jpg" />
+    <None Include="wwwroot\images\items\NVIDIAGeForceRTX3090.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GamingStore.Contracts\GamingStore.Contracts.csproj" />
+    <ProjectReference Include="..\GamingStore.MachineLearning\GamingStore.MachineLearning.csproj" />
+    <ProjectReference Include="..\GamingStore.Services\GamingStore.Services.csproj" />
+    <ProjectReference Include="..\LoggerService\LoggerService.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="wwwroot\data\MonthlyRevenueBarChartData.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties wwwroot_4lib_4bootstrap_4dist_4css_4bootstrap_1min_1css_1map__JsonSchema="" wwwroot_4lib_4bootstrap_4dist_4js_4bootstrap_1bundle_1js_1map__JsonSchema="" /></VisualStudio></ProjectExtensions>
+</Project>

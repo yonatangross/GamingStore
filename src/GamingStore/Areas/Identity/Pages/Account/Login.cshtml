@@ -1,0 +1,62 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+    Layout = "~/Views/Shared/_NewLoginLayout.cshtml";
+}
+<head>
+    <title>@ViewData["Title"]</title>
+</head>
+
+<div class="login-logo">
+    <a asp-action="Index" asp-controller="Home">
+        <img class="align-content" src="/images/logo.png" alt="">
+    </a>
+</div>
+<div class="login-form">
+    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Input.Email"></label>
+            <input type="email" asp-for="Input.Email" class="form-control" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.Password"></label>
+            <input type="password" asp-for="Input.Password" class="form-control" />
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+        <div class="checkbox">
+            <label asp-for="Input.RememberMe">
+                <input asp-for="Input.RememberMe" />
+                @Html.DisplayNameFor(m => m.Input.RememberMe)
+            </label>
+            <label class="pull-right">
+                <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+            </label>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success  mb-3 mt-3">Sign In</button>
+        </div>
+        <hr />
+
+    </form>
+    <div class="social-login-content">
+        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div class="social-button">
+                <button type="submit" name="provider" value="Facebook" class="btn btn-primary mb-3 mt-3"><i class="fa fa-facebook fa-2x"></i> Sign in with facebook</button>
+                <button type="submit" name="provider" value="Google" class="btn btn-danger mb-3 mt-3 "><i class="fa fa-google fa-2x"></i> Sign in with Google</button>
+            </div>
+        </form>
+    </div>
+    <div class="register-link m-t-15 text-center">
+        <p>Don't have an account? <a asp-page="./Register">Sign up Here</a></p>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,130 @@
+﻿@using GamingStore.Contracts
+@using System.Text.RegularExpressions
+@using Microsoft.EntityFrameworkCore.ChangeTracking.Internal
+@model GamingStore.ViewModels.Stores.StoresCitiesViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+@functions
+{
+    void OpeningHoursTemplate(Store store)
+    {
+        <div class="store_detail">
+            Opening Hours:
+            <table class="opening_hours">
+                <tr>
+                    @{
+                        foreach (var day in store.OpeningHours)
+                        {
+                            <th> @day.DayOfWeek.ToString().Substring(0, 3)</th>
+                        }
+                    }
+                </tr>
+                <tr>
+                    @{
+                        foreach (var day in store.OpeningHours)
+                        {
+                            <td>
+                                <span>
+                                    @($"{day.OpeningTime:hh\\:mm}")
+                                </span>
+                                <span>
+                                    @($"{day.ClosingTime:hh\\:mm}")
+                                </span>
+                            </td>
+                        }
+                    }
+                </tr>
+            </table>
+        </div>
+    }
+
+    void StoreTemplate(Store store)
+    {
+        <li class="list-group-item list-group-item-action" id="store_@store.Id" data-toggle="list" role="tab" aria-controls="store_@store.Id">
+            @{ var isWebsite = store.Name == "Website" ? true : false; }
+            <div class="store_title">
+                <h4>
+                    @{
+                        var storeName = store.Name.Replace("Store", "");
+                    }
+                    @Html.DisplayFor(modelItem => storeName)
+                </h4>
+            </div>
+            <div class="store_detail store_address">
+                @{
+                    var address = store.Address.ToString();
+                    <script>
+            storesObject.push(["@address", "@storeName", "@isWebsite".toLowerCase()]);
+                    </script>
+                }
+                @Html.DisplayFor(modelItem => address)
+            </div>
+            <div class="store_detail store_phonenumber">
+                Phone:
+                <a href="tel:@store.PhoneNumber">@Regex.Replace(store.PhoneNumber, @"(\d{3})(\d{3})(\d{4})", "+$1-$2-$3")</a>
+            </div>
+            <div class="store_detail store_email">
+                Email:
+                <a href="mailto:@store.Email">@store.Email </a>
+            </div>
+            @{ OpeningHoursTemplate(store); }
+        </li>
+    }
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/store_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
+    <script>
+        var storesObject = [];
+    </script>
+</head>
+
+<div class="store_container">
+    <div class="container">
+        <h3>Which Store are you looking for?</h3>
+        @using (Html.BeginForm("Index", "Stores", FormMethod.Post, new { @class = "search_form" }))
+        {
+            <div class="input-group mb-3">
+                <div class="input-group-prepend  search_bar">
+                    @Html.TextBoxFor(sc => sc.Name, new { @class = "form-control", @id = "searchStoreString", @placeholder = "Search Store" })
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    @Html.Label("cityInputGroup", "City", new { @class = "input-group-text" })
+                </div>
+                @Html.DropDownListFor(sc => sc.City, new SelectList(Model.CitiesWithStores), "Select City", new { @class = "custom-select", @id = "cityInputGroup" })
+            </div>
+            <div class="form-group form-check">
+                @Html.CheckBoxFor(m => m.IsOpen, new { @class = "form-check-input", @id = "isOpen" })
+                @Html.Label("isOpen", "Search only open stores")
+            </div>
+            <button asp-action="Index" asp-controller="Stores" type="submit" class="btn btn-primary" id="searchSubmit">Search</button>
+        }
+        <div class="row">
+            <div class="col-lg-5">
+                <ul class="list-group store_list" id="storesList" role="tablist">
+                    @foreach (var store in Model.Stores)
+                    {
+                        StoreTemplate(store);
+                    }
+                </ul>
+
+            </div>
+            <div class="col-lg-7">
+                <div class="store_map" id="map"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @*loads after all scripts are rendered like jQuery and scripts from _NewLayout https://stackoverflow.com/questions/37923853/how-to-use-jquery-in-asp-net-core/37923947*@
+    <script type="text/javascript" src="/js/stores.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJ8e0GNYL2ZJLC1g68-2-0Iv-yXGrZkAQ&callback=initMap" type="text/javascript"></script>
+}

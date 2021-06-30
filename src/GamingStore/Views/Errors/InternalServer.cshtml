@@ -1,0 +1,27 @@
+﻿@model GamingStore.ViewModels.Errors.ErrorViewModel
+@{
+    ViewData["Title"] = "500 Internal Server Error";
+}
+
+
+<div class="row">
+    <div class="col-md-6 align-self-center">
+        <img src="/images/error.png" alt="" />
+    </div>
+    <div class="col-md-6 align-self-center">
+        <h2>UH OH! We're lost.</h2>
+        <p>
+            Something went broke. En error occurred while processing your request<br />
+            This is unexpected error. Please contact support.
+        </p>
+
+        @if (!string.IsNullOrWhiteSpace(Model.ErrorCode))
+        {
+            <p>
+                <strong>Error Code:</strong> <code>@Model.ErrorCode</code>
+            </p>
+        }
+
+        <button type="button" class="btn btn-primary" onclick="location.href = '@Url.Action("ContactUs", "Home")'">Contact Support</button>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+﻿@model GamingStore.ViewModels.Stores.StoreDetailsViewModel
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+}
+
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Delete Store# @Model.Store.Id</strong>
+                    </div>
+                    <div class="card-body card-block">
+                        <div>
+                            <h4>Store</h4>
+                            <h4>@Model.Store.Id</h4>
+                            <hr />
+
+                            <dl class="row">
+                                <dt class="col-sm-2">
+                                    @Html.DisplayNameFor(model => model.Store.Name)
+                                </dt>
+                                <dd class="col-sm-10">
+                                    @Html.DisplayFor(model => model.Store.Name)
+                                </dd>
+                                <dt class="col-sm-2">
+                                    @Html.DisplayNameFor(model => model.Store.Address)
+                                </dt>
+                                <dd class="col-sm-10">
+                                    @{ var formattedAddress = Model.Store.Address.ToString();}
+                                    @Html.DisplayFor(model => formattedAddress)
+                                </dd>
+                                <dt class="col-sm-2">
+                                    @Html.DisplayNameFor(model => model.Store.PhoneNumber)
+                                </dt>
+                                <dd class="col-sm-10">
+                                    @Html.DisplayFor(model => model.Store.PhoneNumber)
+                                </dd>
+                                <dt class="col-sm-2">
+                                    @Html.DisplayNameFor(model => model.Store.Email)
+                                </dt>
+                                <dd class="col-sm-10">
+                                    @Html.DisplayFor(model => model.Store.Email)
+                                </dd>
+                                <dt class="col-sm-2">
+                                    @Html.DisplayNameFor(model => model.Store.OpeningHours)
+                                </dt>
+                                <dd class="col-sm-10">
+                                    <table class="opening_hours">
+                                        <tr>
+                                            @{
+                                                foreach (var day in Model.Store.OpeningHours)
+                                                {
+                                                    <th style="padding: 1%"> @day.DayOfWeek.ToString().Substring(0, 3)</th>
+                                                }
+                                            }
+                                        </tr>
+                                        <tr>
+                                            @{
+                                                foreach (var day in Model.Store.OpeningHours)
+                                                {
+                                                    <td style="padding: 1%">
+                                                        <span>
+                                                            @($"{day.OpeningTime:hh\\:mm}")
+                                                        </span>
+                                                        <span>
+                                                            @($" - ")
+                                                        </span>
+                                                        <span>
+                                                            @($"{day.ClosingTime:hh\\:mm}")
+                                                        </span>
+                                                    </td>
+                                                }
+                                            }
+                                        </tr>
+                                    </table>
+                                </dd>
+
+                            </dl>
+                            @using (Html.BeginForm("DeleteConfirmed", "Stores", FormMethod.Post, null))
+                            {
+                                @Html.Hidden("id", Model.Store.Id)
+                                <input type="submit" value="Delete" class="btn btn-danger" />
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

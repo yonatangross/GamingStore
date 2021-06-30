@@ -1,0 +1,253 @@
+﻿@using GamingStore.Contracts
+@model GamingStore.ViewModels.Home.HomeViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/homepage_styles.css">
+</head>
+<body>
+
+    <section class="characteristics">
+        <div class="container">
+            <div class="row">
+                <!-- Char. Item -->
+                <div class="col-lg-3 col-md-6 char_col">
+
+                    <div class="char_item d-flex flex-row align-items-center justify-content-start" >
+                        <div class="char_icon"><img src="~/images/char_1.png" alt=""></div>
+                        <div class="char_content">
+                            <div class="char_title">Free Delivery</div>
+                            <div class="char_subtitle">from $50</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Char. Item -->
+                <div class="col-lg-3 col-md-6 char_col">
+
+                    <div class="char_item d-flex flex-row align-items-center justify-content-start" >
+                        <div class="char_icon"><img src="~/images/char_2.png" alt=""></div>
+                        <div class="char_content">
+                            <div class="char_title">Great New Products</div>
+                            <div class="char_subtitle" style="margin: 5px">Every Week</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Char. Item -->
+                <div class="col-lg-3 col-md-6 char_col">
+
+                    <div class="char_item d-flex flex-row align-items-center justify-content-start" >
+                        <div class="char_icon"><img src="~/images/char_3.png" alt=""></div>
+                        <div class="char_content">
+                            <div class="char_title" style="margin: 6px"> Cheapest Online Gaming Store </div>
+                            <div class="char_subtitle" style="margin: 5px">Best Seller Store</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Char. Item -->
+                <div class="col-lg-3 col-md-6 char_col">
+
+                    <div class="char_item d-flex flex-row align-items-center justify-content-start" >
+                        <div class="char_icon"><img src="~/images/char_4.png" alt=""></div>
+                        <div class="char_content">
+                            <div class="char_title">Best Offers Every Day</div>
+                            <div class="char_subtitle">Save Money</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @if (Model != null && Model.Items.Any())
+    {
+        <div class="best_sellers" style="margin-top: auto ;margin-bottom:5%">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="tabbed_container">
+                            <div class="tabs clearfix tabs-right">
+                                <div class="new_arrivals_title"><strong>Products you may like</strong></div>
+                                <div class="tabs_line"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row" style="padding: 30px 5px 10px 5px;">
+                    @for (int i = 0; i <= 2; i++)
+                    {
+                        <div class="col-lg-4 advert_col">
+
+                            <!-- Advert Item -->
+
+                            <div class="ml-item advert d-flex flex-row align-items-center justify-content-start" style="border-radius: 5%">
+                                <div class="col-7">
+                                    <div class="row">
+                                        @{
+                                            var a = Model.Items[i].Title.Split(' ');
+                                            var counter = 0;
+                                            var title = string.Empty;
+                                            foreach (var tfii in a)
+                                            {
+                                                title += $"{tfii} ";
+                                                counter++;
+                                                if (counter == 4)
+                                                {
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        <div class="advert_title" style="margin-left:10%"><a href="/Items/Details?id=@Model.Items[i].Id">@title</a></div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="advert_price" style="margin:auto;font-size:20px">$@Model.Items[i].Price</div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <div class="col-5" style="margin:auto">
+                                    <div class="advert_image" style="max-height: 80%; max-width: 100%; margin: auto;"> <a href="/Items/Details?id=@Model.Items[i].Id"> <img src="/@Model.Items[i].ImageUrl/1.jpg" alt=""> </a></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+                </div>
+
+                <div class="row" style="padding: 30px 5px 10px 5px;">
+                    @for (int i = 3; i <= 5; i++)
+                    {
+                        <div class="col-lg-4 advert_col">
+
+                            <!-- Advert Item -->
+
+                            <div class="ml-item advert d-flex flex-row align-items-center justify-content-start" style="border-radius: 5%">
+                                <div class="col-7">
+                                    <div class="row">
+                                        @{
+                                            var a = Model.Items[i].Title.Split(' ');
+                                            var counter = 0;
+                                            var title = string.Empty;
+                                            foreach (var tfii in a)
+                                            {
+                                                title += $"{tfii} ";
+                                                counter++;
+                                                if (counter == 4)
+                                                {
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        <div class="advert_title" style="margin-left:10%"><a href="/Items/Details?id=@Model.Items[i].Id">@title</a></div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="advert_price" style="margin: auto;font-size:20px">$@Model.Items[i].Price</div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <div class="col-5" style="margin:auto">
+                                    <div class="advert_image" style="max-height: 80%; max-width: 100%; margin: auto;"> <a href="/Items/Details?id=@Model.Items[i].Id"> <img src="/@Model.Items[i].ImageUrl/1.jpg" alt=""> </a></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    <section class="featured-item-video" >
+        <div class="item-description">
+            <div>
+                <h1 class="h1" ><span><strong>GEFORCE RTX 3070</strong></span></h1>
+                <h2 class="h3" ><strong>THE ULTIMATE PLAY</strong></h2>
+                <div style="color: white">
+                    <strong> <p class="item-text-description">The GeForce RTX<sup>™</sup>
+                       3070 is powered by Ampere—NVIDIA’s 2nd gen RTX architecture. Built with enhanced Ray Tracing Cores and Tensor Cores, new streaming multiprocessors, and high-speed G6 memory, it gives you the power you need to rip through the most demanding games.</p></strong>
+                </div>
+            </div>
+           
+        </div>
+            <video src="video/GeForce RTX 3070 Unboxing.mp4" controls="controls"
+                   height="498"> </video>
+        
+        <div class="btn btn-primary btn-lg btn-block">
+                <a href="/Items/Details?id=5">
+                        <i class="fas fa-shopping-cart"></i> SEE BUYING OPTION
+                </a>
+        </div>
+    </section>
+
+
+    <section class="best_sellers" style=" margin-top: 5% ;margin-bottom:5%">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="tabbed_container">
+                        <div class="tabs clearfix tabs-right">
+                            <div class="new_arrivals_title">Hot Products</div>
+                            <div class="tabs_line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding: 3%">
+
+                <div class="col-lg-4 advert_col">
+                    <!-- Advert Item -->
+                    <div class="ml-item advert d-flex flex-row align-items-center justify-content-start" >
+                        <div class="col-7">
+                            <div class="row">
+                                <div class="advert_title" style="margin-left: 10%"><a href="/Items/Details?id=1">New Surround Gaming Headset For Best Experience!</a></div>
+                            </div>
+                            <hr />
+                        </div>
+                        <div class="col-5" style="margin: auto">
+                            <div class="advert_image" style="max-height: 80%; max-width: 100%; margin: auto;"> <a href="/Items/Details?id=1"> <img src="/images/items/G432Wired7dot1SurroundSoundGamingHeadset/1.jpg" alt=""> </a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 advert_col">
+                    <!-- Advert Item -->
+                    <div class="ml-item advert d-flex flex-row align-items-center justify-content-start" >
+                        <div class="col-7">
+                            <div class="row">
+                                <div class="advert_title" style="margin-left: 10%"><a href="/Items/Details?id=8">New Powerful CPU Intel Core i9-10900KA</a></div>
+                            </div>
+                            <hr />
+                        </div>
+                        <div class="col-5" style="margin: auto">
+                            <div class="advert_image" style="max-height: 80%; max-width: 100%; margin: auto;"> <a href="/Items/Details?id=8"> <img src="/images/items/IntelCorei9-10900KACometLakeBox/1.jpg" alt=""> </a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 advert_col">
+                    <!-- Advert Item -->
+                    <div class="ml-item advert d-flex flex-row align-items-center justify-content-start" >
+                        <div class="col-7">
+                            <div class="row">
+                                <div class="advert_title" style="margin-left: 10%"><a href="/Items/Details?id=6">New Powerful GPU Nvidia GeForce RTX3090</a></div>
+                            </div>
+                            <hr />
+                        </div>
+                        <div class="col-5" style="margin: auto">
+                            <div class="advert_image" style="max-height: 80%; max-width: 100%; margin: auto;"> <a href="/Items/Details?id=6"> <img src="/images/items/NVIDIAGeForceRTX3090/1.jpg" alt=""> </a></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</body>
+@section Scripts{
+    <script type="text/javascript" src="/js/home.js"></script>
+}

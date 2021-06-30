@@ -1,0 +1,68 @@
+﻿@model GamingStore.ViewModels.Items.ItemViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/single_product.css">
+</head>
+<div class="single_product">
+    <div class="container">
+        <div class="row">
+
+            <!-- Images -->
+            <div class="col-lg-2 order-lg-1 order-2">
+                <ul class="image_list">
+                    <li data-image="/@Model.Item.ImageUrl/1.jpg"><img src="/@Model.Item.ImageUrl/1.jpg" alt=""></li>
+                    <li data-image="/@Model.Item.ImageUrl/2.jpg"><img src="/@Model.Item.ImageUrl/2.jpg" alt=""></li>
+                    <li data-image="/@Model.Item.ImageUrl/3.jpg"><img src="/@Model.Item.ImageUrl/3.jpg" alt=""></li>
+                </ul>
+            </div>
+
+            <!-- Selected Image -->
+            <div class="col-lg-5 order-lg-2 order-1">
+                <div class="image_selected"><img src="/@Model.Item.ImageUrl/1.jpg" alt="" style="max-width: 80%"></div>
+            </div>
+
+            <!-- Description -->
+            <div class="col-lg-5 order-3">
+                <div class="product_description">
+                    <div class="product_category"> @Html.DisplayFor(c => Model.Item.Category)</div>
+                    <div class="product_name">@Model.Item.Title</div>
+                    <div class="product_text"><p>@Model.Item.Description</p></div>
+                    <div class="order_info d-flex flex-row">
+                        @using (Html.BeginForm("AddToCart", "Items", FormMethod.Post, new {role = "form" }))
+                        {
+                            @Html.Hidden("itemId", Model.Item.Id)
+                            <div class="clearfix" style="z-index: 1000;">
+
+                                <!-- Product Quantity -->
+                                <div class="product_quantity clearfix">
+                                    <span>Quantity: </span>
+                                    <input id="quantity_input" name="quantity" type="text" pattern="[0-9]*" value="1">
+                                    <input id="product_id" name="id" type="hidden" value="@Model.Item.Id">
+                                    <div class="quantity_buttons">
+                                        <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fas fa-chevron-up"></i></div>
+                                        <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="product_price">@Html.DisplayFor(m => m.Item.Price)</div>
+                            <div class="button_container">
+                                <input type="submit" value="Add to Cart" name="submit" class="button cart_button" @*onclick="updateCartIndicator()"*@>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="/js/product_details.js"></script>
+
+}

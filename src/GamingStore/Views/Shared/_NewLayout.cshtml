@@ -1,0 +1,276 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using GamingStore.Data
+@inject SignInManager<Customer> SignInManager
+@inject UserManager<Customer> UserManager
+@inject StoreContext StoreContext
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - GamingStore</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="GamingStore shop project">
+    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link href="~/lib/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="~/css/site.css"/>
+</head>
+
+<body>
+<div class="super_container">
+<!-- Header -->
+<header class="header">
+    <!-- Top Bar -->
+    <div class="top_bar">
+        <div class="container">
+            <div class="row">
+                <div class="col d-flex flex-row">
+                    <div class="top_bar_contact_item">
+                        <div class="top_bar_icon">
+                            <img src="~/images/mail.png" alt="">
+                        </div><a href="mailto:gamingstoreproject@gmail.com">gamingstoreproject@gmail.com</a>
+                    </div>
+                    @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Viewer")))
+                    {
+                        <div class="top_bar_contact_item">
+                            <a asp-controller="Administration" asp-action="Index">Admin CP</a>
+                        </div>
+                    }
+                    <div class="ml-auto">
+                        <partial name="_NewLoginPartial"/>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Main -->
+
+    <div class="header_main">
+        <div class="container">
+            <div class="row">
+
+                <!-- Logo -->
+                <div class="col-lg-3 col-sm-3 col-3 order-1">
+                    <div class="logo_container">
+                        <div class="logo">
+                            <a href="/Home">
+                                <img src="~/images/logo.png" alt="Gaming Store" style="width: 85%;">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search -->
+                <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
+                    <div class="header_search">
+                        <div class="header_search_content">
+                            @using (Html.BeginForm("Index", "Items", FormMethod.Get))
+                            {
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">Search</div>
+                                    </div>
+                                    @Html.TextBox("Keywords", null, new {@class = "form-control"})
+                                    @{
+                                        var allCategories = new List<string> {"All Categories"};
+                                        allCategories.AddRange(StoreContext.Items.Select(item => item.Category).Distinct());
+                                    }
+                                    
+                                  
+                                    @Html.DropDownList("Category", new SelectList(allCategories), null, new {@class = "category-dropdown form-control"})
+                                    <input type="image" class="search-topbar-button btn-primary btn" src="/images/searchIcon4.png"/>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wishlist -->
+                <div class="col-lg-2 col-9 order-lg-3 order-2 text-lg-left text-right align-self-center">
+                    <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
+                        <!-- Cart -->
+                        <div>
+                            <div class="d-flex flex-row align-items-center justify-content-end">
+                                <div class="cart_icon">
+                                    <img src="~/images/cart.png" alt="">
+                                    <div class="cart_count">
+                                        <span id="cart_items_count">@Model?.ItemsInCart</span>
+                                    </div>
+                                </div>
+                                <div class="cart_content">
+                                    <div class="cart_text">
+                                        <a class="nav-link text-dark" asp-controller="Carts" asp-action="Index">Cart</a>
+                                    </div>
+                                    <div class="cart_price"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+
+    <nav class="main_nav">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+
+                    <div class="main_nav_content d-flex flex-row">
+
+                        <!-- Main Nav Menu -->
+
+                        <div class="main_nav_menu ">
+                            <ul class="standard_dropdown main_nav_dropdown">
+                                <li>
+                                    <a asp-area="" asp-controller="Home" asp-action="Index">Home<i class="fas fa-chevron-down"></i></a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Stores" asp-action="Index">Stores<i class="fas fa-chevron-down"></i></a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Items" asp-action="Index">Products<i class="fas fa-chevron-down"></i></a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Home" asp-action="ContactUs">Support<i class="fas fa-chevron-down"></i></a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                        <!-- Menu Trigger -->
+
+                        <div class="menu_trigger_container ml-auto">
+                            <div class="menu_trigger d-flex flex-row align-items-center justify-content-end">
+                                <div>
+                                    <div class="menu_trigger_text">menu</div>
+                                    <div class="cat_burger menu_burger_inner">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+</header>
+
+<div class="container" style="margin-top: 1%">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
+
+<!-- Footer -->
+
+<div style="background: #fafafa; width: 100%; padding-top: 60px; padding-bottom: 60px; box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);">
+
+</div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-4 footer_col">
+                <div class="footer_column footer_contact">
+                    <div class="logo_container">
+                        <div class="logo">
+                            <canvas id="FooterCanvas" width="300" height="100"></canvas>
+                        </div>
+                    </div>
+                    <div class="footer_title">Got Question? Call Us 24/7</div>
+                    <div class="footer_phone">+972 506656474</div>
+                    <div class="footer_contact_text">
+                        <p>48 Yirmiyahu Street, Tel Aviv</p>
+                        <p>Israel</p>
+                    </div>
+                    <div class="footer_social">
+                        <ul>
+                            <li>
+                                <a href="https://twitter.com/GamingS48312490">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-2 offset-lg-1">
+                <div class="footer_column">
+                    <div class="footer_title">Find it Fast</div>
+                    <ul class="footer_list">
+                        @{
+                                var categories = new List<string> {"All Categories"};
+                            categories.AddRange(StoreContext.Items.Select(item => item.Category).Distinct());
+                       
+                            foreach (var category in categories)
+                            {
+                                <li>
+                                    <a href="/Items?Category=@category">@Html.DisplayFor(e => category)</a>
+                                </li>  
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <div class=" col-lg-0 offset-lg-1">
+                <div class="footer_column">
+                    <div class="footer_title"> Navigation</div>
+                    <ul class="footer_list">
+                        <li>
+                            <a href="/Stores">Stores</a>
+                        </li>
+                        <li>
+                            <a href="/Items">Products</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class=" col-lg-2 offset-lg-1">
+                <div class="footer_column">
+                    <div class="footer_title">Customer Care</div>
+                    <ul class="footer_list">
+                        <li>
+                            <a href="/Identity/Account/Manage">My Account</a>
+                        </li>
+                        <li>
+                            <a href="/Identity/Account/Manage/MyOrders">Order Tracking</a>
+                        </li>
+                        <li>
+                            <a href="/Home/ContactUs">Customer Services</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/lib/notifyjs/notify.min.js"></script>
+<script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js" type="text/javascript"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+@RenderSection("Scripts", required: false)
+</body>
+<script>
+    var canvas = document.getElementById("FooterCanvas");
+    var ctx = canvas.getContext("2d");
+    ctx.font = "35px Arial";
+    ctx.fillText("Gaming Store", 0, 40);
+</script>
+
+</html>

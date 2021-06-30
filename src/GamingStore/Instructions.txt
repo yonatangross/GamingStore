@@ -1,0 +1,9 @@
+﻿Instructions to run project as administrator.
+1. run <dotnet user-secrets init> in PMC
+2. Make sure you have our secrets.json on your computer in %APPDATA%
+3. Remove migrations folder
+4. Drop-Database
+5. write following commands on PMC:
+5.1 Add-Migration InitialCreate
+5.2 Update-Database
+6. run program.

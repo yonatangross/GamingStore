@@ -1,0 +1,123 @@
+﻿@model GamingStore.ViewModels.Home.ContactViewModel
+
+@addTagHelper *, Vereyon.Web.FlashMessage
+@{
+    ViewData["Title"] = "Customer Service";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/contact_styles.css">
+</head>
+<body>
+
+    <div class="contact_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <div class="contact_form_container">
+
+                        <canvas id="myCanvas" width="300" height="100"></canvas>
+
+                        @using (Html.BeginForm("ConfirmContactUs", "Home", FormMethod.Post))
+                        {
+                            <div class="contact_form_inputs d-flex flex-md-row flex-column justify-content-between">
+                                @{
+                                    if (!string.IsNullOrWhiteSpace(Model?.Name))
+                                    {
+                                        @Html.TextBoxFor(m => m.Name, new { @placeholder = "Your name", @class = "input_field", disabled = "disabled" })
+                                        @Html.HiddenFor(m => m.Name)
+                                    }
+                                    else
+                                    {
+                                        @Html.TextBoxFor(m => m.Name, new { @placeholder = "Your name", @class = "input_field" })
+                                    }
+
+                                    if (!string.IsNullOrWhiteSpace(Model?.Email))
+                                    {
+                                        @Html.TextBoxFor(m => m.Email, new { @placeholder = "Your email", @type = "email", @class = "input_field", disabled = "disabled" })
+                                        @Html.HiddenFor(m => m.Email)
+                                    }
+                                    else
+                                    {
+                                        @Html.TextBoxFor(m => m.Email, new { @placeholder = "Your email", @type = "email", @class = "input_field" })
+                                    }
+
+                                    @Html.ValidationMessageFor(m => m.Name)
+                                    @Html.ValidationMessageFor(m => m.Email)
+                                }
+
+                                @Html.TextBoxFor(m => m.PhoneNumber, new { @placeholder = "Your phone number", @class = "input_field" })
+                                @Html.ValidationMessageFor(m => m.PhoneNumber)
+                            </div>
+                            <div>
+                                @Html.TextAreaFor(m => m.Message, new { @placeholder = "Message (Must contains 5 letters and above)", @class = "text_field", @rows = "4" })
+                                @Html.ValidationMessageFor(m => m.Message)
+                            </div>
+                            <div>
+                                <div id="flash_message">
+                                    <flash dismissable="true" />
+                                </div>
+                                <input type="submit" id="contact_submit" value="Send Message" name="submit" class="button contact_submit_button">
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contact_info">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <div class="d-flex flex-lg-row flex-column justify-content-between">
+
+                        <!-- Contact Item -->
+                        <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                            <div class="contact_info_image"><img src="~/images/contact_1.png" alt=""></div>
+                            <div class="contact_info_content">
+                                <div class="contact_info_title">Phone</div>
+                                <div class="contact_info_text">+972 50 665 6474</div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Item -->
+                        <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                            <div class="contact_info_image"><img src="~/images/contact_2.png" alt=""></div>
+                            <div class="contact_info_content">
+                                <div class="contact_info_title">Email</div>
+                                <div class="contact_info_text">gamingstore@gmail.com</div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Item -->
+                        <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                            <div class="contact_info_image"><img src="~/images/contact_3.png" alt=""></div>
+                            <div class="contact_info_content">
+                                <div class="contact_info_title">Address</div>
+                                <div class="contact_info_text">48 Yirmiyahu Street, Tel Aviv, IL, Israel</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+@section scripts{
+    <script src="js/home.js"></script>
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        ctx.font = "40px Arial";
+        ctx.fillText("Get in Touch", 10, 50);
+    </script>
+    <script>
+        setTimeout(function () {
+            $('.alert').fadeOut('slow');
+        },
+            8000); // <-- time in milliseconds
+    </script>
+    <script src="/lib/jquery/dist/jquery.js"></script>
+}
